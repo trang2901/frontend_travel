@@ -4,3 +4,4 @@ export { default as Customer } from "./customer/Customer";
 export { default as Detail } from "./detail/Detail";
 export { default as Login } from "./login/Login";
 export { default as PaymentContent } from "./payment/PaymentContent";
+export { default as Banner} from "./vd/banner"

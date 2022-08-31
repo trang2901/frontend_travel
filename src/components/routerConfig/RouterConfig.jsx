@@ -1,12 +1,13 @@
 import React from "react";
 
 import { Routes, Route } from "react-router-dom";
-import { Home, Detail, Login, PaymentContent, Customer } from "../../pages";
+import { Home, Detail, Login, PaymentContent, Customer, Banner } from "../../pages";
 
 const RouterConfig = () => {
   return (
     <>
       <Routes>
+        <Route path="/" element={<Banner />} />
         <Route path="/" element={<Home />} />
         <Route path="customer/*" element={<Customer />} />
         <Route path="Detail" element={<Detail />} />

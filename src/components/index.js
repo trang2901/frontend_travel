@@ -7,3 +7,4 @@ export { default as CategoryCard } from "./categoryCard/CategoryCard";
 export { default as TourCard } from "./tourCard/TourCard";
 export { default as LightBox } from "./lightBox/LightBox";
 export { default as RouterConfig } from "./routerConfig/RouterConfig";
+export {default as Banner1} from "./banner1/Banner1"
