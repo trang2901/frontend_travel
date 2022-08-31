@@ -56,24 +56,9 @@ const Navbar = (props) => {
   return (
     <div className="navbar">
       <div className="navbar-container">
-        <NavLink to="/" className="logo">
-          <h2 className="logo">
-            <span>Travel</span>.int
-          </h2>
-        </NavLink>
+        
 
-        <ul className="navbar-pages__container">
-          {pages.map((item) => (
-            <NavLink
-              to={`/${item.path}`}
-              className={({ isActive }) =>
-                isActive ? "navLink navLink-active" : "navLink"
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-        </ul>
+        
 
         <div className="button-action">
           {customerID ? (
