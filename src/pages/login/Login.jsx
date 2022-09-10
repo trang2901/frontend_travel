@@ -148,10 +148,10 @@ const Login = ({ login }) => {
                 disabled={isSubmitting}
                 sx={{
                   color: "#fff",
-                  background: "#313131",
+                  background: "#7dbce6",
                   "&:hover": {
                     color: "#fff",
-                    background: "#313131",
+                    background: "#7dbce6",
                   },
                 }}
               >
@@ -172,13 +172,13 @@ const Login = ({ login }) => {
             <>
               <Button
                 onClick={() => setLoginOn(true)}
-                sx={buttonStyle("#313131", "#fff", "12px 0", "1rem 0")}
+                sx={buttonStyle("#7dbce6;", "#fff", "12px 0", "1rem 0")}
               >
                 Đăng nhập
               </Button>
               <Button
                 onClick={() => setLoginOn(false)}
-                sx={buttonStyle("#fff", "#313131", "0 12px", "1rem 0")}
+                sx={buttonStyle("#fff", "#7dbce6;", "0 12px", "1rem 0")}
               >
                 Đăng ký
               </Button>
@@ -187,13 +187,13 @@ const Login = ({ login }) => {
             <>
               <Button
                 onClick={() => setLoginOn(true)}
-                sx={buttonStyle("#fff", "#313131", "12px 0", "1rem 0")}
+                sx={buttonStyle("#fff", "#7dbce6;", "12px 0", "1rem 0")}
               >
                 Đăng nhập
               </Button>
               <Button
                 onClick={() => setLoginOn(false)}
-                sx={buttonStyle("#313131", "#fff", "0 12px", "1rem 0")}
+                sx={buttonStyle("#7dbce6;", "#fff", "0 12px", "1rem 0")}
               >
                 Đăng ký
               </Button>

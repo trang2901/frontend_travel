@@ -37,7 +37,7 @@ const Header = () => {
                                     </li>
                                 </ul>
                                 <form className="form-inline mr-auto" target="_self">
-                                    <div className="form-group"><label for="search-field"><i className="fa fa-search text-white"></i></label><input className="form-control search-field" type="search" id="search-field" name="search" /></div>
+                                    <div className="form-group"><label for="search-field"><i className="fa fa-search text-black"></i></label><input className="form-control search-field" type="search" id="search-field" name="search" /></div>
                                 </form>
                                 
                                     {customerID ? (

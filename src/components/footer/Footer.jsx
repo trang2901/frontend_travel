@@ -118,7 +118,8 @@ const Footer = () => {
   
 
  
-  <div className="text-center p-4" style={{backgroundColor: '#434343'}}>
+    
+  <div className="text-center p-4" style={{backgroundColor: '#7dbce6'}}>
     © 2021 Copyright:
     <a className="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
   </div>
