@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import ButtonCustom from "../../components/buttonCustom/ButtonCustom";
-
+import 'antd/dist/antd.css';
+import { Tabs } from 'antd';
 import "./detailTour.scss";
+import { Container } from "@mui/material";
 const TourDetail = ({ tourData }) => {
   const [introductionOn, setIntroduction] = useState(true);
 
@@ -28,10 +30,14 @@ const TourDetail = ({ tourData }) => {
       </div>
     </div>
   );
+  const onChange = (key) => {
+    console.log(key);
+  };
   return (
+    
     <>
       <div className="tour--information__detail">
-        <div className="button--section">
+        {/* <div className="button--section">
           {introductionOn ? (
             <>
               <ButtonCustom
@@ -59,9 +65,9 @@ const TourDetail = ({ tourData }) => {
               />
             </>
           )}
-        </div>
+        </div> */}
 
-        <div className="content">
+        {/* <div className="content">
           {introductionOn ? (
             <div className="introduction--container">
               {tourData.lich_trinh?.map((diaDiem, index) =>
@@ -75,7 +81,39 @@ const TourDetail = ({ tourData }) => {
               )}
             </div>
           )}
+        </div> */}
+        <Container>
+        <Tabs
+    defaultActiveKey="1"
+    size="large"
+    className="customTab"
+    
+    onChange={onChange}
+    items={[
+      {
+        label: `Giới thiệu chung`,
+        key: '1',
+        children: 
+        <div className="introduction--container">
+              {tourData.lich_trinh?.map((diaDiem, index) =>
+                renderIntroduction(diaDiem, index)
+              )}
         </div>
+        ,
+      },
+
+      {
+        label: `Lịch trình chi tiết`,
+        key: '2',
+        children:<div className="detail--container">
+        {tourData.lich_trinh?.map((diaDiem, index) =>
+          renderDetail(diaDiem, index)
+        )}
+      </div> ,
+      },
+    ]}
+  />
+</Container>
       </div>
     </>
   );

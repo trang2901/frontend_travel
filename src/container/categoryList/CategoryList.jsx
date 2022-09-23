@@ -56,9 +56,12 @@ const CategoryList = () => {
     <div className="categoryList padding-section">
       <div className="category">
         <div className="category--heading">
-          <h1>Danh mục</h1>
-          <p>Sẽ rất nhanh nếu bạn tìm theo đặc trung văn hóa</p>
+          <h1>Du lịch trong nước</h1>
+          {/* <p>Sẽ rất nhanh nếu bạn tìm theo đặc trung văn hóa</p> */}
         </div>
+        <Carousel listCategory={listCategory} />
+        <div className="category--heading">
+        <h1>Du lịch ngoài nước</h1></div>
         <Carousel listCategory={listCategory} />
       </div>
     </div>

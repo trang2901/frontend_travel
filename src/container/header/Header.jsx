@@ -5,7 +5,7 @@ import { Banner } from "../../components";
 const header = () => {
   return (
     <div className="Header">
-      <Banner />
+      {/* <Banner /> */}
     </div>
   );
 };

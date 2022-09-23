@@ -4,13 +4,19 @@ import DatePicker from "react-datepicker";
 import { LoginContext } from "../../LoginContext";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import fontawesome from '@fortawesome/fontawesome'
 import { getDate, getMonth, getYear } from "date-fns";
 import ButtonCustom from "../../components/buttonCustom/ButtonCustom";
 import { useNavigate } from "react-router-dom";
 import { MuiFbPhotoGrid } from "mui-fb-photo-grid";
 import PeopleIcon from "@mui/icons-material/People";
 import { calendar, numberpeople, location } from "../../assets/svg";
+import { Container } from "@mui/material";
+import 'antd/dist/antd.css';
+import { Divider} from "antd";
+import { faCoffee} from '@fortawesome/free-solid-svg-icons';
+import 'font-awesome/css/font-awesome.min.css';
 import "./tourHead.scss";
 const TourHead = ({ tourData }) => {
   const customerID = useContext(LoginContext);
@@ -83,13 +89,13 @@ const TourHead = ({ tourData }) => {
     maxHeight: "30px",
     minWidth: "30px",
     minHeight: "30px",
+     
   };
 
   const buttonSubmitStyle = {
     width: "100%",
     padding: "1rem 0",
     boxShadow: "0px 4px 25px rgba(0, 0, 0, 0.15)",
-    borderRadius: "15px ",
     marginTop: "1rem",
   };
 
@@ -106,7 +112,7 @@ const TourHead = ({ tourData }) => {
   };
 
   return (
-    <>
+    <Container>
       <div className="tour--information">
         <div className="tour--information__lightBox">
           <div className="numberOfTour">
@@ -115,30 +121,93 @@ const TourHead = ({ tourData }) => {
             </p>
             {<PeopleIcon />}
           </div>
+
           <MuiFbPhotoGrid
             style={{ height: "250px" }}
-            sx={{ height: "250px" }}
+            sx={{ height: "250px"}}
             images={IMAGES} // require
             reactModalStyle={{ overlay: { zIndex: 2000 } }} // optional (https://github.com/reactjs/react-modal#styles)
           />
+
           {/* <LightBox images={tourData.hinh} /> */}
         </div>
         <div className="tour--information__general">
           <h3>{tourData.ten}</h3>
+          <Divider 
+             
+             style={{borderColor: 'darkgrey'}}
+             />
           <p>{tourData.description}</p>
+          <p style={{ color: 'red', fontSize: '30px'}}>{tourData.gia} đ</p>
+          
+         
           {/* {tourData.location} */}
-          <div className="location">
-            <img src={location} style={{ width: "24px" }} alt="location.svg" />
-            <span>Nhật Bản</span>
-          </div>
-          <p style={{ marginLeft: "1rem" }}>{tourData.gia} đ</p>
-          <div className="booktour--form">
-            <div className="input--section">
-              <div className="input date">
-                <label>
-                  <img src={calendar} alt="calendar.svg" />
-                  Date
-                </label>
+
+          {/* <div className="location"> */}
+            {/* <img src={location} style={{ width: "24px" }} alt="location.svg" />
+            <span>Nhật Bản</span> */}
+            <label><i class="fa-regular fa-file-code"></i> Mã: </label>{tourData.id_tour}
+            <p></p>
+            <label><i class="fa-solid fa-car"></i> Phương tiện: </label> 
+            <p></p>
+            <label><i class="fa-solid fa-location-dot"></i>  Địa điểm: NHẬT BẢN</label>
+          <p></p>
+            <label><i class="fa-solid fa-calendar"></i> Date: </label> {tourData.khoi_hanh}
+            <p></p>
+          {/* </div> */}
+          <label><i class="fa-solid fa-person"></i> People:   </label>&emsp;
+          {/* <div className="input numberGuest2"> */}
+                
+                {/* <div className="numberGuest--input1"> */}
+                  {numberGuest ? (
+                    <ButtonCustom
+                    
+                      nameString="-"
+                      style={buttonUpDownStyle}
+                      variant="contained"
+                      customFunction={handleClickSubtract}
+                    />
+                  ) : (
+                    <ButtonCustom
+                      nameString="-"
+                      style={buttonUpDownStyle}
+                      variant="outlined"
+                      disabled={true}
+                    />
+                  )}
+                  <input
+                    id="numberGuest"
+                    name="numberGuest"
+                    type="text"
+                    value={numberGuest}
+                    style={{ textAlign: "center", width: "50px", border: 'none' }}
+
+                  />
+
+                  {numberGuest <
+                  parseInt(tourData.so_cho - tourData.du_khach?.length || 0) ? (
+                    <ButtonCustom
+                      nameString="+"
+                      style={buttonUpDownStyle}
+                      variant="contained"
+                      customFunction={handleClickAdd}
+                    />
+                  ) : (
+                    <ButtonCustom
+                      nameString="+"
+                      style={buttonUpDownStyle}
+                      variant="outlined"
+                      disabled={true}
+                    />
+                  )}
+                {/* </div> */}
+          {/* <div className="booktour--form"> */}
+            {/* <div className="input--section"> */}
+              {/* <div className="input date"> */}
+                {/* <label> */}                
+{/* <label>
+<i class="fa-solid fa-calendar"></i>  Date
+                </label> */}
                 {/* <DatePicker
                   dateFormat="dd/MM/yyyy"
                   selected={date}
@@ -156,11 +225,11 @@ const TourHead = ({ tourData }) => {
                   // )}
                   disabledKeyboardNavigation
                 /> */}
-                <div>{tourData.khoi_hanh}</div>
-              </div>
-              <div className="input numberGuest">
+                {/* <div>{tourData.khoi_hanh}</div> */}
+              {/* </div> */}
+              {/* <div className="input numberGuest">
                 <label>
-                  <img src={numberpeople} alt="numberpeople.svg" />
+                <i class="fa-solid fa-person"></i>
                   People
                 </label>
                 <div className="numberGuest--input">
@@ -203,9 +272,10 @@ const TourHead = ({ tourData }) => {
                       disabled={true}
                     />
                   )}
-                </div>
-              </div>
-            </div>
+                </div> */}
+              {/* </div> */}
+            {/* </div> */}
+
             {
               /*tourData.date.includes(selectedDate) &&*/ numberGuest ? (
                 <ButtonCustom
@@ -225,10 +295,24 @@ const TourHead = ({ tourData }) => {
                 />
               )
             }
-          </div>
+            <p></p>
+             <Divider 
+             dashed
+             style={{borderColor: 'darkgrey'}}
+             >
+              HOTLINE TƯ VẤN & ĐẶT TOUR
+             </Divider>
+             <div className="contact">
+            <label className="label1"><i class="fa-solid fa-phone"></i> HOLINE TƯ VẤN: </label><label> 0394075201</label>
+            <br></br>
+            <label className="label1"><i class="fa-solid fa-envelope"></i> EMAIL: </label> test@gmail.com
+            </div>
+          {/* </div> */}
         </div>
+       
       </div>
-    </>
+      
+    </Container>
   );
 };
 
