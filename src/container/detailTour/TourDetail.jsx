@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import ButtonCustom from "../../components/buttonCustom/ButtonCustom";
 import 'antd/dist/antd.css';
-import { Tabs } from 'antd';
+// import { Tabs } from 'antd';
+import { Tabs} from '@mui/material';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import {Tab} from '@mui/material';
 import "./detailTour.scss";
-import { Container } from "@mui/material";
+import { Container, Paper } from "@mui/material";
+import { red } from "@mui/material/colors";
 const TourDetail = ({ tourData }) => {
   const [introductionOn, setIntroduction] = useState(true);
 
@@ -12,6 +18,7 @@ const TourDetail = ({ tourData }) => {
       <img
         src={`https://tour-api-dev.herokuapp.com/${diaDiem.id_dia_diem.hinh}`}
       />
+
       <div className="place--infor">
         <h1>{diaDiem.id_dia_diem.ten}</h1>
         <p>{diaDiem.id_dia_diem.mo_ta}</p>
@@ -32,6 +39,11 @@ const TourDetail = ({ tourData }) => {
   );
   const onChange = (key) => {
     console.log(key);
+  }; 
+  const [value, setValue] = React.useState('1');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
   return (
     
@@ -66,7 +78,6 @@ const TourDetail = ({ tourData }) => {
             </>
           )}
         </div> */}
-
         {/* <div className="content">
           {introductionOn ? (
             <div className="introduction--container">
@@ -82,38 +93,46 @@ const TourDetail = ({ tourData }) => {
             </div>
           )}
         </div> */}
-        <Container>
-        <Tabs
-    defaultActiveKey="1"
-    size="large"
-    className="customTab"
-    
-    onChange={onChange}
-    items={[
-      {
-        label: `Giới thiệu chung`,
-        key: '1',
-        children: 
-        <div className="introduction--container">
-              {tourData.lich_trinh?.map((diaDiem, index) =>
-                renderIntroduction(diaDiem, index)
-              )}
+        <Paper elevation={4}>
+        <Container >
+        <div className="diemnoibat">
+        <p className="title_diemnoibat">ĐIỂM NỔI BẬT</p>
+        <div className="des_diemnoibat">
+            <p>  &bull; {tourData.ten}</p>
+            <p>  &bull; {tourData.ten}</p>
+            <p>  &bull; {tourData.ten}</p>
         </div>
-        ,
-      },
+        </div>
 
-      {
-        label: `Lịch trình chi tiết`,
-        key: '2',
-        children:<div className="detail--container">
-        {tourData.lich_trinh?.map((diaDiem, index) =>
-          renderDetail(diaDiem, index)
-        )}
-      </div> ,
-      },
-    ]}
-  />
+        <div className="tab">
+        <TabContext value={value}>
+          <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <Tab sx={{ tabSize: "large", fontSize: "20px", borderColor: "red"}} label="GIỚI THIỆU " value="1" />
+            <Tab sx={{ tabSize: "large", fontSize: "20px"}} label="CHI TIẾT LỊCH TRÌNH" value="2" />
+          </TabList>
+        
+
+        
+        <TabPanel value="1">
+        <div className="introduction--container">
+                    {tourData.lich_trinh?.map((diaDiem, index) =>
+                      renderIntroduction(diaDiem, index)
+                    )}
+       </div>
+        </TabPanel>
+        
+        <TabPanel className="tabPanel" value="2">
+          <div className="detail--container">
+              {tourData.lich_trinh?.map((diaDiem, index) =>
+                renderDetail(diaDiem, index)
+              )}
+            </div></TabPanel>
+        
+      </TabContext>
+      </div>
+        
 </Container>
+</Paper>
       </div>
     </>
   );

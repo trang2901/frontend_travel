@@ -1,32 +1,35 @@
+body {
+  p {
+    font-size: 20px;
+  }
+}
 .tour--information__detail {
   width: 100%;
 }
 .button--section {
 }
 .content {
-  width: 100%;
+  // width: 100%;
   padding: 2rem;
   box-shadow: 0px 4px 45px -15px rgb(0 0 0 / 15%);
-
   border-radius: 20px;
 }
-
 .introduction--container {
   display: flex;
   flex-direction: column;
 }
+
 .detail--container {
 }
 
 .introduction--item {
   //   display: flex;
-
+  
   gap: 2rem;
   margin-bottom: 4rem;
   img {
     width: 50%;
     height: auto;
-    border-radius: 10px;
   }
 
   &.even {
@@ -55,13 +58,22 @@
     border-radius: 10px;
   }
 }
-
 .place--infor {
   h1 {
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
   }
   p {
-    font-size: 24px;
+    font-size: 20px;
     line-height: 34px;
   }
+}
+
+.diemnoibat .title_diemnoibat {
+  margin-top: 15px;
+  color: red;
+  font-size: 20px;
+  font-weight: 100;
+  font-style: unset;
+  font-weight: bolder;
 }

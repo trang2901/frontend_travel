@@ -18,6 +18,7 @@ import { Divider} from "antd";
 import { faCoffee} from '@fortawesome/free-solid-svg-icons';
 import 'font-awesome/css/font-awesome.min.css';
 import "./tourHead.scss";
+import { red } from "@mui/material/colors";
 const TourHead = ({ tourData }) => {
   const customerID = useContext(LoginContext);
 
@@ -89,6 +90,8 @@ const TourHead = ({ tourData }) => {
     maxHeight: "30px",
     minWidth: "30px",
     minHeight: "30px",
+    background: "#7dbce6",
+    color: "black"
      
   };
 
@@ -97,6 +100,8 @@ const TourHead = ({ tourData }) => {
     padding: "1rem 0",
     boxShadow: "0px 4px 25px rgba(0, 0, 0, 0.15)",
     marginTop: "1rem",
+    backgroundColor: "#7dbce6",
+    color: "black"
   };
 
   const handleClickAdd = () => {
@@ -132,9 +137,10 @@ const TourHead = ({ tourData }) => {
           {/* <LightBox images={tourData.hinh} /> */}
         </div>
         <div className="tour--information__general">
-          <h3>{tourData.ten}</h3>
+          <div className="name">
+          <h3>{tourData.ten}</h3> 
+          <p className="trangthai">Trạng thái</p></div>
           <Divider 
-             
              style={{borderColor: 'darkgrey'}}
              />
           <p>{tourData.description}</p>
@@ -163,6 +169,7 @@ const TourHead = ({ tourData }) => {
                     <ButtonCustom
                     
                       nameString="-"
+                      
                       style={buttonUpDownStyle}
                       variant="contained"
                       customFunction={handleClickSubtract}
@@ -170,6 +177,7 @@ const TourHead = ({ tourData }) => {
                   ) : (
                     <ButtonCustom
                       nameString="-"
+                      
                       style={buttonUpDownStyle}
                       variant="outlined"
                       disabled={true}
