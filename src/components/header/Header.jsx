@@ -31,7 +31,7 @@ const Header = () => {
                             <div className="collapse navbar-collapse" id="navcol-1">
                                 <ul className="nav navbar-nav">
                                     <li className="nav-item" role="presentation"><a className="nav-link" href="/">Home</a></li>
-                                    <li className="nav-item" role="presentation"><a className="nav-link" href="/">About Us</a></li>
+                                    <li className="nav-item" role="presentation"><a className="nav-link" href="/aboutus">About Us</a></li>
                                     <li className="nav-item dropdown"><a className="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Contact</a>
                                         <div className="dropdown-menu" role="menu"><a className="dropdown-item" role="presentation" href="#">Logo design</a><a className="dropdown-item" role="presentation" href="#">Banner design</a><a className="dropdown-item" role="presentation" href="#">content writing</a></div>
                                     </li>

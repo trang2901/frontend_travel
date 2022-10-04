@@ -6,3 +6,4 @@ export { default as Login } from "./login/Login";
 export { default as PaymentContent } from "./payment/PaymentContent";
 export { default as Banner} from "./banner/banner";
 export { default as List} from "./product/list";
+export { default as Aboutus} from "./aboutus/Aboutus"
