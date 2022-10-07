@@ -8,6 +8,7 @@ import { NavLink, useNavigate, Link } from "react-router-dom";
 import { Menu, Close } from "@mui/icons-material";
 import Banner1 from "../banner1/Banner1"
 import {Row} from "antd"
+import logo from "../../image/DORIS_TOURS.png"
 const Header = () => {
     const customerID = useContext(LoginContext);
     const [customerName, setCustomerName] = useState("");
@@ -29,10 +30,8 @@ const Header = () => {
             <div>
                 <div className="header-blue">
                     <nav className="navbar navbar-light navbar-expand-md navigation-clean-search">
-                        <div className="container-fluid"><a className="navbar-brand" href="/">.travelwoVi</a><button data-toggle="collapse" className="navbar-toggler" data-target="#navcol-1"><span className="sr-only">Toggle navigation</span><span className="navbar-toggler-icon"></span></button>
+                        <div className="container-fluid"><a className="navbar-brand" href="/">DORIS TOURS </a><button data-toggle="collapse" className="navbar-toggler" data-target="#navcol-1"></button>
                            
-
-                      
                             <div className="collapse navbar-collapse" id="navcol-1">
                                 <ul className="nav navbar-nav">
                                     <li className="nav-item" role="presentation"><a className="nav-link" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
