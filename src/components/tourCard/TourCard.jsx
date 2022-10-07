@@ -13,14 +13,12 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import "./tourCard.scss";
 const TourCard = ({ tourData }) => {
-
-
   return (
     <>
     {/* <Link to={`/detail?slug=${tourData.slug}`}> */}
       <Card
         sx={{
-          width: 400,
+          width: 340,
  
           borderRadius: 0,
           boxShadow: "0px 4px 45px -15px rgba(0, 0, 0, 0.15)",
@@ -49,29 +47,21 @@ const TourCard = ({ tourData }) => {
           <div className="tourCard--Content">
             {/* <p>Mã tour: {tourData.id}</p> */}
             <h3>{tourData.ten}</h3>
-            {/* <p>{tourData.describe}</p> */}
-            
-            
+            {/* <p>{tourData.describe}</p> */}  
             <h2>
                 {tourData.khoi_hanh}
               </h2>
               <p style={{textAlign: 'center'}}>.................</p>
             <div className="locationBox">
-              <h3>{tourData.gia}đ/person</h3>
-                  
-              
-             
+              <h3>{tourData.gia}đ/person</h3> 
             </div>
-            
           </div>
           <div className="tour-btn">
           <Link to={`/detail?slug=${tourData.slug}`}>
             <button className="button">     
             BOOK NOW
-    
               </button>
               </Link>
-
               <Link to={`/detail?slug=${tourData.slug}`}>
             <button className="button1">     
             XEM CHI TIẾT

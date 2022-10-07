@@ -24,19 +24,17 @@
 .locationBox {
   display: flex;
   justify-content: space-between;
-  
   h3 {
     flex: 1;
     font-weight: bold;
     font-size: 16px;
-    line-height: 22px;
+    line-height: 5px;
     color: #a61d1d;
   }
 
   span {
     font-size: 10px;
     line-height: 14px;
-
     color: #aeaeae;
   }
 }

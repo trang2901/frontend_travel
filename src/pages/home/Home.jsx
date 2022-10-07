@@ -5,7 +5,7 @@ import { Banner } from "../../components";
 import { CategoryList, CardList } from "../../container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Cancel from "@mui/icons-material/Cancel";
-
+import Chat from "../../components/chat/Chat"
 const Home = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
@@ -39,6 +39,7 @@ const Home = () => {
     <>
       <Context.Provider value={[tag, setTag]}>
         <Banner />
+        {/* <Chat/>  */}
         <CategoryList setTag={setTag} />
         {tag ? (
           <div className="catergory--selected">
