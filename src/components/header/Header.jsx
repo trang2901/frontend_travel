@@ -45,7 +45,7 @@ const Header = () => {
                                     <li className="nav-item dropdown"><a className="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Contact</a>
                                         <div className="dropdown-menu" role="menu"><a className="dropdown-item" role="presentation" href="#">Logo design</a><a className="dropdown-item" role="presentation" href="#">Banner design</a><a className="dropdown-item" role="presentation" href="#">content writing</a></div>
                                     </li>
-                                    <li className="nav-item" role="presentation"><a className="nav-link" href="/aboutus">Tin Tức</a></li>
+                                    <li className="nav-item" role="presentation"><a className="nav-link" href="/blog">Tin Tức</a></li>
                                 </ul>
                                 <form className="form-inline mr-auto" target="_self">
                                     <div className="form-group"><label for="search-field"><i className="fa fa-search text-black"></i></label><input className="form-control search-field" type="search" id="search-field" name="search" /></div>

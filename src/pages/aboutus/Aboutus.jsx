@@ -4,9 +4,7 @@ import {Divider} from "antd";
 import { Container } from "@mui/material";
 import logo from "../../image/DORIS_TOURS.png"
 const Aboutus = () => {
-    
   return (
- 
     <>
     <Container>
 <div class="bg-light">
@@ -15,9 +13,6 @@ const Aboutus = () => {
       <div class="col-lg-6">
         <h1 class="display-4">Về chúng tôi</h1>
         <p class="lead text-muted mb-0">Tours là thương hiệu thuộc sở hữu của ..... được thành lập nhằm đáp ứng nhu cầu du lịch của khách hàng là người Việt Nam. Với nhiều năm kinh nghiệm trong ngành du lịch, Tours chủ trương mang đến quí khách hàng các chương trình tour nghỉ dưỡng cao cấp, khám phá thiên nhiên, trải nghiệm cuộc sống và du lịch sinh thái trên mọi miền Tổ quốc.</p>
-        <p class="lead text-muted">Snippet by <a href="https://bootstrapious.com/snippets" class="text-muted"> 
-                    <u>Bootstrapious</u></a>
-        </p>
       </div>
       <div class="col-lg-6 d-none d-lg-block"><img src={logo} alt="" class="img-fluid" style={{borderRadius: '50%', height: '25em', width:'25em'}}/></div>
     </div>
