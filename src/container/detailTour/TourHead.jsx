@@ -12,17 +12,19 @@ import { useNavigate } from "react-router-dom";
 import { MuiFbPhotoGrid } from "mui-fb-photo-grid";
 import PeopleIcon from "@mui/icons-material/People";
 import { calendar, numberpeople, location } from "../../assets/svg";
-import { Container } from "@mui/material";
+import { Container, TextareaAutosize } from "@mui/material";
 import 'antd/dist/antd.css';
 import { Divider} from "antd";
 import { faCoffee} from '@fortawesome/free-solid-svg-icons';
 import 'font-awesome/css/font-awesome.min.css';
 import "./tourHead.scss";
 import { red } from "@mui/material/colors";
+import dateFormat from 'dateformat';
 const TourHead = ({ tourData }) => {
   const customerID = useContext(LoginContext);
 
   const [numberGuest, setNumberGuest] = useState(0);
+  const date_format = dateFormat(tourData.khoi_hanh,"dd - mm - yyyy");
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -158,7 +160,7 @@ const TourHead = ({ tourData }) => {
             <p></p>
             <label><i class="fa-solid fa-location-dot"></i>  Địa điểm: NHẬT BẢN</label>
           <p></p>
-            <label><i class="fa-solid fa-calendar"></i> Date: </label> {tourData.khoi_hanh}
+            <label><i class="fa-solid fa-calendar"></i> Date: </label> <label>{date_format}</label>
             <p></p>
           {/* </div> */}
           <label><i class="fa-solid fa-person"></i> People:   </label>&emsp;
@@ -313,7 +315,7 @@ const TourHead = ({ tourData }) => {
              <div className="contact">
             <label className="label1"><i class="fa-solid fa-phone"></i> HOLINE TƯ VẤN: </label><label> 0394075201</label>
             <br></br>
-            <label className="label1"><i class="fa-solid fa-envelope"></i> EMAIL: </label> test@gmail.com
+            <label className="label1"><i class="fa-solid fa-envelope"></i> EMAIL: </label><label> test@gmail.com</label>
             </div>
           {/* </div> */}
         </div>

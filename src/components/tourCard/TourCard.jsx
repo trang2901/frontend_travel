@@ -12,7 +12,11 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import "./tourCard.scss";
+import dateFormat from 'dateformat';
+import { format } from 'date-fns';
 const TourCard = ({ tourData }) => {
+ const so_cho_con = tourData.so_cho - tourData.du_khach?.length;
+ const date_format = dateFormat(tourData.khoi_hanh, "dd - mm - yyyy");
   return (
     <>
     {/* <Link to={`/detail?slug=${tourData.slug}`}> */}
@@ -47,19 +51,22 @@ const TourCard = ({ tourData }) => {
           <div className="tourCard--Content">
             {/* <p>Mã tour: {tourData.id}</p> */}
             <h3>{tourData.ten}</h3>
+            <p className="trangthai">Trạng thái</p>
             {/* <p>{tourData.describe}</p> */}  
-            <h2>
-                {tourData.khoi_hanh}
-              </h2>
-              <p style={{textAlign: 'center'}}>.................</p>
+            
+            {/* <h2>
+            {tourData.khoi_hanh}
+              </h2> */}
+              <h2>{date_format}</h2>
+              {/* <p style={{textAlign: 'center'}}>.................</p> */}
             <div className="locationBox">
-              <h3>{tourData.gia}đ/person</h3> 
+              <h3>{tourData.gia}đ/người</h3> 
             </div>
           </div>
           <div className="tour-btn">
           <Link to={`/detail?slug=${tourData.slug}`}>
             <button className="button">     
-            BOOK NOW
+            ĐẶT NGAY
               </button>
               </Link>
               <Link to={`/detail?slug=${tourData.slug}`}>
@@ -69,7 +76,7 @@ const TourCard = ({ tourData }) => {
               </button>
               </Link> 
           </div>
-          <p className="para">Số chổ còn nhận: .........</p>
+          <p className="para">Số chổ còn nhận: <label className="label_socho">{so_cho_con}</label></p>
         </CardActionArea>
       </Card>
     {/* // </Link> */}

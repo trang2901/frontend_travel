@@ -4,6 +4,7 @@
   gap: 2rem;
   justify-content: space-between;
   width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .tour--information {
@@ -22,7 +23,7 @@
     right: 1rem;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.8);
-
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     z-index: 1;
     padding: 0.5rem 1rem;
   }
@@ -35,14 +36,14 @@
     margin-bottom: 1rem;
     text-transform: uppercase;
     color: #313131;}
-
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   p {
     font-weight: 600;
     font-size: 24px;
     line-height: 33px;
     margin: 1rem 0;
     /* Grey */
-
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #aeaeae;
   }
 
@@ -101,6 +102,7 @@
       height: 36px;
     }
   }
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 // DATE PICKER
@@ -126,6 +128,7 @@
     border: none;
     background-color: transparent;
   }
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .contact {
   justify-content: center;
@@ -135,13 +138,16 @@
   .label1 {
     font-weight: bold;
     font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 }
 .name .trangthai {
   color: green;
   font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 label {
   font-size: 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

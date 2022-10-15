@@ -17,6 +17,7 @@
 .introduction--container {
   display: flex;
   flex-direction: column;
+  
 }
 
 .detail--container {
@@ -62,10 +63,13 @@
   h1 {
     margin-bottom: 0.5rem;
     text-transform: uppercase;
+    color:rgba(228, 102, 102, 0.8);
+    font-family:'Courier New', Courier, monospace ;
   }
   p {
-    font-size: 18px;
-    line-height: 30px;
+    font-size: 17px;
+    line-height: 26px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
   }
 }
 

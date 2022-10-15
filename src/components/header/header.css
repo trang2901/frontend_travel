@@ -4,6 +4,7 @@
     padding-bottom: 80px;
     font-family: 'Source Sans Pro', sans-serif;
     height: 50px;
+    
   }
   
   @media (min-width:768px) {
@@ -222,3 +223,5 @@
     transform: rotate(-19deg);
     opacity: 0.2;
   }
+
+

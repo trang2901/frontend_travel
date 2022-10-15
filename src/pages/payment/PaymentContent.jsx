@@ -96,7 +96,7 @@ const PaymentContent = () => {
   return (
     <div className="pagementContent">
       <h1>Thanh toán</h1>
-      <WizzardHeader />
+      {/* <WizzardHeader /> */}
       <form className="pagementContent.form" onSubmit={handleSubmit}>
         <SwipeableViews index={activedStep} onChangeIndex={handleChange}>
           <UserInfor

@@ -17,8 +17,8 @@ const TourDetail = ({ tourData }) => {
     <div className={`introduction--item ${index % 2 === 0 ? "even" : "odd"}`}>
       <img
         src={`https://tour-api-dev.herokuapp.com/${diaDiem.id_dia_diem.hinh}`}
+        
       />
-
       <div className="place--infor">
         <h1>{diaDiem.id_dia_diem.ten}</h1>
         <p>{diaDiem.id_dia_diem.mo_ta}</p>
@@ -107,7 +107,7 @@ const TourDetail = ({ tourData }) => {
         <div className="tab">
         <TabContext value={value}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab sx={{ tabSize: "large", fontSize: "20px", borderColor: "red"}} label="GIỚI THIỆU " value="1" />
+            <Tab sx={{ tabSize: "large", fontSize: "20px"}} label="GIỚI THIỆU " value="1" />
             <Tab sx={{ tabSize: "large", fontSize: "20px"}} label="CHI TIẾT LỊCH TRÌNH" value="2" />
           </TabList>
         

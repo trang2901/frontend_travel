@@ -1,12 +1,14 @@
 import React from "react";
 import "./banner1.css";
-
+import anhbia from "../../image/anh-bia.jpg"
+import { TourCard } from "../../components";
+import {CardList} from "../../container"
 const Banner = () => {
   return (
     <>
       <div
         style={{
-          background: `url("https://bootstrapious.com/i/snippets/sn-static-header/background.jpg")`,
+          backgroundImage: `url("https://anhdep123.com/top-100-hinh-anh-bien-dep-cuon-hut-nhin-la-muon-di-du-lich-ngay-va-luon/tong-hop-nhung-hinh-anh-dep-ve-bien/")`,
         }}
         className="jumbotron bg-cover text-white"
       >
@@ -31,8 +33,9 @@ const Banner = () => {
       </div>
 
       <div className="container py-5">
-        <h2 className="h3 font-weight-bold">Some demo content</h2>
-        <div className="row">
+        <h2 className="h3 font-weight-bold">Tour Mới</h2>
+        
+        {/* <div className="row">
           <div className="col-lg-10 mb-4">
             <p className="font-italic text-muted">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -64,7 +67,7 @@ const Banner = () => {
               deserunt mollit anim id est laborum.
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

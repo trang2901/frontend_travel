@@ -11,13 +11,13 @@
   h2 {
     font-size: 14px;
     text-align: center;
-    color: #aeaeae;
+    color: #7f7878;
   }
   p {
     font-weight: 600;
     font-size: 14px;
     line-height: 10px;
-    color: #aeaeae;
+    color:  #7f7878;
   }
 }
   
@@ -138,4 +138,13 @@
   text-align: right;
   justify-content: right;
   font-weight: bold;
+}
+.label_socho {
+  color: red;
+  
+}
+
+.tourCard--Content .trangthai {
+  color: green;
+  text-align: center;
 }

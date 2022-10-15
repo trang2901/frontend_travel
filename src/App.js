@@ -4,7 +4,7 @@ import "./App.scss";
 import { LoginContext } from "./LoginContext";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-import Banner1 from "./components/banner1/Banner1"
+
 import List from "./pages/product/list"
 import Navbar from "./components/navbar/Navbar"
 import { RouterConfig } from "./components";

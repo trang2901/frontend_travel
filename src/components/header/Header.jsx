@@ -1,18 +1,20 @@
 import * as React from "react";
-import { useState, useLayoutEffect, useContext } from "react";
+import { useState, useLayoutEffect, useContext} from "react";
 import './header.css'
 import { LoginContext } from "../../LoginContext";
-import { Button, Grid,Stack } from "@mui/material";
+import { Button, Grid,Stack, Avatar  } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { Menu, Close } from "@mui/icons-material";
-import Banner1 from "../banner1/Banner1"
 import {Row} from "antd"
 import logo from "../../image/DORIS_TOURS.png"
+import { red } from "@mui/material/colors";
 const Header = () => {
     const customerID = useContext(LoginContext);
     const [customerName, setCustomerName] = useState("");
-    
+  
+    // const vitri = customerName.charAt(0);
+
     let navigate = useNavigate();
     function buttonStyle(primaryColor, secondColor) {
         var obj = {
@@ -25,6 +27,7 @@ const Header = () => {
         };
         return obj;
     }
+    
     return (
         <>
             <div>
@@ -36,15 +39,17 @@ const Header = () => {
                                 <ul className="nav navbar-nav">
                                     <li className="nav-item" role="presentation"><a className="nav-link" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
                                     <li className="nav-item" role="presentation"><a className="nav-link" href="/aboutus">About Us</a></li>
-                                    <li className="nav-item dropdown"><a className="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Tour Trong Nước</a>
+                                    <li className="nav-item" role="presentation"><a className="nav-link" href="/home">Tour Trong Nước</a></li>
+                                    <li className="nav-item" role="presentation"><a className="nav-link" href="/home">Tour Nước Ngoài</a></li>
+                                    {/* <li className="nav-item dropdown"><a className="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Tour Trong Nước</a>
                                         <div className="dropdown-menu" role="menu"><a className="dropdown-item" role="presentation" href="#">Logo design</a><a className="dropdown-item" role="presentation" href="#">Banner design</a><a className="dropdown-item" role="presentation" href="#">content writing</a></div>
                                     </li>
                                     <li className="nav-item dropdown"><a className="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Tour Nước Ngoài</a>
                                         <div className="dropdown-menu" role="menu"><a className="dropdown-item" role="presentation" href="#">Logo design</a><a className="dropdown-item" role="presentation" href="#">Banner design</a><a className="dropdown-item" role="presentation" href="#">content writing</a></div>
-                                    </li>
-                                    <li className="nav-item dropdown"><a className="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Contact</a>
+                                    </li> */}
+                                    {/* <li className="nav-item dropdown"><a className="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Contact</a>
                                         <div className="dropdown-menu" role="menu"><a className="dropdown-item" role="presentation" href="#">Logo design</a><a className="dropdown-item" role="presentation" href="#">Banner design</a><a className="dropdown-item" role="presentation" href="#">content writing</a></div>
-                                    </li>
+                                    </li> */}
                                     <li className="nav-item" role="presentation"><a className="nav-link" href="/blog">Tin Tức</a></li>
                                 </ul>
                                 <form className="form-inline mr-auto" target="_self">
@@ -54,13 +59,18 @@ const Header = () => {
                                     {customerID ? (
                                         <>
                                             <Link to="/customer">
-                                                <Button variant="contained">
+                                                {/* <Button variant="contained"> */}
+                                                    <Avatar style={{backgroundColor: 'darkblue'}}>
                                                     <AccountCircleIcon sx={{ marginRight: "2px" }} />
                                                     {customerName}
-                                                </Button>
+                                                    {/* <label>{vitri}</label> */}
+                                                    </Avatar>
+                                                {/* </Button> */}
                                             </Link>
+                                            
                                             <Button
-                                                sx={buttonStyle("#fff", "#3075C6")}
+                                            // className="button_custom"
+                                            style={{color: 'darkblue'}}    
                                                 onClick={() => {
                                                     window.sessionStorage.clear();
                                                     window.location.reload();
