@@ -8,15 +8,15 @@ const Banner = () => {
     <>
       <div
         style={{
-          backgroundImage: `url("https://anhdep123.com/top-100-hinh-anh-bien-dep-cuon-hut-nhin-la-muon-di-du-lich-ngay-va-luon/tong-hop-nhung-hinh-anh-dep-ve-bien/")`,
+          backgroundImage: `url("https://dep.anh9.com/imgs/13116cover-facebook-song-bien-vo-nhe-vao-bo.jpg")`,
         }}
         className="jumbotron bg-cover text-white"
       >
         <div className="container py-5 text-center">
-          <h1 className="display-4 font-weight-bold">
-          Du lịch là để tạo ra những kỷ niệm đẹp.
-          </h1>
-          <p className="font-italic mb-0">
+          <p className=" display-4 font-weight-bold" style={{color: '#08183c', fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif', fontSize: '43px'}}>
+          DU LỊCH LÀ ĐỂ TẠO RA NHỮNG KỶ NIỆM ĐẸP
+          </p>
+          <p className="font-italic mb-0" style ={{color: 'white', fontWeight: 'bold'}} >
           “Hãy ngắm nhìn thế giới. Điều đó tuyệt vời hơn bất cứ giấc mơ nào. “- Ray Bradbury
           </p>
           {/* <p className="font-italic">
@@ -26,7 +26,7 @@ const Banner = () => {
             </a>
           </p> */}
           <p></p>
-          <a href="/home" role="button" className="btn btn-primary px-5" style={{backgroundColor: '#7dbce6', border: 'none', color: 'black'}}>
+          <a href="/home" role="button" className="btn btn-primary px-5" style={{backgroundColor: '#08183c', border: 'none', color: '#f97150', height: '40px', borderRadius: '20px'}}>
             Trải nghiệm ngay
           </a>
         </div>

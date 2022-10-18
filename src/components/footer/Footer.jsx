@@ -3,7 +3,7 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import './footer.css'
 const Footer = () => {
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"></link>
   return (
@@ -119,12 +119,12 @@ const Footer = () => {
 
  
     
-  <div className="text-center p-4" style={{backgroundColor: '#7dbce6'}}>
-    <a className="text-reset fw-bold" href="/">.travelwoVi</a>
+  <div className="text-center p-4" style={{backgroundColor: '#08183c'}}>
+    <a className="" href="/" style={{color: '#f97150' , fontWeight: 'bold', fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif', letterSpacing: '1px'}}>DORIS TOURS</a>
   </div>
   
 </footer>
-
+// className="text-reset fw-bold classname của thẻ a dòng 123"
 
   );
 };

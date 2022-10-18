@@ -4,8 +4,9 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { TextField } from "@mui/material";
 import { Formik } from "formik";
 import axios from "axios";
-import "./login.scss";
-const Login = ({ login }) => {
+import { Divider } from "antd";
+
+const Signup = ({ login }) => {
   const [loginOn, setLoginOn] = useState(login);
   const [isSubmit, setIsSubmit] = useState(false);
   useEffect(() => {
@@ -83,6 +84,7 @@ const Login = ({ login }) => {
 
   const renderForm = () => (
     <>
+    
       <Formik
         initialValues={{ email: "", password: "" }}
         // validate={(values) => {
@@ -136,14 +138,7 @@ const Login = ({ login }) => {
               value={values.password}
             />
             {errors.password && touched.password && errors.password}
-            {isSubmit ? (
-              <LoadingButton
-                sx={{ padding: "16px 0" }}
-                loading
-                variant="outlined"
-              ></LoadingButton>
-            ) : (
-              <Button
+            <Button
                 type="submit"
                 disabled={isSubmitting}
                 sx={{
@@ -155,9 +150,8 @@ const Login = ({ login }) => {
                   },
                 }}
               >
-                {loginOn ? "Đăng nhập" : "Đăng ký"}
+                ĐĂNG KÝ
               </Button>
-            )}
           </form>
         )}
       </Formik>
@@ -168,38 +162,17 @@ const Login = ({ login }) => {
     <div className="login">
       <div className="login--form">
         <div className="button--group">
-          {loginOn ? (
-            <>
-              <Button
-                onClick={() => setLoginOn(true)}
-                sx={buttonStyle("#f97150", "#fff", "12px 0", "1rem 0")}
-              >
-                Đăng nhập
-              </Button>
-              <Button
-                onClick={() => setLoginOn(false)}
-                sx={buttonStyle("#fff", "#f97150", "0 12px", "1rem 0")}
-              >
-                Đăng ký
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button
-                onClick={() => setLoginOn(true)}
-                sx={buttonStyle("#fff", "#f97150", "12px 0", "1rem 0")}
-              >
-                Đăng nhập
-              </Button>
-              <Button
+            <Button
                 onClick={() => setLoginOn(false)}
                 sx={buttonStyle("#f97150", "#fff", "0 12px", "1rem 0")}
               >
                 Đăng ký
               </Button>
-            </>
-          )}
         </div>
+        <Divider 
+             style={{borderColor: '#08183c', borderWidth: '2px'}}
+             
+             />
         {renderForm()}
       </div>
 
@@ -234,4 +207,4 @@ const Login = ({ login }) => {
   );
 };
 
-export default Login;
+export default Signup;

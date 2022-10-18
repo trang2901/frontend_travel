@@ -5,8 +5,10 @@
 * ==========================================
 *
 */
+
 .bg-cover {
     background-size: cover !important;
+    /* height: 1000px !important; */
 }
 
 

@@ -8,6 +8,8 @@ import {
 } from "./paymentContent/index";
 import "./paymentContent.scss";
 import axios from "axios";
+import {Divider} from 'antd'
+import { Container, Paper } from "@mui/material";
 const PaymentContent = () => {
   const [onShowLinkInput, setOnShowLinkInput] = useState(false);
   const [activedStep, setActivedStep] = useState(0);
@@ -75,7 +77,7 @@ const PaymentContent = () => {
         .then((result) => {
           alert("Đặt tour thành công");
           window.location.href =
-            "https://happy-mcnulty-9678bb.netlify.app/customer/bookedTour";
+            "http://localhost:3000/customer/bookedTour";
         })
         .catch((err) => console.log(err));
     };
@@ -94,8 +96,16 @@ const PaymentContent = () => {
   )?.number;
 
   return (
-    <div className="pagementContent">
-      <h1>Thanh toán</h1>
+    <>
+      <div className="payment_h">
+        <Divider plain style={{ borderColor: "#f97150" }}>
+          <p>THANH TOÁN</p>
+        </Divider>
+      </div>
+      <Container style={{paddingBottom: '20px'}}>
+      <Paper elevation={5}>
+       
+      <div className="pagementContent">
       {/* <WizzardHeader /> */}
       <form className="pagementContent.form" onSubmit={handleSubmit}>
         <SwipeableViews index={activedStep} onChangeIndex={handleChange}>
@@ -104,6 +114,7 @@ const PaymentContent = () => {
             customerData={customerData}
             setCustomerData={setCustomerData}
           />
+          
           <AccompanyInfor
             onShowLinkInput={onShowLinkInput}
             setOnShowLink={setOnShowLinkInput}
@@ -112,6 +123,8 @@ const PaymentContent = () => {
             accompanyData={accompanyData}
             setAccompanyData={setAccompanyData}
           />
+
+          
         </SwipeableViews>
         <div className="btn--group">
           <Button
@@ -133,6 +146,10 @@ const PaymentContent = () => {
         </div>
       </form>
     </div>
+    
+    </Paper>
+    </Container>
+    </>
   );
 };
 

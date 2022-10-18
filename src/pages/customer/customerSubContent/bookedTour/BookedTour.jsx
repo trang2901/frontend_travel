@@ -3,6 +3,7 @@ import axios from "axios";
 import { LoginContext } from "../../../../LoginContext";
 import Grid from '@mui/material'
 import { Col, Row, Divider } from 'antd';
+import './bookedTour.scss'
 const BookedTour = () => {
   const [customerJoinedTour, setCustomerJoinedTour] = useState([]);
   const customerID = useContext(LoginContext);
@@ -33,21 +34,24 @@ const BookedTour = () => {
       /> */}
       <div style={{ width: "150%" }}>
         <Row style={{textAlign: 'left'}}>
-          <Col span={8}>
-          <h3>Tên tour: </h3>
+          <Col span={4}>
+          <p>TÊN TOUR: </p>
           </Col>
-          <Col span={8}>
+          <Col span={12}>
           {tour.id_tour.ten}
+          </Col>
+          <Col span={8} style={{textAlign: 'center', justifyContent: 'center', color: 'red', fontWeight: 'bold'}}>
+          {tour.trang_thai_duyet}
           </Col>
         </Row>
 
         {/* <h3>Tên tour: {tour.id_tour.ten}</h3> */}
         <p></p>
         <Row style={{textAlign: 'left'}}>
-          <Col span={8}>
-          <h3>Ngày Khởi Hàng:  </h3>
+          <Col span={4}>
+          <p>NGÀY KHỞI HÀNH:  </p>
           </Col>
-          <Col span={8}>
+          <Col span={12}>
           {tour.id_tour.khoi_hanh}
           </Col>
         </Row>
@@ -55,22 +59,23 @@ const BookedTour = () => {
         <p></p>
         {/* <h3>Ngày đặt tour: {getDate(tour.createdAt)}</h3> */}
         <Row style={{textAlign: 'left'}}>
-          <Col span={8}>
-          <h3>Ngày Đặt Tour:   </h3>
+          <Col span={4}>
+          <p>NGÀY ĐẶT TOUR:   </p>
           </Col>
-          <Col span={8}>
+          <Col span={12}>
           {getDate(tour.createdAt)}
           </Col>
         </Row>
+        <p></p>
         <Row style={{textAlign: 'left'}}>
-          <Col span={8}>
-          <h3>Thành Tiền:    </h3>
+          <Col span={4}>
+          <p>THÀNH TIỀN:     </p>
           </Col>
-          <Col span={8}>
+          <Col span={12}>
           {tour.thanh_tien}
           </Col>
         </Row>
-
+        <Divider dashed style={{borderColor: '#f97150'}}/>
         {/* <Row style={{textAlign: 'left'}}>  
           <Col span={6}>Thành Tiền: </Col>
           <Col span={6}>{tour.thanh_tien}đ</Col> */}
@@ -80,18 +85,20 @@ const BookedTour = () => {
       
      
     </div>
-
   );
   return (
     <>
-      <p>Tour đã đặt</p>
+    <div className="tour_dadat">
+    <Divider plain style={{borderColor:'#f97150'}}><p>TOUR ĐÃ ĐẶT</p></Divider> </div>
       <div className="customer--tour__Container">
         {customerJoinedTour
           ?.slice(0)
           .reverse()
           .map((tour) => renderTour(tour))}
+   
+
       </div>
-      <Divider dashed style={{borderColor: 'black'}}/>
+      
     </>
   );
 };

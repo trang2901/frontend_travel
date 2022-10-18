@@ -47,3 +47,10 @@ i{
     transform: none;
     /* color: black; */
 }
+.blog {
+    font-size: 35px;
+    color: #f97150;
+    font-weight: bolder;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}

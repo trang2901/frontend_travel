@@ -8,3 +8,6 @@ export { default as Banner} from "./banner/banner";
 export { default as List} from "./product/list";
 export { default as Aboutus} from "./aboutus/Aboutus"
 export { default as Blog} from "./blog/Blog"
+export { default as Loginn} from "./login1/Loginn"
+export { default as Signup} from "./signup/Signup"
+

@@ -2,6 +2,8 @@ import { TextField } from "@mui/material";
 import React, { useState, useEffect, useLayoutEffect, useContext } from "react";
 import axios from "axios";
 import { LoginContext } from "../../../../LoginContext";
+import { Divider, Input, Col, Row } from "antd";
+import "./acount.scss";
 const Account = () => {
   const [customerData, setCustomerData] = useState({});
   console.log(customerData);
@@ -69,10 +71,33 @@ const Account = () => {
 
   return (
     <>
-      <p>Thông tin tài khoản</p>
+      <div className="thongtin">
+        <Divider plain style={{ borderColor: "#f97150" }}>
+          <p>THÔNG TIN TÀI KHOẢN</p>
+        </Divider>
+      </div>
       <div className="customer--account">
         <form>
-          <TextField
+          <Row>
+            <Col span={4}>
+              <label>HỌ TÊN:  </label>
+            </Col>
+            <Col span={18}>
+              <Input
+                id="ho_ten"
+                value={customerData.ho_ten || ""}
+                onChange={handleChange}
+                onBlur={handleUpdate}
+                type="textarea"
+                name="name"
+                size="large"
+                width="20px"
+                maxLength="200px"
+              />
+            </Col>
+          </Row>
+          <p></p>
+          {/* <TextField
             id="ho_ten"
             type="text"
             value={customerData.ho_ten || ""}
@@ -80,9 +105,27 @@ const Account = () => {
             onChange={handleChange}
             onBlur={handleUpdate}
             label="Họ tên"
-          />
+          /> */}
+<Row>
+            <Col span={4}>
+              <label>SỐ ĐIỆN THOẠI: </label>
+            </Col>
+            <Col span={18}>
+              <Input
+                id="sdt"
+                value={customerData.sdt || ""}
+                onChange={handleChange}
+                onBlur={handleUpdate}
+                type="textarea"
+                name="sdt"
+                size="large"
+                width="20px"
+                maxLength="200px"
+              />
+            </Col>
+          </Row>
 
-          <TextField
+          {/* <TextField
             id="sdt"
             type="text"
             value={customerData.sdt || ""}
@@ -90,8 +133,27 @@ const Account = () => {
             label="Số điện thoại"
             onChange={handleChange}
             onBlur={handleUpdate}
-          />
-          <TextField
+          /> */}
+          <p></p>
+          <Row>
+            <Col span={4}>
+              <label>EMAIL:  </label>
+            </Col>
+            <Col span={18}>
+              <Input
+               id="email"
+               type="email"
+               value={customerData.email || ""}
+               name="email"
+                onChange={handleChange}
+                onBlur={handleUpdate}
+                size="large"
+                width="20px"
+                maxLength="200px"
+              />
+            </Col>
+          </Row>
+          {/* <TextField
             id="email"
             type="email"
             value={customerData.email || ""}
@@ -99,8 +161,9 @@ const Account = () => {
             label="email"
             onChange={handleChange}
             onBlur={handleUpdate}
-          />
-          <TextField
+          /> */}
+          <p></p>
+          {/* <TextField
             id="dia_chi"
             type="text"
             value={customerData.dia_chi || ""}
@@ -108,7 +171,26 @@ const Account = () => {
             label="Địa chỉ"
             onChange={handleChange}
             onBlur={handleUpdate}
-          />
+          /> */}
+
+<Row>
+            <Col span={4}>
+              <label>ĐỊA CHỈ:  </label>
+            </Col>
+            <Col span={18}>
+              <Input
+               id="dia_chi"
+               type="textarea"
+               value={customerData.dia_chi || ""}
+               name="dia_chi"
+                onChange={handleChange}
+                onBlur={handleUpdate}
+                size="large"
+                width="20px"
+                maxLength="200px"
+              />
+            </Col>
+          </Row>
         </form>
       </div>
     </>

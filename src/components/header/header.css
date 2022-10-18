@@ -1,9 +1,10 @@
 .header-blue {
     
-    background-color: #7dbce6;
+    background-color: #08183c;
     padding-bottom: 80px;
     font-family: 'Source Sans Pro', sans-serif;
     height: 50px;
+
     
   }
   
@@ -223,5 +224,4 @@
     transform: rotate(-19deg);
     opacity: 0.2;
   }
-
 

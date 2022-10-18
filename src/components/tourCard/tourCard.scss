@@ -46,9 +46,9 @@
   font-size: 13px;
   font-weight: bold;
   position: relative;
-  background-color: rgb(45, 138, 63);
+  background-color: #f97150;
   border: solid 1px #ffffff;
-  color: #ffffff;
+  color: #08183c;
   padding: 9px;
   width: 100px;
   text-align: center;
@@ -61,8 +61,8 @@
 .button:hover {
   background: #ffffff;
   // box-shadow: 0px 2px 10px 5px #8a938a;
-  color: rgb(45, 138, 63);
-  border: solid 1px rgb(45, 138, 63);
+  color: #f97150;
+  border: solid 1px #08183c;
 }
 
 .button:after {
@@ -95,8 +95,8 @@
   font-weight: bold;
   position: relative;
   background-color: #ffffff;
-  border: solid 1px rgb(45, 138, 63);
-  color: rgb(45, 138, 63);
+  border: solid 1px #08183c;
+  color: #f97150;
   padding: 9px;
   width: 130px;
   text-align: center;
@@ -108,9 +108,10 @@
 }
 
 .button1:hover {
-  background: rgb(45, 138, 63);
+  background: #f97150;
   // box-shadow: 0px 2px 10px 5px #8a938a;
-  color: rgb(255, 255, 255);
+  color: #08183c;
+  border: #f97150
 }
 
 .button1:after {

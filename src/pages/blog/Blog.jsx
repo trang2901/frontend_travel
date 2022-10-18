@@ -1,12 +1,15 @@
 import { Container } from "@mui/material";
 import React from "react";
-import './blog.css'
+import { Divider } from "antd";
+import './blog.css';
 const Blog = () => {
   return (
     <>
   
 
 <Container>
+<div className="blog">
+    <Divider plain style={{borderColor:'#f97150'}}> <p className="introduction">TIN TỨC</p></Divider> </div>
 <main className="my-5">
   <div className="container">
 

@@ -2,14 +2,21 @@ import React from "react";
 import axios from "axios";
 import { useFormik } from "formik";
 import { Button, TextField } from "@mui/material";
-
+import { Col, Row, Input} from 'antd';
 import "../payment.scss";
+import dateFormat from 'dateformat';
+
 const UserInfor = ({ customerData, setCustomerData }) => {
   const customerID = window.sessionStorage.getItem("customerID");
+// const gia = JSON.stringify(bookTourInfor.gia);
+  // const gia = parseInt(bookTourInfor.gia);
+// var gia = parseFloat(bookTourInfor.gia);
+// var gia = parseInt(bookTourInfor.gia.replaceAll('.', ''));
+// const vat = gia * 1;
   const bookTourInfor = JSON.parse(
     window.localStorage.getItem("bookTourInfor")
   );
-
+  const date_format = dateFormat(bookTourInfor.date, "dd - mm - yyyy");
   const handleChange = (e) => {
     switch (e.target.id) {
       case "ho_ten":
@@ -63,69 +70,170 @@ const UserInfor = ({ customerData, setCustomerData }) => {
         break;
     }
   };
+  console.log('data: ', parseInt(bookTourInfor.gia.replaceAll('.', '')));
 
   return (
     <div className="payment padding-section">
       <div className="tour--infor">
+      
         <div className="tour--infor__container">
+        {/* <p className="chitiet--tour">Chi tiết tour</p> */}
           <img src={`https://tour-api-dev.herokuapp.com${bookTourInfor.img}`} />
           <div className="tour--infor__detail">
-            <h1>Tour:{bookTourInfor.name}</h1>
-            <h3>
+            {/* <h1>Tour: {bookTourInfor.name}</h1> */}
+            
+            <Row>
+            <Col span={14}>
+              <label className="lb">Tour:   </label>
+            </Col>
+            <Col span={10}>
+            <p className="des">{bookTourInfor.name}</p>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={14}>
+              <label  className="lb">Số người:   </label>
+            </Col>
+            <Col span={10}>
+            <p className="des">{bookTourInfor.number}</p>
+            </Col>
+          </Row>
+            {/* <h3>
               Số người: <span>{bookTourInfor.number}</span>
-            </h3>
-            <h3>
+            </h3> */}
+            <Row>
+            <Col span={14}>
+              <label  className="lb">Thời gian khởi hành:   </label>
+            </Col>
+            <Col span={10}>
+            <p className="des">{date_format}</p>
+            </Col>
+          </Row>
+            {/* <h3>
               Thời gian khởi hành: <span>{bookTourInfor.date}</span>
-            </h3>
+            </h3> */}
+
           </div>
         </div>
       </div>
+
       <div className="payment--form">
         <form>
           <div className="payment--form__input">
-            <div className="row">
-              <TextField
+            <p className="title_chitiet">Chi tiết thanh toán</p>
+            <p className="slg">Hoàn tất việc mua sắm của bạn bằng việc hoàn thành thông tin chi tiết dưới đây.</p>
+            {/* <div className="row"> */}
+              <Row>
+            <Col span={8}>
+              <label>Email:   </label>
+            </Col>
+            <Col span={16}>
+            <Input
                 id="email"
-                name="email"
-                label="email"
-                type="email"
                 onChange={handleChange}
                 onBlur={handleUpdate}
                 value={customerData.email || ""}
-                sx={{ flex: "1" }}
+                type="email"
+                name="email"
+                size="large"
+                width="20px"
+                maxLength="200px"
               />
-              <TextField
+            </Col>
+          </Row>
+
+              <Row>
+            <Col span={8}>
+              <label>Họ tên:  </label>
+            </Col>
+            <Col span={16}>
+            <Input
                 id="ho_ten"
-                name="name"
-                label="Họ tên"
-                type="text"
                 onChange={handleChange}
                 onBlur={handleUpdate}
-                sx={{ flex: "1" }}
                 value={customerData.ho_ten || ""}
+                type="text"
+                name="name"
+                size="large"
+                width="20px"
+                maxLength="200px"
               />
-            </div>
-            <TextField
+            </Col>
+          </Row>
+            {/* </div> */}
+            <Row>
+            <Col span={8}>
+              <label>Địa chỉ:   </label>
+            </Col>
+            <Col span={16}>
+            <Input
               id="dia_chi"
               name="address"
               label="Địa chỉ liên hệ"
               type="text"
-              onChange={handleChange}
-              onBlur={handleUpdate}
-              value={customerData.dia_chi || ""}
-            />
-            <TextField
+          onChange={handleChange}
+                onBlur={handleUpdate}
+                value={customerData.dia_chi || ""}
+                size="large"
+                width="20px"
+                maxLength="200px"
+              />
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={8}>
+              <label>Số điện thoại:   </label>
+            </Col>
+            <Col span={16}>
+            <Input
               id="sdt"
               name="sdt"
-              label="Số điện thoại"
+       
               type="number"
-              onChange={handleChange}
-              onBlur={handleUpdate}
-              value={customerData.sdt || ""}
-            />
+          onChange={handleChange}
+                onBlur={handleUpdate}
+                value={customerData.sdt || ""}
+                size="large"
+                width="20px"
+                maxLength="200px"
+              />
+            </Col>
+          </Row>
           </div>
+
+
+
           <div className="playment--form__button">
-            <h1>{bookTourInfor.gia} vnđ</h1>
+          <Row>
+            <Col span={8}>
+              <label>Tổng phụ: </label>
+            </Col>
+            <Col span={16}>
+            {parseInt(bookTourInfor.gia.replaceAll('.', ''))}
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={8}>
+              <label>VAT(10%):  </label>
+            </Col>
+            <Col span={16}>
+            
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={8}>
+              <label>Tổng thành tiền:  </label>
+            </Col>
+            <Col span={16}>
+         kkkkkk
+            </Col>
+          </Row>
+
+
+            {/* <h1>{bookTourInfor.gia} vnđ</h1> */}
           </div>
         </form>
       </div>
