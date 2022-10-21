@@ -9,12 +9,28 @@ const BookedTour = () => {
   const customerID = useContext(LoginContext);
 
   useEffect(() => {
-    axios(`https://tour-api-dev.herokuapp.com/thanhtoan`).then(({ data }) => {
+    
+    axios(`https://tourapi-dev-n.herokuapp.com/thanhtoan`).then(({ data }) => {
       const filterData = data.filter(
         (bookedTour) => bookedTour.id_khach_hang["_id"] === customerID
+        
       );
-      console.log(filterData);
-      setCustomerJoinedTour(filterData);
+  
+      
+      // const filterData = [];
+      // for(var i = 0; i <= data.length; i++){
+      //   console.log('data', data[i].id_khach_hang['_id'].trim());
+      //   if(data[i].id_khach_hang['_id'].trim() === customerID.trim()){
+          
+        
+      //     filterData.push(data[i]);
+      //   }
+       
+      //   filterData.push(data[i]);
+      // }
+      
+      // console.log('filterData', filterData);
+       setCustomerJoinedTour(filterData);
     });
   }, []);
 
@@ -22,7 +38,7 @@ const BookedTour = () => {
     const temp = new Date(date);
     return `${temp.getDate()}/${temp.getMonth() + 1}/${temp.getFullYear()}`;
   };
-
+// console.log(data);
   const renderTour = (tour) => (
     <div
       className="tour--item"

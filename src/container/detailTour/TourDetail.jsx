@@ -16,7 +16,7 @@ const TourDetail = ({ tourData }) => {
   const renderIntroduction = (diaDiem, index) => (
     <div className={`introduction--item ${index % 2 === 0 ? "even" : "odd"}`}>
       <img
-        src={`https://tour-api-dev.herokuapp.com/${diaDiem.id_dia_diem.hinh}`}
+        src={`https://tourapi-dev-n.herokuapp.com/${diaDiem.id_dia_diem.hinh}`}
         
       />
       <div className="place--infor">
@@ -28,7 +28,7 @@ const TourDetail = ({ tourData }) => {
   const renderDetail = (diaDiem, index) => (
     <div className={`detail--item ${index % 2 === 0 ? "even" : "odd"}`}>
       <img
-        src={`https://tour-api-dev.herokuapp.com/${diaDiem.id_dia_diem.hinh}`}
+        src={`https://tourapi-dev-n.herokuapp.com/${diaDiem.id_dia_diem.hinh}`}
       />
       <div className="place--infor">
         <h1>{diaDiem.id_dia_diem.ten}</h1>

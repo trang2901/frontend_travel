@@ -39,7 +39,7 @@ const TourCard = ({ tourData }) => {
         >
           <CardMedia
             component="img"
-            src={`http://tour-api-dev.herokuapp.com${tourData.hinh[0]}`}
+            src={`https://tourapi-dev-n.herokuapp.com/${tourData.hinh[0]}`}
             sx={{
               width: "100%",
               height: 300,

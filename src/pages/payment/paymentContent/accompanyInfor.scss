@@ -10,4 +10,11 @@
   display: Flex;
   gap: 0.5rem;
   flex-direction: column;
+  .thongtin_input {
+    color: #08183c;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 2px;
+  }
 }

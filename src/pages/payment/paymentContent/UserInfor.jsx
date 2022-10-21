@@ -5,14 +5,12 @@ import { Button, TextField } from "@mui/material";
 import { Col, Row, Input} from 'antd';
 import "../payment.scss";
 import dateFormat from 'dateformat';
+import { formatPrice } from "../../../utils/helpers";
 
 const UserInfor = ({ customerData, setCustomerData }) => {
   const customerID = window.sessionStorage.getItem("customerID");
-// const gia = JSON.stringify(bookTourInfor.gia);
-  // const gia = parseInt(bookTourInfor.gia);
-// var gia = parseFloat(bookTourInfor.gia);
-// var gia = parseInt(bookTourInfor.gia.replaceAll('.', ''));
-// const vat = gia * 1;
+
+// var gia = parseFloat(bookTourInfor.gia.replaceAll('.', ''));
   const bookTourInfor = JSON.parse(
     window.localStorage.getItem("bookTourInfor")
   );
@@ -38,7 +36,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
     switch (e.target.id) {
       case "ho_ten":
         axios.put(
-          `https://tour-api-dev.herokuapp.com/khachhang/${customerID}`,
+          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
           {
             ho_ten: customerData.ho_ten,
           }
@@ -46,7 +44,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
         break;
       case "sdt":
         axios.put(
-          `https://tour-api-dev.herokuapp.com/khachhang/${customerID}`,
+          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
           {
             sdt: customerData.sdt,
           }
@@ -54,7 +52,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
         break;
       case "email":
         axios.put(
-          `https://tour-api-dev.herokuapp.com/khachhang/${customerID}`,
+          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
           {
             email: customerData.email,
           }
@@ -62,7 +60,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
         break;
       case "dia_chi":
         axios.put(
-          `https://tour-api-dev.herokuapp.com/khachhang/${customerID}`,
+          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
           {
             dia_chi: customerData.dia_chi,
           }
@@ -78,17 +76,17 @@ const UserInfor = ({ customerData, setCustomerData }) => {
       
         <div className="tour--infor__container">
         {/* <p className="chitiet--tour">Chi tiết tour</p> */}
-          <img src={`https://tour-api-dev.herokuapp.com${bookTourInfor.img}`} />
+          <img src={`https://tourapi-dev-n.herokuapp.com${bookTourInfor.img}`} />
           <div className="tour--infor__detail">
             {/* <h1>Tour: {bookTourInfor.name}</h1> */}
             
             <Row>
-            <Col span={14}>
+            {/* <Col span={14}>
               <label className="lb">Tour:   </label>
-            </Col>
-            <Col span={10}>
-            <p className="des">{bookTourInfor.name}</p>
-            </Col>
+            </Col> */}
+            {/* <Col span={10}> */}
+            <p className="tentour">{bookTourInfor.name}</p>
+            {/* </Col> */}
           </Row>
           <Row>
             <Col span={14}>
@@ -123,24 +121,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
             <p className="title_chitiet">Chi tiết thanh toán</p>
             <p className="slg">Hoàn tất việc mua sắm của bạn bằng việc hoàn thành thông tin chi tiết dưới đây.</p>
             {/* <div className="row"> */}
-              <Row>
-            <Col span={8}>
-              <label>Email:   </label>
-            </Col>
-            <Col span={16}>
-            <Input
-                id="email"
-                onChange={handleChange}
-                onBlur={handleUpdate}
-                value={customerData.email || ""}
-                type="email"
-                name="email"
-                size="large"
-                width="20px"
-                maxLength="200px"
-              />
-            </Col>
-          </Row>
+             
 
               <Row>
             <Col span={8}>
@@ -200,35 +181,92 @@ const UserInfor = ({ customerData, setCustomerData }) => {
               />
             </Col>
           </Row>
+          <Row>
+            <Col span={8}>
+              <label>Email:   </label>
+            </Col>
+            <Col span={16}>
+            <Input
+                id="email"
+                onChange={handleChange}
+                onBlur={handleUpdate}
+                value={customerData.email || ""}
+                type="email"
+                name="email"
+                size="large"
+                width="20px"
+                maxLength="200px"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={8}>
+              <label>Tên doanh nghiệp:  </label>
+            </Col>
+            <Col span={16}>
+            <Input
+              id="sdt"
+              name="sdt"
+       
+              type="number"
+          onChange={handleChange}
+                onBlur={handleUpdate}
+                value={""}
+                size="large"
+                width="20px"
+                maxLength="200px"
+              />
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={8}>
+              <label>Mã số thuế doanh nghiệp:    </label>
+            </Col>
+            <Col span={16}>
+            <Input
+              id="sdt"
+              name="sdt"
+       
+              type="number"
+          onChange={handleChange}
+                onBlur={handleUpdate}
+                value={ ""}
+                size="large"
+                width="20px"
+                maxLength="200px"
+              />
+            </Col>
+          </Row>
           </div>
 
 
 
           <div className="playment--form__button">
-          <Row>
+          <Row className="row_thanhtoan">
             <Col span={8}>
               <label>Tổng phụ: </label>
             </Col>
-            <Col span={16}>
-            {parseInt(bookTourInfor.gia.replaceAll('.', ''))}
+            <Col span={16} className="gia">
+            {formatPrice(parseFloat(bookTourInfor.gia.replaceAll('.', '')))}
             </Col>
           </Row>
 
-          <Row>
+          <Row className="row_thanhtoan">
             <Col span={8}>
               <label>VAT(10%):  </label>
             </Col>
-            <Col span={16}>
-            
+            <Col span={16} className="gia">
+            {formatPrice(parseFloat(bookTourInfor.gia.replaceAll('.', '')) * 0.1)}
             </Col>
           </Row>
 
-          <Row>
+          <Row className="row_thanhtoan">
             <Col span={8}>
-              <label>Tổng thành tiền:  </label>
+              <label style={{fontWeight: 'bold'}}>Tổng thành tiền:  </label>
             </Col>
-            <Col span={16}>
-         kkkkkk
+            <Col span={16} className="gia" style={{fontWeight: 'bold'}}>
+            { formatPrice(parseFloat(bookTourInfor.gia.replaceAll('.', '')) + parseFloat(bookTourInfor.gia.replaceAll('.', '')) * 0.1)}
             </Col>
           </Row>
 

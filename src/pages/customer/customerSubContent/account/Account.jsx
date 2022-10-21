@@ -36,7 +36,7 @@ const Account = () => {
     switch (e.target.id) {
       case "ho_ten":
         axios.put(
-          `https://tour-api-dev.herokuapp.com/khachhang/${customerID}`,
+          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
           {
             ho_ten: customerData.ho_ten,
           }
@@ -44,7 +44,7 @@ const Account = () => {
         break;
       case "sdt":
         axios.put(
-          `https://tour-api-dev.herokuapp.com/khachhang/${customerID}`,
+          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
           {
             sdt: customerData.sdt,
           }
@@ -52,7 +52,7 @@ const Account = () => {
         break;
       case "email":
         axios.put(
-          `https://tour-api-dev.herokuapp.com/khachhang/${customerID}`,
+          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
           {
             email: customerData.email,
           }
@@ -60,7 +60,7 @@ const Account = () => {
         break;
       case "dia_chi":
         axios.put(
-          `https://tour-api-dev.herokuapp.com/khachhang/${customerID}`,
+          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
           {
             dia_chi: customerData.dia_chi,
           }
@@ -80,7 +80,7 @@ const Account = () => {
         <form>
           <Row>
             <Col span={4}>
-              <label>HỌ TÊN:  </label>
+              <label className="lb1">HỌ TÊN: </label>
             </Col>
             <Col span={18}>
               <Input
@@ -106,9 +106,9 @@ const Account = () => {
             onBlur={handleUpdate}
             label="Họ tên"
           /> */}
-<Row>
+          <Row>
             <Col span={4}>
-              <label>SỐ ĐIỆN THOẠI: </label>
+              <label className="lb1">SỐ ĐIỆN THOẠI: </label>
             </Col>
             <Col span={18}>
               <Input
@@ -137,14 +137,14 @@ const Account = () => {
           <p></p>
           <Row>
             <Col span={4}>
-              <label>EMAIL:  </label>
+              <label className="lb1">EMAIL: </label>
             </Col>
             <Col span={18}>
               <Input
-               id="email"
-               type="email"
-               value={customerData.email || ""}
-               name="email"
+                id="email"
+                type="email"
+                value={customerData.email || ""}
+                name="email"
                 onChange={handleChange}
                 onBlur={handleUpdate}
                 size="large"
@@ -173,16 +173,16 @@ const Account = () => {
             onBlur={handleUpdate}
           /> */}
 
-<Row>
+          <Row>
             <Col span={4}>
-              <label>ĐỊA CHỈ:  </label>
+              <label className="lb1">ĐỊA CHỈ: </label>
             </Col>
             <Col span={18}>
               <Input
-               id="dia_chi"
-               type="textarea"
-               value={customerData.dia_chi || ""}
-               name="dia_chi"
+                id="dia_chi"
+                type="textarea"
+                value={customerData.dia_chi || ""}
+                name="dia_chi"
                 onChange={handleChange}
                 onBlur={handleUpdate}
                 size="large"

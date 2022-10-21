@@ -16,7 +16,7 @@ const Detail = () => {
 
   const fetchDetailTour = () => {
     const slug = searchParams.get("slug");
-    axios(`https://tour-api-dev.herokuapp.com/tour/${slug}`)
+    axios(`https://tourapi-dev-n.herokuapp.com/tour/${slug}`)
       .then(({ data }) => {
         document.title = data.ten;
         setTourData(data);

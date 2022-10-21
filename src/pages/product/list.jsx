@@ -16,7 +16,7 @@ const List = () => {
   }, [tag]);
 
   const fetchToursData = () => {
-    axios("https://tour-api-dev.herokuapp.com/Tour")
+    axios("https://tourapi-dev-n.herokuapp.com/tour")
       .then(({ data }) => {
         if (tag) {
           const filteredTours = data.filter((tour) => tour.tags.includes(tag));

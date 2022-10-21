@@ -10,4 +10,4 @@ export { default as Aboutus} from "./aboutus/Aboutus"
 export { default as Blog} from "./blog/Blog"
 export { default as Loginn} from "./login1/Loginn"
 export { default as Signup} from "./signup/Signup"
-
+export { default as Ordersuccessful} from "./order_successful/Ordersuccessful"

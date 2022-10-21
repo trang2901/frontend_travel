@@ -46,7 +46,13 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #aeaeae;
   }
-
+  .label_detail {
+    font-weight: bold;
+    color: #08183c;
+  }
+  i {
+    font-size: 21px;
+  }
   .location {
     display: flex;
     align-items: center;

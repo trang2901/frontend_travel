@@ -32,7 +32,13 @@
       color: #08183c;
     }
     .des {
-      color:rgba(153, 148, 148, 0.929)
+      color:rgba(5, 95, 32, 0.929);
+      font-weight: bolder;
+    }
+    .tentour {
+      font-weight: bold;
+      color: #08183c;
+      font-size: 20px
     }
     
   }
@@ -87,5 +93,11 @@
     // justify-content: space-between;
     // align-items: center;
     margin-top: 2rem;
+    .gia{
+      text-align: right;
+    }
+    .row_thanhtoan {
+      margin-top: 5px;
+    }
   }
 }
