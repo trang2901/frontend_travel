@@ -10,7 +10,7 @@ const Home = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
   const [fetching, setFetching] = useState(true);
-
+  
 
   useEffect(() => {
     setFetching(true);

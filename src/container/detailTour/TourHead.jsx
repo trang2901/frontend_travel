@@ -23,10 +23,20 @@ import dateFormat from "dateformat";
 
 const TourHead = ({ tourData }) => {
   const customerID = useContext(LoginContext);
-
   const [numberGuest, setNumberGuest] = useState(0);
-  const date_format = dateFormat(tourData.khoi_hanh, "dd - mm - yyyy");
+  const date_format = dateFormat(tourData.khoi_hanh, "dd/mm/yyyy");
   const navigate = useNavigate();
+  /////set trạng thái ----------------------------------
+  const newDate = new Date();
+  const [trangthai, setTrangThai]= useState('Chưa diễn ra');
+  // const setTrangThai = (trangthai) => {
+  //     if(date_format < newDate) {
+        
+  //       // setTrangThai(trangthai);
+  //     }
+  // }
+ 
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -118,6 +128,21 @@ const TourHead = ({ tourData }) => {
     console.log("submit");
   };
 
+  useEffect(() => {
+    // console.log(convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf());
+    // console.log(convertToDate(dateFormat(tourData.khoi_hanh, "dd/mm/yyyy")).getTime().valueOf());
+     if(convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() > convertToDate(dateFormat(tourData.khoi_hanh, "dd/mm/yyyy")).getTime().valueOf()){
+        setTrangThai('Đã diễn ra');
+     } else {
+      setTrangThai('Chưa diễn ra');
+     } 
+     
+  }, [tourData]);
+  
+  const convertToDate = (dateSting) => {
+    const [day, month, year] = dateSting.split("/");
+    return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+}
   return (
     <Container>
       <div className="tour--information">
@@ -141,7 +166,14 @@ const TourHead = ({ tourData }) => {
         <div className="tour--information__general">
           <div className="name">
             <h3>{tourData.ten}</h3>
-            <p className="trangthai">Trạng thái</p>
+
+{/* --------- */}
+            <p className="trangthai" style={{ color: trangthai==='Đã diễn ra'?"red": "green"}}>{trangthai}</p>
+
+      
+
+
+
           </div>
           <Divider style={{ borderColor: "darkgrey" }} />
           <p>{tourData.description}</p>

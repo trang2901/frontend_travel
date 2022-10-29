@@ -75,9 +75,10 @@ const PaymentContent = () => {
           ],
         })
         .then((result) => {
-          alert("Đặt tour thành công");
+          // alert("Đặt tour thành công");
           window.location.href =
-            "http://localhost:3000/customer/bookedTour";
+            // "http://localhost:3000/customer/bookedTour"
+            "http://localhost:3000/ordersuccessful";
         })
         .catch((err) => console.log(err));
     };

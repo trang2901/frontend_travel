@@ -5,6 +5,10 @@ import './ordersuccessful.scss'
 import { Container } from "@mui/material";
 import {Button, Modal} from 'antd';
 const Ordersuccessful = () => {
+  const handleClick = ()=> {
+    window.location.href =
+            "http://localhost:3000/customer/bookedTour";
+  }
    return (
     <Container style={{justifyContent: 'center'}}>
     <div className="order--container">
@@ -24,8 +28,8 @@ const Ordersuccessful = () => {
               </button>
               </Link>
 
-              <Link to={`./customer/bookedTour`}>
-            <button className="button--tiep">     
+              <Link to={``}>
+            <button className="button--tiep" onClick={handleClick}>     
             Đơn đã đặt
     
               </button>

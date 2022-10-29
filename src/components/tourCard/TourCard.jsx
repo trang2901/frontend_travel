@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -16,7 +16,26 @@ import dateFormat from 'dateformat';
 import { format } from 'date-fns';
 const TourCard = ({ tourData }) => {
  const so_cho_con = tourData.so_cho - tourData.du_khach?.length;
- const date_format = dateFormat(tourData.khoi_hanh, "dd - mm - yyyy");
+ const date_format = dateFormat(tourData.khoi_hanh, "dd/mm/yyyy");
+
+ const newDate = new Date();
+ const [trangthai, setTrangThai]= useState('Chưa diễn ra');
+
+ const convertToDate = (dateSting) => {
+  const [day, month, year] = dateSting.split("/");
+  return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+}
+
+useEffect(() => {
+  // console.log(convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf());
+  // console.log(convertToDate(dateFormat(tourData.khoi_hanh, "dd/mm/yyyy")).getTime().valueOf());
+   if(convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() > convertToDate(dateFormat(tourData.khoi_hanh, "dd/mm/yyyy")).getTime().valueOf()){
+      setTrangThai('Đã diễn ra');
+   } else {
+    setTrangThai('Chưa diễn ra');
+   } 
+   
+}, [tourData]);
   return (
     <>
     {/* <Link to={`/detail?slug=${tourData.slug}`}> */}
@@ -51,7 +70,7 @@ const TourCard = ({ tourData }) => {
           <div className="tourCard--Content">
             {/* <p>Mã tour: {tourData.id}</p> */}
             <h3>{tourData.ten}</h3>
-            <p className="trangthai">Trạng thái</p>
+            <p className="trangthai" style={{ color: trangthai==='Đã diễn ra'?"red": "green"}}>{trangthai}</p>
             {/* <p>{tourData.describe}</p> */}  
             
             {/* <h2>
