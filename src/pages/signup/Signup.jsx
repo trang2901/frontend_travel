@@ -38,7 +38,7 @@ const Signup = ({ login }) => {
   const createLoginRequest = (values) => {
     const getCustomerID = (accountID) => {
       axios
-        .get("https://tour-api-dev.herokuapp.com/khachhang")
+        .get("https://tourapi-dev-n.herokuapp.com/khachhang")
         .then(({ data }) => {
           const Data = data.find(
             (customer) => customer.id_tai_khoan?.["_id"] === accountID
@@ -49,7 +49,7 @@ const Signup = ({ login }) => {
     };
 
     axios
-      .get(`https://tour-api-dev.herokuapp.com/taikhoan/${values.email}`)
+      .get(`https://tourapi-dev-n.herokuapp.com/taikhoan/${values.email}`)
       .then(({ data }) => {
         if (data == null) {
           setIsSubmit(false);
@@ -65,15 +65,27 @@ const Signup = ({ login }) => {
 
   const createRegisterRequest = (values) => {
     axios
-      .post("https://tour-api-dev.herokuapp.com/taikhoan", {
+      .post("https://tourapi-dev-n.herokuapp.com/taikhoan", 
+      {
         username: values.email,
         password: values.password,
+        diachi: values.diachi,
+        hoten: values.hoten,
+        sodienthoai: values.sodienthoai,
       })
+      // console.log('thành công!!!!!!!')
       .then(({ data }) => {
+        // console.log(data);
         axios
-          .post("https://tour-api-dev.herokuapp.com/khachhang", {
+          .post("https://tourapi-dev-n.herokuapp.com/khachhang", {
             id_tai_khoan: data,
+            ho_ten: data.hoten,
+            dia_chi: data.diachi,
+            sdt: data.sodienthoai
+            
+
           })
+         
           .then(({ data }) => {
             window.sessionStorage.setItem("customerID", data._id);
             window.location.href = "/";
@@ -84,9 +96,8 @@ const Signup = ({ login }) => {
 
   const renderForm = () => (
     <>
-    
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: "", password: "", diachi: "", hoten: "", sodienthoai: "" }}
         // validate={(values) => {
         //   const errors = {};
         //   if (!values.email) {
@@ -102,9 +113,11 @@ const Signup = ({ login }) => {
           setTimeout(() => {
             setIsSubmit(true);
             if (loginOn) createLoginRequest(values);
-            else createRegisterRequest(values);
+            else 
+            createRegisterRequest(values);
           });
           setSubmitting(false);
+         
         }}
       >
         {({
@@ -120,9 +133,36 @@ const Signup = ({ login }) => {
           <form className="form" onSubmit={handleSubmit}>
             <TextField
               type="text"
+              name="hoten"
+              variant="standard"
+              label="Họ tên"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.hoten}
+            />
+            <TextField
+              type="text"
+              name="diachi"
+              variant="standard"
+              label="Địa chỉ"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.diachi}
+            />
+            <TextField
+              type="text"
+              name="sodienthoai"
+              variant="standard"
+              label="Số điện thoại"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.sodienthoai}
+            />
+            <TextField
+              type="text"
               name="email"
               variant="standard"
-              label="Email"
+              label="Username"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
@@ -138,6 +178,8 @@ const Signup = ({ login }) => {
               value={values.password}
             />
             {errors.password && touched.password && errors.password}
+            <p></p>
+            <p></p>
             <Button
                 type="submit"
                 disabled={isSubmitting}
