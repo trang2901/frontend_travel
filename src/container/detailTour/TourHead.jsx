@@ -190,7 +190,9 @@ const TourHead = ({ tourData }) => {
                 <i class="fa-regular fa-file-code"></i> &ensp;Mã:{" "}
               </label>
             </Col>
-            <Col span={17}>{tourData.id_tour}</Col>
+            <Col span={17}>
+             <label> {tourData.matour}</label>
+              </Col>
           </Row>
           <p></p>
           <Row>
@@ -199,16 +201,30 @@ const TourHead = ({ tourData }) => {
                 <i class="fa-solid fa-car"></i>&ensp;Phương tiện:{" "}
               </label>
             </Col>
-            <Col span={17}></Col>
+            <Col span={17}>
+             <label>{tourData.Phuongtien}</label> 
+              </Col>
           </Row>
           <p></p>
           <Row>
             <Col span={7}>
               <label className="label_detail">
-                <i class="fa-solid fa-location-dot"></i>&ensp;Địa điểm:{" "}
+                <i class="fa-solid fa-location-dot"></i>&ensp;Khách sạn: {" "}
               </label>
             </Col>
-            <Col span={17}>NHẬT BẢN</Col>
+            <Col span={17}>
+              <label>{tourData.khachsan}</label></Col>
+          </Row>
+          <p></p>
+          <Row>
+            <Col span={7}>
+              <label className="label_detail">
+                <i class="fa-solid fa-location-dot"></i>&ensp;Ẩm thực: {" "}
+              </label>
+            </Col>
+            <Col span={17}>
+             <label>{tourData.amthuc}</label>
+              </Col>
           </Row>
           <p></p>
           <Row>

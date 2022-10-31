@@ -14,6 +14,7 @@ import Grid from '@mui/material/Grid';
 import "./tourCard.scss";
 import dateFormat from 'dateformat';
 import { format } from 'date-fns';
+import { Divider } from "antd";
 const TourCard = ({ tourData }) => {
  const so_cho_con = tourData.so_cho - tourData.du_khach?.length;
  const date_format = dateFormat(tourData.khoi_hanh, "dd/mm/yyyy");
@@ -39,6 +40,8 @@ useEffect(() => {
   return (
     <>
     {/* <Link to={`/detail?slug=${tourData.slug}`}> */}
+    
+
       <Card
         sx={{
           width: 340,

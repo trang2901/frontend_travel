@@ -92,21 +92,25 @@
     color: #fcfeff !important;
     background-color: transparent;
   }
-  
+
+/* dropdown menu ở đây nè ------------------------------------------------------------------------------------------------------------------------ */
   .header-blue .navbar .navbar-nav > li > .dropdown-menu {
-    margin-top: -5px;
+    margin-top: 15px;
     box-shadow: 0 4px 8px rgba(0,0,0,.1);
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
     border-radius: 2px;
+    width: 1000px;
+    height: auto;
+    margin-left: 10px;
   }
   
   .header-blue .navbar .dropdown-menu .dropdown-item:focus, .header-blue .navbar .dropdown-menu .dropdown-item {
     line-height: 2;
-    color: #37434d;
+    color: #f97150
   }
   
   .header-blue .navbar .dropdown-menu .dropdown-item:focus, .header-blue .navbar .dropdown-menu .dropdown-item:hover {
-    background: #ebeff1;
+    background: #ffffff;
   }
   
   .header-blue .action-button, .header-blue .action-button:not(.disabled):active {

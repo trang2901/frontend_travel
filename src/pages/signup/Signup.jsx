@@ -5,7 +5,7 @@ import { TextField } from "@mui/material";
 import { Formik } from "formik";
 import axios from "axios";
 import { Divider } from "antd";
-
+import './signup.scss'
 const Signup = ({ login }) => {
   const [loginOn, setLoginOn] = useState(login);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -140,6 +140,7 @@ const Signup = ({ login }) => {
               onBlur={handleBlur}
               value={values.hoten}
             />
+            <p></p>
             <TextField
               type="text"
               name="diachi"
@@ -149,6 +150,8 @@ const Signup = ({ login }) => {
               onBlur={handleBlur}
               value={values.diachi}
             />
+            <p>
+            </p>
             <TextField
               type="text"
               name="sodienthoai"
@@ -158,6 +161,7 @@ const Signup = ({ login }) => {
               onBlur={handleBlur}
               value={values.sodienthoai}
             />
+            <p></p>
             <TextField
               type="text"
               name="email"
@@ -167,6 +171,7 @@ const Signup = ({ login }) => {
               onBlur={handleBlur}
               value={values.email}
             />
+            <p></p>
             {/* {errors.email && touched.email && errors.email} */}
             <TextField
               type="password"
@@ -178,6 +183,7 @@ const Signup = ({ login }) => {
               value={values.password}
             />
             {errors.password && touched.password && errors.password}
+            <p></p>
             <p></p>
             <p></p>
             <Button
@@ -194,6 +200,7 @@ const Signup = ({ login }) => {
               >
                 ĐĂNG KÝ
               </Button>
+              <p></p> <p></p>
           </form>
         )}
       </Formik>
@@ -206,7 +213,8 @@ const Signup = ({ login }) => {
         <div className="button--group">
             <Button
                 onClick={() => setLoginOn(false)}
-                sx={buttonStyle("#f97150", "#fff", "0 12px", "1rem 0")}
+                sx={buttonStyle("#f97150", "0 12px", "1rem 0")}
+                style= {{marginTop: '10px'}}
               >
                 Đăng ký
               </Button>

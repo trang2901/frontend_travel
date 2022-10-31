@@ -98,9 +98,8 @@ const TourDetail = ({ tourData }) => {
         <div className="diemnoibat">
         <p className="title_diemnoibat">ĐIỂM NỔI BẬT</p>
         <div className="des_diemnoibat">
-            <p>  &bull; {tourData.ten}</p>
-            <p>  &bull; {tourData.ten}</p>
-            <p>  &bull; {tourData.ten}</p>
+            <label>{tourData.diemnhan}</label>
+            
         </div>
         </div>
 

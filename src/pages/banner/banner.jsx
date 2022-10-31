@@ -1,9 +1,39 @@
-import React from "react";
-import "./banner1.css";
+import React,{useState, useEffect}  from "react";
+
 import anhbia from "../../image/anh-bia.jpg"
 import { TourCard } from "../../components";
-import {CardList} from "../../container"
+import axios from "axios";
+import { CategoryList, CardList } from "../../container";
+import './banner1.scss'
+import { Divider } from "antd";
 const Banner = () => {
+  const [tag, setTag] = useState("");
+  const [DataTours, setDataTours] = useState([]);
+  const [fetching, setFetching] = useState(true);
+  
+
+  useEffect(() => {
+    setFetching(true);
+    fetchToursData();
+    tag ? (document.title = tag) : (document.title = ".travelwoVi");
+  }, [tag]);
+  const fetchToursData = () => {
+    axios("https://tourapi-dev-n.herokuapp.com/tour")
+      .then(({ data }) => {
+        if (tag) {
+          const filteredTours = data.filter((tour) => tour.tags.includes(tag));
+          setDataTours(filteredTours);
+          setFetching(false);
+        } else {
+          setDataTours(data);
+          setFetching(false);
+        }
+      })
+      .catch((err) => {
+        console.error("Fetching error: " + err);
+      });
+  };
+
   return (
     <>
       <div
@@ -33,8 +63,10 @@ const Banner = () => {
       </div>
 
       <div className="container py-5">
-        <h2 className="h3 font-weight-bold">Tour Mới</h2>
-        
+      <div className="tourmoi">
+          <Divider dashed orientation="left" plain style={{borderColor:'#f97150'}}> <p className="tourmoi">TOUR MỚI</p></Divider> </div>
+
+      
         {/* <div className="row">
           <div className="col-lg-10 mb-4">
             <p className="font-italic text-muted">
@@ -69,6 +101,7 @@ const Banner = () => {
           </div>
         </div> */}
       </div>
+      <CardList DataTours={DataTours} tag={tag} />
     </>
   );
 };

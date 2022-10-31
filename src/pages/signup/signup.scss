@@ -1,0 +1,74 @@
+.login {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    
+  }
+  .login--form {
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px rgb(9, 15, 32) solid;
+    border-radius: 15px;
+  
+    .button--group {
+      width: 100%;
+      // display: flex;
+      button {
+        width: 100%;
+      }
+    }
+  
+    .form {
+      width: 50%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      input,
+      button {
+        width: 100%;
+      }
+    }
+  }
+  
+  .authentication--section {
+    width: 40vw;
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-around;
+    button {
+      width: 40%;
+    }
+  }
+  
+  @media screen and (max-width: 1050px) {
+    /* tablet */
+    .login--form {
+      width: 70vw;
+    }
+  
+    .button--group {
+      width: 100%;
+      display: flex;
+      button {
+        font-size: 18px;
+        width: 100%;
+        padding: 0.5rem;
+        z-index: 0;
+      }
+  
+      &:hover {
+        .MuiButton-text {
+          font-size: 18px;
+        }
+        width: 100%;
+        z-index: 0;
+      }
+    }
+  }
+  

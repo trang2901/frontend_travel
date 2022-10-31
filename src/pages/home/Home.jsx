@@ -5,7 +5,9 @@ import { Banner } from "../../components";
 import { CategoryList, CardList } from "../../container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Cancel from "@mui/icons-material/Cancel";
-import Chat from "../../components/chat/Chat"
+import Chat from "../../components/chat/Chat";
+import { Divider } from "antd";
+import './home.scss'
 const Home = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
@@ -64,7 +66,10 @@ const Home = () => {
             <CircularProgress disableShrink />
           </div>
         ) : (
-          <CardList DataTours={DataTours} tag={tag} />
+          <>
+          <div className="tourList">
+    <Divider plain style={{borderColor:'#f97150'}}> <p className="introduction">TOUR TRONG NƯỚC</p></Divider> </div>
+          <CardList DataTours={DataTours} tag={tag} /></>
         )}
       </Context.Provider>
     </>
