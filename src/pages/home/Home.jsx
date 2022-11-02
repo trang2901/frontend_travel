@@ -43,6 +43,8 @@ const Home = () => {
         <Banner />
         {/* <Chat/>  */}
         <CategoryList setTag={setTag} />
+        <p></p><p></p>
+        
         {tag ? (
           <div className="catergory--selected">
             <div onClick={() => setTag("")}>

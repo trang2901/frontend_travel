@@ -64,19 +64,19 @@ const Footer = () => {
         <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
    
           <h6 className="text-uppercase fw-bold mb-4">
-            Products
+            Du lịch
           </h6>
           <p>
-            <a href="#!" className="text-reset">Angular</a>
+            <a href="#!" className="text-reset">Tour miền Bắc</a>
           </p>
           <p>
-            <a href="#!" className="text-reset">React</a>
+            <a href="#!" className="text-reset">Tour miền Trung</a>
           </p>
           <p>
-            <a href="#!" className="text-reset">Vue</a>
+            <a href="#!" className="text-reset">Tour miền Tây Nam Bộ</a>
           </p>
           <p>
-            <a href="#!" className="text-reset">Laravel</a>
+            <a href="#!" className="text-reset">Tour miền Đông Nam Bộ</a>
           </p>
         </div>
         

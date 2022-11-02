@@ -209,7 +209,7 @@ const TourHead = ({ tourData }) => {
           <Row>
             <Col span={7}>
               <label className="label_detail">
-                <i class="fa-solid fa-location-dot"></i>&ensp;Khách sạn: {" "}
+              <i class="fa-solid fa-building"></i>&ensp;Khách sạn: {" "}
               </label>
             </Col>
             <Col span={17}>
@@ -219,7 +219,7 @@ const TourHead = ({ tourData }) => {
           <Row>
             <Col span={7}>
               <label className="label_detail">
-                <i class="fa-solid fa-location-dot"></i>&ensp;Ẩm thực: {" "}
+              <i class="fa-solid fa-utensils"></i>&ensp;Ẩm thực: {" "}
               </label>
             </Col>
             <Col span={17}>

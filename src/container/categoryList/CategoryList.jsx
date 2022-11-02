@@ -7,65 +7,65 @@ const CategoryList = () => {
   const listCategory = [
     {
       id: "2",
-      label: "Sakura",
-      imageURL: require("../../assets/category/sakura.jpg"),
+      label: "Hà Nội",
+      imageURL: require("../../assets/category/hoguom.jpg"),
     },
     {
       id: "3",
-      label: "Mountain",
-      imageURL: require("../../assets/category/mountain.jpg"),
+      label: "Đà Nẵng",
+      imageURL: require("../../assets/category/bantayvang_danang.jpg"),
     },
     {
       id: "42",
-      label: "Temple",
-      imageURL: require("../../assets/category/temple.jpg"),
+      label: "Đà Lạt",
+      imageURL: require("../../assets/category/qtrglamvien.jpg"),
     },
     {
       id: "32",
-      label: "City",
-      imageURL: require("../../assets/category/city.jpg"),
+      label: "Phú Quốc",
+      imageURL: require("../../assets/category/phuquoc.jpg"),
     },
     {
       id: "31",
-      label: "Contryside",
-      imageURL: require("../../assets/category/contryside.jpg"),
+      label: "Vũng Tàu",
+      imageURL: require("../../assets/category/vungtau.jpeg"),
     },
     {
       id: "314",
-      label: "Castle",
-      imageURL: require("../../assets/category/castle.jpg"),
+      label: "TP Hồ Chí Minh",
+      imageURL: require("../../assets/category/tphcm.jpg"),
     },
     {
       id: "312",
-      label: "Snow",
-      imageURL: require("../../assets/category/snow.jpg"),
+      label: "Cần Thơ",
+      imageURL: require("../../assets/category/benninhkieu.jpg"),
     },
     {
       id: "342",
-      label: "Onsen",
-      imageURL: require("../../assets/category/onsen.jpg"),
+      label: "Nha Trang",
+      imageURL: require("../../assets/category/nhatrang.jpg"),
     },
     {
       id: "142",
-      label: "Beach",
-      imageURL: require("../../assets/category/sakura.jpg"),
+      label: "Hà Giang",
+      imageURL: require("../../assets/category/hagiang.jpg"),
     },
   ];
 
   return (
     <div className="categoryList padding-section">
-      {/* <div className="category">
+      <div className="category">
         <div className="category--heading">
-           <h1>Du lịch trong nước</h1>
-          <p>Sẽ rất nhanh nếu bạn tìm theo đặc trung văn hóa</p>
+           {/* <h1>Du lịch trong nước</h1>
+          <p>Sẽ rất nhanh nếu bạn tìm theo đặc trung văn hóa</p> */}
         </div>
-        <Carousel listCategory={listCategory} /> */}
+        <Carousel listCategory={listCategory} />
 
         {/* <div className="category--heading">
         <h1>Du lịch ngoài nước</h1></div> */}
         {/* <Carousel listCategory={listCategory} /> */}
 
-     {/* </div> */}
+     </div>
      </div>
   );
 };
