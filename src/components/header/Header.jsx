@@ -449,24 +449,6 @@ const Header = () => {
                     </a>
                   </li>
                 </ul>
-                <form className="form-inline mr-auto" target="_self">
-                  <div className="form-group">
-                    <label for="search-field">
-                      <i
-                        className="fa fa-search"
-                        style={{ color: "#f97150" }}
-                      ></i>
-                    </label>
-                    <input
-                      className="form-control search-field"
-                      type="search"
-                      id="search-field"
-                      name="search"
-                      style={{ color: "#f97150" }}
-                    />
-                  </div>
-                </form>
-
                 {customerID ? (
                   <>
                     <Link to="/customer">

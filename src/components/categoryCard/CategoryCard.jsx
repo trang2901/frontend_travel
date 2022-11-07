@@ -37,10 +37,10 @@ const CategoryCard = ({ dataTour }) => {
           component="img"
           image={dataTour.imageURL}
           sx={{
-            width: "100%",
-            height: "40vh",
+            width: "70%",
+            height: "70%",
             filter: "drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.2))",
-            borderRadius: "40px",
+            borderRadius: "20%",
           }}
           alt=""
         />

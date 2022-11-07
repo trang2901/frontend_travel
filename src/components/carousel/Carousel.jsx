@@ -40,7 +40,7 @@ const Carousel = ({ listCategory }) => {
           borderRadius: "5px",
         }}
         width="100%"
-        height="40%"
+        height="50%"
         slidesToShow={1}
         autoplay={false}
         dragging={false}

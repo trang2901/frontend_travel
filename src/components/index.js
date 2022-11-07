@@ -9,3 +9,4 @@ export { default as LightBox } from "./lightBox/LightBox";
 export { default as RouterConfig } from "./routerConfig/RouterConfig";
 
 export { default as Chat} from "./chat/Chat";
+export { default as HeaderBill} from './headerBill/HeaderBill'

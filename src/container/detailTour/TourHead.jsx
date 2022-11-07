@@ -163,6 +163,7 @@ const TourHead = ({ tourData }) => {
 
           {/* <LightBox images={tourData.hinh} /> */}
         </div>
+        
         <div className="tour--information__general">
           <div className="name">
             <h3>{tourData.ten}</h3>
@@ -202,7 +203,7 @@ const TourHead = ({ tourData }) => {
               </label>
             </Col>
             <Col span={17}>
-             <label>{tourData.Phuongtien}</label> 
+             <label>{tourData.phuongtien}</label> 
               </Col>
           </Row>
           <p></p>
@@ -219,6 +220,17 @@ const TourHead = ({ tourData }) => {
           <Row>
             <Col span={7}>
               <label className="label_detail">
+              <i class="fa-solid fa-location-dot"></i>&ensp;Điểm khởi hành: {" "}
+              </label>
+            </Col>
+            <Col span={17}>
+              <label>{tourData.diemkhoihanh}</label></Col>
+          </Row>
+          <p></p>
+
+          <Row>
+            <Col span={7}>
+              <label className="label_detail">
               <i class="fa-solid fa-utensils"></i>&ensp;Ẩm thực: {" "}
               </label>
             </Col>
@@ -230,7 +242,7 @@ const TourHead = ({ tourData }) => {
           <Row>
             <Col span={7}>
               <label className="label_detail">
-                <i class="fa-solid fa-calendar"></i>&ensp;Date:{" "}
+                <i class="fa-solid fa-calendar"></i>&ensp;Ngày khởi hành:{" "}
               </label>
             </Col>
             <Col span={17}>
@@ -238,11 +250,22 @@ const TourHead = ({ tourData }) => {
             </Col>
           </Row>
           <p></p>
+          <Row>
+            <Col span={7}>
+              <label className="label_detail">
+              <i class="fa-regular fa-clock"></i>&ensp;Thời gian:{" "}
+              </label>
+            </Col>
+            <Col span={17}>
+              <label>{tourData.thoigian}</label>
+            </Col>
+          </Row>
+          <p></p>
           {/* </div> */}
           <Row>
             <Col span={7}>
               <label className="label_detail">
-                <i class="fa-solid fa-person"></i>&ensp;People:{" "}
+                <i class="fa-solid fa-person"></i>&ensp;Số khách:{" "}
               </label>
             </Col>
             <Col span={17}>

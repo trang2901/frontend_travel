@@ -1,45 +1,229 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
-import img from "../../image/logocheck.png"
-import './ordersuccessful.scss'
-import { Container } from "@mui/material";
-import {Button, Modal} from 'antd';
+import img from "../../image/logocheck.png";
+import "./ordersuccessful.scss";
+import { Container,Paper } from "@mui/material";
+import { Button, Modal } from "antd";
+import { Col, Row, Divider } from "antd";
+import axios from "axios";
+import { LoginContext } from "../../LoginContext";
+import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+import { formatPrice } from "../../utils/helpers";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import { HeaderBill } from "../../components";
+import dateFormat from "dateformat";
 const Ordersuccessful = () => {
-  const handleClick = ()=> {
-    window.location.href =
-            "http://localhost:3000/customer/bookedTour";
-  }
-   return (
-    <Container style={{justifyContent: 'center'}}>
-    <div className="order--container">
-    {/* <center> */}
-        <img src = {img}/> 
-        {/* </center> */}
-    <p className="order">Đặt tour thành công</p>
-    <label>Cảm ơn bạn đã cho chúng tôi cơ hội được phục vụ !</label>
-    <p></p>
-    <label>Chúng tôi sẽ kiểm tra và xác nhận đơn đặt hàng sớm nhất có thể! </label>
-    <p><label><i class="fa-solid fa-phone"></i> Tư vấn đặt tour:</label>&ensp;<label style={{color: 'red', fontWeight: 'bold'}}>0394075201</label><label>(8:00 - 22:00)</label></p>
-    <p></p>
-    <div className="btn--tour">
-          <Link to={`/home`}>
-            <button className="button--trove">     
-            Trang chủ
-              </button>
-              </Link>
+  const customerID = useContext(LoginContext);
+  const [customerJoinedTour, setCustomerJoinedTour] = useState([]);
 
-              <Link to={``}>
-            <button className="button--tiep" onClick={handleClick}>     
-            Đơn đã đặt
-    
-              </button>
-              </Link> 
-          </div>
 
-    </div>
+
+
+  useEffect(() => {
+    axios(`https://tourapi-dev-n.herokuapp.com/thanhtoan/`).then(({ data }) => {
+      const filterData = data.filter((bookedTour)=> bookedTour._id);
+      setCustomerJoinedTour(filterData);
+
+    });
+  }, []);
+
+  const handleClick = () => {
+    window.location.href = "http://localhost:3000/customer/bookedTour";
+  };
   
-    </Container>
-   )
+  const PDFExportComponent = useRef(null);
+  const content = useRef(null);
+  const handleExport = (event) => {
+    PDFExportComponent.current.save();
+  };
+  const handleExportwithMethod = (event) => {
+    savePDF(content.current, { paperSize: "A4" });
+  };
+  const dateCurrent = new Date();
+
+  const getDate = (date) => {
+    const temp = new Date(date);
+    return `${temp.getDate()}/${temp.getMonth() + 1}/${temp.getFullYear()} - ${temp.getHours()}:${temp.getMinutes()}:${temp.getSeconds()}`;
+  };
+  return (
+    <>
+      <Container style={{ justifyContent: "center" }}>
+        <div className="order--container">
+          <img src={img} />
+          <p className="order">Đặt tour thành công</p>
+          <label>Cảm ơn bạn đã cho chúng tôi cơ hội được phục vụ !</label>
+          <p></p>
+          <label>
+            Chúng tôi sẽ kiểm tra và xác nhận đơn đặt hàng sớm nhất có thể!{" "}
+          </label>
+          <p>
+            <label>
+              <i class="fa-solid fa-phone"></i> Tư vấn đặt tour:
+            </label>
+            &ensp;
+            <label style={{ color: "red", fontWeight: "bold" }}>
+              0394075201
+            </label>
+            <label>(8:00 - 22:00)</label>
+          </p>
+          <p></p>
+          <div className="btn--tour">
+            <Link to={`/home`}>
+              <button className="button--trove">Trang chủ</button>
+            </Link>
+            <Link to={``}>
+              <button className="button--tiep" onClick={handleClick}>
+                Đơn đã đặt
+              </button>
+            </Link>
+          </div>
+        </div>
+
+		
+          {/* <PDFExport ref={PDFExportComponent} paperSize="A1">
+            <Container>
+		                        
+<div class="receipt-content">
+    <div class="container bootstrap snippets bootdey">
+		<div class="row">
+		
+			<div class="col-md-12">
+			
+				<div class="invoice-wrapper">
+				<HeaderBill />
+				<br/>
+					<div class="intro">
+					
+						Xin chao <strong>{tour.id_khach_hang.ho_ten.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}</strong>, 
+						<br/>
+						Cam on ban da cho chung toi co hoi duoc phuc vu!
+						<br/>
+						Day la bien lai thanh toan{" "}
+						<strong>{formatPrice(parseFloat(tour.thanh_tien.replaceAll('.', '')) + parseFloat(tour.thanh_tien.replaceAll('.', '')) * 0.1 - parseFloat(tour.thanh_tien.replaceAll('.', '')) * tour.giam_gia)  }</strong> 
+						{" "}cua ban!
+					</div>
+
+					<div class="payment-info">
+						<div class="row">
+							<div class="col-sm-6">
+								<span>Ma thanh toan</span>
+								<strong>{tour._id}</strong>
+							</div>
+							<div class="col-sm-6 text-right">
+								<span>Ngay thanh toan</span>
+								<strong>{getDate(dateCurrent)}</strong>
+							</div>
+						</div>
+					</div>
+
+					<div class="payment-details">
+						<div class="row">
+							<div class="col-sm-6">
+								<span>Khach Hang</span>
+								<strong>
+									{tour.id_khach_hang.ho_ten.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}
+								</strong>
+								<p>{tour.id_khach_hang.dia_chi.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}</p>
+								<p>{tour.id_khach_hang.sdt}</p>
+								<p>
+									<a href="#">
+										{tour.id_khach_hang.email.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}
+									</a>
+								</p>
+							</div>
+
+							<div class="col-sm-6 text-right">
+								<span>Thanh toan cho</span>
+								<strong>
+									DORISTOUR
+								</strong>
+								<p>Hung Loi, Ninh Kieu, Can Tho</p>
+								<p>0123456789</p>
+								<p>
+									<a href="#">
+										doristour@gmail.com
+									</a>
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="line-items">
+						<div class="headers clearfix">
+							<div class="row">
+								<Row>
+									<Col span={9} style={{textAlign:'left'}}>Tour</Col>
+									<Col span={3} style={{textAlign:'center'}}>So luong</Col>
+									<Col span={4} style={{textAlign:'center'}}>Diem khoi hanh</Col>
+									
+									<Col span={6} style={{textAlign:'center'}}>Thanh tien</Col>
+								</Row>
+								
+							</div>
+						</div>
+
+						<div class="items">
+							<div class="row item">
+
+							<Row>
+									<Col span={9} style={{textAlign:'left'}}>
+										{tour.id_tour.ten.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}<br/>
+										<small>Ngay khoi hanh: {dateFormat(tour.id_tour.khoi_hanh, "dd/mm/yyyy")}</small>
+									</Col>
+									<Col span={3} style={{textAlign:'center'}}>hmm</Col>
+									<Col span={4} style={{textAlign:'center'}}>{tour.id_tour.diemkhoihanh.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}</Col>
+									
+									<Col span={6} style={{textAlign:'center'}}>{tour.id_tour.gia}</Col>
+							</Row>
+							
+							</div>
+							
+					
+
+						</div>
+						<div class="total text-right">
+						<p class="extra-notes">
+								<strong>Luu y: </strong>
+								Quy khach co mat tai diem khoi hanh truoc 30 phut
+							</p>
+							<div class="field">
+								Tong truoc thue <span>{tour.thanh_tien}</span>
+							</div>
+							<div class="field">
+								VAT <span>10%{" "}</span>
+							</div>
+							<div class="field">
+								Giam gia <span>{tour.giam_gia}</span>
+							</div>
+							<div class="field grand-total">
+								Tong cong<span>{formatPrice(parseFloat(tour.thanh_tien.replaceAll('.', '')) + parseFloat(tour.thanh_tien.replaceAll('.', '')) * 0.1 - parseFloat(tour.thanh_tien.replaceAll('.', '')) * (parseFloat(tour.giam_gia.replaceAll('%', '')))/100)}</span>
+							</div>
+						</div>
+
+						<div class="print">
+							<a href="#">
+								<i class="fa fa-print"></i>
+								Print this receipt
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="footer">
+					Copyright © 2014. company name
+				</div>
+			</div>
+		</div>
+	</div>
+</div>              
+            </Container>
+			
+          </PDFExport>
+		 */}
+      </Container>
+    </>
+  );
 };
 
-export default  Ordersuccessful;
+export default Ordersuccessful;

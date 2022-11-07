@@ -2,34 +2,19 @@ import React, { useState, useEffect, useLayoutEffect, useContext } from "react";
 import axios from "axios";
 import { LoginContext } from "../../../../LoginContext";
 import Grid from '@mui/material'
-import { Col, Row, Divider } from 'antd';
+import { Col, Row, Divider, Button } from 'antd';
 import './bookedTour.scss'
 const BookedTour = () => {
   const [customerJoinedTour, setCustomerJoinedTour] = useState([]);
   const customerID = useContext(LoginContext);
-
+ const [state, setState] = useState(0);
+ 
   useEffect(() => {
-    
     axios(`https://tourapi-dev-n.herokuapp.com/thanhtoan`).then(({ data }) => {
       const filterData = data.filter(
         (bookedTour) => bookedTour.id_khach_hang["_id"] === customerID
         
       );
-  
-      
-      // const filterData = [];
-      // for(var i = 0; i <= data.length; i++){
-      //   console.log('data', data[i].id_khach_hang['_id'].trim());
-      //   if(data[i].id_khach_hang['_id'].trim() === customerID.trim()){
-          
-        
-      //     filterData.push(data[i]);
-      //   }
-       
-      //   filterData.push(data[i]);
-      // }
-      
-      // console.log('filterData', filterData);
        setCustomerJoinedTour(filterData);
     });
   }, []);
@@ -39,6 +24,9 @@ const BookedTour = () => {
     return `${temp.getDate()}/${temp.getMonth() + 1}/${temp.getFullYear()}`;
   };
 // console.log(data);
+const getData = (data) => {
+  console.log(data);
+};
   const renderTour = (tour) => (
     <div
       className="tour--item"
@@ -48,10 +36,12 @@ const BookedTour = () => {
         src={`http://tour-api-dev.herokuapp.com${tour.hinh[0]}`}
         style={{ width: "20%" }}
       /> */}
+      <p>{tour._id}</p>
       <div style={{ width: "150%" }}>
         <Row style={{textAlign: 'left'}}>
+        {/* <p>{tour._id}</p>  */}
           <Col span={4}>
-          <p>TÊN TOUR: </p>
+          <p>TÊN TOUR:</p>
           </Col>
           <Col span={12}>
           {tour.id_tour.ten}
@@ -91,6 +81,11 @@ const BookedTour = () => {
           {tour.thanh_tien}
           </Col>
         </Row>
+
+       <Row>
+        <a href='http://localhost:3000/billne' onClick={() => localStorage.setItem('id',tour._id)}>Xuất hóa đơn</a>
+       
+       </Row>
         <Divider dashed style={{borderColor: '#f97150'}}/>
         {/* <Row style={{textAlign: 'left'}}>  
           <Col span={6}>Thành Tiền: </Col>
@@ -101,6 +96,8 @@ const BookedTour = () => {
       
      
     </div>
+
+    
   );
   return (
     <>
@@ -111,8 +108,6 @@ const BookedTour = () => {
           ?.slice(0)
           .reverse()
           .map((tour) => renderTour(tour))}
-   
-
       </div>
       
     </>

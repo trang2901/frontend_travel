@@ -32,7 +32,7 @@ const Detail = () => {
   useEffect(() => {
     const loadAsyncStuff = async () => {
       try {
-            const slug = searchParams.get("slug");
+        const slug = searchParams.get("slug");
    
         const response = await fetch(`https://tourapi-dev-n.herokuapp.com/tour/${slug}`);
         const json = await response.json();
@@ -48,7 +48,7 @@ const Detail = () => {
     loadAsyncStuff();
      
   }, []);
-  console.log(tourData);
+  console.log('log nè',tourData);
   return (
     tourData != null ?
     <div className="detail padding-section">

@@ -14,6 +14,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
   const bookTourInfor = JSON.parse(
     window.localStorage.getItem("bookTourInfor")
   );
+  
   const date_format = dateFormat(bookTourInfor.date, "dd - mm - yyyy");
   const handleChange = (e) => {
     switch (e.target.id) {

@@ -69,8 +69,27 @@ const Home = () => {
           </div>
         ) : (
           <>
+          <form className="form-inline mr-auto" target="_self">
+                  <div className="form-group">
+                    <label for="search-field">
+                      <i
+                        className="fa fa-search"
+                        style={{ color: "#f97150" }}
+                      ></i>
+                    </label>
+                    
+                    <input
+                      className="form-control search-field"
+                      type="search"
+                      id="search-field"
+                      name="search"
+                      style={{ color: "#f97150" }}
+                    />
+                  </div>
+                </form>
+
           <div className="tourList">
-    <Divider plain style={{borderColor:'#f97150'}}> <p className="introduction">TOUR TRONG NƯỚC</p></Divider> </div>
+          <Divider plain style={{borderColor:'#f97150'}}> <p className="introduction">TOUR TRONG NƯỚC</p></Divider> </div>
           <CardList DataTours={DataTours} tag={tag} /></>
         )}
       </Context.Provider>

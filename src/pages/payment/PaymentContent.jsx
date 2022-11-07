@@ -13,7 +13,6 @@ import { Container, Paper } from "@mui/material";
 const PaymentContent = () => {
   const [onShowLinkInput, setOnShowLinkInput] = useState(false);
   const [activedStep, setActivedStep] = useState(0);
-
   const [customerData, setCustomerData] = useState({});
   const [accompanyData, setAccompanyData] = useState([]);
   useEffect(() => {
@@ -60,12 +59,11 @@ const PaymentContent = () => {
 
     const requestPosData = JSON.parse(
       window.localStorage.getItem("bookTourPostRequestData")
+      
     );
-
     axios
       .post("https://tourapi-dev-n.herokuapp.com/thanhtoan", requestPosData)
       .catch((err) => console.log(err));
-
     const patchDuKhachTour = (idDuKhaches) => {
       axios
         .patch(`https://tourapi-dev-n.herokuapp.com/tour/${tourData.id}`, {

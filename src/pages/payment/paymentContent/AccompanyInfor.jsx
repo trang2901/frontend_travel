@@ -29,7 +29,7 @@ const AccompanyInfor = ({
       <div className="accompany--input">
         {/* <h1>{index + 1}</h1> */}
         <p className="thongtin_input">Thông tin người {index + 1}</p>
-        <Input
+        {/* <Input
               type="text"
               label="Họ và tên"
               placeholder="Họ và tên"
@@ -39,16 +39,16 @@ const AccompanyInfor = ({
                 maxLength="200px"
                 onChange={handleChangeName}
                 inputProps={{ "data-index": index }}
-              />
-        {/* <TextField
+              /> */}
+        <TextField
           type="text"
           label="Họ và tên"
           value={accompanyData[index]?.ho_ten || ""}
           sx={{ maxWidth: "200px" }}
           onChange={handleChangeName}
           inputProps={{ "data-index": index }}
-        /> */}
-        <Input
+        />
+        {/* <Input
               type="number"
               label="Số điện thoại"
                 size="large"
@@ -58,9 +58,9 @@ const AccompanyInfor = ({
                 value={accompanyData[index]?.sdt || ""}
                 onChange={handleChangePhone}
                 inputProps={{ "data-index": index }}
-              />
+              /> */}
 
-        {/* <TextField
+        <TextField
           type="number"
           label="Số điện thoại"
           sx={{ maxWidth: "200px" }}
@@ -68,7 +68,7 @@ const AccompanyInfor = ({
           onChange={handleChangePhone}
           inputProps={{ "data-index": index }}
           style= {{borderRadius: 0}}
-        /> */}
+        />
       </div>
     ));
   };
