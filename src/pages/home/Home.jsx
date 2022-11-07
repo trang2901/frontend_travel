@@ -8,12 +8,12 @@ import Cancel from "@mui/icons-material/Cancel";
 import Chat from "../../components/chat/Chat";
 import { Divider } from "antd";
 import './home.scss'
+import { Button } from "@mui/material";
+import Search from '../../components/search/Search'
 const Home = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
   const [fetching, setFetching] = useState(true);
-  
-
   useEffect(() => {
     setFetching(true);
     fetchToursData();
@@ -36,6 +36,7 @@ const Home = () => {
         console.error("Fetching error: " + err);
       });
   };
+
 
   return (
     <>
@@ -69,28 +70,11 @@ const Home = () => {
           </div>
         ) : (
           <>
-          <form className="form-inline mr-auto" target="_self">
-                  <div className="form-group">
-                    <label for="search-field">
-                      <i
-                        className="fa fa-search"
-                        style={{ color: "#f97150" }}
-                      ></i>
-                    </label>
-                    
-                    <input
-                      className="form-control search-field"
-                      type="search"
-                      id="search-field"
-                      name="search"
-                      style={{ color: "#f97150" }}
-                    />
-                  </div>
-                </form>
-
           <div className="tourList">
+          <Search />
           <Divider plain style={{borderColor:'#f97150'}}> <p className="introduction">TOUR TRONG NƯỚC</p></Divider> </div>
-          <CardList DataTours={DataTours} tag={tag} /></>
+          {/* <CardList DataTours={DataTours} tag={tag} /> */}
+          </>
         )}
       </Context.Provider>
     </>
