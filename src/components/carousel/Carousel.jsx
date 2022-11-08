@@ -38,6 +38,7 @@ const Carousel = ({ listCategory }) => {
         style={{
           padding: "0 4rem",
           borderRadius: "5px",
+          // background: 'none'
         }}
         width="100%"
         height="50%"
@@ -49,23 +50,23 @@ const Carousel = ({ listCategory }) => {
         afterSlide={(slideIndex) => setSlideIndex(slideIndex)}
         renderCenterLeftControls={({ previousSlide }) =>
           slideIndex ? (
-            <Button onClick={previousSlide}>
-              <ArrowBackIos />
+            <Button onClick={previousSlide} style={{color: '#08183c'}}>
+              <ArrowBackIos style={{fontSize: '30px'}}/>
             </Button>
           ) : (
             <Button onClick={previousSlide} disabled>
-              <ArrowBackIos />
+              <ArrowBackIos style={{fontSize: '30px'}}/>
             </Button>
           )
         }
         renderCenterRightControls={({ nextSlide }) =>
           slideIndex == numberOfSlide - 1 ? (
             <Button className="btn-right" onClick={nextSlide} disabled>
-              <ArrowForwardIos />
+              <ArrowForwardIos style={{fontSize: '30px'}} />
             </Button>
           ) : (
-            <Button className="btn-right" onClick={nextSlide}>
-              <ArrowForwardIos />
+            <Button className="btn-right" onClick={nextSlide} style={{color: '#08183c'}}>
+              <ArrowForwardIos style={{fontSize: '30px'}}/>
             </Button>
           )
         }

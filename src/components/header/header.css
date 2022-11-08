@@ -227,4 +227,6 @@
     transform: rotate(-19deg);
     opacity: 0.2;
   }
-
+.login-logout {
+  text-align: right;
+}

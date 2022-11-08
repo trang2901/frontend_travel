@@ -6,7 +6,7 @@ import { CategoryList, CardList } from "../../container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Cancel from "@mui/icons-material/Cancel";
 import Chat from "../../components/chat/Chat";
-import { Divider } from "antd";
+import { Divider, Row, Col } from "antd";
 import './home.scss'
 import { Button } from "@mui/material";
 import Search from '../../components/search/Search'
@@ -37,20 +37,21 @@ const Home = () => {
       });
   };
 
-
   return (
     <>
+    {/* <Search /> */}
       <Context.Provider value={[tag, setTag]}>
         <Banner />
-        {/* <Chat/>  */}
+       
         <CategoryList setTag={setTag} />
         <p></p><p></p>
         
         {tag ? (
           <div className="catergory--selected">
-            <div onClick={() => setTag("")}>
-              <Cancel />
-              <p>{tag}</p>
+            <div onClick={() => setTag("")} className="selected--item">
+             
+              <p> <Cancel style={{fontSize: 'large',}}/>Lọc theo <strong style={{color: '#f97150'}}>{tag}</strong></p>
+              
             </div>
           </div>
         ) : (
@@ -71,9 +72,14 @@ const Home = () => {
         ) : (
           <>
           <div className="tourList">
+         
+          
+          <Divider plain style={{borderColor:'#f97150'}}><p className="introduction">DANH SÁCH TOUR</p></Divider>
+          </div>
+          <p></p>
           <Search />
-          <Divider plain style={{borderColor:'#f97150'}}> <p className="introduction">TOUR TRONG NƯỚC</p></Divider> </div>
-          {/* <CardList DataTours={DataTours} tag={tag} /> */}
+          <CardList DataTours={DataTours} tag={tag} />
+        
           </>
         )}
       </Context.Provider>

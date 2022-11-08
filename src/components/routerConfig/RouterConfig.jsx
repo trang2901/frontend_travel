@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Routes, Route } from "react-router-dom";
-import { Home, Detail, Login, PaymentContent, Customer, Banner,List,Aboutus, Blog, Loginn, Signup,Payment1, Ordersuccessful, BookedTour, Bill} from "../../pages";
+import { Home, Detail, Login, PaymentContent, Customer, Banner,List,Aboutus, Blog, Loginn, Signup,Payment1, Ordersuccessful, BookedTour, Bill,TourMB} from "../../pages";
 
 const RouterConfig = () => {
   return (
@@ -21,6 +21,7 @@ const RouterConfig = () => {
         <Route path="Signup" element={<Signup login={false}/>} />
         <Route path="ordersuccessful" element={<Ordersuccessful />} />
         <Route path="billne" element={<Bill />} />
+        <Route path="/tourMB" element={<TourMB />} />
       </Routes>
     </>
   );

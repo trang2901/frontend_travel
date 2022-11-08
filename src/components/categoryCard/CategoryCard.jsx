@@ -21,7 +21,9 @@ const CategoryCard = ({ dataTour }) => {
         width: "100%",
         borderRadius: "10px",
         boxShadow: "none",
-        // background: "#F9FBFF",
+      }}
+      style={{
+        background: 'none',
       }}
     >
       <CardActionArea
@@ -37,8 +39,8 @@ const CategoryCard = ({ dataTour }) => {
           component="img"
           image={dataTour.imageURL}
           sx={{
-            width: "70%",
-            height: "70%",
+            width: "80px",
+            height: "80px",
             filter: "drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.2))",
             borderRadius: "20%",
           }}
@@ -46,7 +48,7 @@ const CategoryCard = ({ dataTour }) => {
         />
         <CardContent>
           <Typography
-            sx={{ fontWeight: 800, fontSize: "16px", lineHeight: "22px" }}
+            sx={{ fontWeight: 800, fontSize: "16px", lineHeight: "22px", color: '#08183c'}}
           >
             {dataTour.label}
           </Typography>

@@ -188,9 +188,8 @@ const CategoryList = () => {
     <div className="categoryList padding-section">
       <div className="category">
         <div className="category--heading">
-           {/* <h1>Du lịch trong nước</h1>
-          <p>Sẽ rất nhanh nếu bạn tìm theo đặc trung văn hóa</p> */}
           <p>CÁC ĐIỂM ĐẾN </p>
+          <label>Dưới đây là các điểm đến du lịch nổi tiếng được yêu thích và được nhiều khách du lịch quan tâm. Sẽ rất nhanh nếu bạn tìm theo thành phố mà mình muốn đến !</label>
         </div>
         <Carousel listCategory={listCategory} />
 

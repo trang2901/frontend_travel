@@ -19,8 +19,9 @@
     line-height: 10px;
     color:  #7f7878;
   }
+ 
 }
-  
+
 .locationBox {
   display: flex;
   justify-content: space-between;
@@ -29,7 +30,7 @@
     font-weight: bold;
     font-size: 16px;
     line-height: 5px;
-    color: #a61d1d;
+    color: #b61717;
   }
 
   span {
@@ -142,10 +143,27 @@
 }
 .label_socho {
   color: red;
+  font-size: 20px;
   
 }
 
 .tourCard--Content .trangthai {
   color: green;
   text-align: center;
+}
+.numberOfTour1 {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  top: 1.3rem;
+  right: 1.3rem;
+  border-radius: 7px;
+  background-color: rgba(239, 234, 234, 0.948);
+  // background-color: transparent;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  z-index: 1;
+  padding: 0.5rem 1rem;
+  color:#08183c;
+  font-weight: bold;
 }

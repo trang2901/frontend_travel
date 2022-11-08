@@ -3,6 +3,7 @@
     color: #f97150;
     font-weight: bolder;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
     margin-top: 40px;
 }
 .form-group {
@@ -10,5 +11,26 @@
     .input {
         color: red;
         width: 1000px;
+    }
+}
+.catergory--selected {
+    width: 100%;
+    background: none;
+    text-align: center;
+
+    .selected--item{
+        width: 300px;
+        background: none;
+        text-align: center;
+        padding: 10px;
+        display: inline-block;
+        p {
+            color:#08183c;
+            font-size: 18px;
+            margin-top: -45px;
+            // font-weight: bold;
+            // padding: 10px;
+        }
+        
     }
 }

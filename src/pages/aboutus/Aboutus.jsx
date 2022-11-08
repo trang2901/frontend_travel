@@ -3,6 +3,8 @@ import "./aboutus.css"
 import {Divider} from "antd";
 import { Container } from "@mui/material";
 import logo from "../../image/DORIS_TOURS.png"
+import imageTr from "../../image/Image_Tr.jpg"
+import imageNg from "../../image/image_ng.jpg"
 const Aboutus = () => {
   return (
     <>
@@ -55,8 +57,8 @@ const Aboutus = () => {
     <div class="row text-center">
 
       <div class="col-xl-3 col-sm-6 mb-5">
-        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="https://bootstrapious.com/i/snippets/sn-about/avatar-4.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
-          <h5 class="mb-0">Manuella Nevoresky</h5><span class="small text-uppercase">CEO - Founder</span>
+        <div class="bg-white rounded shadow-sm py-5 px-4"><img src={imageTr} alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
+          <h5 class="mb-0">Huyền Trang</h5><span class="small text-uppercase">CEO - Founder</span>
           <ul class="social mb-0 list-inline mt-3">
             <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
             <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
@@ -67,8 +69,8 @@ const Aboutus = () => {
       </div>
   
       <div class="col-xl-3 col-sm-6 mb-5">
-        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="https://bootstrapious.com/i/snippets/sn-about/avatar-3.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
-          <h5 class="">Samuel Hardy</h5><span class="small text-uppercase">CEO - Founder</span>
+        <div class="bg-white rounded shadow-sm py-5 px-4"><img src={imageNg} alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
+          <h5 class="">Trọng Nghỉa</h5><span class="small text-uppercase">CEO - Founder</span>
           <ul class="social mb-0 list-inline mt-3">
             <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
             <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>

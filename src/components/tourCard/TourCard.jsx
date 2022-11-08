@@ -7,6 +7,7 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
+import PeopleIcon from "@mui/icons-material/People";
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -15,6 +16,7 @@ import "./tourCard.scss";
 import dateFormat from 'dateformat';
 import { format } from 'date-fns';
 import { Divider } from "antd";
+
 const TourCard = ({ tourData }) => {
  const so_cho_con = tourData.so_cho - tourData.du_khach?.length;
  const date_format = dateFormat(tourData.khoi_hanh, "dd/mm/yyyy");
@@ -59,6 +61,12 @@ useEffect(() => {
             padding: "1rem",
           }}
         >
+          <div className="numberOfTour1">
+            <p>
+              {tourData.du_khach?.length || 0}/{tourData.so_cho}
+            </p>
+            {<PeopleIcon />}
+          </div>
           <CardMedia
             component="img"
             src={`https://tourapi-dev-n.herokuapp.com/${tourData.hinh[0]}`}
@@ -72,6 +80,7 @@ useEffect(() => {
           />
           <div className="tourCard--Content">
             {/* <p>Mã tour: {tourData.id}</p> */}
+            {/* <small>{tourData.thoigian}</small> */}
             <h3>{tourData.ten}</h3>
             <p className="trangthai" style={{ color: trangthai==='Đã diễn ra'?"red": "green"}}>{trangthai}</p>
             {/* <p>{tourData.describe}</p> */}  
@@ -79,7 +88,11 @@ useEffect(() => {
             {/* <h2>
             {tourData.khoi_hanh}
               </h2> */}
-              <h2>{date_format}</h2>
+              
+              <h2>Mã tour: <strong style={{color: '#08183c'}}>{tourData.matour}</strong></h2>
+              <h2>Ngày khởi hành: <strong style={{color: '#08183c'}}>{date_format}</strong></h2>
+              <h2>Nơi khởi hành:  <strong style={{color: '#08183c'}}>{tourData.diemkhoihanh}</strong></h2>
+              
               {/* <p style={{textAlign: 'center'}}>.................</p> */}
             <div className="locationBox">
               <h3>{tourData.gia}đ/người</h3> 

@@ -14,3 +14,4 @@ export { default as Ordersuccessful} from "./order_successful/Ordersuccessful"
 export { default as BookedTour} from "./customer/customerSubContent/bookedTour/BookedTour"
 export { default as Bill} from "./billpage/Bill"
 export { default as Pdfexport} from './order_successful/Pdfexport'
+export { default as TourMB} from './tourMB/TourMB'

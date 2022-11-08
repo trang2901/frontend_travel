@@ -97,14 +97,14 @@ const Header = () => {
                     <div className="dropdown-menu" role="menu">
                       <Row gutter={16}>
                         <Col className="gutter-row" span={6}>
-                          <a
+                          {/* <a
                             className="dropdown-item"
                             role="presentation"
-                            href="#"
+                            href="/tourMB"
                             style={{ color: "#08183c", fontWeight: "bold" }}
                           >
                             TOUR MIỀN BẮC
-                          </a>
+                          </a> */}
                           <a
                             className="dropdown-item"
                             role="presentation"
@@ -126,24 +126,24 @@ const Header = () => {
                           >
                             Du lịch Hạ Long
                           </a>
-                          <a
+                          {/* <a
                             className="dropdown-item"
                             role="presentation"
                             href="#"
                             style={{color: "#08183c", fontWeight: "bold", fontStyle: 'italic', textDecoration: 'underline' }}
                           >
                             Xem tất cả
-                          </a>
+                          </a> */}
                         </Col>
                         <Col className="gutter-row" span={6}>
-                          <a
+                          {/* <a
                             className="dropdown-item"
                             role="presentation"
                             href="#"
                             style={{ color: "#08183c", fontWeight: "bold" }}
                           >
                             TOUR MIỀN TRUNG
-                          </a>
+                          </a> */}
                           <a
                             className="dropdown-item"
                             role="presentation"
@@ -165,24 +165,24 @@ const Header = () => {
                           >
                             Du lịch Quảng Bình
                           </a>
-                          <a
+                          {/* <a
                             className="dropdown-item"
                             role="presentation"
                             href="#"
                             style={{color: "#08183c", fontWeight: "bold", fontStyle: 'italic', textDecoration: 'underline' }}
                           >
                             Xem tất cả
-                          </a>
+                          </a> */}
                         </Col>
                         <Col className="gutter-row" span={6}>
-                        <a
+                        {/* <a
                             className="dropdown-item"
                             role="presentation"
                             href="#"
                             style={{ color: "#08183c", fontWeight: "bold" }}
                           >
                             TOUR MIỀN TÂY NAM BỘ
-                          </a>
+                          </a> */}
                           <a
                             className="dropdown-item"
                             role="presentation"
@@ -204,24 +204,24 @@ const Header = () => {
                           >
                             Du lịch Cần Thơ
                           </a>
-                          <a
+                          {/* <a
                             className="dropdown-item"
                             role="presentation"
                             href="#"
                             style={{color: "#08183c", fontWeight: "bold", fontStyle: 'italic', textDecoration: 'underline' }}
                           >
                             Xem tất cả
-                          </a>
+                          </a> */}
                         </Col>
                         <Col className="gutter-row" span={6}>
-                        <a
+                        {/* <a
                             className="dropdown-item"
                             role="presentation"
                             href="#"
                             style={{ color: "#08183c", fontWeight: "bold" }}
                           >
                             TOUR MIỀN ĐÔNG NAM BỘ
-                          </a>
+                          </a> */}
                           <a
                             className="dropdown-item"
                             role="presentation"
@@ -243,14 +243,14 @@ const Header = () => {
                           >
                             Du lịch TP.Hồ Chí Minh
                           </a>
-                          <a
+                          {/* <a
                             className="dropdown-item"
                             role="presentation"
                             href="#"
                             style={{color: "#08183c", fontWeight: "bold", fontStyle: 'italic', textDecoration: 'underline' }}
                           >
                             Xem tất cả
-                          </a>
+                          </a> */}
                         </Col>
                       </Row>
                     </div>
@@ -445,10 +445,12 @@ const Header = () => {
                         letterSpacing: "0.5px",
                       }}
                     >
-                      TIN TỨC
+                      CẨM NANG DU LỊCH
                     </a>
                   </li>
                 </ul>
+                <span style={{width: '400px'}}></span>
+                
                 {customerID ? (
                   <>
                     <Link to="/customer">
@@ -510,6 +512,7 @@ const Header = () => {
                     >
                       ĐĂNG KÝ
                     </a>
+                    
                   </>
                 )}
               </div>

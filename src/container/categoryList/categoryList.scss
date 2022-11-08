@@ -3,12 +3,13 @@
 
 .category {
   height: 100%;
-  background: #f9fbff;
+  background: none;
 }
 
 .category--heading {
-  width: 70%;
+  width: 100%;
   padding: 1rem 4rem;
+  margin-top: -2rem;
   h1 {
     font-weight: 600;
     font-size: 32px;
@@ -16,10 +17,9 @@
   }
 
   p {
-    font-weight: 600;
-    font-size: 16px;
+    font-weight: bold;
+    font-size: 17px;
     line-height: 22px;
-
-    color: #2a3bba;
+    color:#f97150;
   }
 }
