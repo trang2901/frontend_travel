@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
+import './categoryCard.scss';
 const CategoryCard = ({ dataTour }) => {
   const navigate = useNavigate();
   const [tag, setTag] = useContext(Context);
@@ -18,9 +18,11 @@ const CategoryCard = ({ dataTour }) => {
         setTag(dataTour.label);
       }}
       sx={{
+
         width: "100%",
         borderRadius: "10px",
         boxShadow: "none",
+        height: '100%'
       }}
       style={{
         background: 'none',
@@ -36,13 +38,15 @@ const CategoryCard = ({ dataTour }) => {
         }}
       >
         <CardMedia
+          className="img"
           component="img"
           image={dataTour.imageURL}
           sx={{
-            width: "80px",
-            height: "80px",
+            width: "100px",
+            height: "100px",
             filter: "drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.2))",
-            borderRadius: "20%",
+            borderRadius: "100%",
+           marginTop: '1rem'
           }}
           alt=""
         />

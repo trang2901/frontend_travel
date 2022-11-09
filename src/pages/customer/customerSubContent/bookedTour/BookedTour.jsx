@@ -36,7 +36,6 @@ const getData = (data) => {
         src={`http://tour-api-dev.herokuapp.com${tour.hinh[0]}`}
         style={{ width: "20%" }}
       /> */}
-      <p>{tour._id}</p>
       <div style={{ width: "150%" }}>
         <Row style={{textAlign: 'left'}}>
         {/* <p>{tour._id}</p>  */}
@@ -83,7 +82,7 @@ const getData = (data) => {
         </Row>
 
        <Row>
-        <a href='http://localhost:3000/billne' onClick={() => localStorage.setItem('id',tour._id)}>Xuất hóa đơn</a>
+        <a href='http://localhost:3000/bill' onClick={() => localStorage.setItem('id',tour._id)}>Xuất hóa đơn</a>
        
        </Row>
         <Divider dashed style={{borderColor: '#f97150'}}/>

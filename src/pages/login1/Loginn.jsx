@@ -140,7 +140,7 @@ const Login = ({ login }) => {
             />
             <p></p><p></p>
             {errors.password && touched.password && errors.password}
-            <Button
+            {/* <Button
                 type="submit"
                 disabled={isSubmitting}
                 sx={{
@@ -153,9 +153,9 @@ const Login = ({ login }) => {
                 }}
               >
                 ĐĂNG NHẬP
-              </Button>
-              <p></p>
-            {/* {isSubmit ? (
+              </Button> */}
+              {/* <p></p> */}
+            {isSubmit ? (
               <LoadingButton
                 sx={{ padding: "16px 0" }}
                 loading
@@ -176,7 +176,9 @@ const Login = ({ login }) => {
               >
                 {loginOn ? "Đăng nhập" : "Đăng ký"}
               </Button>
-            )} */}
+              
+            )}
+            <p></p>
           </form>
         )}
       </Formik>

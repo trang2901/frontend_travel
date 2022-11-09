@@ -38,10 +38,11 @@ const Carousel = ({ listCategory }) => {
         style={{
           padding: "0 4rem",
           borderRadius: "5px",
+          width:'100%',
           // background: 'none'
         }}
-        width="100%"
-        height="50%"
+        // width="100%"
+        // height="100%"
         slidesToShow={1}
         autoplay={false}
         dragging={false}

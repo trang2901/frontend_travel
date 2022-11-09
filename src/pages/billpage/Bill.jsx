@@ -63,6 +63,11 @@ console.log('data id: ', data);
 console.log('customerJoinedTour id: ', Object.keys(customerJoinedTour).length);
   const renderTour = (tour) => (
     <>
+    <div className="hello">
+     <p> XIN CHÀO <strong>{tour.id_khach_hang.ho_ten}</strong>! ĐÂY LÀ HÓA ĐƠN CỦA QUÝ KHÁCH</p>
+     <p> CẢM ƠN QUÝ KHÁCH ĐÃ CHO CHÚNG TÔI CƠ HỘI ĐƯỢC PHỤC VỤ</p>
+     <p>--------------------------------------------------------------------------------------</p>
+    </div>
       <Container style={{ justifyContent: "center" }}>
         <PDFExport ref={PDFExportComponent} paperSize="A2">
           <Container>

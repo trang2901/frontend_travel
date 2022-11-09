@@ -20,7 +20,7 @@ const RouterConfig = () => {
         <Route path="Login" element={<Loginn login={true}/>} />
         <Route path="Signup" element={<Signup login={false}/>} />
         <Route path="ordersuccessful" element={<Ordersuccessful />} />
-        <Route path="billne" element={<Bill />} />
+        <Route path="bill" element={<Bill />} />
         <Route path="/tourMB" element={<TourMB />} />
       </Routes>
     </>

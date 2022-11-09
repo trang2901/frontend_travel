@@ -7,13 +7,57 @@ import { CategoryList, CardList } from "../../container";
 import "./banner1.scss";
 import { Divider, Row, Col } from "antd";
 import { Container, Paper } from "@mui/material";
-import Carousel from "../../components/carousel/Carousel"
-import { Context } from "../../pages/home/Context"
+import Carousel from "../../components/carousel/Carousel";
+import { Context } from "../../pages/home/Context";
+import ReactPlayer from "react-player";
+import imgDL from "../../image/dulichDaLat.jpg"
+import imgHG from "../../image/amthuchagiang.jpg"
+import imgVHL from "../../image/vinhhalong.jpg"
+import imgCNMT from "../../image/chonoimientay.png"
+import imgDN from "../../image/danang.jpg"
+import imgVN from "../../image/xinchaoVN.jpg"
+import img1 from "../../image/banhtroininhbinh.jpg"
+import img2 from "../../image/img2.jpg"
+import img3 from "../../image/img3.jpg"
+import img4 from "../../image/img4.jpg"
+import img5 from "../../image/img5.jpg"
+import img6 from "../../image/img6.jpg"
+import img7 from "../../image/img7.jpg"
+import img8 from "../../image/img8.jpg"
+import img9 from "../../image/img9.jpg"
+import img10 from "../../image/img10.jpg"
+import img11 from "../../image/img11.jpg"
+import img12 from "../../image/img12.jpg"
+import img13 from "../../image/img13.jpg"
+import img14 from "../../image/img14.jpg"
+import img15 from "../../image/img15.jpg"
+import img16 from "../../image/img16.jpg"
+import img17 from "../../image/img17.jpg"
+import img18 from "../../image/img18.jpg"
+import img19 from "../../image/img19.jpg"
+import hinh1 from "../../image/hinh1.jpg"
+import hinh2 from "../../image/hinh2.jpg"
+import hinh3 from "../../image/hinh3.jpg"
+import hinh4 from "../../image/hinh4.jpg"
+import hinh5 from "../../image/hinh5.jpg"
+import hinh6 from "../../image/hinh6.jpg"
+import hinh7 from "../../image/hinh7.jpg"
+import hinh8 from "../../image/hinh8.jpg"
+import hinh9 from "../../image/hinh9.jpg"
+import hinh10 from "../../image/hinh10.jpg"
+import hinh11 from "../../image/hinh11.jpg"
+import hinh12 from "../../image/hinh12.jpg"
+import hinh13 from "../../image/hinh13.jpg"
+import hinh14 from "../../image/hinh14.jpg"
+import hinh15 from "../../image/hinh15.jpg"
+import hinh16 from "../../image/hinh16.jpg"
+import hinh17 from "../../image/hinh17.jpg"
+import hinh18 from "../../image/hinh18.jpg"
 const Banner = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
   const [fetching, setFetching] = useState(true);
-  
+
   useEffect(() => {
     setFetching(true);
     fetchToursData();
@@ -34,6 +78,21 @@ const Banner = () => {
       .catch((err) => {
         console.error("Fetching error: " + err);
       });
+  };
+  const [playTime, setPlayTime] = useState(0);
+
+  const handleProgress = (state) => {
+    setPlayTime(formatTime(state.playedSeconds));
+  };
+  const formatTime = (time) => {
+    const date = new Date(time * 1000);
+    const hour = date.getUTCHours();
+    const minute = date.getUTCMinutes();
+    const second = ("0" + date.getUTCSeconds()).slice(-2);
+    if (hour) {
+      return `${hour}:${("0" + minute).slice(-2)}:${second}`;
+    }
+    return `${minute}:${second}`;
   };
   const listCategory = [
     {
@@ -84,56 +143,55 @@ const Banner = () => {
   ];
   return (
     <>
-     <Context.Provider value={[tag, setTag]}>
-      <div
-        style={{
-          backgroundImage: `url("https://dep.anh9.com/imgs/13116cover-facebook-song-bien-vo-nhe-vao-bo.jpg")`,
-        }}
-        className="jumbotron bg-cover text-white"
-      >
-        <div className="container py-5 text-center">
-          <p
-            className=" display-4 font-weight-bold"
-            style={{
-              color: "#08183c",
-              fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
-              fontSize: "43px",
-            }}
-          >
-            DU LỊCH LÀ ĐỂ TẠO RA NHỮNG KỶ NIỆM ĐẸP
-          </p>
-          <p
-            className="font-italic mb-0"
-            style={{ color: "white", fontWeight: "bold" }}
-          >
-            “Hãy ngắm nhìn thế giới. Điều đó tuyệt vời hơn bất cứ giấc mơ nào.
-            “- Ray Bradbury
-          </p>
-          {/* <p className="font-italic">
+      <Context.Provider value={[tag, setTag]}>
+        <div
+          style={{
+            backgroundImage: `url("https://dep.anh9.com/imgs/13116cover-facebook-song-bien-vo-nhe-vao-bo.jpg")`,
+          }}
+          className="jumbotron bg-cover text-white"
+        >
+          <div className="container py-5 text-center">
+            <p
+              className=" display-4 font-weight-bold"
+              style={{
+                color: "#08183c",
+                fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
+                fontSize: "43px",
+              }}
+            >
+              DU LỊCH LÀ ĐỂ TẠO RA NHỮNG KỶ NIỆM ĐẸP
+            </p>
+            <p
+              className="font-italic mb-0"
+              style={{ color: "white", fontWeight: "bold" }}
+            >
+              “Hãy ngắm nhìn thế giới. Điều đó tuyệt vời hơn bất cứ giấc mơ nào.
+              “- Ray Bradbury
+            </p>
+            {/* <p className="font-italic">
             Snippe by
             <a href="https://bootstrapious.com" className="text-white">
               <u>Bootstrapious</u>
             </a>
           </p> */}
-          <p></p>
-          <a
-            href="/home"
-            role="button"
-            className="btn btn-primary px-5"
-            style={{
-              backgroundColor: "#08183c",
-              border: "none",
-              color: "#f97150",
-              height: "40px",
-              borderRadius: "20px",
-            }}
-          >
-            Trải nghiệm ngay
-          </a>
+            <p></p>
+            <a
+              href="/home"
+              role="button"
+              className="btn btn-primary px-5"
+              style={{
+                backgroundColor: "#08183c",
+                border: "none",
+                color: "#f97150",
+                height: "40px",
+                borderRadius: "20px",
+              }}
+            >
+              Trải nghiệm ngay
+            </a>
+          </div>
         </div>
-      </div>
 
-   
         <div className="tourmoi">
           <Divider
             dashed
@@ -179,26 +237,22 @@ const Banner = () => {
             </p>
           </div>
         </div> */}
-   
-      <CardList DataTours={DataTours} tag={tag} />
-{/* điểm đến===================================================================================================================================== */}
-<Divider
+
+        <CardList DataTours={DataTours} tag={tag} />
+        {/* điểm đến===================================================================================================================================== */}
+        {/* <Divider
           dashed
           orientation="left"
           plain
           style={{ borderColor: "#f97150" }}
         >
           {" "}
-          
           <p className="why">ĐIỂM ĐẾN YÊU THÍCH</p>
         </Divider>
-     <div className="slider-diemden">
-     
-        <CategoryList setTag={setTag} />
-        </div>
-
-{/* why chọn===================================================================================== */}
-      <div>
+        <div className="slider-diemden">
+          <CategoryList setTag={setTag} />
+        </div> */}
+        {/* thư viện========================================== */}
         <Divider
           dashed
           orientation="left"
@@ -206,68 +260,290 @@ const Banner = () => {
           style={{ borderColor: "#f97150" }}
         >
           {" "}
-          
-          <p className="why">VÌ SAO CHỌN DORISTOUR ?</p>
+          <p className="why">Thư viện</p>
         </Divider>
-        <Container>
-        <div className="why--content">
-          <Row>
-            <Col className="gutter-row" span={8}>
-              <div className ="col--item">
-              <i class="fa-solid fa-laptop"></i>
-              <p>Mạng bán tour</p>
-              <label>Ứng dụng công nghệ mới nhất</label>
-                </div>
-            </Col>
+        <div className="thuvien">
+        {/* <Divider type="vertical" style={{ borderColor: "#f97150", width: '20px'}}/> */}
+        <label style={{marginBottom: '3rem'}}>--- <strong>VIDEO</strong> ---</label>
+        <div className="video">
+        <Row>
+          <Col span={4}>
+          <div className="videobox">
+            <img src={imgDL}/>
+            <button><i class="fa-regular fa-circle-play"></i></button>
+          </div>
+          </Col>
+          <Col span={4}>
+          <div className="videobox">
+            <img src={imgHG}/>
+            <button><i class="fa-regular fa-circle-play"></i></button>
+          </div>
+          </Col>
+          <Col span={4}>
+          <div className="videobox">
+            <img src={imgVHL}/>
+            <button><i class="fa-regular fa-circle-play"></i></button>
+          </div>
+          </Col>
+          <Col span={4}>
+          <div className="videobox">
+            <img src={imgCNMT}/>
+            <button><i class="fa-regular fa-circle-play"></i></button>
+          </div>
+          </Col>
+          <Col span={4}>
+          <div className="videobox">
+            <img src={imgDN}/>
+            <button><i class="fa-regular fa-circle-play"></i></button>
+          </div>
+          </Col>
+          <Col span={4}>
+          <div className="videobox">
+            <img src={imgVN}/>
+            <button><i class="fa-regular fa-circle-play"></i></button>
+          </div>
+          </Col>
+          
+          {/* <ReactPlayer
+            width={200}
+            height={200}
+            url="https://www.youtube.com/watch?v=QYPsq3kijOo&t=6s"
+            onProgress={handleProgress}
+            controls={false}
+          /> */}
 
-            <Col className="gutter-row" span={8}>
-              <div className="col--item">
-              <i class="fa-solid fa-box"></i>
-              <p>Sản phẩm & Dịch vụ</p>
-              <label>Đa dạng - An toàn - Chất lượng</label>
-              </div>
-            </Col>
+          {/* <ReactPlayer
+            width={200}
+            height={200}
+            url="https://www.youtube.com/watch?v=a-2iTFdtnvk&t=3s"
+            onProgress={handleProgress}
+            controls={false}
+          /> */}
+        </Row>
+        
+        <Row>
+          <Col span={4}>
+          <p>Du lịch Đà Lạt</p>
+          </Col>
+          <Col span={4}>
+          <p>Du lịch ẩm thực Hà Giang</p>
+          </Col>
+          <Col span={4}>
+          <p>Du lịch Vịnh Hạ Long</p>
+          </Col>
+          <Col span={4}>
+          <p>Chợ nổi miền Tây</p>
+          </Col>
+          <Col span={4}>
+         <p>Du lịch đẹp Đà Nẵng</p>
+          </Col>
+          <Col span={4}>
+        <p> Xin Chào Việt Nam</p>
+          </Col>
+        </Row>
+        </div>
 
-            <Col className="gutter-row" span={8}>
-              <div className="col--item">
-              <i class="fa-solid fa-dollar-sign"></i>
-                <p>Giá cả</p>
-                <label>Luôn có mức giá tốt nhất</label>
-              </div>
-            </Col>
+        <label style={{marginBottom: '3rem'}}>--- <strong >ẨM THỰC </strong>---</label>
+        <div className="image">
+        <div className="imagebox">
+        <Row gutter={[8, 8]}>
+        <Col span={4}>
+        <img src={img1} />
+        </Col>
+        <Col span={4}>
+        <img src={img2} />
+        </Col>
+        <Col span={4}>
+        <img src={img3} />
+        </Col>
+        <Col span={4}>
+        <img src={img4} />
+        </Col>
+        <Col span={4}>
+        <img src={img5} />
+        </Col>
+        <Col span={4}>
+        <img src={img6} />
+        </Col>
 
-          </Row>
-<p></p>
-{/* row2------------------------------------------------------- */}
-          <Row className="row--2">
-            <Col className="gutter-row" span={8}>
-              <div className ="col--item">
-              <i class="fa-solid fa-plane-departure"></i>
-              <p>Đặt tour</p>
-              <label>Đơn giản - Nhanh chóng - Dễ dàng</label>
-                </div>
-            </Col>
+        <Col span={4}>
+        <img src={img7} />
+        </Col>
+        <Col span={4}>
+        <img src={img8} />
+        </Col>
+        <Col span={4}>
+        <img src={img9} />
+        </Col>
+        <Col span={4}>
+        <img src={img10} />
+        </Col>
+        <Col span={4}>
+        <img src={img11} />
+        </Col>
+        <Col span={4}>
+        <img src={img12} />
+        </Col>
 
-            <Col className="gutter-row" span={8}>
-              <div className="col--item">
-              <i class="fa-regular fa-credit-card"></i>
-              <p>Thanh toán</p>
-              <label>An toàn - Linh hoạt</label>
-              </div>
-            </Col>
+        <Col span={4}>
+        <img src={img13} />
+        </Col>
+        <Col span={4}>
+        <img src={img14} />
+        </Col>
+        <Col span={4}>
+        <img src={img15} />
+        </Col>
+        <Col span={4}>
+        <img src={img16} />
+        </Col>
+        <Col span={4}>
+        <img src={img17} />
+        </Col>
+        <Col span={4}>
+        <img src={img18} />
+        </Col>
+        </Row>
+        
+       </div>
 
-            <Col className="gutter-row" span={8}>
-              <div className="col--item">
-              <i class="fa-solid fa-headset"></i>
-                <p>Hỗ trợ</p>
-                <label>Hotline & trực tuyến: (8:00 - 22:00)</label>
-              </div>
-            </Col>
+       </div>
 
-          </Row>
-          <p></p><p></p>
-        </div></Container>
-      </div>
+       <label style={{marginBottom: '3rem'}}>--- <strong> VIỆT NAM VẺ ĐẸP BẤT TẬN</strong> ---</label>
+       <div className="image">
+        <div className="imagebox">
+        <Row gutter={[8, 8]}>
+        <Col span={4}>
+        <img src={hinh1} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh2} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh3} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh4} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh5} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh6} />
+        </Col>
+
+        <Col span={4}>
+        <img src={hinh7} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh8} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh9} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh10} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh11} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh12} />
+        </Col>
+
+        <Col span={4}>
+        <img src={hinh13} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh14} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh15} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh16} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh17} />
+        </Col>
+        <Col span={4}>
+        <img src={hinh18} />
+        </Col>
+        </Row>
+        
+       </div>
+       </div>
+       </div>
+        {/* why chọn===================================================================================== */}
+        <div>
+          <Divider
+            dashed
+            orientation="left"
+            plain
+            style={{ borderColor: "#f97150" }}
+          >
+            {" "}
+            <p className="why">VÌ SAO CHỌN DORISTOUR ?</p>
+          </Divider>
+          <Container>
+            <div className="why--content">
+              <Row>
+                <Col className="gutter-row" span={8}>
+                  <div className="col--item">
+                    <i class="fa-solid fa-laptop"></i>
+                    <p>Mạng bán tour</p>
+                    <label>Ứng dụng công nghệ mới nhất</label>
+                  </div>
+                </Col>
+
+                <Col className="gutter-row" span={8}>
+                  <div className="col--item">
+                    <i class="fa-solid fa-box"></i>
+                    <p>Sản phẩm & Dịch vụ</p>
+                    <label>Đa dạng - An toàn - Chất lượng</label>
+                  </div>
+                </Col>
+
+                <Col className="gutter-row" span={8}>
+                  <div className="col--item">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                    <p>Giá cả</p>
+                    <label>Luôn có mức giá tốt nhất</label>
+                  </div>
+                </Col>
+              </Row>
+              <p></p>
+              {/* row2------------------------------------------------------- */}
+              <Row className="row--2">
+                <Col className="gutter-row" span={8}>
+                  <div className="col--item">
+                    <i class="fa-solid fa-plane-departure"></i>
+                    <p>Đặt tour</p>
+                    <label>Đơn giản - Nhanh chóng - Dễ dàng</label>
+                  </div>
+                </Col>
+
+                <Col className="gutter-row" span={8}>
+                  <div className="col--item">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <p>Thanh toán</p>
+                    <label>An toàn - Linh hoạt</label>
+                  </div>
+                </Col>
+
+                <Col className="gutter-row" span={8}>
+                  <div className="col--item">
+                    <i class="fa-solid fa-headset"></i>
+                    <p>Hỗ trợ</p>
+                    <label>Hotline & trực tuyến: (8:00 - 22:00)</label>
+                  </div>
+                </Col>
+              </Row>
+              <p></p>
+              <p></p>
+            </div>
+          </Container>
+        </div>
       </Context.Provider>
     </>
   );
