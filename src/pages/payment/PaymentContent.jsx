@@ -8,7 +8,7 @@ import {
 } from "./paymentContent/index";
 import "./paymentContent.scss";
 import axios from "axios";
-import {Divider} from 'antd'
+import { Divider } from "antd";
 import { Container, Paper } from "@mui/material";
 const PaymentContent = () => {
   const [onShowLinkInput, setOnShowLinkInput] = useState(false);
@@ -53,17 +53,49 @@ const PaymentContent = () => {
   };
 
   const tourData = JSON.parse(localStorage.getItem("bookTourInfor"));
-
+  const [loading, setLoading] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const requestPosData = JSON.parse(
       window.localStorage.getItem("bookTourPostRequestData")
-      
     );
+
+    // console.log('đây là data request', requestPosData);
+    if (customerData.email !== "") {
+      if (customerData.ho_ten !== "") {
+        e.preventDefault();
+        setLoading(true);
+        // console.log({email, message, name, subject, company})
+        const email = customerData.email;
+        const body = {
+          email,
+        };
+        console.log("lại là email", email);
+        axios
+          .post("https://tourapi-dev-n.herokuapp.com/mail", {
+            email
+          })
+          .then((res) => {
+            alert("Email Sent Successfully");
+            setLoading(false);
+            console.log(res);
+            // window.location.reload();
+          })
+          .catch((err) => {
+            console.log(err);
+            setLoading(false);
+          });
+      } else {
+        alert("Compose Email");
+      }
+    } else {
+      alert("Please fill all required filled");
+    }
+
     axios
       .post("https://tourapi-dev-n.herokuapp.com/thanhtoan", requestPosData)
       .catch((err) => console.log(err));
+
     const patchDuKhachTour = (idDuKhaches) => {
       axios
         .patch(`https://tourapi-dev-n.herokuapp.com/tour/${tourData.id}`, {
@@ -94,6 +126,39 @@ const PaymentContent = () => {
     window.localStorage.getItem("bookTourInfor")
   )?.number;
 
+  // gửi mail
+  const handleRequest = async (e) => {
+    if (customerData.email !== "") {
+      if (customerData.ho_ten !== "") {
+        e.preventDefault();
+        setLoading(true);
+        // console.log({email, message, name, subject, company})
+        const email = customerData.email;
+        const body = {
+          email,
+        };
+
+        axios
+          .post("https://tourapi-dev-n.herokuapp.com/mail", body)
+          .then((res) => {
+            alert("Email Sent Successfully");
+            setLoading(false);
+            console.log(res);
+            window.location.reload();
+          })
+          .catch((err) => {
+            console.log(err);
+            setLoading(false);
+          });
+      } else {
+        alert("Compose Email");
+      }
+    } else {
+      alert("Please fill all required filled");
+    }
+  };
+  console.log("email nè:", customerData.email);
+  //return
   return (
     <>
       <div className="payment_h">
@@ -101,53 +166,49 @@ const PaymentContent = () => {
           <p>THANH TOÁN</p>
         </Divider>
       </div>
-      <Container style={{paddingBottom: '20px'}}>
-      <Paper elevation={5}>
-       
-      <div className="pagementContent">
-      {/* <WizzardHeader /> */}
-      <form className="pagementContent.form" onSubmit={handleSubmit}>
-        <SwipeableViews index={activedStep} onChangeIndex={handleChange}>
-          <UserInfor
-            data={userData}
-            customerData={customerData}
-            setCustomerData={setCustomerData}
-          />
-          
-          <AccompanyInfor
-            onShowLinkInput={onShowLinkInput}
-            setOnShowLink={setOnShowLinkInput}
-            customerData={customerData}
-            numberGuest={numberGuest}
-            accompanyData={accompanyData}
-            setAccompanyData={setAccompanyData}
-          />
+      <Container style={{ paddingBottom: "20px" }}>
+        <Paper elevation={5}>
+          <div className="pagementContent">
+            {/* <WizzardHeader /> */}
+            <form className="pagementContent.form" onSubmit={handleSubmit}>
+              <SwipeableViews index={activedStep} onChangeIndex={handleChange}>
+                <UserInfor
+                  data={userData}
+                  customerData={customerData}
+                  setCustomerData={setCustomerData}
+                />
 
-          
-        </SwipeableViews>
-        <div className="btn--group">
-          <Button
-            disabled={activedStep === 0}
-            onClick={handleButtonBack}
-            variant="contained"
-          >
-            Trở về
-          </Button>
-          {activedStep === 1 ? (
-            <Button onClick={handleSubmit} variant="contained">
-              Đặt tour
-            </Button>
-          ) : (
-            <Button onClick={handleButtonNext} variant="contained">
-              Tiếp tục
-            </Button>
-          )}
-        </div>
-      </form>
-    </div>
-    
-    </Paper>
-    </Container>
+                <AccompanyInfor
+                  onShowLinkInput={onShowLinkInput}
+                  setOnShowLink={setOnShowLinkInput}
+                  customerData={customerData}
+                  numberGuest={numberGuest}
+                  accompanyData={accompanyData}
+                  setAccompanyData={setAccompanyData}
+                />
+              </SwipeableViews>
+              <div className="btn--group">
+                <Button
+                  disabled={activedStep === 0}
+                  onClick={handleButtonBack}
+                  variant="contained"
+                >
+                  Trở về
+                </Button>
+                {activedStep === 1 ? (
+                  <Button onClick={handleSubmit} variant="contained">
+                    Đặt tour
+                  </Button>
+                ) : (
+                  <Button onClick={handleButtonNext} variant="contained">
+                    Tiếp tục
+                  </Button>
+                )}
+              </div>
+            </form>
+          </div>
+        </Paper>
+      </Container>
     </>
   );
 };

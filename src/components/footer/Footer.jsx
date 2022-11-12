@@ -15,14 +15,11 @@ const Footer = () => {
     <div className="me-5 d-none d-lg-block">
       <span>Get connected with us on social networks:</span>
     </div>
-    
 
-    
     <div>
       <a href="" className="me-4 text-reset">
         <i className="fab fa-facebook-f"></i>
-        <FontAwesomeIcon icon={['fab', 'fa-facebook-f']} />
-       
+        {/* <FontAwesomeIcon icon={['fab', 'fa-facebook-f']} /> */}
       </a>
       <a href="" className="me-4 text-reset">
         <i className="fab fa-twitter"></i>
@@ -66,16 +63,16 @@ const Footer = () => {
             Du lịch
           </h6>
           <p>
-            <a href="#!" className="text-reset">Tour miền Bắc</a>
+            <a href="#!" className="text-reset">Tour</a>
           </p>
           <p>
-            <a href="#!" className="text-reset">Tour miền Trung</a>
+            <a href="#!" className="text-reset">Tour</a>
           </p>
           <p>
-            <a href="#!" className="text-reset">Tour miền Tây Nam Bộ</a>
+            <a href="#!" className="text-reset">Tour</a>
           </p>
           <p>
-            <a href="#!" className="text-reset">Tour miền Đông Nam Bộ</a>
+            <a href="#!" className="text-reset">Tour</a>
           </p>
         </div>
         

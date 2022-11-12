@@ -16,7 +16,7 @@ import "./tourCard.scss";
 import dateFormat from 'dateformat';
 import { format } from 'date-fns';
 import { Divider } from "antd";
-
+import Chip from '@mui/material/Chip';
 const TourCard = ({ tourData }) => {
  const so_cho_con = tourData.so_cho - tourData.du_khach?.length;
  const date_format = dateFormat(tourData.khoi_hanh, "dd/mm/yyyy");
@@ -82,7 +82,7 @@ useEffect(() => {
             {/* <p>Mã tour: {tourData.id}</p> */}
             {/* <small>{tourData.thoigian}</small> */}
             <h3>{tourData.ten}</h3>
-            <p className="trangthai" style={{ color: trangthai==='Đã diễn ra'?"red": "green"}}>{trangthai}</p>
+           <p className="trangthai" style={{ color: trangthai==='Đã diễn ra'?"red": "green"}}>{trangthai}</p>
             {/* <p>{tourData.describe}</p> */}  
             
             {/* <h2>
@@ -100,7 +100,7 @@ useEffect(() => {
           </div>
           <div className="tour-btn">
           <Link to={`/detail?slug=${tourData.slug}`}>
-            <button className="button">     
+            <button className="button" disabled={trangthai === 'Đã diễn ra'?"disabled": ""} style={{background: trangthai === 'Đã diễn ra'?"grey":"", }}	>     
             ĐẶT NGAY
               </button>
               </Link>

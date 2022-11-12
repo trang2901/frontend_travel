@@ -9,7 +9,7 @@ const Blog = () => {
 
 <Container>
 <div className="blog">
-    <Divider plain style={{borderColor:'#f97150'}}> <p className="introduction">TIN TỨC</p></Divider> </div>
+    <Divider plain style={{borderColor:'#f97150'}}> <p className="introduction">CẨM NANG DU LỊCH</p></Divider> </div>
 <main className="my-5">
   <div className="container">
 
@@ -25,12 +25,13 @@ const Blog = () => {
         </div>
 
         <div className="col-md-6 mb-4">
-          <span className="badge bg-danger px-2 py-1 shadow-1-strong mb-3">News of the day</span>
-          <h4><strong>Facilis consequatur eligendi</strong></h4>
+          <span className="badge bg-danger px-2 py-1 shadow-1-strong mb-3">Tin mới trong ngày</span>
+          <h4><strong>Tên</strong></h4>
           <p className="text-muted">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequatur
-            eligendi quisquam doloremque vero ex debitis veritatis placeat unde animi laborum
-            sapiente illo possimus, commodi dignissimos obcaecati illum maiores corporis.
+            Mô tả.....................
+            .......................
+            ....................................................
+            .....................................................
           </p>
           <button type="button" className="button_n1">Read more <i class="fa-solid fa-arrow-right"></i></button>
         </div>

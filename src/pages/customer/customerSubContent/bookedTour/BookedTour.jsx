@@ -4,6 +4,7 @@ import { LoginContext } from "../../../../LoginContext";
 import Grid from '@mui/material'
 import { Col, Row, Divider, Button } from 'antd';
 import './bookedTour.scss'
+import Chip from '@mui/material/Chip';
 const BookedTour = () => {
   const [customerJoinedTour, setCustomerJoinedTour] = useState([]);
   const customerID = useContext(LoginContext);
@@ -37,6 +38,7 @@ const getData = (data) => {
         style={{ width: "20%" }}
       /> */}
       <div style={{ width: "150%" }}>
+      <Chip label="Tour đã đặt trong ngày" />
         <Row style={{textAlign: 'left'}}>
         {/* <p>{tour._id}</p>  */}
           <Col span={4}>

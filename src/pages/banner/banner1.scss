@@ -61,11 +61,16 @@ body {
         opacity:0.5;
     }
     button {
+        // color: green;
+        .fa-circle-play::before {
+            color:#08183c;
+        }
+
         i{
-            font-size: 1rem;
+            font-size: 2rem;
             // background-color: transparent;
             // border-radius: 100%;
-            color: #08183c;
+            // color: #08183c;
             font-weight: bold;
 
         }
@@ -88,7 +93,7 @@ body {
     }
 }
 p{
-    color: red;
+    color:#08183c;
     font-weight: bold;
     margin-left: 20%;
 }
@@ -102,6 +107,9 @@ p{
             // margin-top: -1rem;
             width: 200px;
             height: 150px;
+        }
+        img:hover{
+            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
         }
     }
 }

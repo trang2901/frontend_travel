@@ -5,7 +5,8 @@ import { TourCard } from "../../components";
 import axios from "axios";
 import { CategoryList, CardList } from "../../container";
 import "./banner1.scss";
-import { Divider, Row, Col } from "antd";
+import {Row, Col } from "antd";
+import Divider from '@mui/material/Divider';
 import { Container, Paper } from "@mui/material";
 import Carousel from "../../components/carousel/Carousel";
 import { Context } from "../../pages/home/Context";
@@ -53,6 +54,7 @@ import hinh15 from "../../image/hinh15.jpg"
 import hinh16 from "../../image/hinh16.jpg"
 import hinh17 from "../../image/hinh17.jpg"
 import hinh18 from "../../image/hinh18.jpg"
+import Chip from '@mui/material/Chip';
 const Banner = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
@@ -80,7 +82,6 @@ const Banner = () => {
       });
   };
   const [playTime, setPlayTime] = useState(0);
-
   const handleProgress = (state) => {
     setPlayTime(formatTime(state.playedSeconds));
   };
@@ -193,15 +194,10 @@ const Banner = () => {
         </div>
 
         <div className="tourmoi">
-          <Divider
-            dashed
-            orientation="left"
-            plain
-            style={{ borderColor: "#f97150" }}
-          >
+         
             {" "}
-            <p className="tourmoi">TOUR MỚI</p>
-          </Divider>{" "}
+            <p className="tourmoi" style={{textAlign: 'center'}}>TOUR MỚI</p>
+          
         </div>
 
         {/* <div className="row">
@@ -253,48 +249,54 @@ const Banner = () => {
           <CategoryList setTag={setTag} />
         </div> */}
         {/* thư viện========================================== */}
-        <Divider
+        {/* <Divider
           dashed
           orientation="left"
           plain
           style={{ borderColor: "#f97150" }}
-        >
+        > */}
           {" "}
-          <p className="why">Thư viện</p>
-        </Divider>
+          <p className="why" style={{textAlign: 'center'}}>THƯ VIỆN</p>
+        {/* </Divider> */}
         <div className="thuvien">
         {/* <Divider type="vertical" style={{ borderColor: "#f97150", width: '20px'}}/> */}
-        <label style={{marginBottom: '3rem'}}>--- <strong>VIDEO</strong> ---</label>
+        {/* <label style={{marginBottom: '3rem'}}>--- <strong>VIDEO</strong> ---</label> */}
+        {/* <Chip label="Video" style={{marginBottom: '3rem',backGround: '#f97150', color: '#08183c'}} /> */}
+        <div style={{marginBottom: '3rem'}}>
+        <Divider dashed textAlign="left"><Chip color="info" label="VIDEO" style={{ color: '#08183c', fontWeight: 'bold'}}/></Divider></div>
+        
         <div className="video">
         <Row>
           <Col span={4}>
           <div className="videobox">
             <img src={imgDL}/>
-            <button><i class="fa-regular fa-circle-play"></i></button>
+           <a href="/library1"><button style={{color: 'red'}}><i class="fa-regular fa-circle-play" style={{color: 'green'}}></i></button></a> 
           </div>
           </Col>
+
           <Col span={4}>
           <div className="videobox">
             <img src={imgHG}/>
-            <button><i class="fa-regular fa-circle-play"></i></button>
+            <a href="/library2"><button><i class="fa-regular fa-circle-play"></i></button></a> 
           </div>
           </Col>
+          
           <Col span={4}>
           <div className="videobox">
             <img src={imgVHL}/>
-            <button><i class="fa-regular fa-circle-play"></i></button>
+            <a href="/library3"><button><i class="fa-regular fa-circle-play"></i></button></a>
           </div>
           </Col>
           <Col span={4}>
           <div className="videobox">
             <img src={imgCNMT}/>
-            <button><i class="fa-regular fa-circle-play"></i></button>
+            <a href="/library4"> <button><i class="fa-regular fa-circle-play"></i></button></a>
           </div>
           </Col>
           <Col span={4}>
           <div className="videobox">
             <img src={imgDN}/>
-            <button><i class="fa-regular fa-circle-play"></i></button>
+            <a href="/library5"><button><i class="fa-regular fa-circle-play"></i></button></a>
           </div>
           </Col>
           <Col span={4}>
@@ -343,18 +345,25 @@ const Banner = () => {
         </Row>
         </div>
 
-        <label style={{marginBottom: '3rem'}}>--- <strong >ẨM THỰC </strong>---</label>
+        {/* <label style={{marginBottom: '3rem'}}>--- <strong >ẨM THỰC </strong>---</label> */}
+        <div style={{marginBottom: '1rem', marginTop: '1rem'}}>
+        <Divider dashed textAlign="left"><Chip color="info" label="ẨM THỰC" style={{ color: '#08183c', fontWeight: 'bold'}}/></Divider></div>
+        {/* <Chip color="info" label="ẨM THỰC" style={{marginTop: '2rem',marginBottom: '1rem', marginLeft: '2rem', color: '#08183c', fontWeight: 'bold'}}/> */}
         <div className="image">
         <div className="imagebox">
         <Row gutter={[8, 8]}>
+
         <Col span={4}>
-        <img src={img1} />
+       <a target="_blank" href={img1}>
+       <img src={img1} />
+      </a>
         </Col>
         <Col span={4}>
         <img src={img2} />
         </Col>
         <Col span={4}>
         <img src={img3} />
+        
         </Col>
         <Col span={4}>
         <img src={img4} />
@@ -409,7 +418,10 @@ const Banner = () => {
 
        </div>
 
-       <label style={{marginBottom: '3rem'}}>--- <strong> VIỆT NAM VẺ ĐẸP BẤT TẬN</strong> ---</label>
+       {/* <label style={{marginBottom: '3rem'}}>--- <strong> VIỆT NAM VẺ ĐẸP BẤT TẬN</strong> ---</label> */}
+       <div style={{marginBottom: '1rem', marginTop: '1rem'}}>
+        <Divider dashed textAlign="left"><Chip color="info" label="VIỆT NAM VẺ ĐẸP BẤT TẬN" style={{ color: '#08183c', fontWeight: 'bold'}}/></Divider></div>
+       {/* <Chip color="info" label="VIỆT NAM VẺ ĐẸP BẤT TẬN" style={{marginTop: '2rem',marginBottom: '1rem', marginLeft: '2rem', color: '#08183c', fontWeight: 'bold'}}/> */}
        <div className="image">
         <div className="imagebox">
         <Row gutter={[8, 8]}>
@@ -476,15 +488,10 @@ const Banner = () => {
        </div>
         {/* why chọn===================================================================================== */}
         <div>
-          <Divider
-            dashed
-            orientation="left"
-            plain
-            style={{ borderColor: "#f97150" }}
-          >
+         
             {" "}
-            <p className="why">VÌ SAO CHỌN DORISTOUR ?</p>
-          </Divider>
+            <p className="why" style={{textAlign: 'center'}}>VÌ SAO CHỌN DORISTOUR ?</p>
+          
           <Container>
             <div className="why--content">
               <Row>

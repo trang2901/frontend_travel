@@ -15,3 +15,9 @@ export { default as BookedTour} from "./customer/customerSubContent/bookedTour/B
 export { default as Bill} from "./billpage/Bill"
 export { default as Pdfexport} from './order_successful/Pdfexport'
 export { default as TourMB} from './tourMB/TourMB'
+export { default as Library1} from './library/Library1'
+export { default as Library2} from './library/Library2'
+export { default as Library3} from './library/Library3'
+export { default as Library4} from './library/Library4'
+export { default as Library5} from './library/Library5'
+export { default as SendMail} from './sendMail/SendMail'

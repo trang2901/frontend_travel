@@ -5,6 +5,8 @@ import { TextField } from "@mui/material";
 import { Formik } from "formik";
 import axios from "axios";
 import { Divider } from "antd";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 import './loginn.scss'
 const Login = ({ login }) => {
   const [loginOn, setLoginOn] = useState(login);
@@ -34,7 +36,12 @@ const Login = ({ login }) => {
     };
     return obj;
   }
-
+  const showAlertError = () => {
+    <Alert severity="error">
+      <AlertTitle>Lỗi</AlertTitle>
+      Tài khoản hoặc mật khẩu không đúng — <strong>Hãy kiểm tra lại!</strong>
+      </Alert>
+  }
   const createLoginRequest = (values) => {
     const getCustomerID = (accountID) => {
       axios
@@ -53,11 +60,24 @@ const Login = ({ login }) => {
       .then(({ data }) => {
         if (data == null) {
           setIsSubmit(false);
+          // showAlertError();
+      //     alert(
+      //     <Alert severity="error">
+      //   <AlertTitle>Lỗi</AlertTitle>
+      //   Tài khoản hoặc mật khẩu không đúng — <strong>Hãy kiểm tra lại!</strong>
+      // </Alert>)
+          
           alert("Tài khoản hoặc mật khẩu không đúng");
         } else {
           if (data.password === values.password) {
             getCustomerID(data["_id"]);
-          } else alert("Mật khẩu không đúng");
+          } else 
+      //     alert(
+      //     <Alert severity="error">
+      //   <AlertTitle>Lỗi</AlertTitle>
+      //   Mật khẩu không đúng — <strong>Hãy kiểm tra lại!</strong>
+      // </Alert>)
+          alert("Mật khẩu không đúng");
         }
       })
       .catch((err) => console.log(err));
