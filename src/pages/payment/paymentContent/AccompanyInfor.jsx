@@ -2,7 +2,9 @@ import React from "react";
 
 import { TextField } from "@mui/material";
 import { Input } from "antd";
+import { Formik } from "formik";
 import "./accompanyInfor.scss";
+import * as Yup from 'yup';
 const AccompanyInfor = ({
   onShowLinkInput,
   setOnShowLink,
@@ -29,39 +31,20 @@ const AccompanyInfor = ({
       <div className="accompany--input">
         {/* <h1>{index + 1}</h1> */}
         <p className="thongtin_input">Thông tin người {index + 1}</p>
-        {/* <Input
-              type="text"
-              label="Họ và tên"
-              placeholder="Họ và tên"
-              value={accompanyData[index]?.ho_ten || ""}
-                size="large"
-                width="20px"
-                maxLength="200px"
-                onChange={handleChangeName}
-                inputProps={{ "data-index": index }}
-              /> */}
+       
         <TextField
           type="text"
+          // name="hovaten"
           label="Họ và tên"
           value={accompanyData[index]?.ho_ten || ""}
           sx={{ maxWidth: "200px" }}
           onChange={handleChangeName}
           inputProps={{ "data-index": index }}
         />
-        {/* <Input
-              type="number"
-              label="Số điện thoại"
-                size="large"
-                width="20px"
-                maxLength="200px"
-                placeholder="Số điện thoại"
-                value={accompanyData[index]?.sdt || ""}
-                onChange={handleChangePhone}
-                inputProps={{ "data-index": index }}
-              /> */}
-
+        {/* <p style={{color: 'red', fontStyle: 'italic',fontSize:'14px' }}>{errors.hovaten && touched.hovaten && errors.hovaten}</p> */}
         <TextField
           type="number"
+          // name="sdt"
           label="Số điện thoại"
           sx={{ maxWidth: "200px" }}
           value={accompanyData[index]?.sdt || ""}
@@ -69,6 +52,7 @@ const AccompanyInfor = ({
           inputProps={{ "data-index": index }}
           style= {{borderRadius: 0}}
         />
+        
       </div>
     ));
   };

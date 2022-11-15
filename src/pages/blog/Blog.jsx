@@ -33,7 +33,7 @@ const Blog = () => {
             ....................................................
             .....................................................
           </p>
-          <button type="button" className="button_n1">Read more <i class="fa-solid fa-arrow-right"></i></button>
+          <button type="button" className="button_n1">Read more <i className="fa-solid fa-arrow-right"></i></button>
         </div>
       </div>
     </section>

@@ -6,6 +6,8 @@ import { Formik } from "formik";
 import axios from "axios";
 import { Divider } from "antd";
 import './signup.scss'
+import Validator from "../../utils/Validator";
+import * as Yup from 'yup';
 const Signup = ({ login }) => {
   const [loginOn, setLoginOn] = useState(login);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -49,7 +51,7 @@ const Signup = ({ login }) => {
     };
 
     axios
-      .get(`https://tourapi-dev-n.herokuapp.com/taikhoan/${values.email}`)
+      .get(`https://tourapi-dev-n.herokuapp.com/taikhoan/${values.username}`)
       .then(({ data }) => {
         if (data == null) {
           setIsSubmit(false);
@@ -67,11 +69,12 @@ const Signup = ({ login }) => {
     axios
       .post("https://tourapi-dev-n.herokuapp.com/taikhoan", 
       {
-        username: values.email,
+        username: values.username,
         password: values.password,
         diachi: values.diachi,
         hoten: values.hoten,
         sodienthoai: values.sodienthoai,
+        email: values.email
       })
       // console.log('thành công!!!!!!!')
       .then(({ data }) => {
@@ -81,8 +84,8 @@ const Signup = ({ login }) => {
             id_tai_khoan: data,
             ho_ten: data.hoten,
             dia_chi: data.diachi,
-            sdt: data.sodienthoai
-            
+            sdt: data.sodienthoai,
+            email: data.email
 
           })
          
@@ -92,23 +95,48 @@ const Signup = ({ login }) => {
           });
       })
       .catch((err) => console.log(err));
-  };
+  }
+
+  const SignupSchema = Yup.object().shape({
+    hoten: Yup.string()
+      .min(2, 'Họ tên quá ngắn')
+      .required('Đây là trường bắt buộc'),
+    diachi: Yup.string()
+      .min(2, 'Địa chỉ quá ngắn')
+      .required('Đây là trường bắt buộc'),
+    email: Yup.string().email('Invalid email').required('Required'),
+    username : Yup.string()
+    .min(2, 'Tên người dùng không hợp lệ')
+    .required('Đây là trường bắt buộc'),
+    sodienthoai: Yup.string()
+      .min(10, 'Số điện thoại không hợp lệ')
+      .max(10, 'Số điện thoại không hợp lệ')
+      .required('Đây là trường bắt buộc'),
+    
+  });
+ 
 
   const renderForm = () => (
     <>
       <Formik
-        initialValues={{ email: "", password: "", diachi: "", hoten: "", sodienthoai: "" }}
+        initialValues={{ username: "", password: "", diachi: "", hoten: "", sodienthoai: "" }}
         // validate={(values) => {
         //   const errors = {};
-        //   if (!values.email) {
-        //     errors.email = "Required";
-        //   } else if (
-        //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        //   ) {
-        //     errors.email = "Invalid email address";
+        //   if (!values.email && !values.hoten) {
+        //     errors.email = " ";
+        //     errors.hoten=" ";
+        //   } else 
+        //   if (
+        //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email),
+        //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.hoten)
+        //   ) 
+        //   {
+        //     errors.email = "Email không đúng định dạng";
+        //     errors.hoten = "Họ tên không được rỗng"
         //   }
         //   return errors;
         // }}
+        validationSchema={SignupSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             setIsSubmit(true);
@@ -140,6 +168,7 @@ const Signup = ({ login }) => {
               onBlur={handleBlur}
               value={values.hoten}
             />
+           <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.hoten && touched.hoten && errors.hoten}</p>
             <p></p>
             <TextField
               type="text"
@@ -150,6 +179,7 @@ const Signup = ({ login }) => {
               onBlur={handleBlur}
               value={values.diachi}
             />
+           <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.diachi && touched.diachi && errors.diachi}</p>
             <p>
             </p>
             <TextField
@@ -161,16 +191,29 @@ const Signup = ({ login }) => {
               onBlur={handleBlur}
               value={values.sodienthoai}
             />
+             <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.sodienthoai && touched.sodienthoai && errors.sodienthoai}</p>
             <p></p>
             <TextField
               type="text"
               name="email"
               variant="standard"
-              label="Username"
+              label="Email"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
             />
+             <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.email && touched.email && errors.email}</p>
+            <p></p>
+            <TextField
+              type="text"
+              name="username"
+              variant="standard"
+              label="Username"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.username}
+            />
+             <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.username && touched.username && errors.username}</p>
             <p></p>
             {/* {errors.email && touched.email && errors.email} */}
             <TextField

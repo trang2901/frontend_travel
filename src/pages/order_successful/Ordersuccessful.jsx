@@ -59,7 +59,7 @@ const Ordersuccessful = () => {
           </label>
           <p>
             <label>
-              <i class="fa-solid fa-phone"></i> Tư vấn đặt tour:
+              <i className="fa-solid fa-phone"></i> Tư vấn đặt tour:
             </label>
             &ensp;
             <label style={{ color: "red", fontWeight: "bold" }}>
@@ -84,16 +84,16 @@ const Ordersuccessful = () => {
           {/* <PDFExport ref={PDFExportComponent} paperSize="A1">
             <Container>
 		                        
-<div class="receipt-content">
-    <div class="container bootstrap snippets bootdey">
-		<div class="row">
+<div className="receipt-content">
+    <div className="container bootstrap snippets bootdey">
+		<div className="row">
 		
-			<div class="col-md-12">
+			<div className="col-md-12">
 			
-				<div class="invoice-wrapper">
+				<div className="invoice-wrapper">
 				<HeaderBill />
 				<br/>
-					<div class="intro">
+					<div className="intro">
 					
 						Xin chao <strong>{tour.id_khach_hang.ho_ten.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}</strong>, 
 						<br/>
@@ -104,22 +104,22 @@ const Ordersuccessful = () => {
 						{" "}cua ban!
 					</div>
 
-					<div class="payment-info">
-						<div class="row">
-							<div class="col-sm-6">
+					<div className="payment-info">
+						<div className="row">
+							<div className="col-sm-6">
 								<span>Ma thanh toan</span>
 								<strong>{tour._id}</strong>
 							</div>
-							<div class="col-sm-6 text-right">
+							<div className="col-sm-6 text-right">
 								<span>Ngay thanh toan</span>
 								<strong>{getDate(dateCurrent)}</strong>
 							</div>
 						</div>
 					</div>
 
-					<div class="payment-details">
-						<div class="row">
-							<div class="col-sm-6">
+					<div className="payment-details">
+						<div className="row">
+							<div className="col-sm-6">
 								<span>Khach Hang</span>
 								<strong>
 									{tour.id_khach_hang.ho_ten.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}
@@ -133,7 +133,7 @@ const Ordersuccessful = () => {
 								</p>
 							</div>
 
-							<div class="col-sm-6 text-right">
+							<div className="col-sm-6 text-right">
 								<span>Thanh toan cho</span>
 								<strong>
 									DORISTOUR
@@ -149,9 +149,9 @@ const Ordersuccessful = () => {
 						</div>
 					</div>
 
-					<div class="line-items">
-						<div class="headers clearfix">
-							<div class="row">
+					<div className="line-items">
+						<div className="headers clearfix">
+							<div className="row">
 								<Row>
 									<Col span={9} style={{textAlign:'left'}}>Tour</Col>
 									<Col span={3} style={{textAlign:'center'}}>So luong</Col>
@@ -163,8 +163,8 @@ const Ordersuccessful = () => {
 							</div>
 						</div>
 
-						<div class="items">
-							<div class="row item">
+						<div className="items">
+							<div className="row item">
 
 							<Row>
 									<Col span={9} style={{textAlign:'left'}}>
@@ -182,35 +182,35 @@ const Ordersuccessful = () => {
 					
 
 						</div>
-						<div class="total text-right">
-						<p class="extra-notes">
+						<div className="total text-right">
+						<p className="extra-notes">
 								<strong>Luu y: </strong>
 								Quy khach co mat tai diem khoi hanh truoc 30 phut
 							</p>
-							<div class="field">
+							<div className="field">
 								Tong truoc thue <span>{tour.thanh_tien}</span>
 							</div>
-							<div class="field">
+							<div className="field">
 								VAT <span>10%{" "}</span>
 							</div>
-							<div class="field">
+							<div className="field">
 								Giam gia <span>{tour.giam_gia}</span>
 							</div>
-							<div class="field grand-total">
+							<div className="field grand-total">
 								Tong cong<span>{formatPrice(parseFloat(tour.thanh_tien.replaceAll('.', '')) + parseFloat(tour.thanh_tien.replaceAll('.', '')) * 0.1 - parseFloat(tour.thanh_tien.replaceAll('.', '')) * (parseFloat(tour.giam_gia.replaceAll('%', '')))/100)}</span>
 							</div>
 						</div>
 
-						<div class="print">
+						<div className="print">
 							<a href="#">
-								<i class="fa fa-print"></i>
+								<i className="fa fa-print"></i>
 								Print this receipt
 							</a>
 						</div>
 					</div>
 				</div>
 
-				<div class="footer">
+				<div className="footer">
 					Copyright © 2014. company name
 				</div>
 			</div>

@@ -94,6 +94,7 @@ const Account = () => {
                 size="large"
                 width="20px"
                 maxLength="200px"
+                
               />
             </Col>
           </Row>
@@ -122,6 +123,7 @@ const Account = () => {
                 size="large"
                 width="20px"
                 maxLength="200px"
+                
               />
             </Col>
           </Row>

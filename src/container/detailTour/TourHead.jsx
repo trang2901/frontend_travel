@@ -103,8 +103,8 @@ const TourHead = ({ tourData }) => {
     minWidth: "30px",
     minHeight: "30px",
     background: "#f97150",
-    color: "black"
-    
+    color: "black",
+    // background: trangthai === 'Đã diễn ra'?"grey":"", 
   };
 
   const buttonSubmitStyle = {
@@ -114,6 +114,7 @@ const TourHead = ({ tourData }) => {
     marginTop: "1rem",
     backgroundColor: "#f97150",
     color: "black",
+    background: trangthai === 'Đã diễn ra'?"grey":"",
   };
 
   const handleClickAdd = () => {
@@ -188,7 +189,7 @@ const TourHead = ({ tourData }) => {
           <Row>
             <Col span={7}>
               <label className="label_detail">
-                <i class="fa-regular fa-file-code"></i> &ensp;Mã:{" "}
+                <i className="fa-regular fa-file-code"></i> &ensp;Mã:{" "}
               </label>
             </Col>
             <Col span={17}>
@@ -199,7 +200,7 @@ const TourHead = ({ tourData }) => {
           <Row>
             <Col span={7}>
               <label className="label_detail">
-                <i class="fa-solid fa-car"></i>&ensp;Phương tiện:{" "}
+                <i className="fa-solid fa-car"></i>&ensp;Phương tiện:{" "}
               </label>
             </Col>
             <Col span={17}>
@@ -210,7 +211,7 @@ const TourHead = ({ tourData }) => {
           <Row>
             <Col span={7}>
               <label className="label_detail">
-              <i class="fa-solid fa-building"></i>&ensp;Khách sạn: {" "}
+              <i className="fa-solid fa-building"></i>&ensp;Khách sạn: {" "}
               </label>
             </Col>
             <Col span={17}>
@@ -220,7 +221,7 @@ const TourHead = ({ tourData }) => {
           <Row>
             <Col span={7}>
               <label className="label_detail">
-              <i class="fa-solid fa-location-dot"></i>&ensp;Điểm khởi hành: {" "}
+              <i className="fa-solid fa-location-dot"></i>&ensp;Điểm khởi hành: {" "}
               </label>
             </Col>
             <Col span={17}>
@@ -231,7 +232,7 @@ const TourHead = ({ tourData }) => {
           <Row>
             <Col span={7}>
               <label className="label_detail">
-              <i class="fa-solid fa-utensils"></i>&ensp;Ẩm thực: {" "}
+              <i className="fa-solid fa-utensils"></i>&ensp;Ẩm thực: {" "}
               </label>
             </Col>
             <Col span={17}>
@@ -242,7 +243,7 @@ const TourHead = ({ tourData }) => {
           <Row>
             <Col span={7}>
               <label className="label_detail">
-                <i class="fa-solid fa-calendar"></i>&ensp;Ngày khởi hành:{" "}
+                <i className="fa-solid fa-calendar"></i>&ensp;Ngày khởi hành:{" "}
               </label>
             </Col>
             <Col span={17}>
@@ -253,7 +254,7 @@ const TourHead = ({ tourData }) => {
           <Row>
             <Col span={7}>
               <label className="label_detail">
-              <i class="fa-regular fa-clock"></i>&ensp;Thời gian:{" "}
+              <i className="fa-regular fa-clock"></i>&ensp;Thời gian:{" "}
               </label>
             </Col>
             <Col span={17}>
@@ -265,7 +266,7 @@ const TourHead = ({ tourData }) => {
           <Row>
             <Col span={7}>
               <label className="label_detail">
-                <i class="fa-solid fa-person"></i>&ensp;Số khách:{" "}
+                <i className="fa-solid fa-person"></i>&ensp;Số khách:{" "}
               </label>
             </Col>
             <Col span={17}>
@@ -275,6 +276,8 @@ const TourHead = ({ tourData }) => {
                   style={buttonUpDownStyle}
                   variant="contained"
                   customFunction={handleClickSubtract}
+                  // disabled={trangthai === 'Đã diễn ra'?"disabled": ""} 
+                  // style={{background: trangthai === 'Đã diễn ra'?"grey":"", }}
                 />
               ) : (
                 <ButtonCustom
@@ -290,6 +293,7 @@ const TourHead = ({ tourData }) => {
                 type="text"
                 value={numberGuest}
                 style={{ textAlign: "center", width: "50px", border: "none" }}
+                readOnly
               />
 
               {numberGuest <
@@ -321,7 +325,7 @@ const TourHead = ({ tourData }) => {
           {/* <div className="input date"> */}
           {/* <label> */}
           {/* <label>
-<i class="fa-solid fa-calendar"></i>  Date
+<i className="fa-solid fa-calendar"></i>  Date
                 </label> */}
           {/* <DatePicker
                   dateFormat="dd/MM/yyyy"
@@ -344,7 +348,7 @@ const TourHead = ({ tourData }) => {
           {/* </div> */}
           {/* <div className="input numberGuest">
                 <label>
-                <i class="fa-solid fa-person"></i>
+                <i className="fa-solid fa-person"></i>
                   People
                 </label>
                 <div className="numberGuest--input">
@@ -399,6 +403,8 @@ const TourHead = ({ tourData }) => {
                 variant="contained"
                 style={buttonSubmitStyle}
                 customFunction={handleSubmit}
+                disabled={trangthai === 'Đã diễn ra'?"disabled": ""} 
+                // style={{background: trangthai === 'Đã diễn ra'?"grey":"", }}
               />
             ) : (
               <ButtonCustom
@@ -416,12 +422,12 @@ const TourHead = ({ tourData }) => {
           </Divider>
           <div className="contact">
             <label className="label1">
-              <i class="fa-solid fa-phone"></i> HOLINE TƯ VẤN:{" "}
+              <i className="fa-solid fa-phone"></i> HOLINE TƯ VẤN:{" "}
             </label>
             <label> 0394075201</label>
             <br></br>
             <label className="label1">
-              <i class="fa-solid fa-envelope"></i> EMAIL:{" "}
+              <i className="fa-solid fa-envelope"></i> EMAIL:{" "}
             </label>
             <label> test@gmail.com</label>
           </div>

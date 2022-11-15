@@ -35,7 +35,8 @@ export default function Posts() {
         <div className="search--module">
             <div className="input--module">
 
-            <i class="fa-solid fa-magnifying-glass"></i> {" "}{" "}<Input width={2000} placeholder="Tìm kiếm...."onChange={(e) => searchItems(e.target.value)}/>
+            <i className="fa-solid fa-magnifying-glass"></i> {" "}{" "}
+            <Input width={2000} placeholder="Tìm kiếm...."onChange={(e) => searchItems(e.target.value)}/>
             {/* <Input 
                 icon='search'
                 placeholder='Search...'

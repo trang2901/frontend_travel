@@ -39,6 +39,15 @@ useEffect(() => {
    } 
    
 }, [tourData]);
+const setSocho = (socho) => {
+  if(trangthai === 'Đã diễn ra') {
+    socho = 0;
+  }
+  else {
+    socho = socho;
+  }
+}
+
   return (
     <>
     {/* <Link to={`/detail?slug=${tourData.slug}`}> */}
@@ -111,7 +120,8 @@ useEffect(() => {
               </button>
               </Link> 
           </div>
-          <p className="para">Số chổ còn nhận: <label className="label_socho">{so_cho_con}</label></p>
+
+          <p className="para" style={{color: trangthai==='Đã diễn ra'?'red':'#08183c'}}>{trangthai === 'Đã diễn ra'?'Không còn nhận ': <p className="para">Số chổ còn nhận: <label className="label_socho" style={{color: trangthai==='Đã diễn ra'?'white': 'red'}}>{so_cho_con}</label></p>}</p>
         </CardActionArea>
       </Card>
     {/* // </Link> */}

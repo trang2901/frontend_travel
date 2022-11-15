@@ -69,7 +69,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
         break;
     }
   };
-  console.log('data: ', parseInt(bookTourInfor.gia.replaceAll('.', '')));
+  // console.log('data: ', parseInt(bookTourInfor.gia.replaceAll('.', '')));
 
   return (
     <div className="payment padding-section">

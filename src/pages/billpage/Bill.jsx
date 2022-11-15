@@ -71,14 +71,14 @@ console.log('customerJoinedTour id: ', Object.keys(customerJoinedTour).length);
       <Container style={{ justifyContent: "center" }}>
         <PDFExport ref={PDFExportComponent} paperSize="A2">
           <Container>
-            <div class="receipt-content">
-              <div class="container bootstrap snippets bootdey">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="invoice-wrapper">
+            <div className="receipt-content">
+              <div className="container bootstrap snippets bootdey">
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="invoice-wrapper">
                       {/* <HeaderBill /> */}
                       <br />
-                      <div class="intro">
+                      <div className="intro">
                         Xin chao{" "}
                         <strong>
                           {tour.id_khach_hang.ho_ten
@@ -103,22 +103,22 @@ console.log('customerJoinedTour id: ', Object.keys(customerJoinedTour).length);
                         cua ban!
                       </div>
 
-                      <div class="payment-info">
-                        <div class="row">
-                          <div class="col-sm-6">
+                      <div className="payment-info">
+                        <div className="row">
+                          <div className="col-sm-6">
                             <span>Ma thanh toan</span>
                             <strong>{tour._id}</strong>
                           </div>
-                          <div class="col-sm-6 text-right">
+                          <div className="col-sm-6 text-right">
                             <span>Ngay thanh toan</span>
                             <strong>{tour.createdAt}</strong>
                           </div>
                         </div>
                       </div>
 
-                      <div class="payment-details">
-                        <div class="row">
-                          <div class="col-sm-6">
+                      <div className="payment-details">
+                        <div className="row">
+                          <div className="col-sm-6">
                             <span>Khach Hang</span>
                             <strong>
                               {tour.id_khach_hang.ho_ten
@@ -140,7 +140,7 @@ console.log('customerJoinedTour id: ', Object.keys(customerJoinedTour).length);
                             </p>
                           </div>
 
-                          <div class="col-sm-6 text-right">
+                          <div className="col-sm-6 text-right">
                             <span>Thanh toan cho</span>
                             <strong>DORISTOUR</strong>
                             <p>Hung Loi, Ninh Kieu, Can Tho</p>
@@ -152,9 +152,9 @@ console.log('customerJoinedTour id: ', Object.keys(customerJoinedTour).length);
                         </div>
                       </div>
 
-                      <div class="line-items">
-                        <div class="headers clearfix">
-                          <div class="row">
+                      <div className="line-items">
+                        <div className="headers clearfix">
+                          <div className="row">
                             <Row>
                               <Col span={9} style={{ textAlign: "left" }}>
                                 Tour
@@ -170,14 +170,14 @@ console.log('customerJoinedTour id: ', Object.keys(customerJoinedTour).length);
                                 Thanh tien
                               </Col>
                             </Row>
-                            {/* <div class="col-xs-4 text-left">Tour</div>
-								<div class="col-xs-2 text-center">So Luong</div>
-								<div class="col-xs-5 text-right">Tong</div> */}
+                            {/* <div className="col-xs-4 text-left">Tour</div>
+								<div className="col-xs-2 text-center">So Luong</div>
+								<div className="col-xs-5 text-right">Tong</div> */}
                           </div>
                         </div>
 
-                        <div class="items">
-                          <div class="row item">
+                        <div className="items">
+                          <div className="row item">
                             <Row>
                               <Col span={9} style={{ textAlign: "left" }}>
                                 {tour.id_tour.ten
@@ -205,32 +205,32 @@ console.log('customerJoinedTour id: ', Object.keys(customerJoinedTour).length);
                                 {tour.id_tour.gia}
                               </Col>
                             </Row>
-                            {/* <div class="col-xs-4 desc">
+                            {/* <div className="col-xs-4 desc">
 									Html theme
 								</div>
-								<div class="col-xs-3 qty text-center">
+								<div className="col-xs-3 qty text-center">
 									3
 								</div>
-								<div class="col-xs-5 amount text-right">
+								<div className="col-xs-5 amount text-right">
 									$60.00
 								</div> */}
                           </div>
                         </div>
-                        <div class="total text-right">
-                          <p class="extra-notes">
+                        <div className="total text-right">
+                          <p className="extra-notes">
                             <strong>Luu y: </strong>
                             Quy khach co mat tai diem khoi hanh truoc 30 phut
                           </p>
-                          <div class="field">
+                          <div className="field">
                             Tong truoc thue <span>{tour.thanh_tien}</span>
                           </div>
-                          <div class="field">
+                          <div className="field">
                             VAT <span>10% </span>
                           </div>
-                          <div class="field">
+                          <div className="field">
                             Giam gia <span>{tour.giam_gia}</span>
                           </div>
-                          <div class="field grand-total">
+                          <div className="field grand-total">
                             Tong cong
                             <span>
                               {formatPrice(
@@ -260,9 +260,9 @@ console.log('customerJoinedTour id: ', Object.keys(customerJoinedTour).length);
             </div>
           </Container>
         </PDFExport>
-        <div class="print">
+        <div className="print">
           <a href="#" onClick={handleExport}>
-            <i class="fa fa-print"></i>
+            <i className="fa fa-print"></i>
             Print this receipt
           </a>
         </div>

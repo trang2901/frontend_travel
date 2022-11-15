@@ -10,6 +10,8 @@ import "./paymentContent.scss";
 import axios from "axios";
 import { Divider } from "antd";
 import { Container, Paper } from "@mui/material";
+import { ConstructionOutlined } from "@mui/icons-material";
+import { formatPrice } from "../../utils/helpers";
 const PaymentContent = () => {
   const [onShowLinkInput, setOnShowLinkInput] = useState(false);
   const [activedStep, setActivedStep] = useState(0);
@@ -65,15 +67,26 @@ const PaymentContent = () => {
       if (customerData.ho_ten !== "") {
         e.preventDefault();
         setLoading(true);
-        // console.log({email, message, name, subject, company})
         const email = customerData.email;
+        const hoten = customerData.ho_ten;
+        const sodienthoai = customerData.sdt;
+        const tongtien = formatPrice(
+          parseFloat(tourData.gia.replaceAll(".", "")) +
+            parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
+        );
         const body = {
           email,
+          hoten,
+          sodienthoai,
+          tongtien,
         };
-        console.log("lại là email", email);
+
         axios
           .post("https://tourapi-dev-n.herokuapp.com/mail", {
-            email
+            email,
+            hoten,
+            sodienthoai,
+            tongtien,
           })
           .then((res) => {
             alert("Email Sent Successfully");
@@ -134,8 +147,21 @@ const PaymentContent = () => {
         setLoading(true);
         // console.log({email, message, name, subject, company})
         const email = customerData.email;
+        const hoten = customerData.ho_ten;
+        const sodienthoai = customerData.sdt;
+        const tongtien = formatPrice(
+          parseFloat(tourData.gia.replaceAll(".", "")) +
+            parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
+        );
+        // console.log("lại là email", email);
+        // console.log('so dientoahi',customerData.sdt);
+        // console.log('ho ten:', customerData.ho_ten);
+        // console.log('tổng tiền: ', formatPrice(parseFloat(tourData.gia.replaceAll('.', '')) + parseFloat(tourData.gia.replaceAll('.', '')) * 0.1))
         const body = {
           email,
+          hoten,
+          sodienthoai,
+          tongtien,
         };
 
         axios
@@ -157,7 +183,12 @@ const PaymentContent = () => {
       alert("Please fill all required filled");
     }
   };
-  console.log("email nè:", customerData.email);
+
+  // console.log("email nè:", customerData.email);
+  // console.log("lại là email", customerData.email);
+  //       console.log('so dientoahi',customerData.sdt);
+  //       console.log('ho ten:', customerData.ho_ten);
+  //       console.log('tổng tiền: ', formatPrice(parseFloat(tourData.gia.replaceAll('.', '')) + parseFloat(tourData.gia.replaceAll('.', '')) * 0.1))
   //return
   return (
     <>

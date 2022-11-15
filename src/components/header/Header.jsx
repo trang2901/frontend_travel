@@ -66,7 +66,7 @@ const Header = () => {
                         letterSpacing: "0.5px",
                       }}
                     >
-                      <i class="fa-solid fa-house"></i> TRANG CHỦ
+                      <i className="fa-solid fa-house"></i> TRANG CHỦ
                     </a>
                   </li>
 

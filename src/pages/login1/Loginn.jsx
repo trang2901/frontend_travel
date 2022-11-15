@@ -7,7 +7,11 @@ import axios from "axios";
 import { Divider } from "antd";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import isEmpty from "validator/lib/isEmpty"
+// import {useHistory} from 'react-router-dom'
+import isEmail from "validator/lib/isEmail"
 import './loginn.scss'
+import * as Yup from 'yup';
 const Login = ({ login }) => {
   const [loginOn, setLoginOn] = useState(login);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -56,7 +60,7 @@ const Login = ({ login }) => {
     };
 
     axios
-      .get(`https://tourapi-dev-n.herokuapp.com/taikhoan/${values.email}`)
+      .get(`https://tourapi-dev-n.herokuapp.com/taikhoan/${values.username}`)
       .then(({ data }) => {
         if (data == null) {
           setIsSubmit(false);
@@ -85,8 +89,8 @@ const Login = ({ login }) => {
 
   const createRegisterRequest = (values) => {
     axios
-      .post("https://tourapi-dev-n.herokuapp.com/taikhoann", {
-        username: values.email,
+      .post("https://tourapi-dev-n.herokuapp.com/taikhoan", {
+        username: values.username,
         password: values.password,
       })
       .then(({ data }) => {
@@ -101,23 +105,30 @@ const Login = ({ login }) => {
       })
       .catch((err) => console.log(err));
   };
+  const LoginSchema = Yup.object().shape({
+    username : Yup.string()
+    .min(2, 'Tên người dùng không hợp lệ')
+    .required('Đây là trường bắt buộc')
+    
+  });
 
   const renderForm = () => (
     <>
     
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ username: "", password: "" }}
         // validate={(values) => {
         //   const errors = {};
         //   if (!values.email) {
-        //     errors.email = "Required";
+        //     errors.email = " ";
         //   } else if (
         //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
         //   ) {
-        //     errors.email = "Invalid email address";
+        //     errors.email = "Email không đúng định dạng";
         //   }
         //   return errors;
         // }}
+        validationSchema={LoginSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             setIsSubmit(true);
@@ -140,15 +151,15 @@ const Login = ({ login }) => {
           <form className="form" onSubmit={handleSubmit}>
             <TextField
               type="text"
-              name="email"
+              name="username"
               variant="standard"
-              label="Email"
+              label="Tên người dùng"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.email}
+              value={values.username}
             />
-            <p></p>
-            {/* {errors.email && touched.email && errors.email} */}
+            {/* <p className="text-red-400 text-xs italic">{validationMsg.email}</p> */}
+            <p style={{color: 'red', fontStyle: 'italic',fontSize:'14px' }}>{errors.username && touched.username && errors.username}</p>
             <TextField
               type="password"
               name="password"
@@ -158,8 +169,9 @@ const Login = ({ login }) => {
               onBlur={handleBlur}
               value={values.password}
             />
+            {/* <p className="text-red-400 text-xs italic">{validationMsg.password}</p> */}
             <p></p><p></p>
-            {errors.password && touched.password && errors.password}
+            {/* {errors.password && touched.password && errors.password} */}
             {/* <Button
                 type="submit"
                 disabled={isSubmitting}

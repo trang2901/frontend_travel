@@ -43,14 +43,14 @@ const TourDetail = ({ tourData }) => {
       <Row>
         <Col span={12}>
           <Row>
-            <Col span={5}><p style={{color: '#08183c', fontWeight: 'bold'}}><i class="fa-solid fa-hotel"></i>{" "}Khách sạn: </p></Col>
+            <Col span={5}><p style={{color: '#08183c', fontWeight: 'bold'}}><i className="fa-solid fa-hotel"></i>{" "}Khách sạn: </p></Col>
             <Col span={7} style={{textAlign: 'left', fontWeight: 'bold', color: 'green'}}><p>{diaDiem.dich_vu}</p></Col>
           </Row>
         
         </Col>
         <Col span={12}>
         <Row>
-            <Col span={5}><p style={{color: '#08183c', fontWeight: 'bold'}}><i class="fa-solid fa-calendar-days"></i>{" "}Ngày ở:</p></Col>
+            <Col span={5}><p style={{color: '#08183c', fontWeight: 'bold'}}><i className="fa-solid fa-calendar-days"></i>{" "}Ngày ở:</p></Col>
             <Col span={7} style={{textAlign: 'left', fontWeight: 'bold', color: 'green'}}><p>{diaDiem.ngay_o}{" "}ngày</p></Col>
           </Row>
            
@@ -58,7 +58,7 @@ const TourDetail = ({ tourData }) => {
       </Row>
       
       <div>
-      <i class="fa-solid fa-book"></i>{" "}<label style={{color: '#08183c', fontWeight: 'bold'}}>Tổng quan: </label><p>{diaDiem.chitiet}</p>
+      <i className="fa-solid fa-book"></i>{" "}<label style={{color: '#08183c', fontWeight: 'bold'}}>Tổng quan: </label><p>{diaDiem.chitiet}</p>
       
       
       <div>
@@ -181,7 +181,7 @@ const TourDetail = ({ tourData }) => {
                     label="GIỚI THIỆU "
                     value="1"
                   />
-                  <Tab
+                  <Tab 
                     sx={{ tabSize: "large", fontSize: "20px" }}
                     label="CHI TIẾT LỊCH TRÌNH"
                     value="2"

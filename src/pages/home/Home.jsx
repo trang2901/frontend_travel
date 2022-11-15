@@ -41,7 +41,7 @@ const Home = () => {
     <>
     {/* <Search /> */}
       <Context.Provider value={[tag, setTag]}>
-        <Banner />
+        {/* <Banner /> */}
        
         <CategoryList setTag={setTag} />
         <p></p><p></p>

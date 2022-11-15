@@ -270,39 +270,39 @@ const Banner = () => {
           <Col span={4}>
           <div className="videobox">
             <img src={imgDL}/>
-           <a href="/library1"><button style={{color: 'red'}}><i class="fa-regular fa-circle-play" style={{color: 'green'}}></i></button></a> 
+           <a href="/library1"><button style={{color: 'red'}}><i className="fa-regular fa-circle-play" style={{color: 'green'}}></i></button></a> 
           </div>
           </Col>
 
           <Col span={4}>
           <div className="videobox">
             <img src={imgHG}/>
-            <a href="/library2"><button><i class="fa-regular fa-circle-play"></i></button></a> 
+            <a href="/library2"><button><i className="fa-regular fa-circle-play"></i></button></a> 
           </div>
           </Col>
           
           <Col span={4}>
           <div className="videobox">
             <img src={imgVHL}/>
-            <a href="/library3"><button><i class="fa-regular fa-circle-play"></i></button></a>
+            <a href="/library3"><button><i className="fa-regular fa-circle-play"></i></button></a>
           </div>
           </Col>
           <Col span={4}>
           <div className="videobox">
             <img src={imgCNMT}/>
-            <a href="/library4"> <button><i class="fa-regular fa-circle-play"></i></button></a>
+            <a href="/library4"> <button><i className="fa-regular fa-circle-play"></i></button></a>
           </div>
           </Col>
           <Col span={4}>
           <div className="videobox">
             <img src={imgDN}/>
-            <a href="/library5"><button><i class="fa-regular fa-circle-play"></i></button></a>
+            <a href="/library5"><button><i className="fa-regular fa-circle-play"></i></button></a>
           </div>
           </Col>
           <Col span={4}>
           <div className="videobox">
             <img src={imgVN}/>
-            <button><i class="fa-regular fa-circle-play"></i></button>
+            <button><i className="fa-regular fa-circle-play"></i></button>
           </div>
           </Col>
           
@@ -497,7 +497,7 @@ const Banner = () => {
               <Row>
                 <Col className="gutter-row" span={8}>
                   <div className="col--item">
-                    <i class="fa-solid fa-laptop"></i>
+                    <i className="fa-solid fa-laptop"></i>
                     <p>Mạng bán tour</p>
                     <label>Ứng dụng công nghệ mới nhất</label>
                   </div>
@@ -505,7 +505,7 @@ const Banner = () => {
 
                 <Col className="gutter-row" span={8}>
                   <div className="col--item">
-                    <i class="fa-solid fa-box"></i>
+                    <i className="fa-solid fa-box"></i>
                     <p>Sản phẩm & Dịch vụ</p>
                     <label>Đa dạng - An toàn - Chất lượng</label>
                   </div>
@@ -513,7 +513,7 @@ const Banner = () => {
 
                 <Col className="gutter-row" span={8}>
                   <div className="col--item">
-                    <i class="fa-solid fa-dollar-sign"></i>
+                    <i className="fa-solid fa-dollar-sign"></i>
                     <p>Giá cả</p>
                     <label>Luôn có mức giá tốt nhất</label>
                   </div>
@@ -524,7 +524,7 @@ const Banner = () => {
               <Row className="row--2">
                 <Col className="gutter-row" span={8}>
                   <div className="col--item">
-                    <i class="fa-solid fa-plane-departure"></i>
+                    <i className="fa-solid fa-plane-departure"></i>
                     <p>Đặt tour</p>
                     <label>Đơn giản - Nhanh chóng - Dễ dàng</label>
                   </div>
@@ -532,7 +532,7 @@ const Banner = () => {
 
                 <Col className="gutter-row" span={8}>
                   <div className="col--item">
-                    <i class="fa-regular fa-credit-card"></i>
+                    <i className="fa-regular fa-credit-card"></i>
                     <p>Thanh toán</p>
                     <label>An toàn - Linh hoạt</label>
                   </div>
@@ -540,7 +540,7 @@ const Banner = () => {
 
                 <Col className="gutter-row" span={8}>
                   <div className="col--item">
-                    <i class="fa-solid fa-headset"></i>
+                    <i className="fa-solid fa-headset"></i>
                     <p>Hỗ trợ</p>
                     <label>Hotline & trực tuyến: (8:00 - 22:00)</label>
                   </div>
