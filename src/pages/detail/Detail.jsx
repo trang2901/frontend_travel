@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { TourHead, TourDetail } from "../../container";
-
 import "./detail.scss";
 import axios from "axios";
 
@@ -43,6 +42,8 @@ const Detail = () => {
       } finally {
         setLoaded(true);
       }
+      // window.scrollTo(0,0);
+
     };
 
     loadAsyncStuff();

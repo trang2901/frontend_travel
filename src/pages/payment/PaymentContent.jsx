@@ -13,6 +13,7 @@ import { Container, Paper } from "@mui/material";
 import { ConstructionOutlined } from "@mui/icons-material";
 import { formatPrice } from "../../utils/helpers";
 const PaymentContent = () => {
+
   const [onShowLinkInput, setOnShowLinkInput] = useState(false);
   const [activedStep, setActivedStep] = useState(0);
   const [customerData, setCustomerData] = useState({});
@@ -55,13 +56,14 @@ const PaymentContent = () => {
   };
 
   const tourData = JSON.parse(localStorage.getItem("bookTourInfor"));
+  
   const [loading, setLoading] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     const requestPosData = JSON.parse(
       window.localStorage.getItem("bookTourPostRequestData")
     );
-
+     
     // console.log('đây là data request', requestPosData);
     if (customerData.email !== "") {
       if (customerData.ho_ten !== "") {
@@ -70,6 +72,8 @@ const PaymentContent = () => {
         const email = customerData.email;
         const hoten = customerData.ho_ten;
         const sodienthoai = customerData.sdt;
+        const newDate = new Date();
+        const ngaydattour = newDate.getDate() + "/" + newDate.getMonth() + "/" + newDate.getFullYear() + " "+ "-"+" " + newDate.getHours()+":"+newDate.getMinutes()+":"+ newDate.getSeconds();
         const tongtien = formatPrice(
           parseFloat(tourData.gia.replaceAll(".", "")) +
             parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
@@ -79,6 +83,7 @@ const PaymentContent = () => {
           hoten,
           sodienthoai,
           tongtien,
+          ngaydattour
         };
 
         axios
@@ -87,9 +92,10 @@ const PaymentContent = () => {
             hoten,
             sodienthoai,
             tongtien,
+            ngaydattour
           })
           .then((res) => {
-            alert("Email Sent Successfully");
+            alert("Email đã được gửi");
             setLoading(false);
             console.log(res);
             // window.location.reload();
@@ -131,7 +137,7 @@ const PaymentContent = () => {
       .then(({ data }) => patchDuKhachTour(data))
       .catch((err) => console.log(err));
   };
-
+  console.log('đây là data Tour:', tourData);
   //User data
   const userData = {};
   //accompany data
@@ -140,56 +146,47 @@ const PaymentContent = () => {
   )?.number;
 
   // gửi mail
-  const handleRequest = async (e) => {
-    if (customerData.email !== "") {
-      if (customerData.ho_ten !== "") {
-        e.preventDefault();
-        setLoading(true);
-        // console.log({email, message, name, subject, company})
-        const email = customerData.email;
-        const hoten = customerData.ho_ten;
-        const sodienthoai = customerData.sdt;
-        const tongtien = formatPrice(
-          parseFloat(tourData.gia.replaceAll(".", "")) +
-            parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
-        );
-        // console.log("lại là email", email);
-        // console.log('so dientoahi',customerData.sdt);
-        // console.log('ho ten:', customerData.ho_ten);
-        // console.log('tổng tiền: ', formatPrice(parseFloat(tourData.gia.replaceAll('.', '')) + parseFloat(tourData.gia.replaceAll('.', '')) * 0.1))
-        const body = {
-          email,
-          hoten,
-          sodienthoai,
-          tongtien,
-        };
-
-        axios
-          .post("https://tourapi-dev-n.herokuapp.com/mail", body)
-          .then((res) => {
-            alert("Email Sent Successfully");
-            setLoading(false);
-            console.log(res);
-            window.location.reload();
-          })
-          .catch((err) => {
-            console.log(err);
-            setLoading(false);
-          });
-      } else {
-        alert("Compose Email");
-      }
-    } else {
-      alert("Please fill all required filled");
-    }
-  };
-
-  // console.log("email nè:", customerData.email);
-  // console.log("lại là email", customerData.email);
+  // const handleRequest = async (e) => {
+  //   if (customerData.email !== "") {
+  //     if (customerData.ho_ten !== "") {
+  //       e.preventDefault();
+  //       setLoading(true);
+  //       const email = customerData.email;
+  //       const hoten = customerData.ho_ten;
+  //       const sodienthoai = customerData.sdt;
+  //       const tongtien = formatPrice(
+  //         parseFloat(tourData.gia.replaceAll(".", "")) +
+  //           parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
+  //       );
+  //       console.log("lại là email", email);
   //       console.log('so dientoahi',customerData.sdt);
   //       console.log('ho ten:', customerData.ho_ten);
   //       console.log('tổng tiền: ', formatPrice(parseFloat(tourData.gia.replaceAll('.', '')) + parseFloat(tourData.gia.replaceAll('.', '')) * 0.1))
-  //return
+  //       const body = {
+  //         email,
+  //         hoten,
+  //         sodienthoai,
+  //         tongtien,
+  //       };
+  //       axios
+  //         .post("https://tourapi-dev-n.herokuapp.com/mail", body)
+  //         .then((res) => {
+  //           alert("Email Sent Successfully");
+  //           setLoading(false);
+  //           console.log(res);
+  //           window.location.reload();
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //           setLoading(false);
+  //         });
+  //     } else {
+  //       alert("Compose Email");
+  //     }
+  //   } else {
+  //     alert("Please fill all required filled");
+  //   }
+  // };
   return (
     <>
       <div className="payment_h">

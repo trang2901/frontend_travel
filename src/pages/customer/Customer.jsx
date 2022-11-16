@@ -15,6 +15,7 @@ const Customer = () => {
       ({ data }) => setCustomerJoinedTour(data.tour_tg)
     );
   }, []);
+  
   const listItem = [
     { id: "/customer/account", label: "Thông tin tài khoản" },
     { id: "/customer/bookedTour", label: "Tour đã đặt" },
