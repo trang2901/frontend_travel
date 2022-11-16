@@ -7,7 +7,7 @@ import CustomerRouterConfig from "./CustomerRouterConfig";
 import "./customer.scss";
 const Customer = () => {
   const [customerJoinedTour, setCustomerJoinedTour] = useState([]);
-  console.log(customerJoinedTour);
+  // console.log(customerJoinedTour);
   const customerID = useContext(LoginContext);
 
   useEffect(() => {

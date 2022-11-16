@@ -7,7 +7,7 @@ import { Divider, Input, Col, Row } from "antd";
 import "./acount.scss";
 const Account = () => {
   const [customerData, setCustomerData] = useState({});
-  console.log(customerData);
+  // console.log(customerData);
   const customerID = useContext(LoginContext);
 
   useEffect(() => {
