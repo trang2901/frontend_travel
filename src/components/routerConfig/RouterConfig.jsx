@@ -1,7 +1,9 @@
 import React from "react";
 
 import { Routes, Route } from "react-router-dom";
-import { Home, Detail, Login, SendMail, PaymentContent, Customer, Banner,List,Aboutus, Blog, Loginn, Signup,Payment1, Ordersuccessful, BookedTour, Bill,TourMB, Library1, Library2, Library3, Library4, Library5} from "../../pages";
+import { Process } from "../../container";
+import { Home, Detail, Login, SendMail, PaymentContent, Customer, Banner,List,Aboutus, Blog, Loginn, Signup,Payment1, Ordersuccessful, BookedTour, Bill,TourMB, Library1, Library2, Library3, Library4, Library5, TourMT, TourMTNB, 
+  TourMDNB, ProcessTour} from "../../pages";
 
 const RouterConfig = () => {
   return (
@@ -22,12 +24,16 @@ const RouterConfig = () => {
         <Route path="ordersuccessful" element={<Ordersuccessful />} />
         <Route path="bill" element={<Bill />} />
         <Route path="/tourMB" element={<TourMB />} />
+        <Route path="/tourMT" element={<TourMT />} />
+        <Route path="/tourMTNB" element={<TourMTNB />} />
+        <Route path="/tourMDNB" element={<TourMDNB />} />
         <Route path="/library1" element={<Library1 />} />
         <Route path="/library2" element={<Library2 />} />
         <Route path="/library3" element={<Library3 />} />
         <Route path="/library4" element={<Library4 />} />
         <Route path="/library5" element={<Library5 />} />
         <Route path="/mail" element={<SendMail />} />
+        <Route path="/process" element={<ProcessTour />} />
       </Routes>
     </>
   );

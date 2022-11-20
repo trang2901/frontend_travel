@@ -94,7 +94,7 @@ const Account = () => {
                 size="large"
                 width="20px"
                 maxLength="200px"
-                
+                style={{background: 'none', borderTop: 'none', borderLeft: 'none', borderRight: 'none'}}
               />
             </Col>
           </Row>
@@ -123,7 +123,7 @@ const Account = () => {
                 size="large"
                 width="20px"
                 maxLength="200px"
-                
+                style={{background: 'none', borderTop: 'none', borderLeft: 'none', borderRight: 'none'}}
               />
             </Col>
           </Row>
@@ -153,6 +153,7 @@ const Account = () => {
                 size="large"
                 width="20px"
                 maxLength="200px"
+                style={{background: 'none', borderTop: 'none', borderLeft: 'none', borderRight: 'none'}}
               />
             </Col>
           </Row>
@@ -191,6 +192,7 @@ const Account = () => {
                 size="large"
                 width="20px"
                 maxLength="200px"
+                style={{background: 'none', borderTop: 'none', borderLeft: 'none', borderRight: 'none'}}
               />
             </Col>
           </Row>

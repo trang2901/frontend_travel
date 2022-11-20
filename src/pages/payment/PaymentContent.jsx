@@ -33,11 +33,13 @@ const PaymentContent = () => {
         arrayTemp.push({
           ho_ten: customerData.ho_ten,
           sdt: customerData.sdt,
+          tuoi: customerData.tuoi
         });
       else
         arrayTemp.push({
           ho_ten: "",
           sdt: "",
+          tuoi: "",
         });
     });
     setAccompanyData(arrayTemp);
@@ -60,6 +62,7 @@ const PaymentContent = () => {
   const [loading, setLoading] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     const requestPosData = JSON.parse(
       window.localStorage.getItem("bookTourPostRequestData")
     );

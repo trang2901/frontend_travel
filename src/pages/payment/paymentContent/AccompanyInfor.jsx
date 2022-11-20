@@ -25,6 +25,12 @@ const AccompanyInfor = ({
     tempArray[index].sdt = e.target.value;
     setAccompanyData(tempArray);
   };
+  const handleChangeAge = (e) => {
+    const index = e.target.dataset.index;
+    const tempArray = [...accompanyData];
+    tempArray[index].tuoi = e.target.value;
+    setAccompanyData(tempArray);
+  };
 
   const renderFormAccompany = () => {
     return Array.from({ length: numberGuest }, (item, index) => (
@@ -40,7 +46,9 @@ const AccompanyInfor = ({
           sx={{ maxWidth: "200px" }}
           onChange={handleChangeName}
           inputProps={{ "data-index": index }}
+          required
         />
+        
         {/* <p style={{color: 'red', fontStyle: 'italic',fontSize:'14px' }}>{errors.hovaten && touched.hovaten && errors.hovaten}</p> */}
         <TextField
           type="number"
@@ -51,7 +59,20 @@ const AccompanyInfor = ({
           onChange={handleChangePhone}
           inputProps={{ "data-index": index }}
           style= {{borderRadius: 0}}
+          required
         />
+        <TextField
+          type="number"
+          // name="sdt"
+          label="Tuổi"
+          sx={{ maxWidth: "200px" }}
+          value={accompanyData[index]?.tuoi || ""}
+          onChange={handleChangeAge}
+          inputProps={{ "data-index": index }}
+          style= {{borderRadius: 0}}
+          required
+        />
+
         
       </div>
     ));

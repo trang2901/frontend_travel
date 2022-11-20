@@ -1,0 +1,22 @@
+.detail {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .btn--group {
+      margin-bottom: 2rem;
+    }
+  
+    .content {
+      width: 100%;
+      .title {
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #08183c;
+        font-size: 23px;
+        text-align: center;
+      }
+    }
+  }
+  

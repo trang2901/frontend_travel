@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { TourHead, TourDetail, RegionList } from "../../container";
+import { Context} from '../home/Context';
 import CardList from '../../container/cardList/CardList'
+import { Banner } from "../../components";
+import CircularProgress from "@mui/material/CircularProgress";
+import Cancel from "@mui/icons-material/Cancel";
 import axios from "axios";
 import { Divider } from "antd";
 import Search from '../../components/search/Search'
-
-const TourMB = () => {
+const TourMN = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
   const [fetching, setFetching] = useState(true);
   const [tourMB, setTourMB] = useState([]);
   
+
   useEffect(() => {
     setFetching(true);
     fetchToursData();
@@ -21,10 +27,11 @@ const TourMB = () => {
       .then(({ data }) => {
         if (tag) {
           const filteredTours = data.filter((tour) => tour.tags.includes(tag));
+          
           setDataTours(filteredTours);
           setFetching(false);
         } else {
-          const ATourMB = data.filter((tour)=>tour.matour.includes('TMB'));
+          const ATourMB = data.filter((tour)=>tour.matour.includes('TMT'));
           setDataTours(ATourMB);
           setFetching(false);
         }        
@@ -40,8 +47,8 @@ const TourMB = () => {
      <div className="tourList">
          
           
-         <Divider plain style={{borderColor:'#f97150'}}><p className="introduction">DU LỊCH MIỀN BẮC</p></Divider>
-         <p style={{color: '#08183c', fontSize: '18px', marginLeft: '2rem'}}>Miền Bắc Việt Nam gồm Tây Bắc, Đông Bắc và đồng bằng Sông Hồng, là cái nôi văn hóa lịch sử hàng ngàn năm của Việt Nam. Thiên nhiên và cảnh đẹp hùng vĩ, 4 mùa xuân hạ thu đông, miền Bắc luôn là điểm hẹn hấp dẫn cho ta trở lại nhiều lần.</p>
+         <Divider plain style={{borderColor:'#f97150'}}><p className="introduction">DU LỊCH MIỀN TRUNG</p></Divider>
+         <p style={{color: '#08183c', fontSize: '18px', marginLeft: '2rem'}}>Miền Trung Việt Nam gồm Bắc Trung Bộ, Nam Trung Bộ và Tây Nguyên, tổng 19 tỉnh thành. Miền Trung là giao điểm của sông núi hữu tình, thiên nhiên hùng vĩ, văn hóa đặc sắc, pha trộn ảnh hưởng của Hindu và Trung Hoa. Một điểm đến lý tưởng!</p>
       <p style={{color: '#08183c', fontSize: '18px', marginLeft: '2rem'}}>Chúng tôi tìm thấy <strong style={{color: 'red'}}>{DataTours.length}</strong> tours cho quý khách</p>
 
          </div>
@@ -60,4 +67,4 @@ const TourMB = () => {
   );
 };
 
-export default TourMB;
+export default TourMN;

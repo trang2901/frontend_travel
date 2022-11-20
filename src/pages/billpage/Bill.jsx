@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import img from "../../image/logocheck.png";
-
-import { Container, Paper } from "@mui/material";
-import { Button, Modal } from "antd";
+import { useNavigate } from "react-router-dom";
+import { Container, Paper, Button } from "@mui/material";
+import { Modal } from "antd";
 import { Col, Row, Divider } from "antd";
 import axios from "axios";
 import { LoginContext } from "../../LoginContext";
@@ -14,6 +14,7 @@ import html2canvas from "html2canvas";
 import { HeaderBill } from "../../components";
 import dateFormat from "dateformat";
 import "./bill.scss";
+import { ArrowBack } from "@mui/icons-material";
 const Bill = () => {
 
   const customerID = useContext(LoginContext);
@@ -60,14 +61,25 @@ console.log('data id: ', data);
       temp.getMonth() + 1
     }/${temp.getFullYear()} - ${temp.getHours()}:${temp.getMinutes()}:${temp.getSeconds()}`;
   };
+const navigate = useNavigate();
 console.log('customerJoinedTour id: ', Object.keys(customerJoinedTour).length);
   const renderTour = (tour) => (
     <>
+    <Button
+        variant="outlined"
+        onClick={() => navigate("/customer/bookedTour")}
+        style={{ position: "absolute", left: 0, color: '#08183c', borderColor: '#08183c', marginLeft: '1rem' }}
+      >
+        {<ArrowBack />}
+        Trở về
+  </Button>  
+
     <div className="hello">
      <p> XIN CHÀO <strong>{tour.id_khach_hang.ho_ten}</strong>! ĐÂY LÀ HÓA ĐƠN CỦA QUÝ KHÁCH</p>
      <p> CẢM ƠN QUÝ KHÁCH ĐÃ CHO CHÚNG TÔI CƠ HỘI ĐƯỢC PHỤC VỤ</p>
      <p>--------------------------------------------------------------------------------------</p>
     </div>
+    <div className="content--bill">
       <Container style={{ justifyContent: "center" }}>
         <PDFExport ref={PDFExportComponent} paperSize="A2">
           <Container>
@@ -267,6 +279,7 @@ console.log('customerJoinedTour id: ', Object.keys(customerJoinedTour).length);
           </a>
         </div>
       </Container>
+      </div>
     </>
   );
   return (

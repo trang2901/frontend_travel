@@ -11,3 +11,4 @@ export { default as RouterConfig } from "./routerConfig/RouterConfig";
 export { default as Chat} from "./chat/Chat";
 export { default as HeaderBill} from './headerBill/HeaderBill'
 export { default as Search} from './search/Search'
+export { default as Place} from './place/Place'

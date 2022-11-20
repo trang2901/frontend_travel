@@ -74,7 +74,7 @@ const Signup = ({ login }) => {
         diachi: values.diachi,
         hoten: values.hoten,
         sodienthoai: values.sodienthoai,
-        email: values.email
+        email: values.email,
       })
       // console.log('thành công!!!!!!!')
       .then(({ data }) => {
@@ -85,8 +85,8 @@ const Signup = ({ login }) => {
             ho_ten: data.hoten,
             dia_chi: data.diachi,
             sdt: data.sodienthoai,
-            email: data.email
-
+            email: data.email,
+            tuoi: values.tuoi
           })
          
           .then(({ data }) => {
@@ -112,14 +112,17 @@ const Signup = ({ login }) => {
       .min(10, 'Số điện thoại không hợp lệ')
       .max(10, 'Số điện thoại không hợp lệ')
       .required('Đây là trường bắt buộc'),
-    
+      tuoi: Yup.string()
+      .min(1, 'Tuổi')
+      .max(2, '')
+      .required('Đây là trường bắt buộc'),
   });
  
 
   const renderForm = () => (
     <>
       <Formik
-        initialValues={{ username: "", password: "", diachi: "", hoten: "", sodienthoai: "" }}
+        initialValues={{ username: "", password: "", diachi: "", hoten: "", sodienthoai: "", tuoi: "" }}
         // validate={(values) => {
         //   const errors = {};
         //   if (!values.email && !values.hoten) {
@@ -182,6 +185,18 @@ const Signup = ({ login }) => {
            <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.diachi && touched.diachi && errors.diachi}</p>
             <p>
             </p>
+            <TextField
+              type="text"
+              name="tuoi"
+              variant="standard"
+              label="Tuổi"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.tuoi}
+            />
+           <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.tuoi && touched.tuoi && errors.tuoi}</p>
+           
+           <p></p>
             <TextField
               type="text"
               name="sodienthoai"

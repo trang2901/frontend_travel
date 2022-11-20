@@ -78,8 +78,8 @@ const Header = () => {
                                         <div className="dropdown-menu" role="menu"><a className="dropdown-item" role="presentation" href="#">Logo design</a><a className="dropdown-item" role="presentation" href="#">Banner design</a><a className="dropdown-item" role="presentation" href="#">content writing</a></div>
                                     </li> */}
                   {/* TOUR TRONG NƯỚC Ở ĐÂY=======================================================================================*/}
-                  {/* <li className="nav-item dropdown"> */}
-                    {/* <a
+                  <li className="nav-item dropdown">
+                    <a
                       className="dropdown-toggle nav-link"
                       data-toggle="dropdown"
                       aria-expanded="false"
@@ -93,57 +93,57 @@ const Header = () => {
                       }}
                     >
                       DU LỊCH
-                    </a> */}
-                    <li className="nav-item" role="presentation">
-                    <a
-                      className="nav-link"
-                      href="/home"
-                      style={{
-                        color: "#f97150",
-                        fontWeight: "bold",
-                        fontFamily:
-                          "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
-                        letterSpacing: "0.5px",
-                      }}
-                    >
-                     DU LỊCH
                     </a>
-                  </li>
-                    {/* <div className="dropdown-menu" role="menu">
+                 
+                    <div className="dropdown-menu" role="menu">
                       <Row gutter={16}>
                         <Col className="gutter-row" span={6}>
                          
                           <a
                             className="dropdown-item"
                             role="presentation"
-                            href="#"
+                            href="/tourMB"
                           >
-                            Du lịch Hà Nội
+                            TOUR MIỀN BẮC
                           </a>
                           <a
                             className="dropdown-item"
                             role="presentation"
-                            href="#"
+                            href="/tourMT"
                           >
-                            Du lịch Hải Phòng
+                            TOUR MIỀN TRUNG
                           </a>
                           <a
                             className="dropdown-item"
                             role="presentation"
-                            href="#"
+                            href="/tourMTNB"
                           >
-                            Du lịch Hạ Long
+                            TOUR MIỀN TÂY NAM BỘ
                           </a>
-                       
+                          <a
+                            className="dropdown-item"
+                            role="presentation"
+                            href="/tourMDNB"
+                          >
+                            TOUR MIỀN ĐÔNG NAM BỘ
+                          </a>
+                          <a
+                            className="dropdown-item"
+                            role="presentation"
+                            href="/home"
+                            style={{color: '#08183c', textAlign: 'right', textDecoration: 'underline'}}
+                          >
+                            Xem tất cả
+                          </a>
                         </Col>
-                        <Col className="gutter-row" span={6}>
+                        {/* <Col className="gutter-row" span={6}>
                           
                           <a
                             className="dropdown-item"
                             role="presentation"
                             href="#"
                           >
-                            Du lịch Huế
+                            
                           </a>
                           <a
                             className="dropdown-item"
@@ -210,11 +210,13 @@ const Header = () => {
                             Du lịch TP.Hồ Chí Minh
                           </a>
                           
-                        </Col>
+                        </Col> */}
                       </Row>
-                    </div> */}
+                    </div>
                     
-                  {/* </li> */}
+                  </li>
+
+
                   {/* TOUR NƯỚC NGOÀI Ở ĐÂY =======================================================================================*/}
                   {/* <li className="nav-item dropdown">
                     <a

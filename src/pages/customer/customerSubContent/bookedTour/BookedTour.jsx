@@ -2,7 +2,7 @@ import React, { useState, useEffect, useLayoutEffect, useContext } from "react";
 import axios from "axios";
 import { LoginContext } from "../../../../LoginContext";
 import Grid from "@mui/material";
-import { Col, Row, Divider, Button, Tabs } from "antd";
+import { Col, Row, Divider, Button, Tabs, Modal } from "antd";
 import "./bookedTour.scss";
 import Chip from "@mui/material/Chip";
 import dateFormat from "dateformat";
@@ -15,7 +15,10 @@ const BookedTour = () => {
   const [customerJoinedTourYear, setCustomerJoinedTourYear] = useState([]);
   const arrayDate = [];
   const arrayMonth = [];
-  const arrayYear =[];
+  const arrayYear = [];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [idToDelete, setidToDelete] = useState(0);
+
   useEffect(() => {
     axios(`https://tourapi-dev-n.herokuapp.com/thanhtoan`).then(({ data }) => {
       const filterData = data.filter(
@@ -42,16 +45,30 @@ const BookedTour = () => {
     });
   }, []);
 
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   const deleteBill = (billid) => {
     axios
       .delete(`https://tourapi-dev-n.herokuapp.com/thanhtoan/${billid}`)
       .then((res) => {
-        alert("Xóa thành công");
+        // alert("Xóa thành công");
+        // showModal();
         window.location.reload();
       })
       .catch(() => {
         alert("xóa thất bại");
       });
+    // setIsModalOpen(false);
   };
 
   // useEffect(()=>{
@@ -112,7 +129,6 @@ const BookedTour = () => {
     const temp = new Date(date);
     return `${temp.getDate()}/${temp.getMonth() + 1}/${temp.getFullYear()}`;
   };
-  // console.log("bookedTour:", customerJoinedTour);
 
   const getDataItem = () => {
     const date = new Date();
@@ -136,6 +152,10 @@ const BookedTour = () => {
     console.log(data);
   };
 
+  const bookTourInfor = JSON.parse(
+    window.localStorage.getItem("bookTourInfor")
+  );
+  console.log("book:", customerJoinedTour);
   const renderTour = (tour) => (
     <div
       className="tour--item"
@@ -148,19 +168,20 @@ const BookedTour = () => {
       <div style={{ width: "150%" }}>
         <Row style={{ textAlign: "left" }}>
           {/* <p>{tour._id}</p>  */}
+          {/* <p>{bookTourInfor._id.number}</p> */}
           <Col span={4}>
             <p>TÊN TOUR:</p>
           </Col>
           <Col span={12}>{tour.id_tour.ten}</Col>
-          
+
           <Col
             span={8}
             style={{
               textAlign: "center",
               justifyContent: "center",
-              color: tour.trang_thai_duyet==='Chưa duyệt'?'red':'green',
+              color: tour.trang_thai_duyet === "Chưa duyệt" ? "red" : "green",
               fontWeight: "bold",
-              textTransform: 'uppercase'
+              textTransform: "uppercase",
             }}
           >
             {tour.trang_thai_duyet}
@@ -173,7 +194,7 @@ const BookedTour = () => {
           <Col span={4}>
             <p>NGÀY KHỞI HÀNH: </p>
           </Col>
-          <Col span={12}>{tour.id_tour.khoi_hanh}</Col>
+          <Col span={12}>{dateFormat(tour.id_tour.khoi_hanh, 'dd/mm/yyyy')}</Col>
         </Row>
         {/* <h3>Ngày khởi hành: {tour.id_tour.khoi_hanh}</h3> */}
         <p></p>
@@ -194,32 +215,68 @@ const BookedTour = () => {
 
         <Row style={{ textAlign: "left" }}>
           <Col span={4}>
-          <a
-            // disabled={tour.trang_thai_duyet === 'Chưa duyệt'? 'disabled':''}
-            href= {tour.trang_thai_duyet === 'Chưa duyệt'?'':"http://localhost:3000/bill"}
-            onClick={() => localStorage.setItem("id", tour._id)}
-           
-          >
-            {tour.trang_thai_duyet==='Chưa duyệt'?'': 'Xuất hóa đơn'}
-          </a>
+            <a
+              // disabled={tour.trang_thai_duyet === 'Chưa duyệt'? 'disabled':''}
+              href={
+                tour.trang_thai_duyet === "Chưa duyệt"
+                  ? ""
+                  : "http://localhost:3000/bill"
+              }
+              onClick={() => localStorage.setItem("id", tour._id)}
+            >
+              {tour.trang_thai_duyet === "Chưa duyệt" ? "" : "Xuất hóa đơn"}
+            </a>
           </Col>
-          <Col span={12}></Col>
-         <Col 
-         span={8}
-         style={{
-          textAlign: "center",
-          justifyContent: "center",
-          color: 'red',
-          fontWeight: "bold",
-          textTransform: 'uppercase'
-        }}
-         >
-          {tour.trang_thai_duyet === 'ĐÃ DUYỆT'?'': <button style={{fontWeight: 'bold'}} onClick={() => deleteBill(tour._id)}>HỦY ĐƠN</button>}
-         
-         </Col>
+          <Col span={12}>
+            <a 
+            href={
+              tour.trang_thai_duyet === "Chưa duyệt"
+                ? ""
+                : "/process"
+            }
+            onClick={() =>
+              localStorage.setItem("slugprocess", tour.id_tour.slug)
+            }
+            >
+              {tour.trang_thai_duyet === "Chưa duyệt" ? "" : "Xem tiến trình tour"}
+             
+            </a>
+          </Col>
+          <Col
+            span={8}
+            style={{
+              textAlign: "center",
+              justifyContent: "center",
+              color: "red",
+              fontWeight: "bold",
+              textTransform: "uppercase",
+            }}
+          >
+            {tour.trang_thai_duyet === "ĐÃ DUYỆT" ? (
+              ""
+            ) : (
+              <button
+                style={{ fontWeight: "bold" }}
+                onClick={() => {
+                  setidToDelete(tour._id);
+                  showModal();
+                }}
+              >
+                HỦY ĐƠN
+              </button>
+            )}
+          </Col>
 
-         
+          <Modal
+            title="Basic Modal"
+            open={isModalOpen}
+            onOk={() => deleteBill(idToDelete)}
+            onCancel={handleCancel}
+          >
+            <p>Bạn có chắc chắn muốn hủy đơn không?</p>
+          </Modal>
         </Row>
+
         <Divider dashed style={{ borderColor: "#f97150" }} />
         {/* <Row style={{textAlign: 'left'}}>  
           <Col span={6}>Thành Tiền: </Col>

@@ -11,6 +11,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
   const customerID = window.sessionStorage.getItem("customerID");
 
 // var gia = parseFloat(bookTourInfor.gia.replaceAll('.', ''));
+
   const bookTourInfor = JSON.parse(
     window.localStorage.getItem("bookTourInfor")
   );
@@ -82,12 +83,8 @@ const UserInfor = ({ customerData, setCustomerData }) => {
             {/* <h1>Tour: {bookTourInfor.name}</h1> */}
             
             <Row>
-            {/* <Col span={14}>
-              <label className="lb">Tour:   </label>
-            </Col> */}
-            {/* <Col span={10}> */}
+
             <p className="tentour">{bookTourInfor.name}</p>
-            {/* </Col> */}
           </Row>
           <Row>
             <Col span={14}>
