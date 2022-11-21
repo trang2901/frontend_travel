@@ -13,6 +13,7 @@ import imgDN from "../../image/danang.jpg"
 import imgVN from "../../image/xinchaoVN.jpg"
 import img1 from "../../image/banhtroininhbinh.jpg"
 import "./library.scss"
+import { ScrollButton } from "../../components";
 const Library1 = () => {
     const [playTime, setPlayTime] = useState(0);
 
@@ -89,6 +90,7 @@ const Library1 = () => {
         </div>
     </div>
           </Container>
+         <ScrollButton /> 
     </>
     
   );

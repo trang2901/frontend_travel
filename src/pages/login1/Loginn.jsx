@@ -5,13 +5,14 @@ import { TextField } from "@mui/material";
 import { Formik } from "formik";
 import axios from "axios";
 import { Divider } from "antd";
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import isEmpty from "validator/lib/isEmpty"
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import CircularProgress from '@mui/material/CircularProgress';
+import isEmpty from "validator/lib/isEmpty";
 // import {useHistory} from 'react-router-dom'
-import isEmail from "validator/lib/isEmail"
-import './loginn.scss'
-import * as Yup from 'yup';
+import isEmail from "validator/lib/isEmail";
+import "./loginn.scss";
+import * as Yup from "yup";
 const Login = ({ login }) => {
   const [loginOn, setLoginOn] = useState(login);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -44,8 +45,8 @@ const Login = ({ login }) => {
     <Alert severity="error">
       <AlertTitle>Lỗi</AlertTitle>
       Tài khoản hoặc mật khẩu không đúng — <strong>Hãy kiểm tra lại!</strong>
-      </Alert>
-  }
+    </Alert>;
+  };
   const createLoginRequest = (values) => {
     const getCustomerID = (accountID) => {
       axios
@@ -65,23 +66,23 @@ const Login = ({ login }) => {
         if (data == null) {
           setIsSubmit(false);
           // showAlertError();
-      //     alert(
-      //     <Alert severity="error">
-      //   <AlertTitle>Lỗi</AlertTitle>
-      //   Tài khoản hoặc mật khẩu không đúng — <strong>Hãy kiểm tra lại!</strong>
-      // </Alert>)
-          
+          //     alert(
+          //     <Alert severity="error">
+          //   <AlertTitle>Lỗi</AlertTitle>
+          //   Tài khoản hoặc mật khẩu không đúng — <strong>Hãy kiểm tra lại!</strong>
+          // </Alert>)
+
           alert("Tài khoản hoặc mật khẩu không đúng");
         } else {
           if (data.password === values.password) {
             getCustomerID(data["_id"]);
-          } else 
-      //     alert(
-      //     <Alert severity="error">
-      //   <AlertTitle>Lỗi</AlertTitle>
-      //   Mật khẩu không đúng — <strong>Hãy kiểm tra lại!</strong>
-      // </Alert>)
-          alert("Mật khẩu không đúng");
+          }
+          //     alert(
+          //     <Alert severity="error">
+          //   <AlertTitle>Lỗi</AlertTitle>
+          //   Mật khẩu không đúng — <strong>Hãy kiểm tra lại!</strong>
+          // </Alert>)
+          else alert("Mật khẩu không đúng");
         }
       })
       .catch((err) => console.log(err));
@@ -106,15 +107,13 @@ const Login = ({ login }) => {
       .catch((err) => console.log(err));
   };
   const LoginSchema = Yup.object().shape({
-    username : Yup.string()
-    .min(2, 'Tên người dùng không hợp lệ')
-    .required('Đây là trường bắt buộc')
-    
+    username: Yup.string()
+      .min(2, "Tên người dùng không hợp lệ")
+      .required("Đây là trường bắt buộc"),
   });
 
   const renderForm = () => (
     <>
-    
       <Formik
         initialValues={{ username: "", password: "" }}
         // validate={(values) => {
@@ -148,70 +147,122 @@ const Login = ({ login }) => {
           isSubmitting,
           /* and other goodies */
         }) => (
-          <form className="form" onSubmit={handleSubmit}>
-            <TextField
-              type="text"
-              name="username"
-              variant="standard"
-              label="Tên người dùng"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.username}
-            />
-            {/* <p className="text-red-400 text-xs italic">{validationMsg.email}</p> */}
-            <p style={{color: 'red', fontStyle: 'italic',fontSize:'14px' }}>{errors.username && touched.username && errors.username}</p>
-            <TextField
-              type="password"
-              name="password"
-              label="Mật khẩu"
-              variant="standard"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
-            {/* <p className="text-red-400 text-xs italic">{validationMsg.password}</p> */}
-            <p></p><p></p>
-            {/* {errors.password && touched.password && errors.password} */}
-            {/* <Button
-                type="submit"
-                disabled={isSubmitting}
-                sx={{
-                  color: "#f97150",
-                  background: "#08183c",
-                  "&:hover": {
-                    color: "#f97150",
-                    background: "#08183c",
-                  },
-                }}
-              >
-                ĐĂNG NHẬP
-              </Button> */}
-              {/* <p></p> */}
-            {isSubmit ? (
-              <LoadingButton
-                sx={{ padding: "16px 0" }}
-                loading
-                variant="outlined"
-              ></LoadingButton>
-            ) : (
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                sx={{
-                  color: "#f97150",
-                  background: "#08183c",
-                  "&:hover": {
-                    color: "#f97150",
-                    background: "#08183c",
-                  },
-                }}
-              >
-                {loginOn ? "Đăng nhập" : "Đăng ký"}
-              </Button>
+          <>
+            {/* <form className="form" onSubmit={handleSubmit}>
+              <TextField
+                type="text"
+                name="username"
+                variant="standard"
+                label="Tên người dùng"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.username}
+              />
               
-            )}
-            <p></p>
-          </form>
+              <p
+                style={{ color: "red", fontStyle: "italic", fontSize: "14px" }}
+              >
+                {errors.username && touched.username && errors.username}
+              </p>
+              <TextField
+                type="password"
+                name="password"
+                label="Mật khẩu"
+                variant="standard"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+              />
+        
+              <p></p>
+              <p></p>
+              
+              {isSubmit ? (
+                <LoadingButton
+                  sx={{ padding: "16px 0" }}
+                  loading
+                  variant="outlined"
+                ></LoadingButton>
+              ) : (
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  sx={{
+                    color: "#f97150",
+                    background: "#08183c",
+                    "&:hover": {
+                      color: "#f97150",
+                      background: "#08183c",
+                    },
+                  }}
+                >
+                  {loginOn ? "Đăng nhập" : "Đăng ký"}
+                </Button>
+              )}
+              <p></p>
+                </form> */}
+            <div className="wrapper1">
+              <form className="p-3 mt-3" onSubmit={handleSubmit}>
+                <div className="form-field d-flex align-items-center">
+                  <span className="far fa-user"></span>
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="Tên đăng nhập"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.username}
+                  />
+                </div>
+                <div className="form-field d-flex align-items-center">
+                  <span className="fas fa-key"></span>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Mật khẩu"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                  />
+                </div>
+                {isSubmit ? (
+                  <div style={{textAlign: 'center'}}>
+                   {/* <LoadingButton
+                   sx={{ padding: "16px 0" }}
+                  loading
+                  variant="outlined"
+                  // width='100%'
+                  ></LoadingButton> */}
+                  <CircularProgress size={25}/>
+
+                  </div>
+                ) : (
+                  <div style={{textAlign: 'center'}}>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    sx={{
+                      color: "#f97150",
+                      background: "#08183c",
+                      "&:hover": {
+                        color: "#f97150",
+                        background: "#08183c",
+                      },
+                      width: '100%'
+                      
+                    }}
+                    style={{borderRadius: '30px'}}
+                  >
+                    {loginOn ? "Đăng nhập" : "Đăng ký"}
+                  </Button>
+                  </div>
+                )}
+                <p style={{textAlign:'center', marginTop: '1rem'}}>Bạn chưa có tài khoản? <a href='/signup'><strong style={{color: 'blue'}}>Đăng ký</strong></a></p>
+              </form>
+            </div>
+          </>
         )}
       </Formik>
     </>
@@ -221,26 +272,19 @@ const Login = ({ login }) => {
     <div className="login">
       <div className="login--form">
         <div className="button--group">
-
-            <Button
-                onClick={() => setLoginOn(true)}
-                sx={buttonStyle("#f97150", "12px 0", "1rem 0")}
-                style= {{marginTop: '10px'}}
-                
-              >
-                Đăng nhập
-              </Button> 
-              
-          
+          <Button
+            onClick={() => setLoginOn(true)}
+            sx={buttonStyle("#f97150", "12px 0", "1rem 0")}
+            style={{ marginTop: "10px" }}
+          >
+            Đăng nhập
+          </Button>
         </div>
-        <Divider 
-             style={{borderColor: '#08183c', borderWidth: '2px'}}
-             
-             />
+        <Divider style={{ borderColor: "#08183c", borderWidth: "2px" }} />
         {renderForm()}
       </div>
 
-      <div className="authentication--section">
+      {/* <div className="authentication--section">
         <Button
           variant="outlined"
           sx={{
@@ -254,19 +298,21 @@ const Login = ({ login }) => {
         >
           Facebook
         </Button>
-        <Button variant="outlined"
-        sx={{
-          color: "#f97150",
-          
-          borderColor: "#08183c ",
-          "&:hover": {
-            color: "#08183c",
-            borderColor: "#f97150",
-          },
-        }}
+        <Button
+          variant="outlined"
+          sx={{
+            color: "#f97150",
+
+            borderColor: "#08183c ",
+            "&:hover": {
+              color: "#08183c",
+              borderColor: "#f97150",
+            },
+          }}
         >
-          Google</Button>
-      </div>
+          Google
+        </Button>
+      </div> */}
     </div>
   );
 };

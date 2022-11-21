@@ -5,6 +5,7 @@ import { Container } from "@mui/material";
 import logo from "../../image/DORIS_TOURS.png"
 import imageTr from "../../image/Image_Tr.jpg"
 import imageNg from "../../image/image_ng.jpg"
+import { ScrollButton } from "../../components";
 const Aboutus = () => {
   return (
     <>
@@ -108,6 +109,7 @@ const Aboutus = () => {
     </div>
   </div>
 </div>
+<ScrollButton />
 </Container>
     </>
     

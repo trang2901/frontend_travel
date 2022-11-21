@@ -6,6 +6,7 @@ import { Col, Row, Divider, Button, Tabs, Modal } from "antd";
 import "./bookedTour.scss";
 import Chip from "@mui/material/Chip";
 import dateFormat from "dateformat";
+import {ScrollButton} from "../../../../components";
 const BookedTour = () => {
   const [customerJoinedTour, setCustomerJoinedTour] = useState([]);
   const customerID = useContext(LoginContext);
@@ -323,6 +324,7 @@ const BookedTour = () => {
           </Tabs.TabPane>
         </Tabs>
       </div>
+      <ScrollButton />
     </>
   );
 };

@@ -5,9 +5,11 @@ import { TextField } from "@mui/material";
 import { Formik } from "formik";
 import axios from "axios";
 import { Divider } from "antd";
-import './signup.scss'
+import "./signup.scss";
 import Validator from "../../utils/Validator";
-import * as Yup from 'yup';
+import * as Yup from "yup";
+import { ScrollButton } from "../../components";
+import {CircularProgress} from "@mui/material";
 const Signup = ({ login }) => {
   const [loginOn, setLoginOn] = useState(login);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -67,8 +69,7 @@ const Signup = ({ login }) => {
 
   const createRegisterRequest = (values) => {
     axios
-      .post("https://tourapi-dev-n.herokuapp.com/taikhoan", 
-      {
+      .post("https://tourapi-dev-n.herokuapp.com/taikhoan", {
         username: values.username,
         password: values.password,
         diachi: values.diachi,
@@ -86,53 +87,59 @@ const Signup = ({ login }) => {
             dia_chi: data.diachi,
             sdt: data.sodienthoai,
             email: data.email,
-            tuoi: values.tuoi
+            tuoi: values.tuoi,
           })
-         
+
           .then(({ data }) => {
             window.sessionStorage.setItem("customerID", data._id);
             window.location.href = "/";
           });
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   const SignupSchema = Yup.object().shape({
     hoten: Yup.string()
-      .min(2, 'Họ tên quá ngắn')
-      .required('Đây là trường bắt buộc'),
+      .min(2, "Họ tên quá ngắn")
+      .required("Đây là trường bắt buộc"),
     diachi: Yup.string()
-      .min(2, 'Địa chỉ quá ngắn')
-      .required('Đây là trường bắt buộc'),
-    email: Yup.string().email('Invalid email').required('Required'),
-    username : Yup.string()
-    .min(2, 'Tên người dùng không hợp lệ')
-    .required('Đây là trường bắt buộc'),
+      .min(2, "Địa chỉ quá ngắn")
+      .required("Đây là trường bắt buộc"),
+    email: Yup.string().email("Invalid email").required("Required"),
+    username: Yup.string()
+      .min(2, "Tên người dùng không hợp lệ")
+      .required("Đây là trường bắt buộc"),
     sodienthoai: Yup.string()
-      .min(10, 'Số điện thoại không hợp lệ')
-      .max(10, 'Số điện thoại không hợp lệ')
-      .required('Đây là trường bắt buộc'),
-      tuoi: Yup.string()
-      .min(1, 'Tuổi')
-      .max(2, '')
-      .required('Đây là trường bắt buộc'),
+      .min(10, "Số điện thoại không hợp lệ")
+      .max(10, "Số điện thoại không hợp lệ")
+      .required("Đây là trường bắt buộc"),
+    tuoi: Yup.string()
+      .min(1, "Tuổi")
+      .max(2, "")
+      .required("Đây là trường bắt buộc"),
   });
- 
 
   const renderForm = () => (
     <>
       <Formik
-        initialValues={{ username: "", password: "", diachi: "", hoten: "", sodienthoai: "", tuoi: "" }}
+        initialValues={{
+          username: "",
+          password: "",
+          diachi: "",
+          hoten: "",
+          sodienthoai: "",
+          tuoi: "",
+        }}
         // validate={(values) => {
         //   const errors = {};
         //   if (!values.email && !values.hoten) {
         //     errors.email = " ";
         //     errors.hoten=" ";
-        //   } else 
+        //   } else
         //   if (
         //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email),
         //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.hoten)
-        //   ) 
+        //   )
         //   {
         //     errors.email = "Email không đúng định dạng";
         //     errors.hoten = "Họ tên không được rỗng"
@@ -144,11 +151,9 @@ const Signup = ({ login }) => {
           setTimeout(() => {
             setIsSubmit(true);
             if (loginOn) createLoginRequest(values);
-            else 
-            createRegisterRequest(values);
+            else createRegisterRequest(values);
           });
           setSubmitting(false);
-         
         }}
       >
         {({
@@ -161,90 +166,136 @@ const Signup = ({ login }) => {
           isSubmitting,
           /* and other goodies */
         }) => (
-          <form className="form" onSubmit={handleSubmit}>
-            <TextField
-              type="text"
-              name="hoten"
-              variant="standard"
-              label="Họ tên"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.hoten}
-            />
-           <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.hoten && touched.hoten && errors.hoten}</p>
-            <p></p>
-            <TextField
-              type="text"
-              name="diachi"
-              variant="standard"
-              label="Địa chỉ"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.diachi}
-            />
-           <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.diachi && touched.diachi && errors.diachi}</p>
-            <p>
-            </p>
-            <TextField
-              type="text"
-              name="tuoi"
-              variant="standard"
-              label="Tuổi"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.tuoi}
-            />
-           <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.tuoi && touched.tuoi && errors.tuoi}</p>
-           
-           <p></p>
-            <TextField
-              type="text"
-              name="sodienthoai"
-              variant="standard"
-              label="Số điện thoại"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.sodienthoai}
-            />
-             <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.sodienthoai && touched.sodienthoai && errors.sodienthoai}</p>
-            <p></p>
-            <TextField
-              type="text"
-              name="email"
-              variant="standard"
-              label="Email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
-             <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.email && touched.email && errors.email}</p>
-            <p></p>
-            <TextField
-              type="text"
-              name="username"
-              variant="standard"
-              label="Username"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.username}
-            />
-             <p style={{color: 'red', fontStyle: 'italic',fontSize:'12px' }}>{errors.username && touched.username && errors.username}</p>
-            <p></p>
-            {/* {errors.email && touched.email && errors.email} */}
-            <TextField
-              type="password"
-              name="password"
-              label="Mật khẩu"
-              variant="standard"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
-            {errors.password && touched.password && errors.password}
-            <p></p>
-            <p></p>
-            <p></p>
-            <Button
+          <>
+            {/* <form className="form" onSubmit={handleSubmit}> */}
+            {/* <TextField
+                type="text"
+                name="hoten"
+                variant="standard"
+                label="Họ tên"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.hoten}
+              /> */}
+            {/* <p
+                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
+              >
+                {errors.hoten && touched.hoten && errors.hoten}
+              </p> */}
+            {/* <p></p>
+              <TextField
+                type="text"
+                name="diachi"
+                variant="standard"
+                label="Địa chỉ"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.diachi}
+              /> */}
+            {/* <p
+                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
+              >
+                {errors.diachi && touched.diachi && errors.diachi}
+              </p>
+              <p></p>
+              <TextField
+                type="text"
+                name="tuoi"
+                variant="standard"
+                label="Tuổi"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.tuoi}
+              />
+              <p
+                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
+              >
+                {errors.tuoi && touched.tuoi && errors.tuoi}
+              </p> */}
+            {/* <p></p>
+              <TextField
+                type="text"
+                name="sodienthoai"
+                variant="standard"
+                label="Số điện thoại"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.sodienthoai}
+              />
+              <p
+                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
+              >
+                {errors.sodienthoai &&
+                  touched.sodienthoai &&
+                  errors.sodienthoai}
+              </p>
+              <p></p> */}
+            {/* <TextField
+                type="text"
+                name="email"
+                variant="standard"
+                label="Email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+              />
+              <p
+                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
+              >
+                {errors.email && touched.email && errors.email}
+              </p>
+              <p></p> */}
+            {/* <TextField
+                type="text"
+                name="username"
+                variant="standard"
+                label="Username"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.username}
+              />
+              <p
+                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
+              >
+                {errors.username && touched.username && errors.username}
+              </p>
+              <p></p>
+              <TextField
+                type="password"
+                name="password"
+                label="Mật khẩu"
+                variant="standard"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+              />
+              {errors.password && touched.password && errors.password}
+              <p></p>
+              <p></p>
+              <p></p> */}
+            {/* {isSubmit ? (
+                <LoadingButton
+                  sx={{ padding: "16px 0" }}
+                  loading
+                  variant="outlined"
+                ></LoadingButton>
+              ) : (
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  sx={{
+                    color: "#f97150",
+                    background: "#08183c",
+                    "&:hover": {
+                      color: "#f97150",
+                      background: "#08183c",
+                    },
+                  }}
+                >
+                  {loginOn ? "Đăng nhập" : "ĐĂNG KÝ"}
+                </Button>
+              )} */}
+            {/* <Button
                 type="submit"
                 disabled={isSubmitting}
                 sx={{
@@ -257,9 +308,246 @@ const Signup = ({ login }) => {
                 }}
               >
                 ĐĂNG KÝ
-              </Button>
-              <p></p> <p></p>
-          </form>
+              </Button> */}
+            {/* <p></p> <p></p>
+            </form> */}
+
+            <div
+              className="card shadow-2-strong card-registration"
+              style={{
+                background: "none",
+                marginTop: "-1.5rem",
+                border: "none",
+              }}
+            >
+              <div className="card-body p-4 p-md-5">
+                <form onSubmit={handleSubmit}>
+                  <div className="row">
+                    <div className="col-md-6 mb-4">
+                      <div className="form-outline">
+                        <label className="form-label" for="firstName">
+                          Họ và tên <sup style={{ color: "red" }}>*</sup>
+                        </label>
+                        <input
+                          type="text"
+                          id="hoten"
+                          className="form-control form-control-lg"
+                          name="hoten"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.hoten}
+                        />
+                        <p
+                          style={{
+                            color: "red",
+                            fontStyle: "italic",
+                            fontSize: "12px",
+                          }}
+                        >
+                          {errors.hoten && touched.hoten && errors.hoten}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="col-md-6 mb-4">
+                      <div className="form-outline">
+                        <label className="form-label" for="lastName">
+                          Tuổi <sup style={{ color: "red" }}>*</sup>
+                        </label>
+                        <input
+                          type="text"
+                          id="tuoi"
+                          className="form-control form-control-lg"
+                          name="tuoi"
+                
+                         onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.tuoi}
+                        />
+                         <p
+                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
+              >
+                {errors.tuoi && touched.tuoi && errors.tuoi}
+              </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-12 mb-4 d-flex align-items-center">
+                      <div className="form-outline datepicker w-100">
+                        <label for="birthdayDate" className="form-label">
+                          Địa chỉ <sup style={{ color: "red" }}>*</sup>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control form-control-lg"
+                          id="diachi"
+                          name="diachi"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.diachi}
+                        />
+                        <p
+                          style={{
+                            color: "red",
+                            fontStyle: "italic",
+                            fontSize: "12px",
+                          }}
+                        >
+                          {errors.diachi && touched.diachi && errors.diachi}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-6 mb-4 pb-2">
+                      <div className="form-outline">
+                        <label className="form-label" for="emailAddress">
+                          Email <sup style={{ color: "red" }}>*</sup>
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          className="form-control form-control-lg"
+                          name="email"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.email}
+                        />
+                        <p
+                          style={{
+                            color: "red",
+                            fontStyle: "italic",
+                            fontSize: "12px",
+                          }}
+                        >
+                          {errors.email && touched.email && errors.email}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-md-6 mb-4 pb-2">
+                      <div className="form-outline">
+                        <label className="form-label" for="phoneNumber">
+                          Số điện thoại <sup style={{ color: "red" }}>*</sup>
+                        </label>
+                        <input
+                          type="text"
+                          id="sodienthoai"
+                          className="form-control form-control-lg"
+                          name="sodienthoai"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.sodienthoai}
+                        />
+                        <p
+                          style={{
+                            color: "red",
+                            fontStyle: "italic",
+                            fontSize: "12px",
+                          }}
+                        >
+                          {errors.sodienthoai &&
+                            touched.sodienthoai &&
+                            errors.sodienthoai}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-6 mb-4 pb-2">
+                      <div className="form-outline">
+                        <label className="form-label" for="emailAddress">
+                          Tên đăng nhập <sup style={{ color: "red" }}>*</sup>
+                        </label>
+                        <input
+                          type="text"
+                          id="username"
+                          className="form-control form-control-lg"
+                          name="username"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.username}
+                        />
+                        <p
+                          style={{
+                            color: "red",
+                            fontStyle: "italic",
+                            fontSize: "12px",
+                          }}
+                        >
+                          {errors.username &&
+                            touched.username &&
+                            errors.username}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-md-6 mb-4 pb-2">
+                      <div className="form-outline">
+                        <label className="form-label" for="emailAddress">
+                          Mật khẩu <sup style={{ color: "red" }}>*</sup>
+                        </label>
+                        <input
+                          type="password"
+                          id="password"
+                          className="form-control form-control-lg"
+                          name="password"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.password}
+                        />
+                        <p
+                          style={{
+                            color: "red",
+                            fontStyle: "italic",
+                            fontSize: "12px",
+                          }}
+                        >
+                          {errors.password &&
+                            touched.password &&
+                            errors.password}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 pt-2">
+                    {isSubmit ? (
+                      <div style={{textAlign: 'center'}}>
+                      {/* <LoadingButton
+                      sx={{ padding: "16px 0" }}
+                     loading
+                     variant="outlined"
+                     // width='100%'
+                     ></LoadingButton> */}
+                     <CircularProgress size={25}/>
+   
+                     </div>
+                    ) : (
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        sx={{
+                          color: "#f97150",
+                          background: "#08183c",
+                          "&:hover": {
+                            color: "#f97150",
+                            background: "#08183c",
+                          },
+                          width: "100%",
+                        }}
+                      >
+                        {loginOn ? "Đăng nhập" : "ĐĂNG KÝ"}
+                      </Button>
+                    )}
+                    <p style={{textAlign:'center', marginTop: '1rem'}}>Bạn đã có tài khoản? <a href='/login'><strong style={{color: 'blue'}}>Đăng nhập</strong></a></p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </>
         )}
       </Formik>
     </>
@@ -269,22 +557,19 @@ const Signup = ({ login }) => {
     <div className="login">
       <div className="login--form">
         <div className="button--group">
-            <Button
-                onClick={() => setLoginOn(false)}
-                sx={buttonStyle("#f97150", "0 12px", "1rem 0")}
-                style= {{marginTop: '10px'}}
-              >
-                Đăng ký
-              </Button>
+          <Button
+            onClick={() => setLoginOn(false)}
+            sx={buttonStyle("#f97150", "0 12px", "1rem 0")}
+            style={{ marginTop: "10px" }}
+          >
+            Đăng ký
+          </Button>
         </div>
-        <Divider 
-             style={{borderColor: '#08183c', borderWidth: '2px'}}
-             
-             />
+        <Divider style={{ borderColor: "#08183c", borderWidth: "2px" }} />
         {renderForm()}
       </div>
 
-      <div className="authentication--section">
+      {/* <div className="authentication--section">
         <Button
           variant="outlined"
           sx={{
@@ -298,19 +583,22 @@ const Signup = ({ login }) => {
         >
           Facebook
         </Button>
-        <Button variant="outlined"
-        sx={{
-          color: "#f97150",
-          
-          borderColor: "#08183c ",
-          "&:hover": {
-            color: "#08183c",
-            borderColor: "#f97150",
-          },
-        }}
+        <Button
+          variant="outlined"
+          sx={{
+            color: "#f97150",
+
+            borderColor: "#08183c ",
+            "&:hover": {
+              color: "#08183c",
+              borderColor: "#f97150",
+            },
+          }}
         >
-          Google</Button>
-      </div>
+          Google
+        </Button>
+      </div> */}
+      <ScrollButton />
     </div>
   );
 };

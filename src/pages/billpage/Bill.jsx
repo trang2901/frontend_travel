@@ -15,6 +15,7 @@ import { HeaderBill } from "../../components";
 import dateFormat from "dateformat";
 import "./bill.scss";
 import { ArrowBack } from "@mui/icons-material";
+import {ScrollButton} from "../../components";
 const Bill = () => {
 
   const customerID = useContext(LoginContext);
@@ -280,6 +281,7 @@ console.log('customerJoinedTour id: ', Object.keys(customerJoinedTour).length);
         </div>
       </Container>
       </div>
+      <ScrollButton />
     </>
   );
   return (

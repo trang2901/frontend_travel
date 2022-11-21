@@ -55,36 +55,50 @@ import hinh16 from "../../image/hinh16.jpg"
 import hinh17 from "../../image/hinh17.jpg"
 import hinh18 from "../../image/hinh18.jpg"
 import Chip from '@mui/material/Chip';
+import dateFormat from "dateformat";
+import {ScrollButton} from "../../components";
+
 const Banner = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
   const [fetching, setFetching] = useState(true);
-
+  const arrayMonths =[];
   useEffect(() => {
     setFetching(true);
     fetchToursData();
     tag ? (document.title = tag) : (document.title = ".travelwoVi");
   }, [tag]);
+
   const fetchToursData = () => {
     axios("https://tourapi-dev-n.herokuapp.com/tour")
       .then(({ data }) => {
-        if (tag) {
-          const filteredTours = data.filter((tour) => tour.tags.includes(tag));
-          setDataTours(filteredTours);
-          setFetching(false);
-        } else {
-          setDataTours(data);
-          setFetching(false);
+        // if (tag) {
+        //   const filteredTours = data.filter((tour) => tour.tags.includes(tag));
+        //   setDataTours(filteredTours);
+        //   setFetching(false);
+        // } else {
+        //   setDataTours(data);
+        //   setFetching(false);
+        // }
+        const datecurrent = new Date();
+        for(var i=0; i<data.length; i++){
+          const newDate = new Date(dateFormat(data[i].khoi_hanh));
+          if (newDate.getMonth() == datecurrent.getMonth()) {
+            arrayMonths.push(data[i]);
+          }
         }
+        setDataTours(arrayMonths);
       })
       .catch((err) => {
         console.error("Fetching error: " + err);
       });
   };
+
   const [playTime, setPlayTime] = useState(0);
   const handleProgress = (state) => {
     setPlayTime(formatTime(state.playedSeconds));
   };
+
   const formatTime = (time) => {
     const date = new Date(time * 1000);
     const hour = date.getUTCHours();
@@ -196,65 +210,10 @@ const Banner = () => {
         <div className="tourmoi">
          
             {" "}
-            <p className="tourmoi" style={{textAlign: 'center'}}>TOUR MỚI</p>
+            <p className="tourmoi" style={{textAlign: 'center'}}>TOUR TRONG THÁNG</p>
           
         </div>
-
-        {/* <div className="row">
-          <div className="col-lg-10 mb-4">
-            <p className="font-italic text-muted">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
-            </p>
-            <p className="font-italic text-muted">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
-            </p>
-          </div>
-          <div className="col-lg-8">
-            <p className="font-italic text-muted">
-              Lorem ipsum dolor sit amet, consectetur{" "}
-              <strong className="font-weight-bold text-dark">
-                adipisicing elit, sed{" "}
-              </strong>
-              do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in{" "}
-              <strong className="font-weight-bold text-dark">
-                reprehenderit in voluptate{" "}
-              </strong>
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum.
-            </p>
-          </div>
-        </div> */}
-
         <CardList DataTours={DataTours} tag={tag} />
-        {/* điểm đến===================================================================================================================================== */}
-        {/* <Divider
-          dashed
-          orientation="left"
-          plain
-          style={{ borderColor: "#f97150" }}
-        >
-          {" "}
-          <p className="why">ĐIỂM ĐẾN YÊU THÍCH</p>
-        </Divider>
-        <div className="slider-diemden">
-          <CategoryList setTag={setTag} />
-        </div> */}
-        {/* thư viện========================================== */}
-        {/* <Divider
-          dashed
-          orientation="left"
-          plain
-          style={{ borderColor: "#f97150" }}
-        > */}
           {" "}
           <p className="why" style={{textAlign: 'center'}}>THƯ VIỆN</p>
         {/* </Divider> */}
@@ -551,6 +510,7 @@ const Banner = () => {
             </div>
           </Container>
         </div>
+          <ScrollButton />
       </Context.Provider>
     </>
   );

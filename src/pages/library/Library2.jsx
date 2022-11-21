@@ -12,6 +12,7 @@ import imgCNMT from "../../image/chonoimientay.png"
 import imgDN from "../../image/danang.jpg"
 import imgVN from "../../image/xinchaoVN.jpg"
 import './library.scss'
+import { ScrollButton } from "../../components";
 const Library2 = () => {
     const [playTime, setPlayTime] = useState(0);
 
@@ -88,6 +89,7 @@ const Library2 = () => {
         </div>
     </div>
     </Container>
+    <ScrollButton />
     </>
     
   );

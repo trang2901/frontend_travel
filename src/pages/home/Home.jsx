@@ -1,19 +1,47 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Context } from "./Context.js";
-import { Banner } from "../../components";
+import { Banner, ScrollButton } from "../../components";
 import { CategoryList, CardList } from "../../container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Cancel from "@mui/icons-material/Cancel";
 import Chat from "../../components/chat/Chat";
 import { Divider, Row, Col } from "antd";
-import './home.scss'
+import { Card } from "semantic-ui-react";
+import { Input } from "antd";
+import "./home.scss";
 import { Button } from "@mui/material";
-import Search from '../../components/search/Search'
+import Search from "../../components/search/Search";
+
 const Home = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
   const [fetching, setFetching] = useState(true);
+  const [APIData, setAPIData] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+
+  useEffect(() => {
+    axios.get(`https://tourapi-dev-n.herokuapp.com/tour`).then((response) => {
+      setAPIData(response.data);
+    });
+  }, []);
+
+  const searchItems = (searchValue) => {
+    setSearchInput(searchValue);
+    if (searchInput !== "") {
+      const filteredData = APIData.filter((item) => {
+        return Object.values(item)
+          .join("")
+          .toLowerCase()
+          .includes(searchInput.toLowerCase());
+      });
+      setFilteredResults(filteredData);
+    } else {
+      setFilteredResults(APIData);
+    }
+  };
+
   useEffect(() => {
     setFetching(true);
     fetchToursData();
@@ -39,26 +67,109 @@ const Home = () => {
 
   return (
     <>
-    {/* <Search /> */}
+      {/* <Search /> */}
       <Context.Provider value={[tag, setTag]}>
         {/* <Banner /> */}
-       
+
         <CategoryList setTag={setTag} />
-        <p></p><p></p>
-        
+        <p></p>
+        <p></p>
+        <div className="tourList">
+              <Divider plain style={{ borderColor: "#f97150" }}>
+                <p className="introduction">DANH SÁCH TOUR</p>
+              </Divider>
+        </div>
+
         {tag ? (
+          <>
           <div className="catergory--selected">
             <div onClick={() => setTag("")} className="selected--item">
-             
-              <p> <Cancel style={{fontSize: 'large',}}/>Lọc theo <strong style={{color: '#f97150'}}>{tag}</strong></p>
-              
+              <p
+                style={{
+                  fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                }}
+              >
+                {" "}
+                <Cancel style={{ fontSize: "large" }} />
+                Lọc theo{" "}
+                <strong
+                  style={{
+                    color: "#f97150",
+                    fontFamily:
+                      "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                  }}
+                >
+                  {tag}
+                </strong>
+              </p>
             </div>
           </div>
+          
+          {fetching ? (
+            <div
+              className="loading"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "1rem",
+              }}
+            >
+              <CircularProgress disableShrink />
+            </div>
+          ) : (
+            <>
+            
+              <CardList DataTours={DataTours} tag={tag} />
+             
+            </>        
+          )}
+</>
+
         ) : (
-          <></>
+          <>
+            <div className="search--module">
+              <div className="input--module">
+                <i className="fa-solid fa-magnifying-glass"></i>{" "}
+                <Input
+                  width={2000}
+                  placeholder="Tìm kiếm...."
+                  onChange={(e) => searchItems(e.target.value)}
+                />
+              </div>
+
+              <Card.Group itemsPerRow={3} style={{ marginTop: 20 }}>
+                {searchInput.length > 1 ? (
+                  <>
+                    <div className="result">
+                      <p>
+                        Có{" "}
+                        <strong style={{ color: "red" }}>
+                          {filteredResults.length}
+                        </strong>{" "}
+                        kết quả trùng khớp với từ khóa của bạn
+                      </p>
+                    </div>
+                    <CardList
+                      DataTours={filteredResults}
+                      tag={filteredResults.tags}
+                    />
+                    <Divider
+                      style={{ borderColor: "#08183c" }}
+                    ></Divider>
+                  </>
+                ) : (
+                  <>
+                  <CardList DataTours={DataTours} tag={tag} />
+                  </>
+                )}
+
+
+              </Card.Group>
+            </div>
+          </>
         )}
 
-        {fetching ? (
+        {/* {fetching ? (
           <div
             className="loading"
             style={{
@@ -71,18 +182,13 @@ const Home = () => {
           </div>
         ) : (
           <>
-          <div className="tourList">
-         
           
-          <Divider plain style={{borderColor:'#f97150'}}><p className="introduction">DANH SÁCH TOUR</p></Divider>
-          </div>
-          <p></p>
-          <Search />
-          <CardList DataTours={DataTours} tag={tag} />
-        
-          </>
-        )}
+            <CardList DataTours={DataTours} tag={tag} />
+           
+          </>        
+        )} */}
       </Context.Provider>
+      <ScrollButton />
     </>
   );
 };

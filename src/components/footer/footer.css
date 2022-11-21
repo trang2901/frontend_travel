@@ -8,3 +8,59 @@ i {
 h6 {
     color: #f97150 !important;
 }
+
+.f-socials-box {
+    background: linear-gradient( 38.63deg,#031771 27.35%,#08183c 71.81%);
+    border-radius: 10px 0 0 10px;
+    width: 60px;
+    padding: 10px 0;
+    position: fixed;
+    top: 50%;
+    right: 0;
+    z-index: 999;
+    -webkit-transform: translateY(-50%);
+    /* transform: translateY(-50%); */
+    list-style-type: none;
+    text-align: center;  
+}
+.chat-mess {
+    width: 60px;
+    height: 60px;
+    background-color: #0084FF;
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:60px;
+    position: fixed;
+    top:30%;
+    right: 5%;
+}
+.f-socials li {
+    height: 50px;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    width: 100% !important;
+}
+.f-socials li i{
+  font-size: 20px;
+}
+
+.f-social-small {
+    color: #fff!important;
+    text-align: center;
+    cursor: pointer;
+    height: 20px!important;
+}
+.f-socials-full {
+    align-items: center;
+    margin-left: -1rem;
+    width: 100% !important;
+    padding: 10px 0;
+    margin: 0 0 0 0;
+}

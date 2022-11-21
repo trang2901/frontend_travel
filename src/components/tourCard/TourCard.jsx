@@ -98,9 +98,9 @@ const setSocho = (socho) => {
             {tourData.khoi_hanh}
               </h2> */}
               
-              <h2>Mã tour: <strong style={{color: '#08183c'}}>{tourData.matour}</strong></h2>
-              <h2>Ngày khởi hành: <strong style={{color: '#08183c'}}>{date_format}</strong></h2>
-              <h2>Nơi khởi hành:  <strong style={{color: '#08183c'}}>{tourData.diemkhoihanh}</strong></h2>
+              <h2>Mã tour: <strong style={{color: '#08183c', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>{tourData.matour}</strong></h2>
+              <h2>Ngày khởi hành: <strong style={{color: '#08183c', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>{date_format}</strong></h2>
+              <h2>Nơi khởi hành:  <strong style={{color: '#08183c', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>{tourData.diemkhoihanh}</strong></h2>
               
               {/* <p style={{textAlign: 'center'}}>.................</p> */}
             <div className="locationBox">

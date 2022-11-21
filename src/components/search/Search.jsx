@@ -15,7 +15,7 @@ export default function Posts() {
                 setAPIData(response.data);
             })
     }, [])
-
+    
     const searchItems = (searchValue) => {
         setSearchInput(searchValue)
         if (searchInput !== '') {
@@ -37,16 +37,12 @@ export default function Posts() {
 
             <i className="fa-solid fa-magnifying-glass"></i> {" "}{" "}
             <Input width={2000} placeholder="Tìm kiếm...."onChange={(e) => searchItems(e.target.value)}/>
-            {/* <Input 
-                icon='search'
-                placeholder='Search...'
-                
-            /> */}</div>
+            </div>
 
             <Card.Group itemsPerRow={3} style={{ marginTop: 20 }}>
                 {searchInput.length > 1 ? (
                     <>
-                    {/* <Divider plain style={{borderColor:'#f97150'}}> <p className="introduction">TOUR TRONG NƯỚC</p></Divider> */}
+                   
                     <div className="result">
                     <p>Có <strong style={{color: 'red'}}>{filteredResults.length}</strong> kết quả trùng khớp với từ khóa của bạn</p></div>
                     <CardList DataTours={filteredResults} tag={filteredResults.tags} />
@@ -55,14 +51,12 @@ export default function Posts() {
                     
                 ) : (
                     <>
-                    {/* <Divider plain style={{borderColor:'#f97150'}}> <p className="introduction">TOUR TRONG NƯỚC</p></Divider> */}
-                    {/* <CardList DataTours={APIData} tag={APIData.tags}/> */}
-
                     </>
                     
                    
                 )}
             </Card.Group>
-        </div></>
+        </div>
+        </>
     )
 }

@@ -7,17 +7,20 @@
     color: #313131;
     text-transform: uppercase;
     text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   h2 {
     font-size: 14px;
     text-align: center;
     color: #7f7878;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   p {
     font-weight: 600;
     font-size: 14px;
     line-height: 10px;
     color:  #7f7878;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
  
 }
@@ -31,12 +34,14 @@
     font-size: 16px;
     line-height: 5px;
     color: #b61717;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
   span {
     font-size: 10px;
     line-height: 10px;
     color: #aeaeae;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 }
 
@@ -57,6 +62,7 @@
   overflow: hidden;
   // box-shadow: 0 3px 10px #193047;
   border-radius: 50px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .button:hover {
@@ -106,7 +112,9 @@
   // box-shadow: 0 3px 10px #193047;
   border-radius: 50px;
   margin-left: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 
 .button1:hover {
   background: #f97150;
@@ -140,6 +148,7 @@
   text-align: right;
   justify-content: right;
   font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .label_socho {
   color: red;
@@ -150,6 +159,7 @@
 .tourCard--Content .trangthai {
   color: green;
   text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .numberOfTour1 {
   position: absolute;

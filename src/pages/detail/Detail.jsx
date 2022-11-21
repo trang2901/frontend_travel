@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { TourHead, TourDetail } from "../../container";
 import "./detail.scss";
 import axios from "axios";
-
+import {ScrollButton} from "../../components";
 const Detail = () => {
   const [tourData, setTourData] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
@@ -58,6 +58,7 @@ const Detail = () => {
       <div className="recentViewed--container"></div>
       <div className="recommend--container"></div>
       <div></div>
+    <ScrollButton />
     </div> : <></>
   ); 
 };

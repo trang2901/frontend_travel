@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 // import "./detail.scss";
 import { Process } from "../../container";
 import './processtour.scss'
+import { ScrollButton } from "../../components";
 const ProcessTour = () => {
   const [proccessOn, setProccessOn] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -53,6 +54,7 @@ console.log('params:',slug);
       </div>
    
     </div>
+    <ScrollButton />
     </>
    
   );

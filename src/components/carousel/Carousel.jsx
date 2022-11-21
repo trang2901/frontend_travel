@@ -75,7 +75,7 @@ const Carousel = ({ listCategory }) => {
         {slider.map((items) => (
           <div className="slide">
             {items.map((dataTour) => (
-              <CategoryCard dataTour={dataTour} />
+              <CategoryCard dataTour={dataTour}/>
             ))}
           </div>
         ))}

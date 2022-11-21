@@ -12,6 +12,7 @@ import { Divider } from "antd";
 import { Container, Paper } from "@mui/material";
 import { ConstructionOutlined } from "@mui/icons-material";
 import { formatPrice } from "../../utils/helpers";
+import { ScrollButton } from "../../components";
 const PaymentContent = () => {
 
   const [onShowLinkInput, setOnShowLinkInput] = useState(false);
@@ -240,6 +241,7 @@ const PaymentContent = () => {
           </div>
         </Paper>
       </Container>
+      <ScrollButton />
     </>
   );
 };
