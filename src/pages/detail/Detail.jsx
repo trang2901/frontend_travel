@@ -18,7 +18,7 @@ const Detail = () => {
   // const fetchDetailTour =  () =>  {
   //   const slug = searchParams.get("slug");
    
-  //    axios(`https://tourapi-dev-n.herokuapp.com/tour/${slug}`)
+  //    axios(`http://localhost:3001/tour/${slug}`)
   //     .then(({ data }) => {
   //       document.title = data.ten;
   //       console.log(data);
@@ -32,8 +32,7 @@ const Detail = () => {
     const loadAsyncStuff = async () => {
       try {
         const slug = searchParams.get("slug");
-   
-        const response = await fetch(`https://tourapi-dev-n.herokuapp.com/tour/${slug}`);
+        const response = await fetch(`http://localhost:3001/tour/${slug}`);
         const json = await response.json();
         // console.log(json);
         setTourData(json);

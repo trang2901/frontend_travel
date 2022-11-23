@@ -19,7 +19,7 @@ const TourDetail = ({ tourData }) => {
   const renderIntroduction = (diaDiem, index) => (
     <div className={`introduction--item ${index % 3 === 0 ? "even" : "odd"}`}>
       <img
-        src={`https://tourapi-dev-n.herokuapp.com/${diaDiem.id_dia_diem.hinh}`}
+        src={`http://localhost:3001/${diaDiem.id_dia_diem.hinh}`}
       />
       <div className="place--infor">
      <h1>{diaDiem.id_dia_diem.ten}</h1>
@@ -34,7 +34,7 @@ const TourDetail = ({ tourData }) => {
     <>
     <div className="detail--item">
       {/* <img
-        src={`https://tourapi-dev-n.herokuapp.com/${diaDiem.id_dia_diem.hinh}`}
+        src={`http://localhost:3001/${diaDiem.id_dia_diem.hinh}`}
       /> */}
       <p>{diaDiem.id_dia_diem.ten}</p>
     </div>
@@ -177,7 +177,7 @@ const TourDetail = ({ tourData }) => {
                   aria-label="lab API tabs example"
                 >
                   <Tab
-                    sx={{ tabSize: "large", fontSize: "20px" }}
+                    sx={{ tabSize: "large", fontSize: "20px"}}
                     label="GIỚI THIỆU "
                     value="1"
                   />

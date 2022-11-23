@@ -122,3 +122,73 @@ p{
         font-size: 20px;
     }
 }
+.whyus {
+    height: 100%;
+    img {
+        width: 85%;
+        height: 85%;
+    }
+}
+
+
+.whyus--content {
+    // text-align: center;
+    .title--whyus {
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #f97150;
+        font-size: 25px;
+    }
+    .circle {
+        p {
+            width: 30px;
+    height: 30px;
+    text-align: center;
+    margin: auto;
+    background: #000;
+    color: #FFF;
+    border-radius: 50%;
+    padding: 3px;
+    margin-top: 11px;
+    }
+    p:hover {
+        background:#f97150;
+    }
+    }
+    .content--p {
+        color:#08183c;
+        font-weight: 400;
+        font-size: medium;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+}
+
+// .content--why--left::before {
+//     left: 50%;
+// }
+// .content--why::before {
+//     content: "";
+//     height: 1px;
+//     position: absolute;
+//     background: #000;
+//     width: 100%;
+//     left: 0;
+//     right: 0;
+//     bottom: 30%;
+//     z-index: -1;
+// }
+// .content--why {
+//     position: relative;
+//     flex: 1;
+// }
+// .content--why--left {
+//     position: relative;
+//     flex: 1;
+// }
+// .content--why--right {
+//     position: relative;
+//     flex: 1;
+// }
+// .content--why--right::before {
+//     left: -50%;
+// }

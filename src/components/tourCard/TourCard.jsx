@@ -78,7 +78,7 @@ const setSocho = (socho) => {
           </div>
           <CardMedia
             component="img"
-            src={`https://tourapi-dev-n.herokuapp.com/${tourData.hinh[0]}`}
+            src={`http://localhost:3001/${tourData.hinh[0]}`}
             sx={{
               width: "100%",
               height: 300,

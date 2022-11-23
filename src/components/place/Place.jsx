@@ -27,7 +27,7 @@ const Place = ({ data, status, proccessData, index }) => {
 
   //   useEffect(() => {
   //     axios(
-  //       `https://tourapi-dev-n.herokuapp.com/tour/${searchParams.get("slug")}`
+  //       `http://localhost:3001/tour/${searchParams.get("slug")}`
   //     ).then(({ data }) => setTourID(data["_id"]));
   //   }, []);
 
@@ -39,7 +39,7 @@ const Place = ({ data, status, proccessData, index }) => {
     if (statusState === "Chưa hoàn thành") {
       axios
         .put(
-          `https://tourapi-dev-n.herokuapp.com/lichtrinh/${proccessData[index]["_id"]}`,
+          `http://localhost:3001/lichtrinh/${proccessData[index]["_id"]}`,
           {
             trang_thai: "Đang đến",
           }
@@ -49,7 +49,7 @@ const Place = ({ data, status, proccessData, index }) => {
     if (statusState === "Đang đến") {
       axios
         .put(
-          `https://tourapi-dev-n.herokuapp.com/lichtrinh/${proccessData[index]["_id"]}`,
+          `http://localhost:3001/lichtrinh/${proccessData[index]["_id"]}`,
           {
             trang_thai: "Đã tham quan",
           }
@@ -78,7 +78,7 @@ const Place = ({ data, status, proccessData, index }) => {
                     <li>
                       <div className="message-avatar">
                         <img
-                          src={`https://tourapi-dev-n.herokuapp.com/${data.hinh}`}
+                          src={`http://localhost:3001/${data.hinh}`}
                         />
                       </div>
 

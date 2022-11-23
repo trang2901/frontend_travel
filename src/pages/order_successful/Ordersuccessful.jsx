@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import img from "../../image/logocheck.png";
 import "./ordersuccessful.scss";
 import { Container,Paper } from "@mui/material";
-import { Button, Modal } from "antd";
+import { Button, Modal, Alert } from "antd";
 import { Col, Row, Divider } from "antd";
 import axios from "axios";
 import { LoginContext } from "../../LoginContext";
@@ -21,7 +21,7 @@ const Ordersuccessful = () => {
 
 
   useEffect(() => {
-    axios(`https://tourapi-dev-n.herokuapp.com/thanhtoan/`).then(({ data }) => {
+    axios(`http://localhost:3001/thanhtoan/`).then(({ data }) => {
       const filterData = data.filter((bookedTour)=> bookedTour._id);
       setCustomerJoinedTour(filterData);
 
@@ -49,12 +49,13 @@ const Ordersuccessful = () => {
   return (
     <>
       <Container style={{ justifyContent: "center" }}>
+	  {/* <Alert message="Success Text" type="success" /> */}
         <div className="order--container">
           <img src={img} />
-          <p className="order">Đặt tour thành công</p>
-          <label>Cảm ơn bạn đã cho chúng tôi cơ hội được phục vụ !</label>
-          <p></p>
+          <p className="order">ĐẶT TOUR THÀNH CÔNG</p>
+          <label>Cảm ơn bạn đã cho chúng tôi cơ hội được phục vụ !</label><br/>
           <label>
+			Email xác nhận đơn đã được gửi đến địa chỉ email của bạn.<br />
             Chúng tôi sẽ kiểm tra và xác nhận đơn đặt hàng sớm nhất có thể!{" "}
           </label>
           <p>

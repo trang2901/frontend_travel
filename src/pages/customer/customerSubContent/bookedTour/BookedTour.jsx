@@ -6,7 +6,11 @@ import { Col, Row, Divider, Button, Tabs, Modal } from "antd";
 import "./bookedTour.scss";
 import Chip from "@mui/material/Chip";
 import dateFormat from "dateformat";
-import {ScrollButton} from "../../../../components";
+import { ScrollButton } from "../../../../components";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import { Tab } from "@mui/material";
 const BookedTour = () => {
   const [customerJoinedTour, setCustomerJoinedTour] = useState([]);
   const customerID = useContext(LoginContext);
@@ -17,11 +21,13 @@ const BookedTour = () => {
   const arrayDate = [];
   const arrayMonth = [];
   const arrayYear = [];
+  const arrayWait = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [idToDelete, setidToDelete] = useState(0);
+  const [custormerBillWait, setCustomerBillWait] = useState([]);
 
   useEffect(() => {
-    axios(`https://tourapi-dev-n.herokuapp.com/thanhtoan`).then(({ data }) => {
+    axios(`http://localhost:3001/thanhtoan`).then(({ data }) => {
       const filterData = data.filter(
         (bookedTour) => bookedTour.id_khach_hang["_id"] === customerID
       );
@@ -38,14 +44,17 @@ const BookedTour = () => {
         if (newDate.getFullYear() == date.getFullYear()) {
           arrayYear.push(filterData[i]);
         }
+        if (filterData[i].trang_thai_duyet === "Chưa duyệt") {
+          arrayWait.push(filterData[i]);
+        }
       }
       setCustomerJoinedTourYear(arrayYear);
       setCustomerJoinedTourMonth(arrayMonth);
       setCustomerJoinedTourDate(arrayDate);
       setCustomerJoinedTour(filterData);
+      setCustomerBillWait(arrayWait);
     });
   }, []);
-
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -53,14 +62,16 @@ const BookedTour = () => {
   const handleOk = () => {
     setIsModalOpen(false);
   };
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
+  const [value, setValue] = React.useState("1");
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   const deleteBill = (billid) => {
     axios
-      .delete(`https://tourapi-dev-n.herokuapp.com/thanhtoan/${billid}`)
+      .delete(`http://localhost:3001/thanhtoan/${billid}`)
       .then((res) => {
         // alert("Xóa thành công");
         // showModal();
@@ -71,7 +82,6 @@ const BookedTour = () => {
       });
     // setIsModalOpen(false);
   };
-
   // useEffect(()=>{
   //   const date = new Date();
   //   const array = [];
@@ -152,7 +162,6 @@ const BookedTour = () => {
   const getData = (data) => {
     console.log(data);
   };
-
   const bookTourInfor = JSON.parse(
     window.localStorage.getItem("bookTourInfor")
   );
@@ -160,21 +169,14 @@ const BookedTour = () => {
   const renderTour = (tour) => (
     <div
       className="tour--item"
-      style={{ display: "flex", gap: "2rem", marginBottom: "3rem" }}
+      style={{ display: "flex", gap: "2rem", marginBottom: "-1rem"}}
     >
-      {/* <img
-        src={`http://tour-api-dev.herokuapp.com${tour.hinh[0]}`}
-        style={{ width: "20%" }}
-      /> */}
-      <div style={{ width: "150%" }}>
+      <div style={{ width: "150%", marginTop: '1rem' }}>
         <Row style={{ textAlign: "left" }}>
-          {/* <p>{tour._id}</p>  */}
-          {/* <p>{bookTourInfor._id.number}</p> */}
           <Col span={4}>
             <p>TÊN TOUR:</p>
           </Col>
-          <Col span={12}>{tour.id_tour.ten}</Col>
-
+          <Col span={12}><strong>{tour.id_tour.ten}</strong></Col>
           <Col
             span={8}
             style={{
@@ -188,25 +190,32 @@ const BookedTour = () => {
             {tour.trang_thai_duyet}
           </Col>
         </Row>
-
-        {/* <h3>Tên tour: {tour.id_tour.ten}</h3> */}
-        <p></p>
+   
         <Row style={{ textAlign: "left" }}>
           <Col span={4}>
             <p>NGÀY KHỞI HÀNH: </p>
           </Col>
-          <Col span={12}>{dateFormat(tour.id_tour.khoi_hanh, 'dd/mm/yyyy')}</Col>
+          <Col span={12}>
+            {dateFormat(tour.id_tour.khoi_hanh, "dd/mm/yyyy")}
+          </Col>
         </Row>
-        {/* <h3>Ngày khởi hành: {tour.id_tour.khoi_hanh}</h3> */}
-        <p></p>
-        {/* <h3>Ngày đặt tour: {getDate(tour.createdAt)}</h3> */}
+
+        <Row style={{ textAlign: "left" }}>
+          <Col span={4}>
+            <p>SỐ LƯỢNG CHỔ: </p>
+          </Col>
+          <Col span={12}>
+            {tour.soluongcho}
+          </Col>
+        </Row>
+
         <Row style={{ textAlign: "left" }}>
           <Col span={4}>
             <p>NGÀY ĐẶT TOUR: </p>
           </Col>
           <Col span={12}>{getDate(tour.createdAt)}</Col>
         </Row>
-        <p></p>
+    
         <Row style={{ textAlign: "left" }}>
           <Col span={4}>
             <p>THÀNH TIỀN: </p>
@@ -217,7 +226,6 @@ const BookedTour = () => {
         <Row style={{ textAlign: "left" }}>
           <Col span={4}>
             <a
-              // disabled={tour.trang_thai_duyet === 'Chưa duyệt'? 'disabled':''}
               href={
                 tour.trang_thai_duyet === "Chưa duyệt"
                   ? ""
@@ -229,18 +237,15 @@ const BookedTour = () => {
             </a>
           </Col>
           <Col span={12}>
-            <a 
-            href={
-              tour.trang_thai_duyet === "Chưa duyệt"
-                ? ""
-                : "/process"
-            }
-            onClick={() =>
-              localStorage.setItem("slugprocess", tour.id_tour.slug)
-            }
+            <a
+              href={tour.trang_thai_duyet === "Chưa duyệt" ? "" : "/process"}
+              onClick={() =>
+                localStorage.setItem("slugprocess", tour.id_tour.slug)
+              }
             >
-              {tour.trang_thai_duyet === "Chưa duyệt" ? "" : "Xem tiến trình tour"}
-             
+              {tour.trang_thai_duyet === "Chưa duyệt"
+                ? ""
+                : "Xem tiến trình tour"}
             </a>
           </Col>
           <Col
@@ -257,7 +262,14 @@ const BookedTour = () => {
               ""
             ) : (
               <button
-                style={{ fontWeight: "bold" }}
+                style={{
+                  fontWeight: "bold",
+                  background: "red",
+                  color: "white",
+                  width: "100px",
+                  height: "35px",
+                  borderRadius: "10px",
+                }}
                 onClick={() => {
                   setidToDelete(tour._id);
                   showModal();
@@ -267,7 +279,6 @@ const BookedTour = () => {
               </button>
             )}
           </Col>
-
           <Modal
             title="Basic Modal"
             open={isModalOpen}
@@ -278,12 +289,7 @@ const BookedTour = () => {
           </Modal>
         </Row>
 
-        <Divider dashed style={{ borderColor: "#f97150" }} />
-        {/* <Row style={{textAlign: 'left'}}>  
-          <Col span={6}>Thành Tiền: </Col>
-          <Col span={6}>{tour.thanh_tien}đ</Col> */}
-        {/* <Col span={6}> <h3 style={{ width: "50%" }}>{tour.trang_thai_duyet}</h3></Col> */}
-        {/* </Row> */}
+        <Divider dashed style={{ borderColor: "#08183c" }} />
       </div>
     </div>
   );
@@ -295,7 +301,8 @@ const BookedTour = () => {
         </Divider>{" "}
       </div>
       <div className="customer--tour__Container">
-        <Tabs defaultActiveKey="1">
+        {/* <Tabs defaultActiveKey="1" >
+          
           <Tabs.TabPane tab="Tất cả các đơn đã đặt" key="1">
             {customerJoinedTour
               ?.slice(0)
@@ -322,7 +329,75 @@ const BookedTour = () => {
               .reverse()
               .map((tour) => renderTour(tour))}
           </Tabs.TabPane>
-        </Tabs>
+        </Tabs> */}
+        <TabContext value={value}>
+          <TabList
+            onChange={handleChange}
+            aria-label="lab API tabs example"
+            style={{ background: "white", marginTop: "-2.5rem" }}
+          >
+            <Tab
+              sx={{ tabSize: "large", fontSize: "17px", color: "#08183c" }}
+              label="TẤT CẢ"
+              value="1"
+            />
+            <Tab
+              sx={{ tabSize: "large", fontSize: "17px", color: "#08183c" }}
+              label="CHỜ DUYỆT"
+              value="2"
+            />
+            <Tab
+              sx={{ tabSize: "large", fontSize: "17px", color: "#08183c" }}
+              label="ĐƠN ĐẶT TRONG NGÀY"
+              value="3"
+            />
+            <Tab
+              sx={{ tabSize: "large", fontSize: "17px", color: "#08183c" }}
+              label="ĐƠN ĐẶT TRONG THÁNG"
+              value="4"
+            />
+            <Tab
+              sx={{ tabSize: "large", fontSize: "17px", color: "#08183c" }}
+              label="ĐƠN ĐẶT TRONG NĂM"
+              value="5"
+            />
+          </TabList>
+          <p></p>
+          <TabPanel value="1" style={{ background: "white" }}>
+            {customerJoinedTour
+              ?.slice(0)
+              .reverse()
+              .map((tour) => renderTour(tour))}
+          </TabPanel>
+
+          <TabPanel value="2" style={{ background: "white" }}>
+          {custormerBillWait
+              ?.slice(0)
+              .reverse()
+              .map((tour) => renderTour(tour))}
+          </TabPanel>
+
+          <TabPanel value="3" style={{ background: "white" }}>
+            {customerJoinedTourDate
+              ?.slice(0)
+              .reverse()
+              .map((tour) => renderTour(tour))}
+          </TabPanel>
+
+          <TabPanel value="4" style={{ background: "white" }}>
+            {customerJoinedTourMonth
+              ?.slice(0)
+              .reverse()
+              .map((tour) => renderTour(tour))}
+          </TabPanel>
+
+          <TabPanel value="5" style={{ background: "white" }}>
+            {customerJoinedTourYear
+              ?.slice(0)
+              .reverse()
+              .map((tour) => renderTour(tour))}
+          </TabPanel>
+        </TabContext>
       </div>
       <ScrollButton />
     </>

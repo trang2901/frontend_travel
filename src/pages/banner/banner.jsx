@@ -56,8 +56,11 @@ import hinh17 from "../../image/hinh17.jpg"
 import hinh18 from "../../image/hinh18.jpg"
 import Chip from '@mui/material/Chip';
 import dateFormat from "dateformat";
+import travel from "../../image/travel_nbg.png";
 import {ScrollButton} from "../../components";
-
+import chondiemden from "../../image/chon-diem-den.png"
+import chondichvu from "../../image/chon-combo.png"
+import lienhe from "../../image/lien-he-sen-a.png"
 const Banner = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
@@ -70,7 +73,7 @@ const Banner = () => {
   }, [tag]);
 
   const fetchToursData = () => {
-    axios("https://tourapi-dev-n.herokuapp.com/tour")
+    axios("http://localhost:3001/tour")
       .then(({ data }) => {
         // if (tag) {
         //   const filteredTours = data.filter((tour) => tour.tags.includes(tag));
@@ -445,6 +448,65 @@ const Banner = () => {
        </div>
        </div>
        </div>
+       <p></p>
+       
+       {/* Chuyến đi dễ dàng cùng Dế mèn tour ========================================================*/}
+       <div style={{textAlign: 'center', marginBottom: '3rem', marginTop: '1.5rem'}}>
+      <Row style={{height: '20rem'}}>
+        <Col span={6}>
+          <div className="whyus">
+            <img src={travel}/>
+          </div>
+        </Col>
+        <Col span={18}>
+          <div className="whyus--content">
+
+          <div style={{textAlign: 'center'}}>
+            <p className="title--whyus">CHUYẾN ĐI DỄ DÀNG CÙNG DẾ MÈN TOUR</p>
+            </div>
+
+          <Row>
+            <Col span={8}>
+              <div className="content--why--left">
+                <img src={chondiemden}/>
+                <div className="circle">
+                <p>1</p>
+                </div>
+                <div className="content--p">
+                <p>Chọn địa điểm</p>
+                </div>
+              </div>
+            </Col>
+            <Col span={8}>
+            <div className="content--why">
+                <img src={chondichvu}/>
+                <div className="circle">
+                <Divider plain><p>2</p></Divider>
+                </div>
+
+                <div  className="content--p">
+                <p>Lựa chọn dịch vụ trên Dế Mèn Tour</p>
+                </div>
+              </div>
+
+            </Col>
+            <Col span={8}>
+            <div className="content--why--right">
+                <img src={lienhe}/>
+
+                <div className="circle">
+                <p>3</p>
+                </div>
+                <div  className="content--p">
+                <p>Sẵn sàng cho chuyến đi đáng nhớ</p>
+                </div>
+              </div>
+            </Col>
+          </Row>
+          </div>
+        </Col>
+      </Row>
+      </div>
         {/* why chọn===================================================================================== */}
         <div>
          

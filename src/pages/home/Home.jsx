@@ -22,7 +22,7 @@ const Home = () => {
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
-    axios.get(`https://tourapi-dev-n.herokuapp.com/tour`).then((response) => {
+    axios.get(`http://localhost:3001/tour`).then((response) => {
       setAPIData(response.data);
     });
   }, []);
@@ -49,7 +49,7 @@ const Home = () => {
   }, [tag]);
 
   const fetchToursData = () => {
-    axios("https://tourapi-dev-n.herokuapp.com/tour")
+    axios("http://localhost:3001/tour")
       .then(({ data }) => {
         if (tag) {
           const filteredTours = data.filter((tour) => tour.tags.includes(tag));

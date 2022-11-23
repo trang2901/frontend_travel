@@ -11,7 +11,7 @@ const Account = () => {
   const customerID = useContext(LoginContext);
 
   useEffect(() => {
-    axios(`https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`).then(
+    axios(`http://localhost:3001/khachhang/${customerID}`).then(
       ({ data }) => setCustomerData(data)
     );
   }, []);
@@ -37,7 +37,7 @@ const Account = () => {
     switch (e.target.id) {
       case "ho_ten":
         axios.put(
-          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
+          `http://localhost:3001/khachhang/${customerID}`,
           {
             ho_ten: customerData.ho_ten,
           }
@@ -45,7 +45,7 @@ const Account = () => {
         break;
       case "sdt":
         axios.put(
-          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
+          `http://localhost:3001/khachhang/${customerID}`,
           {
             sdt: customerData.sdt,
           }
@@ -53,7 +53,7 @@ const Account = () => {
         break;
       case "email":
         axios.put(
-          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
+          `http://localhost:3001/khachhang/${customerID}`,
           {
             email: customerData.email,
           }
@@ -61,7 +61,7 @@ const Account = () => {
         break;
       case "dia_chi":
         axios.put(
-          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
+          `http://localhost:3001/khachhang/${customerID}`,
           {
             dia_chi: customerData.dia_chi,
           }

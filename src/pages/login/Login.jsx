@@ -37,7 +37,7 @@ const Login = ({ login }) => {
   const createLoginRequest = (values) => {
     const getCustomerID = (accountID) => {
       axios
-        .get("https://tourapi-dev-n.herokuapp.com/khachhang")
+        .get("http://localhost:3001/khachhang")
         .then(({ data }) => {
           const Data = data.find(
             (customer) => customer.id_tai_khoan?.["_id"] === accountID
@@ -48,7 +48,7 @@ const Login = ({ login }) => {
     };
 
     axios
-      .get(`https://tourapi-dev-n.herokuapp.com/taikhoan/${values.email}`)
+      .get(`http://localhost:3001/taikhoan/${values.email}`)
       .then(({ data }) => {
         if (data == null) {
           setIsSubmit(false);
@@ -64,13 +64,13 @@ const Login = ({ login }) => {
 
   const createRegisterRequest = (values) => {
     axios
-      .post("https://tourapi-dev-n.herokuapp.com/taikhoan", {
+      .post("http://localhost:3001/taikhoan", {
         username: values.email,
         password: values.password,
       })
       .then(({ data }) => {
         axios
-          .post("https://tourapi-dev-n.herokuapp.com/khachhang", {
+          .post("http://localhost:3001/khachhang", {
             id_tai_khoan: data,
           })
           .then(({ data }) => {

@@ -23,7 +23,7 @@ const TourMN = () => {
   }, [tag]);
 
   const fetchToursData = () => {
-    axios("https://tourapi-dev-n.herokuapp.com/tour")
+    axios("http://localhost:3001/tour")
       .then(({ data }) => {
         if (tag) {
           const filteredTours = data.filter((tour) => tour.tags.includes(tag));

@@ -24,7 +24,7 @@ console.log('data', processData);
 console.log('params:',slug);
   useEffect(() => {
     axios(
-      `https://tourapi-dev-n.herokuapp.com/tour/${slug}`
+      `http://localhost:3001/tour/${slug}`
     ).then(({ data }) => {
       setProcessData(data.lich_trinh);
       setFileData(data.ten);

@@ -10,7 +10,7 @@ export default function Posts() {
     const [filteredResults, setFilteredResults] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     useEffect(() => {
-        axios.get(`https://tourapi-dev-n.herokuapp.com/tour`)
+        axios.get(`http://localhost:3001/tour`)
             .then((response) => {
                 setAPIData(response.data);
             })

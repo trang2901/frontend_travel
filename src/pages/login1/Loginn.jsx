@@ -8,6 +8,7 @@ import { Divider } from "antd";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import CircularProgress from '@mui/material/CircularProgress';
+import { Spin } from 'antd';
 import isEmpty from "validator/lib/isEmpty";
 // import {useHistory} from 'react-router-dom'
 import isEmail from "validator/lib/isEmail";
@@ -50,7 +51,7 @@ const Login = ({ login }) => {
   const createLoginRequest = (values) => {
     const getCustomerID = (accountID) => {
       axios
-        .get("https://tourapi-dev-n.herokuapp.com/khachhang")
+        .get("http://localhost:3001/khachhang")
         .then(({ data }) => {
           const Data = data.find(
             (customer) => customer.id_tai_khoan?.["_id"] === accountID
@@ -61,7 +62,7 @@ const Login = ({ login }) => {
     };
 
     axios
-      .get(`https://tourapi-dev-n.herokuapp.com/taikhoan/${values.username}`)
+      .get(`http://localhost:3001/taikhoan/${values.username}`)
       .then(({ data }) => {
         if (data == null) {
           setIsSubmit(false);
@@ -90,13 +91,13 @@ const Login = ({ login }) => {
 
   const createRegisterRequest = (values) => {
     axios
-      .post("https://tourapi-dev-n.herokuapp.com/taikhoan", {
+      .post("http://localhost:3001/taikhoan", {
         username: values.username,
         password: values.password,
       })
       .then(({ data }) => {
         axios
-          .post("https://tourapi-dev-n.herokuapp.com/khachhang", {
+          .post("http://localhost:3001/khachhang", {
             id_tai_khoan: data,
           })
           .then(({ data }) => {
@@ -235,7 +236,8 @@ const Login = ({ login }) => {
                   variant="outlined"
                   // width='100%'
                   ></LoadingButton> */}
-                  <CircularProgress size={25}/>
+                  {/* <CircularProgress size={25}/> */}
+                  <Spin size={25} />
 
                   </div>
                 ) : (

@@ -20,6 +20,7 @@ import "font-awesome/css/font-awesome.min.css";
 import "./tourHead.scss";
 import { red } from "@mui/material/colors";
 import dateFormat from "dateformat";
+import { formatPrice } from "../../utils/helpers"
 
 const TourHead = ({ tourData }) => {
   const customerID = useContext(LoginContext);
@@ -57,7 +58,7 @@ const TourHead = ({ tourData }) => {
       id: tourData["_id"],
       img: tourData.hinh[0],
       name: tourData.ten,
-      gia: sumCost(tourData.gia, numberGuest),
+      gia: formatPrice(parseFloat(tourData.gia.replaceAll('.', ''))*numberGuest + parseFloat(tourData.gia.replaceAll('.', ''))*numberGuest * 0.1),
       date: tourData.khoi_hanh,
       number: numberGuest,
       du_khach: tourData.du_khach,
@@ -67,10 +68,12 @@ const TourHead = ({ tourData }) => {
       id_khach_hang: customerID,
       id_tour: tourData["_id"],
       giam_gia: "10%",
-      thanh_tien: sumCost(tourData.gia, numberGuest),
+      // thanh_tien: sumCost(tourData.gia*numberGuest, tourData.gia*numberGuest*0.1),
+      thanh_tien: formatPrice(parseFloat(tourData.gia.replaceAll('.', ''))*numberGuest + parseFloat(tourData.gia.replaceAll('.', ''))*numberGuest * 0.1),
       phuong_thuc_tt: "Chia kỳ",
       ky_thanh_toan: [],
       trang_thai_duyet: "Chưa duyệt",
+      soluongcho: numberGuest,
     };
 
     if (customerID) {
@@ -88,8 +91,8 @@ const TourHead = ({ tourData }) => {
     dataImage?.map((imageURL) =>
       imageArray.push({
         title: "...", // require
-        img: `https://tourapi-dev-n.herokuapp.com/${imageURL}`, // require
-        imgThumbnail: `https://tourapi-dev-n.herokuapp.com/${imageURL}`, // optional
+        img: `http://localhost:3001/${imageURL}`, // require
+        imgThumbnail: `http://localhost:3001/${imageURL}`, // optional
       })
     );
     return imageArray;

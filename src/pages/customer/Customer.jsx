@@ -11,7 +11,7 @@ const Customer = () => {
   const customerID = useContext(LoginContext);
 
   useEffect(() => {
-    axios(`https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`).then(
+    axios(`http://localhost:3001/khachhang/${customerID}`).then(
       ({ data }) => setCustomerJoinedTour(data.tour_tg)
     );
   }, []);

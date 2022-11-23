@@ -21,7 +21,7 @@ const PaymentContent = () => {
   const [accompanyData, setAccompanyData] = useState([]);
   useEffect(() => {
     const customerID = window.sessionStorage.getItem("customerID");
-    axios(`https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`).then(
+    axios(`http://localhost:3001/khachhang/${customerID}`).then(
       ({ data }) => setCustomerData(data)
     );
   }, []);
@@ -68,7 +68,7 @@ const PaymentContent = () => {
       window.localStorage.getItem("bookTourPostRequestData")
     );
      
-    // console.log('đây là data request', requestPosData);
+    console.log('đây là data request', requestPosData);
     if (customerData.email !== "") {
       if (customerData.ho_ten !== "") {
         e.preventDefault();
@@ -91,7 +91,7 @@ const PaymentContent = () => {
         };
 
         axios
-          .post("https://tourapi-dev-n.herokuapp.com/mail", {
+          .post("http://localhost:3001/mail", {
             email,
             hoten,
             sodienthoai,
@@ -114,14 +114,13 @@ const PaymentContent = () => {
     } else {
       alert("Please fill all required filled");
     }
-
     axios
-      .post("https://tourapi-dev-n.herokuapp.com/thanhtoan", requestPosData)
+      .post("http://localhost:3001/thanhtoan", requestPosData)
       .catch((err) => console.log(err));
 
     const patchDuKhachTour = (idDuKhaches) => {
       axios
-        .patch(`https://tourapi-dev-n.herokuapp.com/tour/${tourData.id}`, {
+        .patch(`http://localhost:3001/tour/${tourData.id}`, {
           du_khach: [
             ...[...tourData.du_khach].map((item) => item["_id"]),
             ...idDuKhaches,
@@ -137,7 +136,7 @@ const PaymentContent = () => {
     };
 
     axios
-      .post(`https://tourapi-dev-n.herokuapp.com/dukhach`, accompanyData)
+      .post(`http://localhost:3001/dukhach`, accompanyData)
       .then(({ data }) => patchDuKhachTour(data))
       .catch((err) => console.log(err));
   };
@@ -145,9 +144,12 @@ const PaymentContent = () => {
   //User data
   const userData = {};
   //accompany data
+
   const numberGuest = JSON.parse(
     window.localStorage.getItem("bookTourInfor")
   )?.number;
+  console.log('customer:', numberGuest);
+  console.log('book: ', window.localStorage.getItem("bookTourInfor"));
 
   // gửi mail
   // const handleRequest = async (e) => {
@@ -173,7 +175,7 @@ const PaymentContent = () => {
   //         tongtien,
   //       };
   //       axios
-  //         .post("https://tourapi-dev-n.herokuapp.com/mail", body)
+  //         .post("http://localhost:3001/mail", body)
   //         .then((res) => {
   //           alert("Email Sent Successfully");
   //           setLoading(false);

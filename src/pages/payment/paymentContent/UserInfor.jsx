@@ -38,7 +38,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
     switch (e.target.id) {
       case "ho_ten":
         axios.put(
-          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
+          `http://localhost:3001/khachhang/${customerID}`,
           {
             ho_ten: customerData.ho_ten,
           }
@@ -46,7 +46,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
         break;
       case "sdt":
         axios.put(
-          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
+          `http://localhost:3001/khachhang/${customerID}`,
           {
             sdt: customerData.sdt,
           }
@@ -54,7 +54,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
         break;
       case "email":
         axios.put(
-          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
+          `http://localhost:3001/khachhang/${customerID}`,
           {
             email: customerData.email,
           }
@@ -62,7 +62,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
         break;
       case "dia_chi":
         axios.put(
-          `https://tourapi-dev-n.herokuapp.com/khachhang/${customerID}`,
+          `http://localhost:3001/khachhang/${customerID}`,
           {
             dia_chi: customerData.dia_chi,
           }
@@ -78,7 +78,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
       
         <div className="tour--infor__container">
         {/* <p className="chitiet--tour">Chi tiết tour</p> */}
-          <img src={`https://tourapi-dev-n.herokuapp.com${bookTourInfor.img}`} />
+          <img src={`http://localhost:3001${bookTourInfor.img}`} />
           <div className="tour--infor__detail">
             {/* <h1>Tour: {bookTourInfor.name}</h1> */}
             
@@ -203,13 +203,12 @@ const UserInfor = ({ customerData, setCustomerData }) => {
             </Col>
             <Col span={16}>
             <Input
-              id="sdt"
-              name="sdt"
-       
-              type="number"
-          onChange={handleChange}
+              id="tendoanhnghiep"
+              name="tendoanhnghiep"
+              type="text"
+              onChange={handleChange}
                 onBlur={handleUpdate}
-                value={""}
+                value={customerData.tendoanhnghiep || ""}
                 size="large"
                 width="20px"
                 maxLength="200px"
@@ -223,13 +222,12 @@ const UserInfor = ({ customerData, setCustomerData }) => {
             </Col>
             <Col span={16}>
             <Input
-              id="sdt"
-              name="sdt"
-       
-              type="number"
+              id="masothuedoanhnghiep"
+              name="masothuedoanhnghiep"
+              type="text"
           onChange={handleChange}
                 onBlur={handleUpdate}
-                value={ ""}
+                value={customerData.masothuedoanhnghiep || ""}
                 size="large"
                 width="20px"
                 maxLength="200px"

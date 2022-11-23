@@ -10,6 +10,7 @@ import Validator from "../../utils/Validator";
 import * as Yup from "yup";
 import { ScrollButton } from "../../components";
 import {CircularProgress} from "@mui/material";
+import { Spin } from 'antd';
 const Signup = ({ login }) => {
   const [loginOn, setLoginOn] = useState(login);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -42,7 +43,7 @@ const Signup = ({ login }) => {
   const createLoginRequest = (values) => {
     const getCustomerID = (accountID) => {
       axios
-        .get("https://tourapi-dev-n.herokuapp.com/khachhang")
+        .get("http://localhost:3001/khachhang")
         .then(({ data }) => {
           const Data = data.find(
             (customer) => customer.id_tai_khoan?.["_id"] === accountID
@@ -53,7 +54,7 @@ const Signup = ({ login }) => {
     };
 
     axios
-      .get(`https://tourapi-dev-n.herokuapp.com/taikhoan/${values.username}`)
+      .get(`http://localhost:3001/taikhoan/${values.username}`)
       .then(({ data }) => {
         if (data == null) {
           setIsSubmit(false);
@@ -69,7 +70,7 @@ const Signup = ({ login }) => {
 
   const createRegisterRequest = (values) => {
     axios
-      .post("https://tourapi-dev-n.herokuapp.com/taikhoan", {
+      .post("http://localhost:3001/taikhoan", {
         username: values.username,
         password: values.password,
         diachi: values.diachi,
@@ -81,13 +82,15 @@ const Signup = ({ login }) => {
       .then(({ data }) => {
         // console.log(data);
         axios
-          .post("https://tourapi-dev-n.herokuapp.com/khachhang", {
+          .post("http://localhost:3001/khachhang", {
             id_tai_khoan: data,
             ho_ten: data.hoten,
             dia_chi: data.diachi,
             sdt: data.sodienthoai,
             email: data.email,
             tuoi: values.tuoi,
+            tendoanhnghiep: values.tendoanhnghiep,
+            masothuedoanhnghiep: values.masothuedoanhnghiep
           })
 
           .then(({ data }) => {
@@ -129,6 +132,8 @@ const Signup = ({ login }) => {
           hoten: "",
           sodienthoai: "",
           tuoi: "",
+          tendoanhnghiep: "",
+          masothuedoanhnghiep: ""
         }}
         // validate={(values) => {
         //   const errors = {};
@@ -167,151 +172,6 @@ const Signup = ({ login }) => {
           /* and other goodies */
         }) => (
           <>
-            {/* <form className="form" onSubmit={handleSubmit}> */}
-            {/* <TextField
-                type="text"
-                name="hoten"
-                variant="standard"
-                label="Họ tên"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.hoten}
-              /> */}
-            {/* <p
-                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
-              >
-                {errors.hoten && touched.hoten && errors.hoten}
-              </p> */}
-            {/* <p></p>
-              <TextField
-                type="text"
-                name="diachi"
-                variant="standard"
-                label="Địa chỉ"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.diachi}
-              /> */}
-            {/* <p
-                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
-              >
-                {errors.diachi && touched.diachi && errors.diachi}
-              </p>
-              <p></p>
-              <TextField
-                type="text"
-                name="tuoi"
-                variant="standard"
-                label="Tuổi"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.tuoi}
-              />
-              <p
-                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
-              >
-                {errors.tuoi && touched.tuoi && errors.tuoi}
-              </p> */}
-            {/* <p></p>
-              <TextField
-                type="text"
-                name="sodienthoai"
-                variant="standard"
-                label="Số điện thoại"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.sodienthoai}
-              />
-              <p
-                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
-              >
-                {errors.sodienthoai &&
-                  touched.sodienthoai &&
-                  errors.sodienthoai}
-              </p>
-              <p></p> */}
-            {/* <TextField
-                type="text"
-                name="email"
-                variant="standard"
-                label="Email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-              <p
-                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
-              >
-                {errors.email && touched.email && errors.email}
-              </p>
-              <p></p> */}
-            {/* <TextField
-                type="text"
-                name="username"
-                variant="standard"
-                label="Username"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.username}
-              />
-              <p
-                style={{ color: "red", fontStyle: "italic", fontSize: "12px" }}
-              >
-                {errors.username && touched.username && errors.username}
-              </p>
-              <p></p>
-              <TextField
-                type="password"
-                name="password"
-                label="Mật khẩu"
-                variant="standard"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-              />
-              {errors.password && touched.password && errors.password}
-              <p></p>
-              <p></p>
-              <p></p> */}
-            {/* {isSubmit ? (
-                <LoadingButton
-                  sx={{ padding: "16px 0" }}
-                  loading
-                  variant="outlined"
-                ></LoadingButton>
-              ) : (
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  sx={{
-                    color: "#f97150",
-                    background: "#08183c",
-                    "&:hover": {
-                      color: "#f97150",
-                      background: "#08183c",
-                    },
-                  }}
-                >
-                  {loginOn ? "Đăng nhập" : "ĐĂNG KÝ"}
-                </Button>
-              )} */}
-            {/* <Button
-                type="submit"
-                disabled={isSubmitting}
-                sx={{
-                  color: "#f97150",
-                  background: "#08183c",
-                  "&:hover": {
-                    color: "#f97150",
-                    background: "#08183c",
-                  },
-                }}
-              >
-                ĐĂNG KÝ
-              </Button> */}
-            {/* <p></p> <p></p>
-            </form> */}
-
             <div
               className="card shadow-2-strong card-registration"
               style={{
@@ -325,7 +185,7 @@ const Signup = ({ login }) => {
                   <div className="row">
                     <div className="col-md-6 mb-4">
                       <div className="form-outline">
-                        <label className="form-label" for="firstName">
+                        <label className="form-label" for="hoten">
                           Họ và tên <sup style={{ color: "red" }}>*</sup>
                         </label>
                         <input
@@ -351,7 +211,7 @@ const Signup = ({ login }) => {
 
                     <div className="col-md-6 mb-4">
                       <div className="form-outline">
-                        <label className="form-label" for="lastName">
+                        <label className="form-label" for="tuoi">
                           Tuổi <sup style={{ color: "red" }}>*</sup>
                         </label>
                         <input
@@ -376,7 +236,7 @@ const Signup = ({ login }) => {
                   <div className="row">
                     <div className="col-md-12 mb-4 d-flex align-items-center">
                       <div className="form-outline datepicker w-100">
-                        <label for="birthdayDate" className="form-label">
+                        <label for="diachi" className="form-label">
                           Địa chỉ <sup style={{ color: "red" }}>*</sup>
                         </label>
                         <input
@@ -404,7 +264,7 @@ const Signup = ({ login }) => {
                   <div className="row">
                     <div className="col-md-6 mb-4 pb-2">
                       <div className="form-outline">
-                        <label className="form-label" for="emailAddress">
+                        <label className="form-label" for="email">
                           Email <sup style={{ color: "red" }}>*</sup>
                         </label>
                         <input
@@ -429,7 +289,7 @@ const Signup = ({ login }) => {
                     </div>
                     <div className="col-md-6 mb-4 pb-2">
                       <div className="form-outline">
-                        <label className="form-label" for="phoneNumber">
+                        <label className="form-label" for="sodienthoai">
                           Số điện thoại <sup style={{ color: "red" }}>*</sup>
                         </label>
                         <input
@@ -459,7 +319,7 @@ const Signup = ({ login }) => {
                   <div className="row">
                     <div className="col-md-6 mb-4 pb-2">
                       <div className="form-outline">
-                        <label className="form-label" for="emailAddress">
+                        <label className="form-label" for="username">
                           Tên đăng nhập <sup style={{ color: "red" }}>*</sup>
                         </label>
                         <input
@@ -484,9 +344,10 @@ const Signup = ({ login }) => {
                         </p>
                       </div>
                     </div>
+
                     <div className="col-md-6 mb-4 pb-2">
                       <div className="form-outline">
-                        <label className="form-label" for="emailAddress">
+                        <label className="form-label" for="password">
                           Mật khẩu <sup style={{ color: "red" }}>*</sup>
                         </label>
                         <input
@@ -511,6 +372,42 @@ const Signup = ({ login }) => {
                         </p>
                       </div>
                     </div>
+
+                    <div className="col-md-6 mb-4 pb-2">
+                      <div className="form-outline">
+                        <label className="form-label" for="tendoanhnghiep">
+                          Tên doanh nghiệp 
+                        </label>
+                        <input
+                          type="text"
+                          id="tendoanhnghiep"
+                          className="form-control form-control-lg"
+                          name="tendoanhnghiep"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.tendoanhnghiep}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="col-md-6 mb-4 pb-2">
+                      <div className="form-outline">
+                        <label className="form-label" for="masothuedoanhnghiep">
+                          Mã số thuế doanh nghiệp
+                        </label>
+                        <input
+                          type="text"
+                          id="masothuedoanhnghiep"
+                          className="form-control form-control-lg"
+                          name="masothuedoanhnghiep"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.masothuedoanhnghiep}
+                        />
+                      </div>
+                    </div>
+
+
                   </div>
 
                   <div className="mt-4 pt-2">
@@ -522,8 +419,8 @@ const Signup = ({ login }) => {
                      variant="outlined"
                      // width='100%'
                      ></LoadingButton> */}
-                     <CircularProgress size={25}/>
-   
+                     {/* <CircularProgress size={25}/> */}
+                     <Spin size={25} />
                      </div>
                     ) : (
                       <Button

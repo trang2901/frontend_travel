@@ -31,7 +31,7 @@ const SendMail = () => {
       company
     }
     
-   axios.post('https://tourapi-dev-n.herokuapp.com/mail', body)
+   axios.post('http://localhost:3001/mail', body)
    .then((res) => {
       alert('Email Sent Successfully')
       setLoading(false)
