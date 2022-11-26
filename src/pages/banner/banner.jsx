@@ -225,7 +225,7 @@ const Banner = () => {
         {/* <label style={{marginBottom: '3rem'}}>--- <strong>VIDEO</strong> ---</label> */}
         {/* <Chip label="Video" style={{marginBottom: '3rem',backGround: '#f97150', color: '#08183c'}} /> */}
         <div style={{marginBottom: '3rem'}}>
-        <Divider dashed textAlign="left"><Chip color="info" label="VIDEO" style={{ color: '#08183c', fontWeight: 'bold'}}/></Divider></div>
+        <Divider textAlign="left"><Chip color="info" label="VIDEO" style={{ color: '#08183c', fontWeight: 'bold'}}/></Divider></div>
         
         <div className="video">
         <Row>
@@ -309,7 +309,7 @@ const Banner = () => {
 
         {/* <label style={{marginBottom: '3rem'}}>--- <strong >ẨM THỰC </strong>---</label> */}
         <div style={{marginBottom: '1rem', marginTop: '1rem'}}>
-        <Divider dashed textAlign="left"><Chip color="info" label="ẨM THỰC" style={{ color: '#08183c', fontWeight: 'bold'}}/></Divider></div>
+        <Divider dashed="true" textAlign="left"><Chip color="info" label="ẨM THỰC" style={{ color: '#08183c', fontWeight: 'bold'}}/></Divider></div>
         {/* <Chip color="info" label="ẨM THỰC" style={{marginTop: '2rem',marginBottom: '1rem', marginLeft: '2rem', color: '#08183c', fontWeight: 'bold'}}/> */}
         <div className="image">
         <div className="imagebox">
@@ -382,7 +382,7 @@ const Banner = () => {
 
        {/* <label style={{marginBottom: '3rem'}}>--- <strong> VIỆT NAM VẺ ĐẸP BẤT TẬN</strong> ---</label> */}
        <div style={{marginBottom: '1rem', marginTop: '1rem'}}>
-        <Divider dashed textAlign="left"><Chip color="info" label="VIỆT NAM VẺ ĐẸP BẤT TẬN" style={{ color: '#08183c', fontWeight: 'bold'}}/></Divider></div>
+        <Divider dashed="true" textAlign="left"><Chip color="info" label="VIỆT NAM VẺ ĐẸP BẤT TẬN" style={{ color: '#08183c', fontWeight: 'bold'}}/></Divider></div>
        {/* <Chip color="info" label="VIỆT NAM VẺ ĐẸP BẤT TẬN" style={{marginTop: '2rem',marginBottom: '1rem', marginLeft: '2rem', color: '#08183c', fontWeight: 'bold'}}/> */}
        <div className="image">
         <div className="imagebox">
@@ -481,7 +481,7 @@ const Banner = () => {
             <div className="content--why">
                 <img src={chondichvu}/>
                 <div className="circle">
-                <Divider plain><p>2</p></Divider>
+                <Divider plain="true"><p>2</p></Divider>
                 </div>
 
                 <div  className="content--p">

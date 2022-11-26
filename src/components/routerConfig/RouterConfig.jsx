@@ -3,7 +3,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Process } from "../../container";
 import { Home, Detail, Login, SendMail, PaymentContent, Customer, Banner,List,Aboutus, Blog, Loginn, Signup,Payment1, Ordersuccessful, BookedTour, Bill,TourMB, Library1, Library2, Library3, Library4, Library5, TourMT, TourMTNB, 
-  TourMDNB, ProcessTour} from "../../pages";
+  TourMDNB, ProcessTour, StripeContainer} from "../../pages";
 
 const RouterConfig = () => {
   return (
@@ -34,6 +34,7 @@ const RouterConfig = () => {
         <Route path="/library5" element={<Library5 />} />
         <Route path="/mail" element={<SendMail />} />
         <Route path="/process" element={<ProcessTour />} />
+        <Route path="/paymentTest" element={<StripeContainer />} />
       </Routes>
     </>
   );

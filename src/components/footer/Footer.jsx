@@ -113,12 +113,12 @@ const Footer = () => {
 
   <div className="f-socials-box">
     <div className="f-social-small">
-      {open === 'false'?<i class="fa-solid fa-chevron-down" onClick={()=>setOpen("true")}></i>:(<></>)}
+      {open === 'false'?<i className="fa-solid fa-chevron-down" onClick={()=>setOpen("true")}></i>:(<></>)}
     </div>
 
     <ul className="f-socials f-socials-full" style={{display: open === 'true'?'block':'none'}}>
       <li className="f-social-small">
-      {open === 'true' ?<i class="fa-solid fa-chevron-up" onClick={()=>setOpen("false")}></i>:''}
+      {open === 'true' ?<i className="fa-solid fa-chevron-up" onClick={()=>setOpen("false")}></i>:''}
       </li>
 
       <li className="social">
