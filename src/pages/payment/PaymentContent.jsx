@@ -79,7 +79,12 @@ const PaymentContent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // ------Stripe==================================================================================================================
+
+    const requestPosData = JSON.parse(
+      window.localStorage.getItem("bookTourPostRequestData")
+    );
+    const thanhTien = parseInt(requestPosData.thanh_tien.replaceAll('.','').replace('VND',''));
+      // ------Stripe==================================================================================================================
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
@@ -88,7 +93,7 @@ const PaymentContent = () => {
       try {
         const { id } = paymentMethod;
         const response = await axios.post("http://localhost:3001/payment", {
-          amount: 2000,
+          amount: thanhTien,
           id,
         });
 
@@ -105,9 +110,9 @@ const PaymentContent = () => {
       console.log(error.message);
     }
     //------------------------------------------------------------------------------------------------------------------------------
-    const requestPosData = JSON.parse(
-      window.localStorage.getItem("bookTourPostRequestData")
-    );
+    // const requestPosData = JSON.parse(
+    //   window.localStorage.getItem("bookTourPostRequestData")
+    // );
 
     if (customerData.email !== "") {
       if (customerData.ho_ten !== "") {
@@ -174,14 +179,16 @@ const PaymentContent = () => {
         console.log("data mới tạo: ", data._id);
 
         const patchDuKhachTour = (idDuKhaches) => {
-          axios
-            .patch(`http://localhost:3001/tour/${tourData.id}`, {
-              du_khach: [
-                ...[...tourData.du_khach].map((item) => item["_id"]),
-                ...idDuKhaches,
-              ],
-            })
-            .then(({ result }) => {
+
+          // axios
+          //   .patch(`http://localhost:3001/tour/${tourData.id}`, {
+          //     du_khach: [
+          //       ...[...tourData.du_khach].map((item) => item["_id"]),
+          //       ...idDuKhaches,
+          //     ],
+          //   })
+          // .then(({ result }) => {
+
             console.log("id du khách:", ...idDuKhaches);
             axios
             .patch(`http://localhost:3001/thanhtoan/${data._id}`, {
@@ -189,10 +196,9 @@ const PaymentContent = () => {
                 ...idDuKhaches,
               ],
             })
-              // alert("Đặt tour thành công");
               window.location.href = "http://localhost:3000/ordersuccessful";
-            })
-            .catch((err) => console.log(err));
+            // })
+            // .catch((err) => console.log(err));
         };
 
         axios
@@ -201,7 +207,7 @@ const PaymentContent = () => {
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
-  };
+};
 
   const CARD_OPTIONS = {
     iconStyle: "solid",
@@ -222,7 +228,6 @@ const PaymentContent = () => {
       },
     },
   };
-
 // Handle submit 2 ---------------------------------------------------------------------------------------------------------
 
 const handleSubmit1 = async (e) => {
@@ -294,16 +299,19 @@ const handleSubmit1 = async (e) => {
     .post("http://localhost:3001/thanhtoan", requestPosData)
     .then(({ data }) => {
       console.log("data mới tạo: ", data._id);
-
       const patchDuKhachTour = (idDuKhaches) => {
-        axios
-          .patch(`http://localhost:3001/tour/${tourData.id}`, {
-            du_khach: [
-              ...[...tourData.du_khach].map((item) => item["_id"]),
-              ...idDuKhaches,
-            ],
-          })
-          .then(({ result }) => {
+
+        // axios
+        //   .patch(`http://localhost:3001/tour/${tourData.id}`, 
+        //   {
+        //     du_khach: [
+        //       ...[...tourData.du_khach].map((item) => item["_id"]),
+        //       ...idDuKhaches,
+        //     ],
+        //   }
+        //   )
+
+          // .then(({ result }) => {
           console.log("id du khách:", ...idDuKhaches);
           axios
           .patch(`http://localhost:3001/thanhtoan/${data._id}`, {
@@ -313,8 +321,8 @@ const handleSubmit1 = async (e) => {
           })
             // alert("Đặt tour thành công");
             window.location.href = "http://localhost:3000/ordersuccessful";
-          })
-          .catch((err) => console.log(err));
+          // })
+          // .catch((err) => console.log(err));
       };
 
       axios
