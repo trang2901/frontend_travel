@@ -5,25 +5,23 @@ import { Input } from "antd";
 import { Formik } from "formik";
 import "./accompanyInfor.scss";
 import * as Yup from 'yup';
-const AccompanyInfor = ({
-  onShowLinkInput,
-  setOnShowLink,
-  numberGuest,
-  accompanyData,
-  setAccompanyData,
-}) => {
+const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData, setAccompanyData,}) => {
+
   const handleChangeName = (e) => {
     const index = e.target.dataset.index;
     const tempArray = [...accompanyData];
     tempArray[index].ho_ten = e.target.value;
     setAccompanyData(tempArray);
+
   };
 
   const handleChangePhone = (e) => {
+
     const index = e.target.dataset.index;
     const tempArray = [...accompanyData];
     tempArray[index].sdt = e.target.value;
     setAccompanyData(tempArray);
+
   };
   const handleChangeAge = (e) => {
     const index = e.target.dataset.index;

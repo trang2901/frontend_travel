@@ -77,10 +77,10 @@ const TourHead = ({ tourData }) => {
     };
 
     if (customerID) {
-      window.localStorage.setItem(
-        "bookTourPostRequestData",
-        JSON.stringify(bookTourData)
+      window.localStorage.setItem("bookTourPostRequestData",JSON.stringify(bookTourData)
       );
+    
+      
       window.localStorage.setItem("bookTourInfor", JSON.stringify(infor));
       navigate("/payment");
     } else window.location.href = "/login";

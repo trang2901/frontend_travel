@@ -55,10 +55,10 @@ const BookedTour = () => {
       setCustomerBillWait(arrayWait);
     });
   }, []);
+
   const showModal = () => {
     setIsModalOpen(true);
   };
-
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -69,78 +69,71 @@ const BookedTour = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   const deleteBill = (billid) => {
     axios
-      .delete(`http://localhost:3001/thanhtoan/${billid}`)
-      .then((res) => {
-        // alert("Xóa thành công");
-        // showModal();
-        window.location.reload();
+      .get(`http://localhost:3001/thanhtoan/${billid}`)
+      .then(({ data }) => {
+        const arrayDukhach = data.du_khach;
+        const slugTourBooked = data.id_tour.slug;
+
+        axios
+          .get(`http://localhost:3001/tour/${slugTourBooked}`)
+          .then(({ data }) => {
+            const dkjointour = data.du_khach;
+
+            console.log("du khách join tour: ", dkjointour);
+
+            // for (let i = 0; i < arrayDukhach.length; i++) {
+            //   for (let it = 0; it < dkjointour.length; it++) {
+            //     if (dkjointour[it]._id === arrayDukhach[i]) {
+            //       dkjointour.splice(it, 1);
+            //     }
+            //   }
+            // }
+
+            // console.log("du khách join tour 2: ", dkjointour);
+            // axios
+            // .patch(`http://localhost:3001/tour/${slugTourBooked}`, {
+            //   du_khach: [
+            //       ...[...dkjointour].map((item) => item["_id"])
+            //   ],
+            // }
+            // )
+            // console.log('data dk join:', dkjointour);
+            // console.log('>>>>>>>>>>>>>thành công!!!!!!!')
+
+            for (let it = 0; it < dkjointour.length; it++) {
+              axios.get(`http://localhost:3001/dukhach`).then(({ data }) => {
+                for (let i = 0; i < arrayDukhach.length; i++) {
+                  data.map((item) => {
+                    if (
+                      item._id === arrayDukhach[i]
+                      ) 
+                      
+                    {
+                      axios
+                        .delete(`http://localhost:3001/dukhach/${item._id}`)
+                        .then((res) => {
+                          axios
+                            .delete(`http://localhost:3001/thanhtoan/${billid}`)
+                            .then((res) => {
+                              window.location.reload();
+                            })
+                        })
+                    }
+                  });
+                }
+              });
+            }
+          });
       })
-      .catch(() => {
-        alert("xóa thất bại");
-      });
-    // setIsModalOpen(false);
   };
-  // useEffect(()=>{
-  //   const date = new Date();
-  //   const array = [];
-  //   for (let i = 0; i < customerJoinedTour.length; i++) {
-  //     const newDate = new Date(dateFormat(customerJoinedTour[i].createdAt));
-  //     // console.log("monrh nè: ", newDate.getDate());
 
-  //     if (newDate.getDate() == date.getDate()) {
-  //       // console.log('tour đặt trong tháng: ', customerJoinedTour[i]);
-  //       array.push(customerJoinedTour[i]);
-  //     } else {
-  //       // console.log("tour khác");
-  //     }
-  //   }
-  //   console.log("mảng vừa push", array);
-  //   setCustomerJoinedTourDate(array);
-
-  // });
-
-  // useEffect(()=>{
-  //   const date = new Date();
-  //   const array = [];
-  //   for (let i = 0; i < customerJoinedTour.length; i++) {
-  //     const newDate = new Date(dateFormat(customerJoinedTour[i].createdAt));
-  //     console.log("monrh nè: ", newDate.getDate());
-
-  //     if (newDate.getMonth() == date.getMonth()) {
-  //       // console.log('tour đặt trong tháng: ', customerJoinedTour[i]);
-  //       array.push(customerJoinedTour[i]);
-  //     } else {
-  //       console.log("tour khác");
-  //     }
-  //   }
-  //   console.log("mảng vừa push", array);
-  //   setCustomerJoinedTourMonth(array);
-  // });
-
-  // useEffect(()=>{
-  //   const date = new Date();
-  //   const array = [];
-  //   for (let i = 0; i < customerJoinedTour.length; i++) {
-  //     const newDate = new Date(dateFormat(customerJoinedTour[i].createdAt));
-  //     console.log("monrh nè: ", newDate.getDate());
-
-  //     if (newDate.getFullYear() == date.getFullYear()) {
-  //       // console.log('tour đặt trong tháng: ', customerJoinedTour[i]);
-  //       array.push(customerJoinedTour[i]);
-  //     } else {
-  //       console.log("tour khác");
-  //     }
-  //   }
-  //   console.log("mảng vừa push", array);
-  //   setCustomerJoinedTourYear(array);
-  // });
   const getDate = (date) => {
     const temp = new Date(date);
     return `${temp.getDate()}/${temp.getMonth() + 1}/${temp.getFullYear()}`;
   };
-
   const getDataItem = () => {
     const date = new Date();
     const array = [];
@@ -158,25 +151,25 @@ const BookedTour = () => {
     console.log("mảng vừa push", array);
     setCustomerJoinedTourDate(array);
   };
-
   const getData = (data) => {
     console.log(data);
   };
   const bookTourInfor = JSON.parse(
     window.localStorage.getItem("bookTourInfor")
   );
-  console.log("book:", customerJoinedTour);
   const renderTour = (tour) => (
     <div
       className="tour--item"
-      style={{ display: "flex", gap: "2rem", marginBottom: "-1rem"}}
+      style={{ display: "flex", gap: "2rem", marginBottom: "-1rem" }}
     >
-      <div style={{ width: "150%", marginTop: '1rem' }}>
+      <div style={{ width: "150%", marginTop: "1rem" }}>
         <Row style={{ textAlign: "left" }}>
           <Col span={4}>
             <p>TÊN TOUR:</p>
           </Col>
-          <Col span={12}><strong>{tour.id_tour.ten}</strong></Col>
+          <Col span={12}>
+            <strong>{tour.id_tour.ten}</strong>
+          </Col>
           <Col
             span={8}
             style={{
@@ -190,7 +183,6 @@ const BookedTour = () => {
             {tour.trang_thai_duyet}
           </Col>
         </Row>
-   
         <Row style={{ textAlign: "left" }}>
           <Col span={4}>
             <p>NGÀY KHỞI HÀNH: </p>
@@ -199,30 +191,24 @@ const BookedTour = () => {
             {dateFormat(tour.id_tour.khoi_hanh, "dd/mm/yyyy")}
           </Col>
         </Row>
-
         <Row style={{ textAlign: "left" }}>
           <Col span={4}>
             <p>SỐ LƯỢNG CHỔ: </p>
           </Col>
-          <Col span={12}>
-            {tour.soluongcho}
-          </Col>
+          <Col span={12}>{tour.soluongcho}</Col>
         </Row>
-
         <Row style={{ textAlign: "left" }}>
           <Col span={4}>
             <p>NGÀY ĐẶT TOUR: </p>
           </Col>
           <Col span={12}>{getDate(tour.createdAt)}</Col>
         </Row>
-    
         <Row style={{ textAlign: "left" }}>
           <Col span={4}>
             <p>THÀNH TIỀN: </p>
           </Col>
           <Col span={12}>{tour.thanh_tien}</Col>
         </Row>
-
         <Row style={{ textAlign: "left" }}>
           <Col span={4}>
             <a
@@ -371,7 +357,7 @@ const BookedTour = () => {
           </TabPanel>
 
           <TabPanel value="2" style={{ background: "white" }}>
-          {custormerBillWait
+            {custormerBillWait
               ?.slice(0)
               .reverse()
               .map((tour) => renderTour(tour))}
