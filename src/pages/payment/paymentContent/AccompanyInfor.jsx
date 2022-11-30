@@ -16,7 +16,6 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
   };
 
   const handleChangePhone = (e) => {
-
     const index = e.target.dataset.index;
     const tempArray = [...accompanyData];
     tempArray[index].sdt = e.target.value;
@@ -41,10 +40,11 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
           // name="hovaten"
           label="Họ và tên"
           value={accompanyData[index]?.ho_ten || ""}
-          sx={{ maxWidth: "200px" }}
+          sx={{ maxWidth: "200px"}}
           onChange={handleChangeName}
           inputProps={{ "data-index": index }}
           required
+          variant="standard" 
         />
         
         {/* <p style={{color: 'red', fontStyle: 'italic',fontSize:'14px' }}>{errors.hovaten && touched.hovaten && errors.hovaten}</p> */}
@@ -52,12 +52,13 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
           type="number"
           // name="sdt"
           label="Số điện thoại"
-          sx={{ maxWidth: "200px" }}
+          sx={{ maxWidth: "200px", border: 'none' }}
           value={accompanyData[index]?.sdt || ""}
           onChange={handleChangePhone}
           inputProps={{ "data-index": index }}
           style= {{borderRadius: 0}}
           required
+          variant="standard" 
         />
         <TextField
           type="number"
@@ -69,6 +70,7 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
           inputProps={{ "data-index": index }}
           style= {{borderRadius: 0}}
           required
+          variant="standard" 
         />
 
         

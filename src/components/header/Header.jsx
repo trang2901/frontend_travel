@@ -43,7 +43,7 @@ const Header = () => {
                   fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
                 }}
               >
-                DORIS TOURS{" "}
+                DẾ MÈN TOURS{" "}
               </a>
               <button
                 data-toggle="collapse"
@@ -419,8 +419,6 @@ const Header = () => {
                       {/* <Button variant="contained"> */}
                       <Avatar style={{ backgroundColor: "darkblue" }}>
                         <AccountCircleIcon sx={{ marginRight: "2px" }} />
-                        {customerName}
-                        {/* <label>{vitri}</label> */}
                       </Avatar>
                       {/* </Button> */}
                     </Link>
@@ -433,6 +431,7 @@ const Header = () => {
                         fontFamily:
                           "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
                         letterSpacing: "0.5px",
+                        
                       }}
                       onClick={() => {
                         window.sessionStorage.clear();

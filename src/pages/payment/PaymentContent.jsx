@@ -9,23 +9,31 @@ import {
   StripeContainer,
   PaymentForm,
 } from "./paymentContent/index";
-
 import "./paymentContent.scss";
 import axios from "axios";
 import * as Yup from "yup";
-import { Divider } from "antd";
-import { Container, Paper } from "@mui/material";
+import { Divider, Row, Col } from "antd";
+import { Container, Paper, Card} from "@mui/material";
 import { ConstructionOutlined } from "@mui/icons-material";
 import { formatPrice } from "../../utils/helpers";
 import { ScrollButton } from "../../components";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Formik } from "formik";
 import { Radio, Space, Input } from "antd";
+import logoStripe from '../../image/stripe.png'
+
 const PaymentContent = () => {
   const [onShowLinkInput, setOnShowLinkInput] = useState(false);
   const [activedStep, setActivedStep] = useState(0);
   const [customerData, setCustomerData] = useState({});
   const [accompanyData, setAccompanyData] = useState([]);
+  const tourData = JSON.parse(localStorage.getItem("bookTourInfor"));
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const stripe = useStripe();
+  const elements = useElements();
+  const [value, setValue] = useState(1);
+
   useEffect(() => {
     const customerID = window.sessionStorage.getItem("customerID");
     axios(`http://localhost:3001/khachhang/${customerID}`).then(({ data }) =>
@@ -70,31 +78,28 @@ const PaymentContent = () => {
     setValue(e.target.value);
   };
 
-  const tourData = JSON.parse(localStorage.getItem("bookTourInfor"));
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const stripe = useStripe();
-  const elements = useElements();
-  const [value, setValue] = useState(1);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const requestPosData = JSON.parse(
       window.localStorage.getItem("bookTourPostRequestData")
     );
+    console.log('req:', requestPosData.id_khach_hang);
+
     const thanhTien = parseInt(requestPosData.thanh_tien.replaceAll('.','').replace('VND',''));
       // ------Stripe==================================================================================================================
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
     });
+
     if (!error) {
       try {
         const { id } = paymentMethod;
         const response = await axios.post("http://localhost:3001/payment", {
           amount: thanhTien,
           id,
+          des: requestPosData.id_khach_hang
         });
 
         if (response.data.success) {
@@ -106,88 +111,80 @@ const PaymentContent = () => {
         console.log("Error", error);
         alert("thanh toán thất bại");
       }
-    } else {
-      console.log(error.message);
-    }
-    //------------------------------------------------------------------------------------------------------------------------------
-    // const requestPosData = JSON.parse(
-    //   window.localStorage.getItem("bookTourPostRequestData")
-    // );
-
-    if (customerData.email !== "") {
-      if (customerData.ho_ten !== "") {
-        e.preventDefault();
-        setLoading(true);
-        const email = customerData.email;
-        const hoten = customerData.ho_ten;
-        const sodienthoai = customerData.sdt;
-        const newDate = new Date();
-        const ngaydattour =
-          newDate.getDate() +
-          "/" +
-          newDate.getMonth() +
-          "/" +
-          newDate.getFullYear() +
-          " " +
-          "-" +
-          " " +
-          newDate.getHours() +
-          ":" +
-          newDate.getMinutes() +
-          ":" +
-          newDate.getSeconds();
-        const tongtien = formatPrice(
-          parseFloat(tourData.gia.replaceAll(".", "")) +
-            parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
-        );
-        const body = {
-          email,
-          hoten,
-          sodienthoai,
-          tongtien,
-          ngaydattour,
-        };
-
-        axios
-          .post("http://localhost:3001/mail", {
+      if (customerData.email !== "") {
+        if (customerData.ho_ten !== "") {
+          e.preventDefault();
+          setLoading(true);
+          const email = customerData.email;
+          const hoten = customerData.ho_ten;
+          const sodienthoai = customerData.sdt;
+          const newDate = new Date();
+          const ngaydattour =
+            newDate.getDate() +
+            "/" +
+            newDate.getMonth() +
+            "/" +
+            newDate.getFullYear() +
+            " " +
+            "-" +
+            " " +
+            newDate.getHours() +
+            ":" +
+            newDate.getMinutes() +
+            ":" +
+            newDate.getSeconds();
+          const tongtien = formatPrice(
+            parseFloat(tourData.gia.replaceAll(".", "")) +
+              parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
+          );
+          const body = {
             email,
             hoten,
             sodienthoai,
             tongtien,
             ngaydattour,
-          })
-          .then((res) => {
-            alert("Email đã được gửi");
-            setLoading(false);
-            console.log(res);
-            // window.location.reload();
-          })
-          .catch((err) => {
-            console.log(err);
-            setLoading(false);
-          });
+          };
+  
+          axios
+            .post("http://localhost:3001/mail", {
+              email,
+              hoten,
+              sodienthoai,
+              tongtien,
+              ngaydattour,
+            })
+            .then((res) => {
+              alert("Email đã được gửi");
+              setLoading(false);
+              console.log(res);
+              // window.location.reload();
+            })
+            .catch((err) => {
+              console.log(err);
+              setLoading(false);
+            });
+        } else {
+          alert("Compose Email");
+        }
       } else {
-        alert("Compose Email");
+        alert("Please fill all required filled");
       }
-    } else {
-      alert("Please fill all required filled");
-    }
-    
-    axios
+      
+      axios
       .post("http://localhost:3001/thanhtoan", requestPosData)
       .then(({ data }) => {
         console.log("data mới tạo: ", data._id);
 
         const patchDuKhachTour = (idDuKhaches) => {
 
-          // axios
-          //   .patch(`http://localhost:3001/tour/${tourData.id}`, {
-          //     du_khach: [
-          //       ...[...tourData.du_khach].map((item) => item["_id"]),
-          //       ...idDuKhaches,
-          //     ],
-          //   })
-          // .then(({ result }) => {
+          axios
+            .patch(`http://localhost:3001/tour/${tourData.id}`, {
+              du_khach: [
+                ...[...tourData.du_khach].map((item) => item["_id"]),
+                ...idDuKhaches,
+              ],
+            })
+          .then(({ result }) => {
 
             console.log("id du khách:", ...idDuKhaches);
             axios
@@ -195,10 +192,11 @@ const PaymentContent = () => {
               du_khach: [
                 ...idDuKhaches,
               ],
+              trang_thai_thanh_toan: 'Đã thanh toán'
             })
               window.location.href = "http://localhost:3000/ordersuccessful";
-            // })
-            // .catch((err) => console.log(err));
+            })
+            .catch((err) => console.log(err));
         };
 
         axios
@@ -207,6 +205,15 @@ const PaymentContent = () => {
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
+
+
+
+    } else {
+      console.log(error.message);
+      // alert('Hãy kiểm tra lại thông tin!');
+      // showAlert();
+    }
+    //------------------------------------------------------------------------------------------------------------------------------
 };
 
   const CARD_OPTIONS = {
@@ -217,7 +224,7 @@ const PaymentContent = () => {
         color: "#f97150",
         fontWeight: 500,
         fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
-        fontSize: "16px",
+        fontSize: "20px",
         fontSmoothing: "antialiased",
         ":-webkit-autofill": { color: "#fce883" },
         "::placeholder": { color: "grey" },
@@ -225,9 +232,17 @@ const PaymentContent = () => {
       invalid: {
         iconColor: "red",
         color: "red",
+      
       },
     },
   };
+  const showAlert = () => {
+    setTimeout(() => {
+        alert('3 giây đã chạy xong!')
+    }, 6000);
+ }
+
+
 // Handle submit 2 ---------------------------------------------------------------------------------------------------------
 
 const handleSubmit1 = async (e) => {
@@ -301,17 +316,17 @@ const handleSubmit1 = async (e) => {
       console.log("data mới tạo: ", data._id);
       const patchDuKhachTour = (idDuKhaches) => {
 
-        // axios
-        //   .patch(`http://localhost:3001/tour/${tourData.id}`, 
-        //   {
-        //     du_khach: [
-        //       ...[...tourData.du_khach].map((item) => item["_id"]),
-        //       ...idDuKhaches,
-        //     ],
-        //   }
-        //   )
+        axios
+          .patch(`http://localhost:3001/tour/${tourData.id}`, 
+          {
+            du_khach: [
+              ...[...tourData.du_khach].map((item) => item["_id"]),
+              ...idDuKhaches,
+            ],
+          }
+          )
 
-          // .then(({ result }) => {
+          .then(({ result }) => {
           console.log("id du khách:", ...idDuKhaches);
           axios
           .patch(`http://localhost:3001/thanhtoan/${data._id}`, {
@@ -321,8 +336,8 @@ const handleSubmit1 = async (e) => {
           })
             // alert("Đặt tour thành công");
             window.location.href = "http://localhost:3000/ordersuccessful";
-          // })
-          // .catch((err) => console.log(err));
+          })
+          .catch((err) => console.log(err));
       };
 
       axios
@@ -369,33 +384,64 @@ const handleSubmit1 = async (e) => {
                   accompanyData={accompanyData}
                   setAccompanyData={setAccompanyData}
                 />
-
+          
                 {/* <StripeContainer /> */}
                 {/* <PaymentForm /> */}
 
-          <Radio.Group onChange={onChange} value={value}>
-            <Space direction="vertical">
-              <Radio value={1}>Thanh toán trực tiếp</Radio>
+          <div className="hinhthucTT">
+          <p>CHỌN PHƯƠNG THỨC THANH TOÁN</p>
+          <Container>
+            <label>Chọn một trong hai phương thức thanh toán sau: </label>
+          <Radio.Group onChange={onChange} value={value} >
+            <Space direction="vertical" style={{width: '800px'}}>
+              <Radio value={1}>
+              Thanh toán trực tiếp
+                {
+                  value===1 ? (
+                      numberGuest > 5 ? <p>Số lượng kh lớn nên cần cọc 10%</p>: null
+                  ): null
+                }
+              
+              </Radio>
+              
               <Radio value={2}>
+
                 Thanh toán online
+
+
+
                 {value === 2 ? (
-                  <Paper elevation={3}>
-                    <fieldset
-                      className="FormGroup"
-                    >
-                      <div
-                        className="FormRow"
-                        style={{width: "500px" }}
-                      >
-                        <CardElement options={CARD_OPTIONS} />
-                      </div>
-                    </fieldset>
+                  <>
+                 <Paper sx={{minWidth: '800px', background: '#cde1f4', marginTop: '1rem'}} square="true">
+                 
+                  <Row style={{marginBottom: '2rem', marginLeft: '4rem'}}>
+                    <Col span={18} style={{marginTop: '3rem'}}>
+                  <label>Tên khách hàng:.........................................................................................................</label><br />
+                  <label>..............................................................................................................................................</label> <br/>
+                  <label>...............................................................................................................................................................</label><br/>
+                    </Col>
+                    <Col span={6} style={{marginTop: '5rem'}}>
+                      <img src={logoStripe} />
+                    </Col>
+                  </Row>
+                 
+                          <fieldset
+                            >
+                              <div
+                              >
+                                <CardElement options={CARD_OPTIONS} />
+                              </div>
+                            </fieldset>
                   </Paper>
+                   
+                    </>
                 ) : null}
+
               </Radio>
             </Space>
           </Radio.Group>
-
+          </Container>
+          </div>
 
               </SwipeableViews>
               <div className="btn--group">
