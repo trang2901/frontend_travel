@@ -217,9 +217,10 @@ const TourDetail = ({ tourData }) => {
                       <p>- Lái xe nhiệt tình, chu đáo, cẩn thận HDV suốt hành trình: nhiệt tình, chu đáo và hiểu biết Khách sạn theo tiêu chuẩn phục vụ du lịch, 2 khách/phòng.</p> 
                       <p>- Nếu lẻ khách ghép 3 khách/phòng.</p>
                      <p>- Vé thăm quan các điểm như trong chương trình Thuyền thăm quan vịnh Hạ Long Các bữa ăn bao gồm: 3
-                      bữa chính(không bao gồm đồ uống) + 1 bữa sáng buffet tạikhách sạn Bảo hiểm du lịch với mức bồi thường tối đa lên
-                      đến 20,000,000/khách</p>
-                    
+                      bữa chính(không bao gồm đồ uống) + 1 bữa sáng buffet tại khách sạn Bảo hiểm du lịch với mức bồi thường tối đa lên
+                      đến 20.000.000/khách</p>
+                      <p>- Giá tour là trọn gói và không hoàn tiền nếu khách hàng không đi hết tour hoặc sử dụng hết dịch vụ. 
+                        Đây là quyền lợi của khách hàng, nếu khách hàng không sử dụng thì bị mất quyền lợi,  bên nhà cung cấp sẽ không chịu trách nhiệm hoàn trả chi phí.</p>
                   </div>
 
                   <div className="giatour">

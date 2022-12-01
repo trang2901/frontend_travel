@@ -7,12 +7,12 @@ import "./accompanyInfor.scss";
 import * as Yup from 'yup';
 const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData, setAccompanyData,}) => {
 
+
   const handleChangeName = (e) => {
     const index = e.target.dataset.index;
     const tempArray = [...accompanyData];
     tempArray[index].ho_ten = e.target.value;
     setAccompanyData(tempArray);
-
   };
 
   const handleChangePhone = (e) => {
@@ -33,8 +33,8 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
     return Array.from({ length: numberGuest }, (item, index) => (
       <div className="accompany--input">
         {/* <h1>{index + 1}</h1> */}
-        <p className="thongtin_input">Thông tin người {index + 1}</p>
        
+        <p className="thongtin_input">Thông tin người {index + 1}</p>    
         <TextField
           type="text"
           // name="hovaten"
@@ -46,8 +46,10 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
           required
           variant="standard" 
         />
+        {/* {
+          accompanyData[index]?.ho_ten === ""?<p style={{color: 'red', fontStyle: 'italic',fontSize:'14px' }}>Không để trống</p>: null
+        } */}
         
-        {/* <p style={{color: 'red', fontStyle: 'italic',fontSize:'14px' }}>{errors.hovaten && touched.hovaten && errors.hovaten}</p> */}
         <TextField
           type="number"
           // name="sdt"
@@ -57,9 +59,12 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
           onChange={handleChangePhone}
           inputProps={{ "data-index": index }}
           style= {{borderRadius: 0}}
-          required
           variant="standard" 
+          required
         />
+        {/* {
+          accompanyData[index]?.sdt === ""?<p style={{color: 'red', fontStyle: 'italic',fontSize:'14px' }}>Không để trống</p>: null
+        } */}
         <TextField
           type="number"
           // name="sdt"
@@ -72,8 +77,9 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
           required
           variant="standard" 
         />
-
-        
+        {/* {
+          accompanyData[index]?.tuoi === ""?<p style={{color: 'red', fontStyle: 'italic',fontSize:'14px' }}>Không để trống</p>: null
+        } */}
       </div>
     ));
   };

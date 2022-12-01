@@ -6,9 +6,7 @@ import logo from "../../image/DORIS_TOURS.png"
 const Pdfexport = () => {
 
   return (
-
-    // <PDFExport ref={PDFExportComponent} paperSize="A1">
-		
+    // <PDFExport ref={PDFExportComponent} paperSize="A1">\
             <Container>
               <div className="container bootstrap snippets bootdey">
                 <div className="panel panel-default">

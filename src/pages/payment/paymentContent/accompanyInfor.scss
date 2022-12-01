@@ -9,7 +9,7 @@
 .accompany--input {
   display: Flex;
   gap: 0.5rem;
-  flex-direction: column;
+  flex-direction: row;
   .thongtin_input {
     color: #08183c;
     font-weight: bold;
@@ -17,4 +17,8 @@
     text-align: center;
     margin-bottom: 2px;
   }
+}
+
+.accompanyInfoData {
+  padding-left: 5rem
 }

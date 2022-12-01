@@ -511,7 +511,7 @@ const Banner = () => {
         <div>
          
             {" "}
-            <p className="why" style={{textAlign: 'center'}}>VÌ SAO CHỌN DORISTOUR ?</p>
+            <p className="why" style={{textAlign: 'center'}}>VÌ SAO CHỌN DẾ MÈN TOURS?</p>
           
           <Container>
             <div className="why--content">

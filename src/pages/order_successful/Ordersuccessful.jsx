@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
-import img from "../../image/logocheck.png";
+import img from "../../image/checkbg.png";
 import "./ordersuccessful.scss";
 import { Container,Paper } from "@mui/material";
 import { Button, Modal, Alert } from "antd";
@@ -51,9 +51,8 @@ const Ordersuccessful = () => {
       <Container style={{ justifyContent: "center" }}>
 	  {/* <Alert message="Success Text" type="success" /> */}
         <div className="order--container">
-          <img src={img} />
-          <p className="order">ĐẶT TOUR THÀNH CÔNG</p>
-          <label>Cảm ơn bạn đã cho chúng tôi cơ hội được phục vụ !</label><br/>
+          <img src={img} width={100} height={100} />
+          <p className="order">Đặt tour thành công</p>
           <label>
 			Email xác nhận đơn đã được gửi đến địa chỉ email của bạn.<br />
             Chúng tôi sẽ kiểm tra và xác nhận đơn đặt hàng sớm nhất có thể!{" "}
@@ -137,7 +136,7 @@ const Ordersuccessful = () => {
 							<div className="col-sm-6 text-right">
 								<span>Thanh toan cho</span>
 								<strong>
-									DORISTOUR
+									DẾ MÈN TOURS
 								</strong>
 								<p>Hung Loi, Ninh Kieu, Can Tho</p>
 								<p>0123456789</p>

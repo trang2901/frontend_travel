@@ -174,11 +174,11 @@ const Bill = () => {
 
                             <div className="col-sm-6 text-right">
                               <span>Thanh toan cho</span>
-                              <strong>DORISTOUR</strong>
+                              <strong>DE MEN TOURS</strong>
                               <p>Hung Loi, Ninh Kieu, Can Tho</p>
                               <p>0123456789</p>
                               <p>
-                                <a href="#">doristour@gmail.com</a>
+                                <a href="#">dementours@gmail.com</a>
                               </p>
                             </div>
                           </div>

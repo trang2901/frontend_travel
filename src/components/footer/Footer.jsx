@@ -46,10 +46,10 @@ const Footer = () => {
         <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
          
           <h6 className="text-uppercase fw-bold mb-4">
-            <i className="fas fa-gem me-3"></i>DORISTOUR
+            <i className="fas fa-gem me-3"></i>DẾ MÈN TOURS
           </h6>
           <p>
-            Doristour cùng bạn đi khắp muôn nơi. Chúng tôi sẽ giúp bạn có 1 chuyến du lịch đáng nhớ và tuyệt vời.
+            Dế Mèn Tours cùng bạn đi khắp muôn nơi. Chúng tôi sẽ giúp bạn có 1 chuyến du lịch đáng nhớ và tuyệt vời.
           </p>
         </div>
         
@@ -97,7 +97,7 @@ const Footer = () => {
           <p><i className="fas fa-home me-3"></i>Hưng Lợi, Ninh Kiều, Cần Thơ</p>
           <p>
             <i className="fas fa-envelope me-3"></i>
-            doristour@gmail.com
+            dementours@gmail.com
           </p>
           <p><i className="fas fa-phone me-3"></i> + 01 234 567 88</p>
           <p><i className="fas fa-print me-3"></i> + 01 234 567 89</p>
@@ -108,7 +108,7 @@ const Footer = () => {
     </div>
   </section> 
   <div className="text-center p-4" style={{backgroundColor: '#08183c'}}>
-    <a className="" href="/" style={{color: '#f97150' , fontWeight: 'bold', fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif', letterSpacing: '1px'}}>DORIS TOURS</a>
+    <a className="" href="/" style={{color: '#f97150' , fontWeight: 'bold', fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif', letterSpacing: '1px'}}>DẾ MÈN TOURS</a>
   </div>
 
   <div className="f-socials-box">
