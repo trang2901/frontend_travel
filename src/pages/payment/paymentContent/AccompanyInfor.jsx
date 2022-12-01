@@ -34,7 +34,7 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
       <div className="accompany--input">
         {/* <h1>{index + 1}</h1> */}
        
-        <p className="thongtin_input">Thông tin người {index + 1}</p>    
+        <p className="thongtin_input">Thông tin người {index + 1}</p>  
         <TextField
           type="text"
           // name="hovaten"

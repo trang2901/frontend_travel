@@ -87,6 +87,7 @@ const PaymentContent = () => {
     setAccompanyData(arrayTemp);
   }, [customerData]);
   const [step, setStep] = useState(0);
+  const [acStep, setAcStep] = useState(0);
   useEffect(() => {
     var temp;
     for (let i = 0; i < accompanyData.length; i++) {
@@ -97,6 +98,16 @@ const PaymentContent = () => {
       }
     }
     setStep(temp);
+
+    var stepTemp;
+    if(customerData.ho_ten !== "" && customerData.dia_chi !="" && customerData.email!=="" && customerData.sdt){
+      stepTemp = 1;
+    }
+    else {
+      stepTemp = 0;
+    }
+
+    setAcStep(stepTemp)
   });
 
   const handleButtonBack = () => {
@@ -270,101 +281,101 @@ const PaymentContent = () => {
   // Handle submit 2 ---------------------------------------------------------------------------------------------------------
   const handleSubmit1 = async (e) => {
     e.preventDefault();
-    // const requestPosData = JSON.parse(
-    //   window.localStorage.getItem("bookTourPostRequestData")
-    // );
+    const requestPosData = JSON.parse(
+      window.localStorage.getItem("bookTourPostRequestData")
+    );
 
-    // axios
-    //       .post("http://localhost:3001/thanhtoan", requestPosData)
-    //       .then(({ data }) => {
-    //         // Gửi email
-    //         if (customerData.email !== "") {
-    //           if (customerData.ho_ten !== "") {
-    //             e.preventDefault();
-    //             setLoading(true);
-    //             const email = customerData.email;
-    //             const hoten = customerData.ho_ten;
-    //             const sodienthoai = customerData.sdt;
-    //             const newDate = new Date();
-    //             const ngaydattour =
-    //               newDate.getDate() +
-    //               "/" +
-    //               newDate.getMonth() +
-    //               "/" +
-    //               newDate.getFullYear() +
-    //               " " +
-    //               "-" +
-    //               " " +
-    //               newDate.getHours() +
-    //               ":" +
-    //               newDate.getMinutes() +
-    //               ":" +
-    //               newDate.getSeconds();
-    //             const tongtien = formatPrice(
-    //               parseFloat(tourData.gia.replaceAll(".", "")) +
-    //                 parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
-    //             );
-    //             const body = {
-    //               email,
-    //               hoten,
-    //               sodienthoai,
-    //               tongtien,
-    //               ngaydattour,
-    //             };
+    axios
+          .post("http://localhost:3001/thanhtoan", requestPosData)
+          .then(({ data }) => {
+            // Gửi email
+            if (customerData.email !== "") {
+              if (customerData.ho_ten !== "") {
+                e.preventDefault();
+                setLoading(true);
+                const email = customerData.email;
+                const hoten = customerData.ho_ten;
+                const sodienthoai = customerData.sdt;
+                const newDate = new Date();
+                const ngaydattour =
+                  newDate.getDate() +
+                  "/" +
+                  newDate.getMonth() +
+                  "/" +
+                  newDate.getFullYear() +
+                  " " +
+                  "-" +
+                  " " +
+                  newDate.getHours() +
+                  ":" +
+                  newDate.getMinutes() +
+                  ":" +
+                  newDate.getSeconds();
+                const tongtien = formatPrice(
+                  parseFloat(tourData.gia.replaceAll(".", "")) +
+                    parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
+                );
+                const body = {
+                  email,
+                  hoten,
+                  sodienthoai,
+                  tongtien,
+                  ngaydattour,
+                };
 
-    //             axios
-    //               .post("http://localhost:3001/mail", {
-    //                 email,
-    //                 hoten,
-    //                 sodienthoai,
-    //                 tongtien,
-    //                 ngaydattour,
-    //               })
-    //               .then((res) => {
-    //                 alert("Email đã được gửi");
-    //                 setLoading(false);
-    //                 console.log(res);
-    //                 // window.location.reload();
-    //               })
-    //               .catch((err) => {
-    //                 console.log(err);
-    //                 setLoading(false);
-    //               });
+                axios
+                  .post("http://localhost:3001/mail", {
+                    email,
+                    hoten,
+                    sodienthoai,
+                    tongtien,
+                    ngaydattour,
+                  })
+                  .then((res) => {
+                    alert("Email đã được gửi");
+                    setLoading(false);
+                    console.log(res);
+                    // window.location.reload();
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    setLoading(false);
+                  });
 
-    //           }
-    //           else {
-    //             alert("Bạn chưa điền họ tên");
-    //           }
-    //         } else {
-    //           alert("Bạn chưa điền email");
-    //         }
+              }
+              else {
+                alert("Bạn chưa điền họ tên");
+              }
+            } else {
+              alert("Bạn chưa điền email");
+            }
 
-    //         const patchDuKhachTour = (idDuKhaches) => {
-    //           axios
-    //             .patch(`http://localhost:3001/tour/${tourData.id}`, {
-    //               du_khach: [
-    //                 ...[...tourData.du_khach].map((item) => item["_id"]),
-    //                 ...idDuKhaches,
-    //               ],
-    //             })
-    //             .then(({ result }) => {
-    //               console.log("id du khách:", ...idDuKhaches);
-    //               axios.patch(`http://localhost:3001/thanhtoan/${data._id}`, {
-    //                 du_khach: [...idDuKhaches],
-    //               });
-    //               // alert("Đặt tour thành công");
-    //               window.location.href =
-    //                 "http://localhost:3000/ordersuccessful";
-    //             })
-    //             .catch((err) => console.log(err));
-    //         };
+            const patchDuKhachTour = (idDuKhaches) => {
+              axios
+                .patch(`http://localhost:3001/tour/${tourData.id}`, {
+                  du_khach: [
+                    ...[...tourData.du_khach].map((item) => item["_id"]),
+                    ...idDuKhaches,
+                  ],
+                })
+                .then(({ result }) => {
+                  console.log("id du khách:", ...idDuKhaches);
+                  axios.patch(`http://localhost:3001/thanhtoan/${data._id}`, {
+                    du_khach: [...idDuKhaches],
+                  });
+                  // alert("Đặt tour thành công");
+                  window.location.href =
+                    "http://localhost:3000/ordersuccessful";
+                })
+                .catch((err) => console.log(err));
+            };
 
-    //         axios
-    //           .post(`http://localhost:3001/dukhach`, accompanyData)
-    //           .then(({ data }) => patchDuKhachTour(data))
-    //           .catch((err) => console.log(err));
-    //       })
-    //       .catch((err) => console.log(err));
+            axios
+              .post(`http://localhost:3001/dukhach`, accompanyData)
+              .then(({ data }) => patchDuKhachTour(data))
+              .catch((err) => console.log(err));
+          })
+          .catch((err) => console.log(err));
   };
   //User data----------------------------------------------------------------------------------------------------------------------
   const userData = {};
@@ -417,7 +428,10 @@ const PaymentContent = () => {
                   customerData={customerData}
                   setCustomerData={setCustomerData}
                 />
+                
                 {/* accompany info ------------------------------------------------------------------------------------------------------------*/}
+                <div>
+                <p style={{textAlign: 'center', marginTop: '2rem', marginBottom: '-0.5rem', color: 'grey', fontWeight: '400'}}>Hãy nhập đủ thông tin của từng khách hàng trước khi sang bước kế tiếp!</p>
                 <AccompanyInfor
                   onShowLinkInput={onShowLinkInput}
                   setOnShowLink={setOnShowLinkInput}
@@ -426,7 +440,7 @@ const PaymentContent = () => {
                   accompanyData={accompanyData}
                   setAccompanyData={setAccompanyData}
                 />
-
+              </div>  
 
                 {/* end------------------------------------------------------------------------------------------------------------------------ */}
                 {/* <StripeContainer /> */}
@@ -507,6 +521,7 @@ const PaymentContent = () => {
                   disabled={activedStep === 0}
                   onClick={handleButtonBack}
                   variant="contained"
+                  style={{background: '#08183c', color: '#f97150'}}
                 >
                   Trở về
                 </Button>
@@ -515,20 +530,25 @@ const PaymentContent = () => {
                     <Button
                       onClick={value === 1 ? handleSubmit1 : handleSubmit}
                       variant="contained"
+                      style={{background: '#08183c', color: '#f97150'}}
                     >
                       Đặt tour
                     </Button>
                   </>
                 ) : 
                 activedStep === 1 ? (
-                  step === 1 ? (
-                    <Button onClick={handleButtonNext} variant="contained">
+                    <Button onClick={handleButtonNext} variant="contained" 
+                      disabled= {step ===1? false : true}
+                      style={{background: step === 1?'#08183c': 'lightgray', color:step === 1?'#f97150':'darkgray'}}
+                    >
                       Tiếp tục
                     </Button>
-                  ) :
-                    null
                 ):
-                <Button onClick={handleButtonNext} variant="contained">
+                <Button onClick={handleButtonNext} 
+                variant="contained"  
+                style={{background: acStep === 1?'#08183c': 'lightgray', color: acStep === 1?'#f97150':'darkgray'}}
+                disabled = {acStep === 1?false:true}
+                >
                 Tiếp tục
               </Button>
                 

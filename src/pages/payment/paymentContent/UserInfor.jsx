@@ -118,12 +118,13 @@ const UserInfor = ({ customerData, setCustomerData }) => {
           <div className="payment--form__input">
             <p className="title_chitiet">Chi tiết thanh toán</p>
             <p className="slg">Hoàn tất việc mua sắm của bạn bằng việc hoàn thành thông tin chi tiết dưới đây.</p>
+            <p className="slg">Hoàn thành một số thông tin để sang bước kế tiếp</p>
             {/* <div className="row"> */}
              
 
               <Row>
             <Col span={8}>
-              <label>Họ tên:  </label>
+              <label>Họ tên: <sup style={{ color: "red" }}>*</sup>  </label>
             </Col>
             <Col span={16}>
             <Input
@@ -142,7 +143,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
             {/* </div> */}
             <Row>
             <Col span={8}>
-              <label>Địa chỉ:   </label>
+              <label>Địa chỉ: <sup style={{ color: "red" }}>*</sup>  </label>
             </Col>
             <Col span={16}>
             <Input
@@ -162,7 +163,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
 
           <Row>
             <Col span={8}>
-              <label>Số điện thoại:   </label>
+              <label>Số điện thoại: <sup style={{ color: "red" }}>*</sup>  </label>
             </Col>
             <Col span={16}>
             <Input
@@ -181,7 +182,7 @@ const UserInfor = ({ customerData, setCustomerData }) => {
           </Row>
           <Row>
             <Col span={8}>
-              <label>Email:   </label>
+              <label>Email:<sup style={{ color: "red"}}>*</sup>   </label>
             </Col>
             <Col span={16}>
             <Input
