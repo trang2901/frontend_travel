@@ -202,8 +202,9 @@ const Banner = () => {
                 border: "none",
                 color: "#f97150",
                 height: "40px",
-                borderRadius: "20px",
+                borderRadius: "10px",
               }}
+              
             >
               Trải nghiệm ngay
             </a>

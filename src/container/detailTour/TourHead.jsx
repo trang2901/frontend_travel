@@ -30,17 +30,12 @@ const TourHead = ({ tourData }) => {
   /////set trạng thái ----------------------------------
   const newDate = new Date();
   const [trangthai, setTrangThai]= useState('Chưa diễn ra');
-  // const setTrangThai = (trangthai) => {
-  //     if(date_format < newDate) {
-        
-  //       // setTrangThai(trangthai);
-  //     }
-  // }
- 
 
+ const dateFinal =dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy");
+
+const dateCurrent = dateFormat(newDate, "dd/mm/yyyy");
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const sumCost = (cost, numberGuest) => {
       const formatVND = (value) => {
         value = value.toLocaleString("it-IT", {
@@ -117,7 +112,7 @@ const TourHead = ({ tourData }) => {
     marginTop: "1rem",
     backgroundColor: "#f97150",
     color: "black",
-    background: trangthai === 'Đã diễn ra'?"grey":"",
+    // background: (convertToDate(dateCurrent).getTime().valueOf() >= convertToDate(dateFinal).getTime().valueOf()) ?"grey":"",
   };
 
   const handleClickAdd = () => {
@@ -133,8 +128,6 @@ const TourHead = ({ tourData }) => {
   };
 
   useEffect(() => {
-    // console.log(convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf());
-    // console.log(convertToDate(dateFormat(tourData.khoi_hanh, "dd/mm/yyyy")).getTime().valueOf());
      if(convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() > convertToDate(dateFormat(tourData.khoi_hanh, "dd/mm/yyyy")).getTime().valueOf()){
         setTrangThai('Đã diễn ra');
      } else {
@@ -174,11 +167,6 @@ const TourHead = ({ tourData }) => {
 
 {/* --------- */}
             <p className="trangthai" style={{ color: trangthai==='Đã diễn ra'?"red": "green"}}>{trangthai}</p>
-
-      
-
-
-
           </div>
           <Divider style={{ borderColor: "darkgrey" }} />
           <p>{tourData.description}</p>
@@ -251,6 +239,17 @@ const TourHead = ({ tourData }) => {
             </Col>
             <Col span={17}>
               <label>{date_format}</label>
+            </Col>
+          </Row>
+          <p></p>
+          <Row>
+            <Col span={7}>
+              <label className="label_detail">
+                <i className="fa-solid fa-calendar"></i>&ensp;Ngày hết hạn đăng ký:{" "}
+              </label>
+            </Col>
+            <Col span={17}>
+              <label>{dateFinal}</label>
             </Col>
           </Row>
           <p></p>
@@ -400,23 +399,30 @@ const TourHead = ({ tourData }) => {
 
           {
             /*tourData.date.includes(selectedDate) &&*/ numberGuest ? (
+
+              convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()?
+              <p>Nghỉ bấm luôn con</p>:
               <ButtonCustom
                 type="Submit"
                 nameString="Đặt Tour"
                 variant="contained"
                 style={buttonSubmitStyle}
                 customFunction={handleSubmit}
-                disabled={trangthai === 'Đã diễn ra'?"disabled": ""} 
+                
                 // style={{background: trangthai === 'Đã diễn ra'?"grey":"", }}
               />
             ) : (
-              <ButtonCustom
-                type="Submit"
-                nameString="Chọn số người tham gia"
-                variant="contained"
-                style={buttonSubmitStyle}
-                disabled={true}
-              />
+
+                convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf() ?
+                <p>Không cho m bấm luôn</p>: (
+                  <ButtonCustom
+                  type="Submit"
+                  nameString="Chọn số người tham gia"
+                  variant="contained"
+                  style={buttonSubmitStyle}
+                  disabled={true}
+                />
+                )
             )
           }
           <p></p>

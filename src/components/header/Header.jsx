@@ -394,8 +394,53 @@ const Header = () => {
                       GIỚI THIỆU
                     </a>
                   </li>
-                  {/* TIN TỨC Ở ĐÂY======================================================================================================== */}
                   <li className="nav-item" role="presentation">
+                    <a
+                      className="nav-link"
+                      href="/aboutus"
+                      style={{
+                        color: "#f97150",
+                        fontWeight: "bold",
+                        fontFamily:
+                          "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
+                        letterSpacing: "0.5px",
+                      }}
+                    >
+                      MIỀN TRUNG
+                    </a>
+                  </li>
+                  <li className="nav-item" role="presentation">
+                    <a
+                      className="nav-link"
+                      href="/aboutus"
+                      style={{
+                        color: "#f97150",
+                        fontWeight: "bold",
+                        fontFamily:
+                          "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
+                        letterSpacing: "0.5px",
+                      }}
+                    >
+                      MIỀN TÂY NAM BỘ
+                    </a>
+                  </li>
+                  <li className="nav-item" role="presentation">
+                    <a
+                      className="nav-link"
+                      href="/aboutus"
+                      style={{
+                        color: "#f97150",
+                        fontWeight: "bold",
+                        fontFamily:
+                          "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
+                        letterSpacing: "0.5px",
+                      }}
+                    >
+                      MIỀN ĐÔNG NAM BỘ
+                    </a>
+                  </li>
+                  {/* TIN TỨC Ở ĐÂY======================================================================================================== */}
+                  {/* <li className="nav-item" role="presentation">
                     <a
                       className="nav-link"
                       href="/blog"
@@ -409,9 +454,11 @@ const Header = () => {
                     >
                       CẨM NANG DU LỊCH
                     </a>
-                  </li>
+                  </li> */}
+
+
                 </ul>
-                <span style={{width: '300px'}}></span>
+                <span style={{width: '100px'}}></span>
                 
                 {customerID ? (
                   <>

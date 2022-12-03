@@ -362,6 +362,7 @@ const PaymentContent = () => {
                   console.log("id du khách:", ...idDuKhaches);
                   axios.patch(`http://localhost:3001/thanhtoan/${data._id}`, {
                     du_khach: [...idDuKhaches],
+                    trang_thai_thanh_toan: "Chưa thanh toán",
                   });
                   // alert("Đặt tour thành công");
                   window.location.href =
@@ -489,11 +490,13 @@ const PaymentContent = () => {
                                     </label>
                                     <br />
                                     <label>
-                                      {requestPosDatas.thanh_tien}
+                                      <strong>{
+                                        requestPosDatas.thanh_tien
+                                      }</strong>
                                     </label>{" "}
                                     <br />
                                     <label>
-                                      ...............................................................................................................................................................
+                                    Hãy nhập số thẻ, ngày hết hạn (MM/YY), mã xác minh thẻ (CVC) và mã bưu chính (ZIP) để hoàn tất thanh toán!
                                     </label>
                                     <br />
                                   </Col>

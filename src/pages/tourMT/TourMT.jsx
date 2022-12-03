@@ -31,7 +31,7 @@ const TourMN = () => {
           setDataTours(filteredTours);
           setFetching(false);
         } else {
-          const ATourMB = data.filter((tour) => tour.matour.includes("TMT"));
+          const ATourMB = data.filter((tour) => tour.loai_tour.ten_loai_tour === 'Tour Miền Trung');
           setDataTours(ATourMB);
           setFetching(false);
         }

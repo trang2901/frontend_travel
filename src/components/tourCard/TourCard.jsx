@@ -20,15 +20,13 @@ import Chip from '@mui/material/Chip';
 const TourCard = ({ tourData }) => {
  const so_cho_con = tourData.so_cho - tourData.du_khach?.length;
  const date_format = dateFormat(tourData.khoi_hanh, "dd/mm/yyyy");
-
  const newDate = new Date();
  const [trangthai, setTrangThai]= useState('Chưa diễn ra');
-
  const convertToDate = (dateSting) => {
   const [day, month, year] = dateSting.split("/");
   return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 }
-
+const dateFinal = dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy");
 useEffect(() => {
   // console.log(convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf());
   // console.log(convertToDate(dateFormat(tourData.khoi_hanh, "dd/mm/yyyy")).getTime().valueOf());
@@ -101,7 +99,7 @@ const setSocho = (socho) => {
               <h2>Mã tour: <strong style={{color: '#08183c', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>{tourData.matour}</strong></h2>
               <h2>Ngày khởi hành: <strong style={{color: '#08183c', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>{date_format}</strong></h2>
               <h2>Nơi khởi hành:  <strong style={{color: '#08183c', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>{tourData.diemkhoihanh}</strong></h2>
-              
+              <h2>Ngày đăng ký cuối cùng: <strong style={{color: '#08183c', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>{dateFinal}</strong></h2>
               {/* <p style={{textAlign: 'center'}}>.................</p> */}
             <div className="locationBox">
               <h3>{tourData.gia}đ/người</h3> 
@@ -109,7 +107,7 @@ const setSocho = (socho) => {
           </div>
           <div className="tour-btn">
           <Link to={`/detail?slug=${tourData.slug}`}>
-            <button className="button" disabled={trangthai === 'Đã diễn ra'?"disabled": ""} style={{background: trangthai === 'Đã diễn ra'?"grey":"", }}	>     
+            <button className="button" disabled={convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()?"disabled": ""} style={{background: convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()?"grey":"", }}	>     
             ĐẶT NGAY
               </button>
               </Link>
@@ -120,8 +118,10 @@ const setSocho = (socho) => {
               </button>
               </Link> 
           </div>
-
-          <p className="para" style={{color: trangthai==='Đã diễn ra'?'red':'#08183c'}}>{trangthai === 'Đã diễn ra'?'Không còn nhận ': <p className="para">Số chổ còn nhận: <label className="label_socho" style={{color: trangthai==='Đã diễn ra'?'white': 'red'}}>{so_cho_con}</label></p>}</p>
+       
+          <p className="para" 
+          style={{color: convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()?'red':'#08183c'}}>
+            {convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()?'Đã hết hạn đăng ký': <p className="para">Số chổ còn nhận: <label className="label_socho" style={{color:'red'}}>{so_cho_con}/{tourData.so_cho}</label></p>}</p>
         </CardActionArea>
       </Card>
     {/* // </Link> */}

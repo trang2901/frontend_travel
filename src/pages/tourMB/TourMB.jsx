@@ -25,8 +25,9 @@ const TourMB = () => {
           setDataTours(filteredTours);
           setFetching(false);
         } else {
-          const ATourMB = data.filter((tour) => tour.matour.includes("TMB"));
+          const ATourMB = data.filter((tour) => tour.loai_tour.ten_loai_tour === 'Tour Miền Bắc');
           setDataTours(ATourMB);
+          console.log('data tour:', DataTours);
           setFetching(false);
         }
       })
