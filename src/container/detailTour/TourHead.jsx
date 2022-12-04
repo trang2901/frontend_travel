@@ -57,6 +57,7 @@ const dateCurrent = dateFormat(newDate, "dd/mm/yyyy");
       date: tourData.khoi_hanh,
       number: numberGuest,
       du_khach: tourData.du_khach,
+      ngay_thanh_toan_cuoi_cung: tourData.ngay_thanh_toan_cuoi_cung
     };
 
     const bookTourData = {
@@ -401,7 +402,7 @@ const dateCurrent = dateFormat(newDate, "dd/mm/yyyy");
             /*tourData.date.includes(selectedDate) &&*/ numberGuest ? (
 
               convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()?
-              <p>Nghỉ bấm luôn con</p>:
+              <p></p>:
               <ButtonCustom
                 type="Submit"
                 nameString="Đặt Tour"
@@ -414,7 +415,7 @@ const dateCurrent = dateFormat(newDate, "dd/mm/yyyy");
             ) : (
 
                 convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf() ?
-                <p>Không cho m bấm luôn</p>: (
+                <p></p>: (
                   <ButtonCustom
                   type="Submit"
                   nameString="Chọn số người tham gia"

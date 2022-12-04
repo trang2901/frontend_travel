@@ -34,6 +34,7 @@ import logoStripe from "../../image/stripe.png";
 import CloseIcon from "@mui/icons-material/Close";
 import { CAlert } from "@coreui/react";
 import { set } from "date-fns";
+import dateFormat from "dateformat";
 
 const PaymentContent = () => {
   const [onShowLinkInput, setOnShowLinkInput] = useState(false);
@@ -61,6 +62,7 @@ const PaymentContent = () => {
   //   const rounded = Math.round(output * 1000)/1000;
   //   return rounded.toString();
   // }
+  const newDate = new Date();
   useEffect(() => {
     const customerID = window.sessionStorage.getItem("customerID");
     axios(`http://localhost:3001/khachhang/${customerID}`).then(({ data }) =>
@@ -277,7 +279,10 @@ const PaymentContent = () => {
       },
     },
   };
-
+  const convertToDate = (dateSting) => {
+    const [day, month, year] = dateSting.split("/");
+    return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+}
   // Handle submit 2 ---------------------------------------------------------------------------------------------------------
   const handleSubmit1 = async (e) => {
     e.preventDefault();
@@ -285,7 +290,7 @@ const PaymentContent = () => {
       window.localStorage.getItem("bookTourPostRequestData")
     );
 
-    axios
+      axios
           .post("http://localhost:3001/thanhtoan", requestPosData)
           .then(({ data }) => {
             // Gửi email
@@ -358,15 +363,14 @@ const PaymentContent = () => {
                     ...idDuKhaches,
                   ],
                 })
-                .then(({ result }) => {
-                  console.log("id du khách:", ...idDuKhaches);
-                  axios.patch(`http://localhost:3001/thanhtoan/${data._id}`, {
-                    du_khach: [...idDuKhaches],
-                    trang_thai_thanh_toan: "Chưa thanh toán",
-                  });
-                  // alert("Đặt tour thành công");
-                  window.location.href =
-                    "http://localhost:3000/ordersuccessful";
+                .then(({ result }) => {            
+                    axios.patch(`http://localhost:3001/thanhtoan/${data._id}`, {
+                      du_khach: [...idDuKhaches],
+                      trang_thai_thanh_toan: "Chưa thanh toán",
+                      trang_thai_han_thanh_toan: "Còn hạn thanh toán"
+                    });
+                    window.location.href =
+                      "http://localhost:3000/ordersuccessful";
                 })
                 .catch((err) => console.log(err));
             };
@@ -384,9 +388,13 @@ const PaymentContent = () => {
   const numberGuest = JSON.parse(
     window.localStorage.getItem("bookTourInfor")
   )?.number;
+  
   const requestPosDatas = JSON.parse(
     window.localStorage.getItem("bookTourPostRequestData")
   );
+
+ const dataToursLimit = JSON.parse(
+  window.localStorage.getItem("bookTourInfor"));
 
   const handleChangeName = (e) => {
     const index = e.target.dataset.index;
@@ -459,11 +467,21 @@ const PaymentContent = () => {
                       <Space direction="vertical" style={{ width: "800px" }}>
                         <Radio value={1}>
                           Thanh toán trực tiếp
-                          {value === 1 ? (
-                            numberGuest > 5 ? (
-                              <p>Số lượng kh lớn nên cần cọc 10%</p>
-                            ) : null
-                          ) : null}
+                          {
+                            value === 1? (
+                              <>
+                              <Paper>
+                                <div style={{padding: '2rem'}}>
+                                <p></p>
+                                <label>Hạn thanh toán của bạn là: <strong>{dateFormat(dataToursLimit.ngay_thanh_toan_cuoi_cung, "dd/mm/yyyy")}</strong></label>
+                                <p></p><label>Nếu quý khách không thanh toán trước ngày này, đơn của quý khách sẽ bị hủy.</label>
+                                <p></p><label>Nếu đồng ý, hãy nhấn Đặt tour</label>
+                                </div>
+                                </Paper>
+                              </>
+                            ):null
+                          }
+                          
                         </Radio>
 
                         <Radio value={2}>

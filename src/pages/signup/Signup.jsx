@@ -69,6 +69,20 @@ const Signup = ({ login }) => {
   };
 
   const createRegisterRequest = (values) => {
+    axios 
+      .get("http://localhost:3001/taikhoan")
+      .then(({data})=> {
+        var temp;
+        for(let i=0; i<data.length; i++){
+            if(values.username == data[i].username || values.email == data[i].email){
+              temp = 1;
+            }
+            else {
+              temp = 0;
+            }
+        }
+        console.log('temp', temp)
+       if (temp === 0){
     axios
       .post("http://localhost:3001/taikhoan", {
         username: values.username,
@@ -78,7 +92,7 @@ const Signup = ({ login }) => {
         sodienthoai: values.sodienthoai,
         email: values.email,
       })
-      // console.log('thành công!!!!!!!')
+      
       .then(({ data }) => {
         // console.log(data);
         axios
@@ -99,6 +113,14 @@ const Signup = ({ login }) => {
           });
       })
       .catch((err) => console.log(err));
+       }
+       else {
+        alert('Trùng email hoặc tên tài khoản.')
+        setIsSubmit(false);
+       }
+      })
+
+    
   };
 
   const SignupSchema = Yup.object().shape({
@@ -135,22 +157,6 @@ const Signup = ({ login }) => {
           tendoanhnghiep: "",
           masothuedoanhnghiep: ""
         }}
-        // validate={(values) => {
-        //   const errors = {};
-        //   if (!values.email && !values.hoten) {
-        //     errors.email = " ";
-        //     errors.hoten=" ";
-        //   } else
-        //   if (
-        //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email),
-        //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.hoten)
-        //   )
-        //   {
-        //     errors.email = "Email không đúng định dạng";
-        //     errors.hoten = "Họ tên không được rỗng"
-        //   }
-        //   return errors;
-        // }}
         validationSchema={SignupSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
@@ -436,7 +442,7 @@ const Signup = ({ login }) => {
                           width: "100%",
                         }}
                       >
-                        {loginOn ? "Đăng nhập" : "ĐĂNG KÝ"}
+                        {loginOn?"Đăng nhập": "ĐĂNG KÝ"} 
                       </Button>
                     )}
                     <p style={{textAlign:'center', marginTop: '1rem'}}>Bạn đã có tài khoản? <a href='/login'><strong style={{color: 'blue'}}>Đăng nhập</strong></a></p>

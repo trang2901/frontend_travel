@@ -458,7 +458,7 @@ const Header = () => {
 
 
                 </ul>
-                <span style={{width: '100px'}}></span>
+                <span style={{width: '50px'}}></span>
                 
                 {customerID ? (
                   <>
