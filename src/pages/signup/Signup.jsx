@@ -72,55 +72,61 @@ const Signup = ({ login }) => {
     axios 
       .get("http://localhost:3001/taikhoan")
       .then(({data})=> {
+        
         var temp;
         for(let i=0; i<data.length; i++){
-            if(values.username == data[i].username || values.email == data[i].email){
-              temp = 1;
+            if(values.username === data[i].username){
+              alert('Tên tài khoản đã tồn tại');
+              temp = 0;
+              setIsSubmit(false)
+              break;
             }
             else {
-              temp = 0;
+              if(values.email === data[i].email){
+                alert('Email đã tồn tại')
+                temp = 0;
+                setIsSubmit(false)
+                break;
+              }
             }
-        }
-        console.log('temp', temp)
-       if (temp === 0){
-    axios
-      .post("http://localhost:3001/taikhoan", {
-        username: values.username,
-        password: values.password,
-        diachi: values.diachi,
-        hoten: values.hoten,
-        sodienthoai: values.sodienthoai,
-        email: values.email,
-      })
-      
-      .then(({ data }) => {
-        // console.log(data);
-        axios
-          .post("http://localhost:3001/khachhang", {
-            id_tai_khoan: data,
-            ho_ten: data.hoten,
-            dia_chi: data.diachi,
-            sdt: data.sodienthoai,
-            email: data.email,
-            tuoi: values.tuoi,
-            tendoanhnghiep: values.tendoanhnghiep,
-            masothuedoanhnghiep: values.masothuedoanhnghiep
+        } 
+           console.log('temp', temp) ;
+        if( temp !== 0){
+          axios
+          .post("http://localhost:3001/taikhoan", {
+            username: values.username,
+            password: values.password,
+            diachi: values.diachi,
+            hoten: values.hoten,
+            sodienthoai: values.sodienthoai,
+            email: values.email,
           })
-
+          
           .then(({ data }) => {
-            window.sessionStorage.setItem("customerID", data._id);
-            window.location.href = "/";
-          });
-      })
-      .catch((err) => console.log(err));
-       }
-       else {
-        alert('Trùng email hoặc tên tài khoản.')
-        setIsSubmit(false);
-       }
-      })
-
+            // console.log(data);
+            axios
+              .post("http://localhost:3001/khachhang", {
+                id_tai_khoan: data,
+                ho_ten: data.hoten,
+                dia_chi: data.diachi,
+                sdt: data.sodienthoai,
+                email: data.email,
+                tuoi: values.tuoi,
+                so_cmnd: values.so_cmnd,
+                tendoanhnghiep: values.tendoanhnghiep,
+                masothuedoanhnghiep: values.masothuedoanhnghiep
+              })
     
+              .then(({ data }) => {
+                window.sessionStorage.setItem("customerID", data._id);
+                window.location.href = "/";
+              });
+          })
+          .catch((err) => console.log(err));
+        }
+
+        })
+
   };
 
   const SignupSchema = Yup.object().shape({
@@ -130,7 +136,7 @@ const Signup = ({ login }) => {
     diachi: Yup.string()
       .min(2, "Địa chỉ quá ngắn")
       .required("Đây là trường bắt buộc"),
-    email: Yup.string().email("Invalid email").required("Required"),
+    email: Yup.string().email("Email khoogn hợp lệ").required("Đây là trường bắt buộc"),
     username: Yup.string()
       .min(2, "Tên người dùng không hợp lệ")
       .required("Đây là trường bắt buộc"),
@@ -142,20 +148,25 @@ const Signup = ({ login }) => {
       .min(1, "Tuổi")
       .max(2, "")
       .required("Đây là trường bắt buộc"),
+    so_cmnd: Yup.string()
+    .min(12, "Số CMND/CCCD không hợp lệ")
+    .max(12, "Số CMND/CCCD không hợp lệ")
+    .required("Đây là trường bắt buộc"),
   });
 
   const renderForm = () => (
     <>
       <Formik
         initialValues={{
-          username: "",
+          // username: "",
           password: "",
           diachi: "",
           hoten: "",
           sodienthoai: "",
           tuoi: "",
           tendoanhnghiep: "",
-          masothuedoanhnghiep: ""
+          masothuedoanhnghiep: "",
+          so_cmnd: ""
         }}
         validationSchema={SignupSchema}
         onSubmit={(values, { setSubmitting }) => {
@@ -262,6 +273,34 @@ const Signup = ({ login }) => {
                           }}
                         >
                           {errors.diachi && touched.diachi && errors.diachi}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                        
+                  <div className="row">
+                    <div className="col-md-12 mb-4 d-flex align-items-center">
+                      <div className="form-outline datepicker w-100">
+                        <label for="diachi" className="form-label">
+                          Số CMND/CCCD <sup style={{ color: "red" }}>*</sup>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control form-control-lg"
+                          id="so_cmnd"
+                          name="so_cmnd"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.so_cmnd}
+                        />
+                        <p
+                          style={{
+                            color: "red",
+                            fontStyle: "italic",
+                            fontSize: "12px",
+                          }}
+                        >
+                          {errors.so_cmnd && touched.so_cmnd && errors.so_cmnd}
                         </p>
                       </div>
                     </div>
