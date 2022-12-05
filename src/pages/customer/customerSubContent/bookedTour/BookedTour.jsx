@@ -164,10 +164,10 @@ const BookedTour = () => {
     >
       <div style={{ width: "150%", marginTop: "1rem" }}>
         <Row style={{ textAlign: "left" }}>
-          <Col span={4}>
+          <Col span={5}>
             <p>TÊN TOUR:</p>
           </Col>
-          <Col span={12}>
+          <Col span={11}>
             <strong>{tour.id_tour.ten}</strong>
           </Col>
           <Col
@@ -184,30 +184,36 @@ const BookedTour = () => {
           </Col>
         </Row>
         <Row style={{ textAlign: "left" }}>
-          <Col span={4}>
+          <Col span={5}>
             <p>NGÀY KHỞI HÀNH: </p>
           </Col>
-          <Col span={12}>
+          <Col span={11}>
             {dateFormat(tour.id_tour.khoi_hanh, "dd/mm/yyyy")}
           </Col>
         </Row>
         <Row style={{ textAlign: "left" }}>
-          <Col span={4}>
+          <Col span={5}>
             <p>SỐ LƯỢNG CHỔ: </p>
           </Col>
-          <Col span={12}>{tour.soluongcho}</Col>
+          <Col span={11}>{tour.soluongcho}</Col>
         </Row>
         <Row style={{ textAlign: "left" }}>
-          <Col span={4}>
+          <Col span={5}>
             <p>NGÀY ĐẶT TOUR: </p>
           </Col>
-          <Col span={12}>{getDate(tour.createdAt)}</Col>
+          <Col span={11}>{getDate(tour.createdAt)}</Col>
         </Row>
         <Row style={{ textAlign: "left" }}>
-          <Col span={4}>
+          <Col span={5}>
             <p>THÀNH TIỀN: </p>
           </Col>
-          <Col span={12}>{tour.thanh_tien}</Col>
+          <Col span={11}>{tour.thanh_tien}</Col>
+        </Row>
+        <Row style={{ textAlign: "left" }}>
+          <Col span={5}>
+            <p>TRẠNG THÁI THANH TOÁN: </p>
+          </Col>
+          <Col span={11}><strong style={{color: tour.trang_thai_thanh_toan === "Chưa thanh toán"?'red':'green'}}>{tour.trang_thai_thanh_toan}</strong></Col>
         </Row>
         <Row style={{ textAlign: "left" }}>
           <Col span={4}>
@@ -219,7 +225,10 @@ const BookedTour = () => {
               }
               onClick={() => localStorage.setItem("id", tour._id)}
             >
-              {tour.trang_thai_duyet === "Chưa duyệt" ? "" : "Xuất hóa đơn"}
+              {
+                tour.trang_thai_thanh_toan === "Chưa thanh toán"?null:
+
+                tour.trang_thai_duyet === "Chưa duyệt"? "" : "Xuất hóa đơn"}
             </a>
           </Col>
           <Col span={12}>
@@ -244,7 +253,9 @@ const BookedTour = () => {
               textTransform: "uppercase",
             }}
           >
-            {tour.trang_thai_duyet === "ĐÃ DUYỆT" ? (
+            {
+            
+            tour.trang_thai_duyet === "ĐÃ DUYỆT"? (
               ""
             ) : (
               <button

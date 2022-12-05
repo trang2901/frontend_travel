@@ -93,7 +93,7 @@ const PaymentContent = () => {
   useEffect(() => {
     var temp;
     for (let i = 0; i < accompanyData.length; i++) {
-      if (accompanyData[i].ho_ten !== "" && accompanyData[i].sdt !== "") {
+      if (accompanyData[i].ho_ten !== "" && accompanyData[i].sdt !== "" && accompanyData[i].so_cmnd !=="") {
         temp = 1;
       } else {
         temp = 0;
@@ -233,6 +233,7 @@ const PaymentContent = () => {
                     axios.patch(`http://localhost:3001/thanhtoan/${data._id}`, {
                       du_khach: [...idDuKhaches],
                       trang_thai_thanh_toan: "Đã thanh toán",
+                      trang_thai_han_thanh_toan: " "
                     });
                     window.location.href =
                       "http://localhost:3000/ordersuccessful";
@@ -367,7 +368,7 @@ const PaymentContent = () => {
                     axios.patch(`http://localhost:3001/thanhtoan/${data._id}`, {
                       du_khach: [...idDuKhaches],
                       trang_thai_thanh_toan: "Chưa thanh toán",
-                      trang_thai_han_thanh_toan: "Còn hạn thanh toán"
+                      trang_thai_han_thanh_toan: " "
                     });
                     window.location.href =
                       "http://localhost:3000/ordersuccessful";
@@ -396,25 +397,6 @@ const PaymentContent = () => {
  const dataToursLimit = JSON.parse(
   window.localStorage.getItem("bookTourInfor"));
 
-  const handleChangeName = (e) => {
-    const index = e.target.dataset.index;
-    const tempArray = [...accompanyData];
-    tempArray[index].ho_ten = e.target.value;
-    setAccompanyData(tempArray);
-  };
-
-  const handleChangePhone = (e) => {
-    const index = e.target.dataset.index;
-    const tempArray = [...accompanyData];
-    tempArray[index].sdt = e.target.value;
-    setAccompanyData(tempArray);
-  };
-  const handleChangeAge = (e) => {
-    const index = e.target.dataset.index;
-    const tempArray = [...accompanyData];
-    tempArray[index].tuoi = e.target.value;
-    setAccompanyData(tempArray);
-  };
 
   return (
     <>
@@ -441,6 +423,9 @@ const PaymentContent = () => {
                 {/* accompany info ------------------------------------------------------------------------------------------------------------*/}
                 <div>
                 <p style={{textAlign: 'center', marginTop: '2rem', marginBottom: '-0.5rem', color: 'grey', fontWeight: '400'}}>Hãy nhập đủ thông tin của từng khách hàng trước khi sang bước kế tiếp!</p>
+                <p style={{textAlign: 'center', marginTop: '1rem', marginBottom: '-0.5rem', color: 'red', fontWeight: '400'}}><strong>Lưu ý: </strong><label style={{color: 'grey'}}>Quý khách phải nhập đầy đủ HỌ TÊN, SỐ ĐIỆN THOẠI, SỐ CMND/CCCD.</label></p>
+                <p style={{textAlign: 'center', marginTop: '1rem', marginBottom: '-0.5rem', color: 'grey', fontWeight: '400'}}> Nếu Quý khách từ 14 tuổi chưa có CMND hoặc CCCD, hãy nhập MÃ ĐỊNH DANH được ghi trên giấy khai sinh. </p>
+                <p style={{textAlign: 'center', marginTop: '1rem', marginBottom: '-0.5rem', color: 'grey', fontWeight: '400'}}>Đến ngày khởi hành, quý khách phải xuất trình giấy tờ tùy thân hoặc giấy khai sinh(Đối với khách hàng từ 14 tuổi chưa có CMND/CCCD) để chúng tôi kiểm tra thông tin</p> 
                 <AccompanyInfor
                   onShowLinkInput={onShowLinkInput}
                   setOnShowLink={setOnShowLinkInput}
@@ -473,9 +458,9 @@ const PaymentContent = () => {
                               <Paper>
                                 <div style={{padding: '2rem'}}>
                                 <p></p>
-                                <label>Hạn thanh toán của bạn là: <strong>{dateFormat(dataToursLimit.ngay_thanh_toan_cuoi_cung, "dd/mm/yyyy")}</strong></label>
-                                <p></p><label>Nếu quý khách không thanh toán trước ngày này, đơn của quý khách sẽ bị hủy.</label>
-                                <p></p><label>Nếu đồng ý, hãy nhấn Đặt tour</label>
+                                <label>Quý khách phải thanh toán đủ số tiền trước ngày: <strong>{dateFormat(dataToursLimit.ngay_thanh_toan_cuoi_cung, "dd/mm/yyyy")}</strong></label>
+                                <p></p><label>Khi đến ngày thanh toán đủ 100% tổng giá trị tiền tour, nếu Quý khách không thanh toán đúng hạn và đúng số tiền được xem như Quý khách tự ý huỷ tour.</label>
+                                <p></p><label>Nếu Quý khách đồng ý với quy định trên, hãy nhấn Đặt tour</label>
                                 </div>
                                 </Paper>
                               </>

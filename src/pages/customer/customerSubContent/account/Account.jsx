@@ -30,6 +30,9 @@ const Account = () => {
       case "dia_chi":
         setCustomerData({ ...customerData, dia_chi: e.target.value });
         break;
+      case "so_cmnd":
+        setCustomerData({ ...customerData, so_cmnd: e.target.value });
+        break;
     }
   };
 
@@ -67,6 +70,14 @@ const Account = () => {
           }
         );
         break;
+        case "so_cmnd":
+          axios.put(
+            `http://localhost:3001/khachhang/${customerID}`,
+            {
+              so_cmnd: customerData.so_cmnd,
+            }
+          );
+          break;
     }
   };
 
@@ -108,6 +119,26 @@ const Account = () => {
             onBlur={handleUpdate}
             label="Họ tên"
           /> */}
+            <Row>
+            <Col span={4}>
+              <label className="lb1">Số CMND/CCCD: </label>
+            </Col>
+            <Col span={18}>
+              <Input
+                id="so_cmnd"
+                value={customerData.so_cmnd || ""}
+                onChange={handleChange}
+                onBlur={handleUpdate}
+                type="textarea"
+                name="name"
+                size="large"
+                width="20px"
+                maxLength="200px"
+                style={{background: 'none', borderTop: 'none', borderLeft: 'none', borderRight: 'none'}}
+              />
+            </Col>
+          </Row>
+          <p></p>
           <Row>
             <Col span={4}>
               <label className="lb1">SỐ ĐIỆN THOẠI: </label>

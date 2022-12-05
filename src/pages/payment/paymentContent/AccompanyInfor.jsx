@@ -29,6 +29,15 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
     setAccompanyData(tempArray);
   };
 
+
+  const handleChangeCMND = (e) => {
+    const index = e.target.dataset.index;
+    const tempArray = [...accompanyData];
+    tempArray[index].so_cmnd= e.target.value;
+    setAccompanyData(tempArray);
+  };
+
+
   const renderFormAccompany = () => {
     return Array.from({ length: numberGuest }, (item, index) => (
       <div className="accompany--input">
@@ -46,9 +55,7 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
           required
           variant="standard" 
         />
-        {/* {
-          accompanyData[index]?.ho_ten === ""?<p style={{color: 'red', fontStyle: 'italic',fontSize:'14px' }}>Không để trống</p>: null
-        } */}
+       
         
         <TextField
           type="number"
@@ -62,9 +69,7 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
           variant="standard" 
           required
         />
-        {/* {
-          accompanyData[index]?.sdt === ""?<p style={{color: 'red', fontStyle: 'italic',fontSize:'14px' }}>Không để trống</p>: null
-        } */}
+      
         <TextField
           type="number"
           // name="sdt"
@@ -72,14 +77,25 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
           sx={{ maxWidth: "200px" }}
           value={accompanyData[index]?.tuoi || ""}
           onChange={handleChangeAge}
-          inputProps={{ "data-index": index }}
+          inputProps={{"data-index": index }}
           style= {{borderRadius: 0}}
           required
           variant="standard" 
         />
-        {/* {
-          accompanyData[index]?.tuoi === ""?<p style={{color: 'red', fontStyle: 'italic',fontSize:'14px' }}>Không để trống</p>: null
-        } */}
+
+<TextField
+          type="number"
+          // name="sdt"
+          label="Số CMND/CCCD"
+          sx={{ maxWidth: "200px" }}
+          value={accompanyData[index]?.so_cmnd || ""}
+          onChange={handleChangeCMND}
+          inputProps={{"data-index": index }}
+          style= {{borderRadius: 0}}
+          required
+          variant="standard" 
+        />
+       
       </div>
     ));
   };
