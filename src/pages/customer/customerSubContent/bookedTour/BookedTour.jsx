@@ -216,6 +216,14 @@ const BookedTour = () => {
           <Col span={11}><strong style={{color: tour.trang_thai_thanh_toan === "Chưa thanh toán"?'red':'green'}}>{tour.trang_thai_thanh_toan}</strong></Col>
         </Row>
         <Row style={{ textAlign: "left" }}>
+          <Col span={5}>
+            <p>HẠN THANH TOÁN: </p>
+          </Col>
+          <Col span={11}><strong>{tour.trang_thai_thanh_toan === "Chưa thanh toán"? dateFormat(tour.id_tour.ngay_thanh_toan_cuoi_cung, 'dd/mm/yyyy'):null}</strong></Col>
+        </Row>
+        {tour.trang_thai_thanh_toan === "Chưa thanh toán"?<p style={{color: '#f97150'}}>Lưu ý: Quý khách phải thanh toán 100% tiền tour trước ngày Hạn thanh toán. Nếu không thanh toán trước ngày này, chúng tôi sẽ xem như quý khách tự ý hủy tour</p>
+        :<p></p>}
+        <Row style={{ textAlign: "left" }}>
           <Col span={4}>
             <a
               href={
@@ -228,7 +236,7 @@ const BookedTour = () => {
               {
                 tour.trang_thai_thanh_toan === "Chưa thanh toán"?null:
 
-                tour.trang_thai_duyet === "Chưa duyệt"? "" : "Xuất hóa đơn"}
+                tour.trang_thai_duyet === "Chưa duyệt"? "" : "In hóa đơn"}
             </a>
           </Col>
           <Col span={12}>
@@ -277,7 +285,7 @@ const BookedTour = () => {
             )}
           </Col>
           <Modal
-            title="Basic Modal"
+            title=""
             open={isModalOpen}
             onOk={() => deleteBill(idToDelete)}
             onCancel={handleCancel}

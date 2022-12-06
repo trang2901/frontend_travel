@@ -78,12 +78,14 @@ const PaymentContent = () => {
           ho_ten: customerData.ho_ten,
           sdt: customerData.sdt,
           tuoi: customerData.tuoi,
+          so_cmnd: customerData.so_cmnd,
         });
       else
         arrayTemp.push({
           ho_ten: "",
           sdt: "",
           tuoi: "",
+          so_cmnd: "",
         });
     });
     setAccompanyData(arrayTemp);
@@ -93,7 +95,11 @@ const PaymentContent = () => {
   useEffect(() => {
     var temp;
     for (let i = 0; i < accompanyData.length; i++) {
-      if (accompanyData[i].ho_ten !== "" && accompanyData[i].sdt !== "" && accompanyData[i].so_cmnd !=="") {
+      if (
+        accompanyData[i].ho_ten !== "" &&
+        accompanyData[i].sdt !== "" &&
+        accompanyData[i].so_cmnd !== ""
+      ) {
         temp = 1;
       } else {
         temp = 0;
@@ -102,14 +108,18 @@ const PaymentContent = () => {
     setStep(temp);
 
     var stepTemp;
-    if(customerData.ho_ten !== "" && customerData.dia_chi !="" && customerData.email!=="" && customerData.sdt){
+    if (
+      customerData.ho_ten !== "" &&
+      customerData.dia_chi != "" &&
+      customerData.email !== "" &&
+      customerData.sdt
+    ) {
       stepTemp = 1;
-    }
-    else {
+    } else {
       stepTemp = 0;
     }
 
-    setAcStep(stepTemp)
+    setAcStep(stepTemp);
   });
 
   const handleButtonBack = () => {
@@ -144,18 +154,21 @@ const PaymentContent = () => {
     if (!error) {
       try {
         const { id } = paymentMethod;
-        const response = await axios.post("http://localhost:3001/payment", {
-          amount: thanhTien,
-          id,
-          des:
-            "Thanh toán cho Khách hàng: " +
-            customerData.ho_ten +
-            "- Mã hóa đơn:  " +
-            requestPosData.id_khach_hang,
-        });
+        const response = await axios.post(
+          "http://localhost:3001/payment",
+          {
+            amount: thanhTien,
+            id,
+            des:
+              "Thanh toán cho Khách hàng: " +
+              customerData.ho_ten +
+              " - Mã khách hàng:  " +
+              requestPosData.id_khach_hang
+          }
+        );
         if (response.data.success) {
           console.log("Successful payment");
-          alert("thanh toán online thành công!");
+          // alert("thanh toán online thành công!");
           setSuccess(true);
 
           if (customerData.email !== "") {
@@ -202,7 +215,7 @@ const PaymentContent = () => {
                   ngaydattour,
                 })
                 .then((res) => {
-                  alert("Email đã được gửi");
+                  // alert("Email đã được gửi");
                   setLoading(false);
                   console.log(res);
                   // window.location.reload();
@@ -212,50 +225,52 @@ const PaymentContent = () => {
                   setLoading(false);
                 });
             } else {
-              alert("Compose Email");
+              // alert("Compose Email");
             }
           } else {
-            alert("Please fill all required filled");
+            // alert("Please fill all required filled");
           }
-
           axios
-            .post("http://localhost:3001/thanhtoan", requestPosData)
-            .then(({ data }) => {
-              const patchDuKhachTour = (idDuKhaches) => {
-                axios
-                  .patch(`http://localhost:3001/tour/${tourData.id}`, {
-                    du_khach: [
-                      ...[...tourData.du_khach].map((item) => item["_id"]),
-                      ...idDuKhaches,
-                    ],
-                  })
-                  .then(({ result }) => {
-                    axios.patch(`http://localhost:3001/thanhtoan/${data._id}`, {
-                      du_khach: [...idDuKhaches],
-                      trang_thai_thanh_toan: "Đã thanh toán",
-                      trang_thai_han_thanh_toan: " "
-                    });
-                    window.location.href =
-                      "http://localhost:3000/ordersuccessful";
-                  })
-                  .catch((err) => console.log(err));
-              };
-
+          .post("http://localhost:3001/thanhtoan", requestPosData)
+          .then(({ data }) => {
+            const patchDuKhachTour = (idDuKhaches) => {
               axios
-                .post(`http://localhost:3001/dukhach`, accompanyData)
-                .then(({ data }) => patchDuKhachTour(data))
+                .patch(`http://localhost:3001/tour/${tourData.id}`, {
+                  du_khach: [
+                    ...[...tourData.du_khach].map((item) => item["_id"]),
+                    ...idDuKhaches,
+                  ],
+                })
+    
+                .then(({ result }) => {
+                  axios.patch(`http://localhost:3001/thanhtoan/${data._id}`, {
+                    du_khach: [...idDuKhaches],
+                    trang_thai_thanh_toan: "Đã thanh toán",
+                    trang_thai_han_thanh_toan: " ",
+                  });
+                  window.location.href = "http://localhost:3000/ordersuccessful";
+                })
                 .catch((err) => console.log(err));
-            })
-            .catch((err) => console.log(err));
+            };
+    
+            axios
+              .post(`http://localhost:3001/dukhach`, accompanyData)
+              .then(({ data }) => patchDuKhachTour(data))
+              .catch((err) => console.log(err));
+          })
+          .catch((err) => console.log(err));
+
         }
       } catch (error) {
         console.log("Error", error);
-        alert("Thanh toán thất bại");
+        // alert("Thanh toán thất bại");
       }
     } else {
       console.log(error.message);
       alert(error.message);
     }
+
+   
 
     // ------Stripe==================================================================================================================
 
@@ -283,7 +298,7 @@ const PaymentContent = () => {
   const convertToDate = (dateSting) => {
     const [day, month, year] = dateSting.split("/");
     return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-}
+  };
   // Handle submit 2 ---------------------------------------------------------------------------------------------------------
   const handleSubmit1 = async (e) => {
     e.preventDefault();
@@ -291,97 +306,94 @@ const PaymentContent = () => {
       window.localStorage.getItem("bookTourPostRequestData")
     );
 
-      axios
-          .post("http://localhost:3001/thanhtoan", requestPosData)
-          .then(({ data }) => {
-            // Gửi email
-            if (customerData.email !== "") {
-              if (customerData.ho_ten !== "") {
-                e.preventDefault();
-                setLoading(true);
-                const email = customerData.email;
-                const hoten = customerData.ho_ten;
-                const sodienthoai = customerData.sdt;
-                const newDate = new Date();
-                const ngaydattour =
-                  newDate.getDate() +
-                  "/" +
-                  newDate.getMonth() +
-                  "/" +
-                  newDate.getFullYear() +
-                  " " +
-                  "-" +
-                  " " +
-                  newDate.getHours() +
-                  ":" +
-                  newDate.getMinutes() +
-                  ":" +
-                  newDate.getSeconds();
-                const tongtien = formatPrice(
-                  parseFloat(tourData.gia.replaceAll(".", "")) +
-                    parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
-                );
-                const body = {
-                  email,
-                  hoten,
-                  sodienthoai,
-                  tongtien,
-                  ngaydattour,
-                };
-
-                axios
-                  .post("http://localhost:3001/mail", {
-                    email,
-                    hoten,
-                    sodienthoai,
-                    tongtien,
-                    ngaydattour,
-                  })
-                  .then((res) => {
-                    alert("Email đã được gửi");
-                    setLoading(false);
-                    console.log(res);
-                    // window.location.reload();
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                    setLoading(false);
-                  });
-
-              }
-              else {
-                alert("Bạn chưa điền họ tên");
-              }
-            } else {
-              alert("Bạn chưa điền email");
-            }
-
-            const patchDuKhachTour = (idDuKhaches) => {
-              axios
-                .patch(`http://localhost:3001/tour/${tourData.id}`, {
-                  du_khach: [
-                    ...[...tourData.du_khach].map((item) => item["_id"]),
-                    ...idDuKhaches,
-                  ],
-                })
-                .then(({ result }) => {            
-                    axios.patch(`http://localhost:3001/thanhtoan/${data._id}`, {
-                      du_khach: [...idDuKhaches],
-                      trang_thai_thanh_toan: "Chưa thanh toán",
-                      trang_thai_han_thanh_toan: " "
-                    });
-                    window.location.href =
-                      "http://localhost:3000/ordersuccessful";
-                })
-                .catch((err) => console.log(err));
+    axios
+      .post("http://localhost:3001/thanhtoan", requestPosData)
+      .then(({ data }) => {
+        // Gửi email
+        if (customerData.email !== "") {
+          if (customerData.ho_ten !== "") {
+            e.preventDefault();
+            setLoading(true);
+            const email = customerData.email;
+            const hoten = customerData.ho_ten;
+            const sodienthoai = customerData.sdt;
+            const newDate = new Date();
+            const ngaydattour =
+              newDate.getDate() +
+              "/" +
+              newDate.getMonth() +
+              "/" +
+              newDate.getFullYear() +
+              " " +
+              "-" +
+              " " +
+              newDate.getHours() +
+              ":" +
+              newDate.getMinutes() +
+              ":" +
+              newDate.getSeconds();
+            const tongtien = formatPrice(
+              parseFloat(tourData.gia.replaceAll(".", "")) +
+                parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
+            );
+            const body = {
+              email,
+              hoten,
+              sodienthoai,
+              tongtien,
+              ngaydattour,
             };
 
             axios
-              .post(`http://localhost:3001/dukhach`, accompanyData)
-              .then(({ data }) => patchDuKhachTour(data))
-              .catch((err) => console.log(err));
-          })
+              .post("http://localhost:3001/mail", {
+                email,
+                hoten,
+                sodienthoai,
+                tongtien,
+                ngaydattour,
+              })
+              .then((res) => {
+                alert("Email đã được gửi");
+                setLoading(false);
+                console.log(res);
+                // window.location.reload();
+              })
+              .catch((err) => {
+                console.log(err);
+                setLoading(false);
+              });
+          } else {
+            alert("Bạn chưa điền họ tên");
+          }
+        } else {
+          alert("Bạn chưa điền email");
+        }
+
+        const patchDuKhachTour = (idDuKhaches) => {
+          axios
+            .patch(`http://localhost:3001/tour/${tourData.id}`, {
+              du_khach: [
+                ...[...tourData.du_khach].map((item) => item["_id"]),
+                ...idDuKhaches,
+              ],
+            })
+            .then(({ result }) => {
+              axios.patch(`http://localhost:3001/thanhtoan/${data._id}`, {
+                du_khach: [...idDuKhaches],
+                trang_thai_thanh_toan: "Chưa thanh toán",
+                trang_thai_han_thanh_toan: " ",
+              });
+              window.location.href = "http://localhost:3000/ordersuccessful";
+            })
+            .catch((err) => console.log(err));
+        };
+
+        axios
+          .post(`http://localhost:3001/dukhach`, accompanyData)
+          .then(({ data }) => patchDuKhachTour(data))
           .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
   };
   //User data----------------------------------------------------------------------------------------------------------------------
   const userData = {};
@@ -389,14 +401,14 @@ const PaymentContent = () => {
   const numberGuest = JSON.parse(
     window.localStorage.getItem("bookTourInfor")
   )?.number;
-  
+
   const requestPosDatas = JSON.parse(
     window.localStorage.getItem("bookTourPostRequestData")
   );
 
- const dataToursLimit = JSON.parse(
-  window.localStorage.getItem("bookTourInfor"));
-
+  const dataToursLimit = JSON.parse(
+    window.localStorage.getItem("bookTourInfor")
+  );
 
   return (
     <>
@@ -419,30 +431,61 @@ const PaymentContent = () => {
                   customerData={customerData}
                   setCustomerData={setCustomerData}
                 />
-                
+
                 {/* accompany info ------------------------------------------------------------------------------------------------------------*/}
                 <div>
-                <p style={{textAlign: 'center', marginTop: '2rem', marginBottom: '-0.5rem', color: 'grey', fontWeight: '400'}}>Hãy nhập đủ thông tin của từng khách hàng trước khi sang bước kế tiếp!</p>
-                <p style={{textAlign: 'center', marginTop: '1rem', marginBottom: '-0.5rem', color: 'red', fontWeight: '400'}}><strong>Lưu ý: </strong><label style={{color: 'grey'}}>Quý khách phải nhập đầy đủ HỌ TÊN, SỐ ĐIỆN THOẠI, SỐ CMND/CCCD.</label></p>
-                <p style={{textAlign: 'center', marginTop: '1rem', marginBottom: '-0.5rem', color: 'grey', fontWeight: '400'}}> Nếu Quý khách từ 14 tuổi chưa có CMND hoặc CCCD, hãy nhập MÃ ĐỊNH DANH được ghi trên giấy khai sinh. </p>
-                <p style={{textAlign: 'center', marginTop: '1rem', marginBottom: '-0.5rem', color: 'grey', fontWeight: '400'}}>Đến ngày khởi hành, quý khách phải xuất trình giấy tờ tùy thân hoặc giấy khai sinh(Đối với khách hàng từ 14 tuổi chưa có CMND/CCCD) để chúng tôi kiểm tra thông tin</p> 
-                <AccompanyInfor
-                  onShowLinkInput={onShowLinkInput}
-                  setOnShowLink={setOnShowLinkInput}
-                  customerData={customerData}
-                  numberGuest={numberGuest}
-                  accompanyData={accompanyData}
-                  setAccompanyData={setAccompanyData}
-                />
-              </div>  
+                  <p
+                    style={{
+                      textAlign: "center",
+                      marginTop: "2rem",
+                      marginBottom: "-0.5rem",
+                      color: "grey",
+                      fontWeight: "400",
+                    }}
+                  >
+                    Hãy nhập đủ thông tin của từng khách hàng trước khi sang
+                    bước kế tiếp!
+                  </p>
+                  <div
+                    style={{
+                      marginLeft: "12rem",
+                      marginTop: "1rem",
+                      marginRight: "5rem",
+                    }}
+                  >
+                    <strong style={{ color: "red", fontSize: "18px" }}>
+                      Lưu ý:{" "}
+                    </strong>
+                    <label style={{ color: "grey" }}>
+                      Quý khách phải nhập đầy đủ HỌ TÊN, SỐ ĐIỆN THOẠI, SỐ
+                      CMND/CCCD.
+                    </label>
+                    <label style={{ color: "grey", marginTop: "-1rem" }}>
+                      Nếu Quý khách từ 14 tuổi chưa có CMND hoặc CCCD, hãy nhập
+                      MÃ ĐỊNH DANH được ghi trên giấy khai sinh.
+                    </label>
+                    <label style={{ color: "grey" }}>
+                      Đến ngày khởi hành, quý khách phải xuất trình giấy tờ tùy
+                      thân hoặc giấy khai sinh( Đối với khách hàng từ 14 tuổi
+                      chưa có CMND/CCCD) để chúng tôi kiểm tra thông tin trước
+                      khi khởi hành.
+                    </label>
+                  </div>
+                  <AccompanyInfor
+                    onShowLinkInput={onShowLinkInput}
+                    setOnShowLink={setOnShowLinkInput}
+                    customerData={customerData}
+                    numberGuest={numberGuest}
+                    accompanyData={accompanyData}
+                    setAccompanyData={setAccompanyData}
+                  />
+                </div>
 
                 {/* end------------------------------------------------------------------------------------------------------------------------ */}
                 {/* <StripeContainer /> */}
                 {/* <PaymentForm /> */}
 
                 <div className="hinhthucTT">
-
-                
                   <p>CHỌN PHƯƠNG THỨC THANH TOÁN</p>
                   <Container>
                     <label>
@@ -452,21 +495,37 @@ const PaymentContent = () => {
                       <Space direction="vertical" style={{ width: "800px" }}>
                         <Radio value={1}>
                           Thanh toán trực tiếp
-                          {
-                            value === 1? (
-                              <>
+                          {value === 1 ? (
+                            <>
                               <Paper>
-                                <div style={{padding: '2rem'}}>
-                                <p></p>
-                                <label>Quý khách phải thanh toán đủ số tiền trước ngày: <strong>{dateFormat(dataToursLimit.ngay_thanh_toan_cuoi_cung, "dd/mm/yyyy")}</strong></label>
-                                <p></p><label>Khi đến ngày thanh toán đủ 100% tổng giá trị tiền tour, nếu Quý khách không thanh toán đúng hạn và đúng số tiền được xem như Quý khách tự ý huỷ tour.</label>
-                                <p></p><label>Nếu Quý khách đồng ý với quy định trên, hãy nhấn Đặt tour</label>
+                                <div style={{ padding: "2rem" }}>
+                                  <p></p>
+                                  <label>
+                                    Quý khách phải thanh toán đủ số tiền trước
+                                    ngày:{" "}
+                                    <strong>
+                                      {dateFormat(
+                                        dataToursLimit.ngay_thanh_toan_cuoi_cung,
+                                        "dd/mm/yyyy"
+                                      )}
+                                    </strong>
+                                  </label>
+                                  <p></p>
+                                  <label>
+                                    Khi đến ngày thanh toán đủ 100% tổng giá trị
+                                    tiền tour, nếu Quý khách không thanh toán
+                                    đúng hạn và đúng số tiền được xem như Quý
+                                    khách tự ý huỷ tour.
+                                  </label>
+                                  <p></p>
+                                  <label>
+                                    Nếu Quý khách đồng ý với quy định trên, hãy
+                                    nhấn Đặt tour
+                                  </label>
                                 </div>
-                                </Paper>
-                              </>
-                            ):null
-                          }
-                          
+                              </Paper>
+                            </>
+                          ) : null}
                         </Radio>
 
                         <Radio value={2}>
@@ -493,13 +552,15 @@ const PaymentContent = () => {
                                     </label>
                                     <br />
                                     <label>
-                                      <strong>{
-                                        requestPosDatas.thanh_tien
-                                      }</strong>
+                                      <strong>
+                                        {requestPosDatas.thanh_tien}
+                                      </strong>
                                     </label>{" "}
                                     <br />
                                     <label>
-                                    Hãy nhập số thẻ, ngày hết hạn (MM/YY), mã xác minh thẻ (CVC) và mã bưu chính (ZIP) để hoàn tất thanh toán!
+                                      Hãy nhập số thẻ, ngày hết hạn (MM/YY), mã
+                                      xác minh thẻ (CVC) và mã bưu chính (ZIP)
+                                      để hoàn tất thanh toán!
                                     </label>
                                     <br />
                                   </Col>
@@ -527,7 +588,10 @@ const PaymentContent = () => {
                   disabled={activedStep === 0}
                   onClick={handleButtonBack}
                   variant="contained"
-                  style={{background: '#08183c', color: '#f97150'}}
+                  style={{
+                    background: activedStep === 0 ? "lightgrey" : "#08183c",
+                    color: activedStep === 0 ? "darkgrey" : "#f97150",
+                  }}
                 >
                   Trở về
                 </Button>
@@ -536,29 +600,36 @@ const PaymentContent = () => {
                     <Button
                       onClick={value === 1 ? handleSubmit1 : handleSubmit}
                       variant="contained"
-                      style={{background: '#08183c', color: '#f97150'}}
+                      style={{ background: "#08183c", color: "#f97150" }}
                     >
                       Đặt tour
                     </Button>
                   </>
-                ) : 
-                activedStep === 1 ? (
-                    <Button onClick={handleButtonNext} variant="contained" 
-                      disabled= {step ===1? false : true}
-                      style={{background: step === 1?'#08183c': 'lightgray', color:step === 1?'#f97150':'darkgray'}}
-                    >
-                      Tiếp tục
-                    </Button>
-                ):
-                <Button onClick={handleButtonNext} 
-                variant="contained"  
-                style={{background: acStep === 1?'#08183c': 'lightgray', color: acStep === 1?'#f97150':'darkgray'}}
-                disabled = {acStep === 1?false:true}
-                >
-                Tiếp tục
-              </Button>
-                
-                }
+                ) : activedStep === 1 ? (
+                  <Button
+                    onClick={handleButtonNext}
+                    variant="contained"
+                    disabled={step === 1 ? false : true}
+                    style={{
+                      background: step === 1 ? "#08183c" : "lightgray",
+                      color: step === 1 ? "#f97150" : "darkgray",
+                    }}
+                  >
+                    Tiếp tục
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleButtonNext}
+                    variant="contained"
+                    style={{
+                      background: acStep === 1 ? "#08183c" : "lightgray",
+                      color: acStep === 1 ? "#f97150" : "darkgray",
+                    }}
+                    disabled={acStep === 1 ? false : true}
+                  >
+                    Tiếp tục
+                  </Button>
+                )}
               </div>
             </form>
           </div>

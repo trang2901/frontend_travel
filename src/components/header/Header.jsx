@@ -9,6 +9,7 @@ import { Menu, Close } from "@mui/icons-material";
 import { Row, Col } from "antd";
 import logo from "../../image/DORIS_TOURS.png";
 import { red } from "@mui/material/colors";
+
 const Header = () => {
   const customerID = useContext(LoginContext);
   const [customerName, setCustomerName] = useState("");
@@ -394,7 +395,7 @@ const Header = () => {
                       GIỚI THIỆU
                     </a>
                   </li>
-                  <li className="nav-item" role="presentation">
+                  {/* <li className="nav-item" role="presentation">
                     <a
                       className="nav-link"
                       href="/aboutus"
@@ -438,7 +439,7 @@ const Header = () => {
                     >
                       MIỀN ĐÔNG NAM BỘ
                     </a>
-                  </li>
+                  </li> */}
                   {/* TIN TỨC Ở ĐÂY======================================================================================================== */}
                   {/* <li className="nav-item" role="presentation">
                     <a
@@ -458,7 +459,8 @@ const Header = () => {
 
 
                 </ul>
-                <span style={{width: '50px'}}></span>
+                <span style={{width: '500px'}}></span>
+             
                 
                 {customerID ? (
                   <>
