@@ -166,6 +166,7 @@ const PaymentContent = () => {
               requestPosData.id_khach_hang
           }
         );
+        
         if (response.data.success) {
           console.log("Successful payment");
           // alert("thanh toán online thành công!");
@@ -458,18 +459,19 @@ const PaymentContent = () => {
                     </strong>
                     <label style={{ color: "grey" }}>
                       Quý khách phải nhập đầy đủ HỌ TÊN, SỐ ĐIỆN THOẠI, SỐ
-                      CMND/CCCD.
-                    </label>
-                    <label style={{ color: "grey", marginTop: "-1rem" }}>
-                      Nếu Quý khách từ 14 tuổi chưa có CMND hoặc CCCD, hãy nhập
+                      CMND/CCCD.Nếu Quý khách dưới 14 tuổi chưa có CMND hoặc CCCD, hãy nhập
                       MÃ ĐỊNH DANH được ghi trên giấy khai sinh.
                     </label>
                     <label style={{ color: "grey" }}>
-                      Đến ngày khởi hành, quý khách phải xuất trình giấy tờ tùy
-                      thân hoặc giấy khai sinh( Đối với khách hàng từ 14 tuổi
-                      chưa có CMND/CCCD) để chúng tôi kiểm tra thông tin trước
+                      - Đến ngày khởi hành, quý khách phải xuất trình giấy tờ tùy
+                      thân để chúng tôi kiểm tra thông tin trước
                       khi khởi hành.
                     </label>
+                    <label style={{ color: "grey" }}>- Quý khách (dưới 14 tuổi) khi đi du lịch mang theo giấy khai sinh 
+                      (bản chính hoặc sao y có thị thực còn hạn sử dụng) để làm thủ tục và kiểm tra thông tin.</label>
+                      <label style={{ color: "grey" }}> - Quý khách phải nhập ĐẦY ĐỦ và CHÍNH XÁC thông tin của từng khách hàng tham gia. Đây là trách nhiệm thuộc về khách hàng. 
+                      Đến ngày khởi hành, chúng tôi sẽ kiểm tra thông tin từng khách hàng. Nếu thông tin không chính xác, Quý khách sẽ không được tham gia tour. 
+                      Dế Mèn Tours sẽ không chịu trách nhiệm và sẽ không hoàn trả bất kỳ chi phí nào!</label>
                   </div>
                   <AccompanyInfor
                     onShowLinkInput={onShowLinkInput}
@@ -548,7 +550,7 @@ const PaymentContent = () => {
                                 >
                                   <Col span={18} style={{ marginTop: "3rem" }}>
                                     <label>
-                                      Bạn vừa đặt đơn hàng với số tiền là:
+                                      Quý khách vừa đặt đơn với số tiền là:
                                     </label>
                                     <br />
                                     <label>
@@ -557,6 +559,14 @@ const PaymentContent = () => {
                                       </strong>
                                     </label>{" "}
                                     <br />
+                                  <label style={{color: 'red'}}>
+                                    <strong>Một số lưu ý:</strong>
+                                  </label>
+                                    <label>
+                                      Sau khi thanh toán thành công, sẽ mất khoảng thời gian trể nhất là 1 ngày để chúng tôi kiểm tra thông tin thanh toán.
+                                      Nếu Quý khách hủy tour, phí hủy tour sẽ là 100% tiền tour.
+                                    </label>
+                                    <label></label>
                                     <label>
                                       Hãy nhập số thẻ, ngày hết hạn (MM/YY), mã
                                       xác minh thẻ (CVC) và mã bưu chính (ZIP)

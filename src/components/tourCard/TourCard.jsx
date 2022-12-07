@@ -86,7 +86,7 @@ const setSocho = (socho) => {
             alt=""
           />
           <div className="tourCard--Content">
-            {/* <p>Mã tour: {tourData.id}</p> */}
+           
             {/* <small>{tourData.thoigian}</small> */}
             <h3>{tourData.ten}</h3>
            <p className="trangthai" style={{ color: trangthai==='Đã diễn ra'?"red": "green"}}>{trangthai}</p>
@@ -96,7 +96,7 @@ const setSocho = (socho) => {
             {tourData.khoi_hanh}
               </h2> */}
               
-              
+              <h2>Mã tour:  <strong style={{color: '#08183c', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>{tourData._id}</strong></h2>
               <h2>Ngày khởi hành: <strong style={{color: '#08183c', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>{date_format}</strong></h2>
               <h2>Nơi khởi hành:  <strong style={{color: '#08183c', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>{tourData.diemkhoihanh}</strong></h2>
               <h2>Ngày đăng ký cuối cùng: <strong style={{color: '#08183c', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>{dateFinal}</strong></h2>
@@ -107,7 +107,7 @@ const setSocho = (socho) => {
           </div>
           <div className="tour-btn">
           <Link to={`/detail?slug=${tourData.slug}`}>
-            <button className="button" disabled={convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()?"disabled": ""} style={{background: convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()?"grey":"", }}	>     
+            <button className="button" disabled={convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()|| trangthai === 'Đã diễn ra'?"disabled": ""} style={{background: convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf() || trangthai === 'Đã diễn ra'?"grey":"", }}	>     
             ĐẶT NGAY
               </button>
               </Link>
@@ -120,8 +120,8 @@ const setSocho = (socho) => {
           </div>
        
           <p className="para" 
-          style={{color: convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()?'red':'#08183c'}}>
-            {convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()?'Đã hết hạn đăng ký': <p className="para">Số chổ còn nhận: <label className="label_socho" style={{color:'red'}}>{so_cho_con}/{tourData.so_cho}</label></p>}</p>
+          style={{color: convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()|| trangthai === 'Đã diễn ra'?'red':'#08183c'}}>
+            {convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf() || trangthai === 'Đã diễn ra'?'Đã hết hạn đăng ký': <p className="para">Số chổ còn nhận: <label className="label_socho" style={{color:'red'}}>{so_cho_con}/{tourData.so_cho}</label></p>}</p>
         </CardActionArea>
       </Card>
     {/* // </Link> */}

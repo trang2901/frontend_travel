@@ -185,7 +185,7 @@ const dateCurrent = dateFormat(newDate, "dd/mm/yyyy");
               </label>
             </Col>
             <Col span={17}>
-             <label> {tourData.matour}</label>
+             <label> {tourData._id}</label>
               </Col>
           </Row>
           <p></p>
