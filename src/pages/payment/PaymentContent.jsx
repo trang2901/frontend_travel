@@ -143,7 +143,8 @@ const PaymentContent = () => {
     console.log("req:", requestPosData.id_khach_hang);
 
     const thanhTien = parseInt(
-      requestPosData.thanh_tien.replaceAll(".", "").replace("VND", "")
+        parseFloat(tourData.gia.replaceAll(".", "")) +
+          parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
     );
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -248,6 +249,10 @@ const PaymentContent = () => {
                     du_khach: [...idDuKhaches],
                     trang_thai_thanh_toan: "Đã thanh toán",
                     trang_thai_han_thanh_toan: " ",
+                    thanh_tien: formatPrice(
+                      parseFloat(tourData.gia.replaceAll(".", "")) +
+                        parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
+                    )
                   });
                   window.location.href = "http://localhost:3000/ordersuccessful";
                 })
@@ -383,6 +388,10 @@ const PaymentContent = () => {
                 du_khach: [...idDuKhaches],
                 trang_thai_thanh_toan: "Chưa thanh toán",
                 trang_thai_han_thanh_toan: " ",
+                thanh_tien: formatPrice(
+                  parseFloat(tourData.gia.replaceAll(".", "")) +
+                    parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
+                )
               });
               window.location.href = "http://localhost:3000/ordersuccessful";
             })
@@ -555,7 +564,10 @@ const PaymentContent = () => {
                                     <br />
                                     <label>
                                       <strong>
-                                        {requestPosDatas.thanh_tien}
+                                        {formatPrice(
+              parseFloat(tourData.gia.replaceAll(".", "")) +
+                parseFloat(tourData.gia.replaceAll(".", "")) * 0.1
+            )}
                                       </strong>
                                     </label>{" "}
                                     <br />

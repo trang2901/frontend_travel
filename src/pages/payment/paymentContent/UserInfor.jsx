@@ -245,7 +245,8 @@ const UserInfor = ({ customerData, setCustomerData }) => {
               <label>Tổng phụ: </label>
             </Col>
             <Col span={16} className="gia">
-            {formatPrice(parseFloat(bookTourInfor.gia.replaceAll('.', '')))}
+            {bookTourInfor.gia}
+            {/* {formatPrice(parseFloat(bookTourInfor.gia.replaceAll('.', '')))} */}
             </Col>
           </Row>
 

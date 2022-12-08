@@ -53,7 +53,7 @@ const dateCurrent = dateFormat(newDate, "dd/mm/yyyy");
       id: tourData["_id"],
       img: tourData.hinh[0],
       name: tourData.ten,
-      gia: formatPrice(parseFloat(tourData.gia.replaceAll('.', ''))*numberGuest + parseFloat(tourData.gia.replaceAll('.', ''))*numberGuest * 0.1),
+      gia: formatPrice(parseFloat(tourData.gia.replaceAll('.', ''))),
       date: tourData.khoi_hanh,
       number: numberGuest,
       du_khach: tourData.du_khach,
@@ -74,13 +74,12 @@ const dateCurrent = dateFormat(newDate, "dd/mm/yyyy");
 
     if (customerID) {
       window.localStorage.setItem("bookTourPostRequestData",JSON.stringify(bookTourData)
-      );
-    
-      
+    );
       window.localStorage.setItem("bookTourInfor", JSON.stringify(infor));
       navigate("/payment");
     } else window.location.href = "/login";
   };
+console.log('data',JSON.stringify(window.localStorage.getItem("bookTourPostRequestData") ))
 
   function getImage(dataImage) {
     const imageArray = [];

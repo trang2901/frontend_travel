@@ -253,33 +253,18 @@ const Bill = () => {
                               <strong>Luu y: </strong>
                               Quy khach co mat tai diem khoi hanh truoc 30 phut
                             </p>
-                            <div className="field">
-                              Tong truoc thue <span>{tour.thanh_tien}</span>
-                            </div>
+      
                             <div className="field">
                               VAT <span>10% </span>
                             </div>
-                            <div className="field">
-                              Giam gia <span>{tour.giam_gia}</span>
-                            </div>
+                           
                             <div className="field grand-total">
                               Tong cong
                               <span>
                                 {formatPrice(
                                   parseFloat(
                                     tour.thanh_tien.replaceAll(".", "")
-                                  ) +
-                                    parseFloat(
-                                      tour.thanh_tien.replaceAll(".", "")
-                                    ) *
-                                      0.1 -
-                                    (parseFloat(
-                                      tour.thanh_tien.replaceAll(".", "")
-                                    ) *
-                                      parseFloat(
-                                        tour.giam_gia.replaceAll("%", "")
-                                      )) /
-                                      100
+                                  ) 
                                 )}
                               </span>
                             </div>
