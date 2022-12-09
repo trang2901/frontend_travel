@@ -64,6 +64,14 @@ const PaymentContent = () => {
   // }
   const newDate = new Date();
   useEffect(() => {
+    const body = document.querySelector('#root');
+ 
+    body.scrollIntoView({
+        behavior: 'smooth'
+    }, 500)
+
+ 
+
     const customerID = window.sessionStorage.getItem("customerID");
     axios(`http://localhost:3001/khachhang/${customerID}`).then(({ data }) =>
       setCustomerData(data)
@@ -126,7 +134,9 @@ const PaymentContent = () => {
     setActivedStep(activedStep - 1);
   };
   const handleButtonNext = () => {
+    
     setActivedStep(activedStep + 1);
+    // window.scrollTo(0, 0);
   };
   const handleChange = (index) => {
     setActivedStep(index);

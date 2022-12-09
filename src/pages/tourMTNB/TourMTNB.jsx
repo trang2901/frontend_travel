@@ -12,6 +12,7 @@ import Search from '../../components/search/Search'
 import { Card} from 'semantic-ui-react'
 import { Input } from 'antd';
 import './tourmtnb.scss'
+import Pagination from '../../components/pagination/Pagination'
 const TourMTNB = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
@@ -20,6 +21,16 @@ const TourMTNB = () => {
   const [APIData, setAPIData] = useState([])
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState('');
+
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(8);
+  const [loading, setLoading] = useState(false);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = DataTours.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
 
   useEffect(() => {
     setFetching(true);
@@ -91,11 +102,21 @@ const TourMTNB = () => {
                     <>
                     <div className="result">
                     <p>Có <strong style={{color: 'red'}}>{filteredResults.length}</strong> kết quả trùng khớp với từ khóa của bạn</p></div>
-                    <CardList DataTours={filteredResults}/>
+                    <CardList DataTours={filteredResults} loading={loading}/>
+                    {/* <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={DataTours.length}
+                    paginate={paginate}
+                    /> */}
                     </>
                     ) : (
                     <>
-                    <CardList DataTours={DataTours} tag={tag} />
+                    <CardList DataTours={currentPosts} tag={tag} loading={loading}/>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={DataTours.length}
+                    paginate={paginate}
+                    />
                     </>
                     
                    

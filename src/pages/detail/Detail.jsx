@@ -29,6 +29,11 @@ const Detail = () => {
   // };
 
   useEffect(() => {
+    const body = document.querySelector('#root');
+    body.scrollIntoView({
+        behavior: 'smooth'
+    }, 500)
+
     const loadAsyncStuff = async () => {
       try {
         const slug = searchParams.get("slug");

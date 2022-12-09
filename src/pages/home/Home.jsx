@@ -12,7 +12,7 @@ import { Input } from "antd";
 import "./home.scss";
 import { Button } from "@mui/material";
 import Search from "../../components/search/Search";
-
+import Pagination from '../../components/pagination/Pagination'
 const Home = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
@@ -20,6 +20,18 @@ const Home = () => {
   const [APIData, setAPIData] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(8);
+  const [loading, setLoading] = useState(false);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = DataTours.slice(indexOfFirstPost, indexOfLastPost);
+
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     axios.get(`http://localhost:3001/tour`).then((response) => {
@@ -120,7 +132,7 @@ const Home = () => {
             <>
             
               <CardList DataTours={DataTours} tag={tag} />
-             
+              
             </>        
           )}
 </>
@@ -159,7 +171,12 @@ const Home = () => {
                   </>
                 ) : (
                   <>
-                  <CardList DataTours={DataTours} tag={tag} />
+                  <CardList DataTours={currentPosts} tag={tag} />
+                  <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={DataTours.length}
+                    paginate={paginate}
+                    />
                   </>
                 )}
 

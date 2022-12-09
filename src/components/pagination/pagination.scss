@@ -1,0 +1,23 @@
+.page-item {
+    color: 'red';
+    text-align: 'center';
+    color: #f97150;
+    margin-left: 0.5rem;
+    .page-link{
+        background-color: #08183c;
+        color: #f97150;
+        font-size: 20px;
+    }
+    .page-link:hover {
+        color:#08183c;
+        background: #f97150;
+    }
+}
+.pagination {
+    // background: red;
+    text-align: center;
+    justify-content: center;
+}
+.page-item:hover {
+    color:#08183c
+}

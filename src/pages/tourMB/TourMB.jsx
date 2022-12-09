@@ -6,6 +6,7 @@ import Search from "../../components/search/Search";
 import { ScrollButton } from "../../components";
 import { Card} from 'semantic-ui-react'
 import { Input } from 'antd';
+import Pagination from '../../components/pagination/Pagination'
 const TourMB = () => {
   const [tag, setTag] = useState("");
   const [DataTours, setDataTours] = useState([]);
@@ -15,13 +16,32 @@ const TourMB = () => {
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState('');
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(8);
+  const [loading, setLoading] = useState(false);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = DataTours.slice(indexOfFirstPost, indexOfLastPost);
+
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   useEffect(() => {
+
+    const body = document.querySelector('#root');
+ 
+    body.scrollIntoView({
+        behavior: 'smooth'
+    }, 500)
+
     setFetching(true);
     fetchToursData();
     tag ? (document.title = tag) : (document.title = "DẾ MÈN TOURS");
   }, [tag]);
 
   const fetchToursData = () => {
+    setLoading(true);
     axios("http://localhost:3001/tour")
       .then(({ data }) => {
           const ATourMB = data.filter((tour) => tour.loai_tour.ten_loai_tour === 'Tour Miền Bắc');
@@ -33,7 +53,9 @@ const TourMB = () => {
       .catch((err) => {
         console.error("Fetching error: " + err);
       });
+      setLoading(false);
   };
+
   const searchItems = (searchValue) => {
     setSearchInput(searchValue)
     if (searchInput !== '') {
@@ -46,6 +68,7 @@ const TourMB = () => {
         setFilteredResults(APIData)
     }
 }
+
 
   return (
     <>
@@ -81,11 +104,22 @@ const TourMB = () => {
                     <>
                     <div className="result">
                     <p>Có <strong style={{color: 'red'}}>{filteredResults.length}</strong> kết quả trùng khớp với từ khóa của bạn</p></div>
-                    <CardList DataTours={filteredResults}/>
+                    <CardList DataTours={filteredResults} loading={loading}/>
+                    {/* <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={DataTours.length}
+                    paginate={paginate}
+                    /> */}
                     </>
                     ) : (
                     <>
-                    <CardList DataTours={DataTours} tag={tag} />
+                    
+                    <CardList DataTours={currentPosts} tag={tag} loading={loading}/>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={DataTours.length}
+                    paginate={paginate}
+                    />
                     </>
                     
                    

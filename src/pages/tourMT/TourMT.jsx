@@ -11,6 +11,7 @@ import { Divider } from "antd";
 import Search from "../../components/search/Search";
 import { Card} from 'semantic-ui-react'
 import { Input } from 'antd';
+import Pagination from '../../components/pagination/Pagination'
 import "./tourmt.scss";
 
 const TourMN = () => {
@@ -22,7 +23,22 @@ const TourMN = () => {
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState('');
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(8);
+  const [loading, setLoading] = useState(false);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = DataTours.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   useEffect(() => {
+
+    const body = document.querySelector('#root');
+ 
+    body.scrollIntoView({
+        behavior: 'smooth'
+    }, 500)
+
     setFetching(true);
     fetchToursData();
     tag ? (document.title = tag) : (document.title = ".travelwoVi");
@@ -86,11 +102,21 @@ const TourMN = () => {
                     <>
                     <div className="result">
                     <p>Có <strong style={{color: 'red'}}>{filteredResults.length}</strong> kết quả trùng khớp với từ khóa của bạn</p></div>
-                    <CardList DataTours={filteredResults}/>
+                    <CardList DataTours={filteredResults} loading={loading}/>
+                    {/* <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={DataTours.length}
+                    paginate={paginate}
+                    /> */}
                     </>
                     ) : (
                     <>
-                    <CardList DataTours={DataTours} tag={tag} />
+                    <CardList DataTours={currentPosts} tag={tag} loading={loading}/>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={DataTours.length}
+                    paginate={paginate}
+                    />
                     </>
                     
                    
