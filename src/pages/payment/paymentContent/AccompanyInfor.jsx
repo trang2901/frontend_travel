@@ -58,7 +58,7 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
        
         
         <TextField
-          type="number"
+          type="text"
           // name="sdt"
           label="Số điện thoại"
           sx={{ maxWidth: "200px", border: 'none' }}
@@ -84,7 +84,7 @@ const AccompanyInfor = ({onShowLinkInput,setOnShowLink,numberGuest,accompanyData
         />
 
         <TextField
-          type="number"
+          type="text"
           // name="sdt"
           label="Số CMND/CCCD"
           sx={{ maxWidth: "200px" }}

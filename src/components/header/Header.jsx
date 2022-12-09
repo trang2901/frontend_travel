@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useLayoutEffect, useContext } from "react";
-import "./header.css";
+import "./header.scss";
 import { LoginContext } from "../../LoginContext";
 import { Button, Grid, Stack, Avatar } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -9,14 +9,21 @@ import { Menu, Close } from "@mui/icons-material";
 import { Row, Col } from "antd";
 import logo from "../../image/DORIS_TOURS.png";
 import { red } from "@mui/material/colors";
+import axios from "axios";
+import { useEffect } from "react";
 
 const Header = () => {
   const customerID = useContext(LoginContext);
   const [customerName, setCustomerName] = useState("");
-
+  const [menuOn, setMenuOn] = useState(false);
   // const vitri = customerName.charAt(0);
+    useEffect(() => {
+        axios(
+          `http://localhost:3001/khachhang/${customerID}`
+        ).then(({ data }) =>setCustomerName(data.ho_ten));
+      }, []);
 
-  let navigate = useNavigate();
+    let navigate = useNavigate();
   function buttonStyle(primaryColor, secondColor) {
     var obj = {
       backgroundColor: `${primaryColor}`,
@@ -95,11 +102,10 @@ const Header = () => {
                     >
                       DU LỊCH
                     </a>
-                 
+
                     <div className="dropdown-menu" role="menu">
                       <Row gutter={16}>
                         <Col className="gutter-row" span={6}>
-                         
                           <a
                             className="dropdown-item"
                             role="presentation"
@@ -132,254 +138,19 @@ const Header = () => {
                             className="dropdown-item"
                             role="presentation"
                             href="/home"
-                            style={{color: '#08183c', textAlign: 'right', textDecoration: 'underline'}}
+                            style={{
+                              color: "#08183c",
+                              textAlign: "right",
+                              textDecoration: "underline",
+                            }}
                           >
                             Xem tất cả
                           </a>
                         </Col>
-                        {/* <Col className="gutter-row" span={6}>
-                          
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch Quảng Trị
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch Quảng Bình
-                          </a>
-                          
-                        </Col>
-                        <Col className="gutter-row" span={6}>
-                        
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch Phú Quốc
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch Tiền Giang
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch Cần Thơ
-                          </a>
-                          
-                        </Col>
-                        <Col className="gutter-row" span={6}>
-                        
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                           Du lịch Đồng Nai
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch Bà Rịa - Vũng Tàu
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch TP.Hồ Chí Minh
-                          </a>
-                          
-                        </Col> */}
                       </Row>
                     </div>
-                    
                   </li>
 
-
-                  {/* TOUR NƯỚC NGOÀI Ở ĐÂY =======================================================================================*/}
-                  {/* <li className="nav-item dropdown">
-                    <a
-                      className="dropdown-toggle nav-link"
-                      data-toggle="dropdown"
-                      aria-expanded="false"
-                      href="#"
-                      style={{
-                        color: "#f97150",
-                        fontWeight: "bold",
-                        fontFamily:
-                          "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
-                        letterSpacing: "0.5px",
-                      }}
-                    >
-                      TOUR NƯỚC NGOÀI
-                    </a>
-                    <div className="dropdown-menu" role="menu">
-                    <Row gutter={16}>
-                        <Col className="gutter-row" span={6}>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                            style={{ color: "#08183c", fontWeight: "bold" }}
-                          >
-                            TOUR MIỀN BẮC
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch Hà Nội
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch Hải Phòng
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch Hạ Long
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                            style={{color: "#08183c", fontWeight: "bold", fontStyle: 'italic', textDecoration: 'underline' }}
-                          >
-                            Xem tất cả
-                          </a>
-                        </Col>
-                        <Col className="gutter-row" span={6}>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                            style={{ color: "#08183c", fontWeight: "bold" }}
-                          >
-                            TOUR MIỀN TRUNG
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch Huế
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch Quảng Trị
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                          >
-                            Du lịch Quảng Bình
-                          </a>
-                          <a
-                            className="dropdown-item"
-                            role="presentation"
-                            href="#"
-                            style={{color: "#08183c", fontWeight: "bold", fontStyle: 'italic', textDecoration: 'underline' }}
-                          >
-                            Xem tất cả
-                          </a>
-                        </Col>
-                        
-                        
-                      </Row>
-                    </div>
-                  </li> */}
-
-                  {/* <li className="nav-item dropdown">
-                    <a
-                      className="dropdown-toggle nav-link"
-                      data-toggle="dropdown"
-                      aria-expanded="false"
-                      href="#"
-                      style={{
-                        fontSize: "13px",
-                        color: "#f97150",
-                        fontWeight: "bold",
-                        fontFamily:
-                          "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
-                        letterSpacing: "0.5px",
-                      }}
-                    >
-                      MIỀN TÂY NAM BỘ
-                    </a>
-                    <div className="dropdown-menu" role="menu">
-                      <a className="dropdown-item" role="presentation" href="#">
-                        Logo design
-                      </a>
-                      <a className="dropdown-item" role="presentation" href="#">
-                        Banner design
-                      </a>
-                      <a className="dropdown-item" role="presentation" href="#">
-                        content writing
-                      </a>
-                    </div>
-                  </li> */}
-                  {/* <li className="nav-item dropdown">
-                    <a
-                      className="dropdown-toggle nav-link"
-                      data-toggle="dropdown"
-                      aria-expanded="false"
-                      href="#"
-                      style={{
-                        fontSize: "13px",
-                        color: "#f97150",
-                        fontWeight: "bold",
-                        fontFamily:
-                          "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
-                        letterSpacing: "0.5px",
-                      }}
-                    >
-                      MIỀN ĐÔNG NAM BỘ
-                    </a>
-                    <div className="dropdown-menu" role="menu">
-                      <a className="dropdown-item" role="presentation" href="#">
-                        Logo design
-                      </a>
-                      <a className="dropdown-item" role="presentation" href="#">
-                        Banner design
-                      </a>
-                      <a className="dropdown-item" role="presentation" href="#">
-                        content writing
-                      </a>
-                    </div>
-                  </li> */}
-                  {/* GIỚI THIỆU Ở ĐÂY================================================================================================ */}
                   <li className="nav-item" role="presentation">
                     <a
                       className="nav-link"
@@ -395,92 +166,45 @@ const Header = () => {
                       GIỚI THIỆU
                     </a>
                   </li>
-                  {/* <li className="nav-item" role="presentation">
-                    <a
-                      className="nav-link"
-                      href="/aboutus"
-                      style={{
-                        color: "#f97150",
-                        fontWeight: "bold",
-                        fontFamily:
-                          "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
-                        letterSpacing: "0.5px",
-                      }}
-                    >
-                      MIỀN TRUNG
-                    </a>
-                  </li>
-                  <li className="nav-item" role="presentation">
-                    <a
-                      className="nav-link"
-                      href="/aboutus"
-                      style={{
-                        color: "#f97150",
-                        fontWeight: "bold",
-                        fontFamily:
-                          "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
-                        letterSpacing: "0.5px",
-                      }}
-                    >
-                      MIỀN TÂY NAM BỘ
-                    </a>
-                  </li>
-                  <li className="nav-item" role="presentation">
-                    <a
-                      className="nav-link"
-                      href="/aboutus"
-                      style={{
-                        color: "#f97150",
-                        fontWeight: "bold",
-                        fontFamily:
-                          "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
-                        letterSpacing: "0.5px",
-                      }}
-                    >
-                      MIỀN ĐÔNG NAM BỘ
-                    </a>
-                  </li> */}
-                  {/* TIN TỨC Ở ĐÂY======================================================================================================== */}
-                  {/* <li className="nav-item" role="presentation">
-                    <a
-                      className="nav-link"
-                      href="/blog"
-                      style={{
-                        color: "#f97150",
-                        fontWeight: "bold",
-                        fontFamily:
-                          "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
-                        letterSpacing: "0.5px",
-                      }}
-                    >
-                      CẨM NANG DU LỊCH
-                    </a>
-                  </li> */}
-
-
                 </ul>
-                <span style={{width: '500px'}}></span>
-             
-                
+                <span style={{ width: "500px" }}></span>
+
                 {customerID ? (
                   <>
-                    <Link to="/customer">
-                      {/* <Button variant="contained"> */}
-                      <Avatar style={{ backgroundColor: "darkblue" }}>
-                        <AccountCircleIcon sx={{ marginRight: "2px" }} />
-                      </Avatar>
-                      {/* </Button> */}
-                    </Link>
-
-                    <Button
-                      // className="button_custom"
+                    {/* <Link to="/customer">
+                        <AccountCircleIcon sx={{ marginRight: "2px" }} >
+                        <Avatar style={{ backgroundColor: "darkblue" }}>
+                        </Avatar>
+                        </AccountCircleIcon>  
+                    </Link> */}
+                    <div class="dropdown">
+                     <button style={{background: 'none', color: '#f97150'}}>
+                      <AccountCircleIcon sx={{ marginRight: "2px", fontSize: '40px' }} >
+                        <Avatar style={{ backgroundColor: "darkblue" }}>
+                        </Avatar>
+                       
+                      </AccountCircleIcon> 
+                      </button>
+                      <div class="dropdown-content">
+                        <a href="/customer"><i className="fa-solid fa-user" ></i> {" "} Thông tin tài khoản</a>
+                        <a href="/customer/bookedTour"><i className="fa-solid fa-list"> {" "} </i> Đơn đã đặt</a>
+                        <a href="#" onClick={() => {
+                        window.sessionStorage.clear();
+                        window.location.reload();
+                      }}>Đăng xuất <i className="fa-solid fa-arrow-right-from-bracket" ></i></a>
+                      </div>
+                    </div>
+                    <label style={{color: '#f97150', fontSize: '18px', fontWeight: 'bold', marginLeft: '0.3rem'}}>
+                    {
+                      customerName
+                    }</label>
+                    {/* <Button
                       style={{
                         color: "#f97150",
                         fontWeight: "bold",
                         fontFamily:
                           "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
                         letterSpacing: "0.5px",
-                        
                       }}
                       onClick={() => {
                         window.sessionStorage.clear();
@@ -488,7 +212,9 @@ const Header = () => {
                       }}
                     >
                       ĐĂNG XUẤT
-                    </Button>
+                    </Button> */}
+                     {
+                     }
                   </>
                 ) : (
                   <>
@@ -522,7 +248,6 @@ const Header = () => {
                     >
                       ĐĂNG KÝ
                     </a>
-                    
                   </>
                 )}
               </div>

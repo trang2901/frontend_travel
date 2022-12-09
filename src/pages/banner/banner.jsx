@@ -5,8 +5,7 @@ import { TourCard } from "../../components";
 import axios from "axios";
 import { CategoryList, CardList } from "../../container";
 import "./banner1.scss";
-import {Row, Col } from "antd";
-import Divider from '@mui/material/Divider';
+import {Row, Col, Divider} from "antd";
 import { Container, Paper } from "@mui/material";
 import Carousel from "../../components/carousel/Carousel";
 import { Context } from "../../pages/home/Context";
@@ -69,7 +68,7 @@ const Banner = () => {
   useEffect(() => {
     setFetching(true);
     fetchToursData();
-    tag ? (document.title = tag) : (document.title = ".travelwoVi");
+    tag ? (document.title = tag) : (document.title = "DẾ MÈN TOURS");
   }, [tag]);
 
   const fetchToursData = () => {
@@ -86,7 +85,7 @@ const Banner = () => {
         const datecurrent = new Date();
         for(var i=0; i<data.length; i++){
           const newDate = new Date(dateFormat(data[i].khoi_hanh));
-          if (newDate.getMonth() == datecurrent.getMonth()) {
+          if (newDate.getMonth() == datecurrent.getMonth() && data[i].du_khach.length >=13) {
             arrayMonths.push(data[i]);
           }
         }
@@ -206,7 +205,7 @@ const Banner = () => {
               }}
               
             >
-              Trải nghiệm ngay
+              Danh sách tours
             </a>
           </div>
         </div>
@@ -214,7 +213,8 @@ const Banner = () => {
         <div className="tourmoi">
          
             {" "}
-            <p className="tourmoi" style={{textAlign: 'center'}}>TOUR TRONG THÁNG</p>
+          
+            <Divider textAlign="left"><p className="tourmoi" style={{textAlign: 'center'}}>TOUR NỔI BẬT TRONG THÁNG</p></Divider>
           
         </div>
         <CardList DataTours={DataTours} tag={tag} />

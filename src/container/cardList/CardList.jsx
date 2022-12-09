@@ -9,6 +9,7 @@ const CardList = ({ DataTours, tag }) => {
       <div className="cardList">
         {DataTours.length == 0 ? (
           <h2 style={{fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>
+   
             {/* Hiện tại chưa có tour du lịch liên quan đến "<strong style={{color: 'red', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>{tag}</strong>" */}
           </h2>
         ) : (

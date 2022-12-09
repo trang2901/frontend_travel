@@ -45,7 +45,7 @@ const Home = () => {
   useEffect(() => {
     setFetching(true);
     fetchToursData();
-    tag ? (document.title = tag) : (document.title = ".travelwoVi");
+    tag ? (document.title = tag) : (document.title = "DẾ MÈN TOURS");
   }, [tag]);
 
   const fetchToursData = () => {

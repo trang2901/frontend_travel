@@ -53,7 +53,7 @@ const dateCurrent = dateFormat(newDate, "dd/mm/yyyy");
       id: tourData["_id"],
       img: tourData.hinh[0],
       name: tourData.ten,
-      gia: formatPrice(parseFloat(tourData.gia.replaceAll('.', ''))*numberGuest + parseFloat(tourData.gia.replaceAll('.', ''))*numberGuest * 0.1),
+      gia: formatPrice(parseFloat(tourData.gia.replaceAll('.', ''))*numberGuest),
       date: tourData.khoi_hanh,
       number: numberGuest,
       du_khach: tourData.du_khach,

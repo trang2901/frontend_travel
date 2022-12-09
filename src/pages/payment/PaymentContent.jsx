@@ -359,7 +359,7 @@ const PaymentContent = () => {
                 ngaydattour,
               })
               .then((res) => {
-                alert("Email đã được gửi");
+                // alert("Email đã được gửi");
                 setLoading(false);
                 console.log(res);
                 // window.location.reload();
