@@ -265,138 +265,62 @@ console.log('data',JSON.stringify(window.localStorage.getItem("bookTourPostReque
           </Row>
           <p></p>
           {/* </div> */}
-          <Row>
-            <Col span={7}>
-              <label className="label_detail">
-                <i className="fa-solid fa-person"></i>&ensp;Số khách:{" "}
-              </label>
-            </Col>
-            <Col span={17}>
-              {numberGuest ? (
-                <ButtonCustom
-                  nameString="-"
-                  style={buttonUpDownStyle}
-                  variant="contained"
-                  customFunction={handleClickSubtract}
-                  // disabled={trangthai === 'Đã diễn ra'?"disabled": ""} 
-                  // style={{background: trangthai === 'Đã diễn ra'?"grey":"", }}
-                />
-              ) : (
-                <ButtonCustom
-                  nameString="-"
-                  style={buttonUpDownStyle}
-                  variant="outlined"
-                  disabled={true}
-                />
-              )}
-              <input
-                id="numberGuest"
-                name="numberGuest"
-                type="text"
-                value={numberGuest}
-                style={{ textAlign: "center", width: "50px", border: "none" }}
-                readOnly
-              />
-
-              {numberGuest <
-              parseInt(tourData.so_cho - tourData.du_khach?.length || 0) ? (
-                <ButtonCustom
-                  nameString="+"
-                  style={buttonUpDownStyle}
-                  variant="contained"
-                  customFunction={handleClickAdd}
-                />
-              ) : (
-                <ButtonCustom
-                  nameString="+"
-                  style={buttonUpDownStyle}
-                  variant="outlined"
-                  disabled={true}
-                />
-              )}
-            </Col>
-          </Row>
-
-          {/* <div className="input numberGuest2"> */}
-
-          {/* <div className="numberGuest--input1"> */}
-
-          {/* </div> */}
-          {/* <div className="booktour--form"> */}
-          {/* <div className="input--section"> */}
-          {/* <div className="input date"> */}
-          {/* <label> */}
-          {/* <label>
-<i className="fa-solid fa-calendar"></i>  Date
-                </label> */}
-          {/* <DatePicker
-                  dateFormat="dd/MM/yyyy"
-                  selected={date}
-                  onChange={(date) => {
-                    setDate(date);
-                    const day = getDate(date);
-                    const month = getMonth(date) + 1;
-                    const year = getYear(date);
-                    setSelectedDate(`${day}/${month}/${year}`);
-                  }}
-                  minDate={new Date()}
-                  wrapperClassName="datePicker"
-                  // highlightDates={tourData.date.map(
-                  //   (date) => new Date(date.split("/").reverse().join())
-                  // )}
-                  disabledKeyboardNavigation
-                /> */}
-          {/* <div>{tourData.khoi_hanh}</div> */}
-          {/* </div> */}
-          {/* <div className="input numberGuest">
-                <label>
-                <i className="fa-solid fa-person"></i>
-                  People
+          {
+            convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()?
+            <></>: (
+              <Row>
+              <Col span={7}>
+                <label className="label_detail">
+                  <i className="fa-solid fa-person"></i>&ensp;Số khách:{" "}
                 </label>
-                <div className="numberGuest--input">
-                  {numberGuest ? (
-                    <ButtonCustom
-                      nameString="-"
-                      style={buttonUpDownStyle}
-                      variant="contained"
-                      customFunction={handleClickSubtract}
-                    />
-                  ) : (
-                    <ButtonCustom
-                      nameString="-"
-                      style={buttonUpDownStyle}
-                      variant="outlined"
-                      disabled={true}
-                    />
-                  )}
-                  <input
-                    id="numberGuest"
-                    name="numberGuest"
-                    type="text"
-                    value={numberGuest}
-                    style={{ textAlign: "center", width: "50px" }}
+              </Col>
+              <Col span={17}>
+                {numberGuest ? (
+                  <ButtonCustom
+                    nameString="-"
+                    style={buttonUpDownStyle}
+                    variant="contained"
+                    customFunction={handleClickSubtract}
+                    // disabled={trangthai === 'Đã diễn ra'?"disabled": ""} 
+                    // style={{background: trangthai === 'Đã diễn ra'?"grey":"", }}
                   />
-
-                  {numberGuest <
-                  parseInt(tourData.so_cho - tourData.du_khach?.length || 0) ? (
-                    <ButtonCustom
-                      nameString="+"
-                      style={buttonUpDownStyle}
-                      variant="contained"
-                      customFunction={handleClickAdd}
-                    />
-                  ) : (
-                    <ButtonCustom
-                      nameString="+"
-                      style={buttonUpDownStyle}
-                      variant="outlined"
-                      disabled={true}
-                    />
-                  )}
-                </div> */}
-          {/* </div> */}
-          {/* </div> */}
-
+                ) : (
+                  <ButtonCustom
+                    nameString="-"
+                    style={buttonUpDownStyle}
+                    variant="outlined"
+                    disabled={true}
+                  />
+                )}
+                <input
+                  id="numberGuest"
+                  name="numberGuest"
+                  type="text"
+                  value={numberGuest}
+                  style={{ textAlign: "center", width: "50px", border: "none" }}
+                  readOnly
+                />
+  
+                {numberGuest <
+                parseInt(tourData.so_cho - tourData.du_khach?.length || 0) ? (
+                  <ButtonCustom
+                    nameString="+"
+                    style={buttonUpDownStyle}
+                    variant="contained"
+                    customFunction={handleClickAdd}
+                  />
+                ) : (
+                  <ButtonCustom
+                    nameString="+"
+                    style={buttonUpDownStyle}
+                    variant="outlined"
+                    disabled={true}
+                  />
+                )}
+              </Col>
+            </Row>
+            )
+          }
           {
             /*tourData.date.includes(selectedDate) &&*/ numberGuest ? (
 
@@ -433,12 +357,12 @@ console.log('data',JSON.stringify(window.localStorage.getItem("bookTourPostReque
             <label className="label1">
               <i className="fa-solid fa-phone"></i> HOLINE TƯ VẤN:{" "}
             </label>
-            <label> 0394075201</label>
+            <label> 0123456789</label>
             <br></br>
             <label className="label1">
               <i className="fa-solid fa-envelope"></i> EMAIL:{" "}
             </label>
-            <label> test@gmail.com</label>
+            <label> dementours@gmail.com</label>
           </div>
           {/* </div> */}
         </div>
