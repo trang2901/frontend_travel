@@ -16,6 +16,7 @@ import dateFormat from "dateformat";
 import "./bill.scss";
 import { ArrowBack } from "@mui/icons-material";
 import { ScrollButton } from "../../components";
+
 const Bill = () => {
   const customerID = useContext(LoginContext);
   const [customerJoinedTour, setCustomerJoinedTour] = useState([]);
@@ -251,7 +252,7 @@ const Bill = () => {
                           <div className="total text-right">
                             <p className="extra-notes">
                               <strong>Luu y: </strong>
-                              Quy khach co mat tai diem khoi hanh truoc 30 phut
+                              Quy khach co mat tai diem khoi hanh truoc 1 tieng
                             </p>
       
                             <div className="field">

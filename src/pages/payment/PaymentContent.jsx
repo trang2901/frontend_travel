@@ -47,36 +47,22 @@ const PaymentContent = () => {
   const stripe = useStripe();
   const elements = useElements();
   const [value, setValue] = useState(1);
-  // function tryConvert(money, encode = true) {
-  //   const input = parseInt(money);
-  //   if (Number.isNaN(input)) {
-  //     return '';
-  //   }
-  //   const currency ="USD";
-  //   if (!currency) {
-  //     return '';
-  //   }
-  //   const sellTemp = "24,645";
-  //   const sell = parseInt(sellTemp.replace(',', ''))
-  //   const output = encode ? input*sell : input/sell;
-  //   const rounded = Math.round(output * 1000)/1000;
-  //   return rounded.toString();
-  // }
   const newDate = new Date();
+
   useEffect(() => {
     const body = document.querySelector('#root');
- 
     body.scrollIntoView({
         behavior: 'smooth'
     }, 500)
 
- 
 
-    const customerID = window.sessionStorage.getItem("customerID");
+  const customerID = window.sessionStorage.getItem("customerID");
     axios(`http://localhost:3001/khachhang/${customerID}`).then(({ data }) =>
       setCustomerData(data)
     );
   }, []);
+
+  
   useEffect(() => {
     //  Create accompany array
     const arrayTemp = [];

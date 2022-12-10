@@ -22,10 +22,12 @@ const TourCard = ({ tourData }) => {
  const date_format = dateFormat(tourData.khoi_hanh, "dd/mm/yyyy");
  const newDate = new Date();
  const [trangthai, setTrangThai]= useState('Chưa diễn ra');
+ 
  const convertToDate = (dateSting) => {
   const [day, month, year] = dateSting.split("/");
   return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 }
+
 const dateFinal = dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy");
 useEffect(() => {
   // console.log(convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf());
@@ -107,14 +109,15 @@ const setSocho = (socho) => {
           </div>
           <div className="tour-btn">
           <Link to={`/detail?slug=${tourData.slug}`}>
-            <button className="button" disabled={convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()|| trangthai === 'Đã diễn ra'?"disabled": ""} style={{background: convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf() || trangthai === 'Đã diễn ra'?"grey":"", }}	>     
+            <button className="button" disabled={convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf()|| trangthai === 'Đã diễn ra'?"disabled": ""} style={{background: convertToDate(dateFormat(newDate, "dd/mm/yyyy")).getTime().valueOf() >= convertToDate(dateFormat(tourData.ngay_dang_ky_cuoi_cung, "dd/mm/yyyy")).getTime().valueOf() || trangthai === 'Đã diễn ra'?"grey":"", }}	
+            
+            >     
             ĐẶT NGAY
               </button>
               </Link>
               <Link to={`/detail?slug=${tourData.slug}`}>
-            <button className="button1">     
-            XEM CHI TIẾT
-    
+            <button className="button1" >     
+                XEM CHI TIẾT
               </button>
               </Link> 
           </div>

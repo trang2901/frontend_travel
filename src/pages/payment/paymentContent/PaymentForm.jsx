@@ -80,7 +80,7 @@ const PaymentForm = () => {
             <Space direction="vertical">
               <Radio value={3}>Thanh toán trực tiếp</Radio>
               <Radio value={4}>
-                Thanh toán online
+                Thanh toán trực tuyến bằng Stripe
                 {value === 4 ? (
                   <Paper elevation={3}>
                     <fieldset

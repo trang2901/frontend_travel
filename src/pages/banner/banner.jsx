@@ -66,6 +66,11 @@ const Banner = () => {
   const [fetching, setFetching] = useState(true);
   const arrayMonths =[];
   useEffect(() => {
+    const body = document.querySelector('#root');
+    body.scrollIntoView({
+        behavior: 'smooth'
+    }, 500)
+    
     setFetching(true);
     fetchToursData();
     tag ? (document.title = tag) : (document.title = "DẾ MÈN TOURS");

@@ -171,12 +171,13 @@ const Home = () => {
                   </>
                 ) : (
                   <>
-                  <CardList DataTours={currentPosts} tag={tag} />
-                  <Pagination
+                 <Pagination
                     postsPerPage={postsPerPage}
                     totalPosts={DataTours.length}
                     paginate={paginate}
                     />
+                  <CardList DataTours={currentPosts} tag={tag} />
+                 
                   </>
                 )}
 
